@@ -1,0 +1,37 @@
+<div class="header navbar-container">
+
+  <div>
+
+    <div *ngFor="let menu of menusTop;">
+      <app-navbar-menu [titleMenu] = menu> </app-navbar-menu>
+    </div>
+
+  </div>
+
+  <div>
+
+  </div>
+
+</div>
+
+<div class="navbar-container">
+
+  <div>
+
+    <img src="assets/core/Logo.png" alt="Logo">
+
+    <div *ngFor="let menu of menusLeft;">
+      <app-navbar-menu [titleMenu] = menu> </app-navbar-menu>
+    </div>
+
+  </div>
+
+  <div>
+
+    <div *ngFor="let menu of menusRight;">
+      <app-navbar-menu [titleMenu] = menu></app-navbar-menu>
+    </div>
+
+  </div>
+
+</div>

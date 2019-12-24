@@ -1,0 +1,29 @@
+a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  text-decoration: none;
+  color: black;
+  font-family: "Open Sans", serif;
+  white-space: nowrap;
+
+  margin: 0px 20px 0px 0px;
+
+  &:hover {
+    color: royalblue;
+    cursor: pointer;
+    #border-title{
+      background-color: royalblue;
+    }
+
+  }
+
+}
+
+#border-title {
+  margin-top: 5px;
+  width: 50%;
+  height: 1px;
+  background-color: transparent;
+}

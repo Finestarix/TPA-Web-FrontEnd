@@ -1,0 +1,29 @@
+.header{
+  margin: 0px !important;
+  padding: 10px 20px;
+
+  background-color: whitesmoke;
+}
+
+.navbar-container {
+
+  display: flex;
+  justify-content: space-between;
+
+  margin: 20px;
+
+  div {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      margin-right: 40px;
+      width: 182px;
+    }
+
+  }
+
+}
