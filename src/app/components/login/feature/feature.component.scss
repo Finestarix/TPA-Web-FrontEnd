@@ -1,0 +1,38 @@
+p {
+  font-size: 14px;
+  color: #58627a;
+
+  margin: 3px 0px;
+
+  b {
+    color: #35405a !important;
+
+  }
+
+}
+
+img {
+  margin: 10px 20px;
+}
+
+.feature-container {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Open Sans", serif;
+
+  width: 355px;
+
+  .feature-content {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+
+  }
+
+}

@@ -1,0 +1,81 @@
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 40px;
+}
+
+.custom-line {
+  margin: 10px;
+}
+
+div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .left-container {
+    background-image: url("./../../../assets/core/login/login-register-illustration.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    width: 650px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .left-container-inside {
+      width: 400px;
+      background-color: white;
+      box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.2);
+      border: 1px solid lightgray;
+      border-radius: 5px;
+    }
+
+    div {
+
+      display: flex;
+      flex-direction: column;
+
+      .title-content {
+        margin: 20px;
+        p {
+          font-family: "Open Sans", serif;
+          font-size: 16px;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+.right-container {
+  background-color: white;
+  box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid lightgray;
+  border-radius: 5px;
+
+  font-family: "Open Sans", serif;
+  color: #35405a;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .login-title {
+    font-size: 18px;
+  }
+
+  .login-subtitle {
+    font-size: 14px;
+  }
+
+}

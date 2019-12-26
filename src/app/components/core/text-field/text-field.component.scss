@@ -1,0 +1,48 @@
+* {
+  font-size: 16px;
+  font-family: "Open Sans", serif;
+}
+
+.active {
+  top: -20px !important;
+  font-size: 12px;
+}
+
+div {
+  position: relative;
+
+  width: 300px;
+  margin: 40px 0px;
+
+  label {
+    position: absolute;
+    top: 5px;
+    margin: 10px;
+    padding: 0px 10px;
+
+    background-color: white;
+    color: #c6cbda;
+
+    transition: top .2s ease-in-out, font-size .2s ease-in-out;
+  }
+
+  input[type=text] {
+    width: 100%;
+    padding: 15px;
+
+    border: 1px solid #c6cbda;
+    border-radius: 3px;
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+
+}
+
+
+
+
+
+

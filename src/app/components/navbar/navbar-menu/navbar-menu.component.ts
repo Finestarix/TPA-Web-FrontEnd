@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {LoginComponent} from '../../login/login.component';
 
 @Component({
   selector: 'app-navbar-menu',
@@ -7,10 +9,34 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class NavbarMenuComponent implements OnInit {
 
+  hover: boolean;
+  isLogin: boolean;
+  isRegister: boolean;
+
   @Input('titleMenu') title: string;
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.hover = this.isLogin = this.isRegister = false;
+
+    if (this.title === 'Login') {
+      this.isLogin = true;
+    }
+  }
+
+  loginAction(): void {
+    // const dialogConf = new MatDialogConfig();
+    //
+    // // dialogConf.disableClose = true;
+    // dialogConf.autoFocus = true;
+    // dialogConf.position = {
+    //   top: '0',
+    //   left: '0'
+    // };
+    //
+
+    this.dialog.open(LoginComponent);
+
   }
 
   setFontSize(checkTitle): number {
@@ -20,11 +46,14 @@ export class NavbarMenuComponent implements OnInit {
   }
 
   setUnderline(checkTitle): string {
-    return (checkTitle === 'Flight' ||
-            checkTitle === 'Hotel' ||
-            checkTitle === 'Train' ||
-            checkTitle === 'Car Rental' ||
-            checkTitle === 'Entertainment') ? 'block' : 'none';
+    if (checkTitle !== 'Flight' &&
+        checkTitle !== 'Hotel' &&
+        checkTitle !== 'Train' &&
+        checkTitle !== 'Car Rental' &&
+        checkTitle !== 'Entertainment') {
+      this.hover = false;
+    }
+    return (this.hover === true) ? 'royalblue' : 'transparent';
   }
 
   setFontWeight(checkTitle): string {

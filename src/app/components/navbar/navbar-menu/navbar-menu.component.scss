@@ -6,6 +6,7 @@ a {
   text-decoration: none;
   color: black;
   font-family: "Open Sans", serif;
+  color: #35405a;
   white-space: nowrap;
 
   margin: 0px 20px 0px 0px;
@@ -13,7 +14,7 @@ a {
   &:hover {
     color: royalblue;
     cursor: pointer;
-    #border-title{
+    .border-title{
       background-color: royalblue;
     }
 

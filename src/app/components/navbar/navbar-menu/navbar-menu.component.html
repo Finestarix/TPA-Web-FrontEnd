@@ -1,4 +1,21 @@
-<a [ngStyle]="{'font-size.px': setFontSize(title), 'font-weight': setFontWeight(title)}">
+<a *ngIf="isLogin; else notLogin" (mouseover) = "hover = true"
+   (mouseleave) = "hover = false"
+   [ngStyle]="{'font-size.px': setFontSize(title),
+               'font-weight': setFontWeight(title)
+              }"
+   (click)="loginAction()" >
   {{title}}
-  <div [ngStyle]="{'display': setUnderline(title)}" id="border-title"></div>
+  <div [ngStyle]="{'background-color': setUnderline(title)}" class="border-title"></div>
 </a>
+
+<ng-template #notLogin>
+  <a (mouseover) = "hover = true"
+     (mouseleave) = "hover = false"
+     [ngStyle]="{'font-size.px': setFontSize(title),
+               'font-weight': setFontWeight(title)
+              }"
+     >
+    {{title}}
+    <div [ngStyle]="{'background-color': setUnderline(title)}" class="border-title"></div>
+  </a>
+</ng-template>

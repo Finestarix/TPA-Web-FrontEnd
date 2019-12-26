@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {LoginComponent} from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +32,30 @@ export class NavbarComponent implements OnInit {
     'Help Center'
   ];
 
+  menusLanguage: any[] = [
+    {
+      image: 'ID-Flag',
+      name: 'Bahasa Indonesia'
+    },
+    {
+      image: 'US-Flag',
+      name: 'English'
+    }
+  ];
+
+  menusMoney: string[] = [
+    'IDR - Indonesia Rupiah',
+    'SGD - Singapore Dollar'
+  ];
+
+  menusType: string[] = [
+    'text',
+    'image'
+  ]
+
   ngOnInit() {
   }
+
+
 
 }
