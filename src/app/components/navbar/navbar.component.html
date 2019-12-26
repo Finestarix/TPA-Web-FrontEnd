@@ -1,41 +1,36 @@
 <div class="header navbar-container">
 
+  <!-- Menu Top Left -->
   <div>
-
     <div *ngFor="let menu of menusTop;">
-      <app-navbar-menu [titleMenu] = menu> </app-navbar-menu>
+      <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
     </div>
-
   </div>
 
+  <!-- Menu Top Right (Dropdown) -->
   <div>
-
     <app-navbar-dropdown [type]="menusType[1]" [menu]="menusLanguage"></app-navbar-dropdown>
     <app-navbar-dropdown [type]="menusType[0]" [menu]="menusMoney"></app-navbar-dropdown>
-
   </div>
 
 </div>
 
 <div class="navbar-container">
 
+  <!-- Menu Bottom Left (Core) -->
   <div>
-
     <img src="assets/core/Logo.png" alt="Logo">
 
     <div *ngFor="let menu of menusLeft;">
-      <app-navbar-menu [titleMenu] = menu> </app-navbar-menu>
+      <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
     </div>
-
   </div>
 
+  <!-- Menu Bottom Right -->
   <div>
-
     <div *ngFor="let menu of menusRight;">
-      <app-navbar-menu [titleMenu] = menu></app-navbar-menu>
+      <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
     </div>
-
-
   </div>
 
 </div>

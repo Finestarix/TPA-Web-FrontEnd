@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {LoginComponent} from '../login/login.component';
 
@@ -9,7 +9,8 @@ import {LoginComponent} from '../login/login.component';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   menusLeft: string[] = [
     'Flight',
@@ -51,11 +52,10 @@ export class NavbarComponent implements OnInit {
   menusType: string[] = [
     'text',
     'image'
-  ]
+  ];
 
   ngOnInit() {
   }
-
 
 
 }

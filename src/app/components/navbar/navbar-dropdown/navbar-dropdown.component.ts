@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 
 @Component({
   selector: 'app-navbar-dropdown',
@@ -13,14 +13,15 @@ export class NavbarDropdownComponent implements OnInit {
   isText: boolean;
   isClick: boolean;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.isText = (this.typeComponent === 'text') ? true : false;
     this.isClick = false;
   }
 
-  setDisplay(): string{
+  setDisplay(): string {
     return (this.isClick) ? 'block' : 'none';
   }
 

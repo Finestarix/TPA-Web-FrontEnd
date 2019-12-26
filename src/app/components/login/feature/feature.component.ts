@@ -9,7 +9,8 @@ export class FeatureComponent implements OnInit {
 
   @Input('feature') feature: object;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

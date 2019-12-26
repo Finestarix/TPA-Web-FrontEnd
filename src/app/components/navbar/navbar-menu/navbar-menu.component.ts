@@ -14,7 +14,9 @@ export class NavbarMenuComponent implements OnInit {
   isRegister: boolean;
 
   @Input('titleMenu') title: string;
-  constructor(private dialog: MatDialog) { }
+
+  constructor(private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.hover = this.isLogin = this.isRegister = false;
@@ -25,32 +27,21 @@ export class NavbarMenuComponent implements OnInit {
   }
 
   loginAction(): void {
-    // const dialogConf = new MatDialogConfig();
-    //
-    // // dialogConf.disableClose = true;
-    // dialogConf.autoFocus = true;
-    // dialogConf.position = {
-    //   top: '0',
-    //   left: '0'
-    // };
-    //
-
     this.dialog.open(LoginComponent);
-
   }
 
   setFontSize(checkTitle): number {
     return (checkTitle === 'Download Karcis.co App' ||
-            checkTitle === 'Promos' ||
-            checkTitle === 'Help Center') ? 12 : 14;
+      checkTitle === 'Promos' ||
+      checkTitle === 'Help Center') ? 12 : 14;
   }
 
   setUnderline(checkTitle): string {
     if (checkTitle !== 'Flight' &&
-        checkTitle !== 'Hotel' &&
-        checkTitle !== 'Train' &&
-        checkTitle !== 'Car Rental' &&
-        checkTitle !== 'Entertainment') {
+      checkTitle !== 'Hotel' &&
+      checkTitle !== 'Train' &&
+      checkTitle !== 'Car Rental' &&
+      checkTitle !== 'Entertainment') {
       this.hover = false;
     }
     return (this.hover === true) ? 'royalblue' : 'transparent';
@@ -58,9 +49,9 @@ export class NavbarMenuComponent implements OnInit {
 
   setFontWeight(checkTitle): string {
     return (checkTitle === 'Tix Point' ||
-            checkTitle === 'Check Order' ||
-            checkTitle === 'Login' ||
-            checkTitle === 'Register') ? 'bold' : 'none';
+      checkTitle === 'Check Order' ||
+      checkTitle === 'Login' ||
+      checkTitle === 'Register') ? 'bold' : 'none';
   }
 
 }

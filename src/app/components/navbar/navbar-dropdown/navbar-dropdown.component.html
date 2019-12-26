@@ -1,7 +1,8 @@
 <div class="header-dropdown">
 
-  <div (click) = "isClick = !isClick">
-    <img *ngIf="!isText; else otherTitle" class="flag-image header-dropdown-title" src="assets/core/navbar/US-Flag.webp" alt="">
+  <div (click)="isClick = !isClick">
+    <img *ngIf="!isText; else otherTitle" class="flag-image header-dropdown-title" src="assets/core/navbar/US-Flag.webp"
+         alt="">
     <ng-template #otherTitle>
       <a class="header-dropdown-title"> IDR </a>
     </ng-template>
