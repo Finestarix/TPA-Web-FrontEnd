@@ -14,6 +14,10 @@ import {NavbarMenuComponent} from './components/core/navbar-menu/navbar-menu.com
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {NavbarDropdownComponent} from './components/navbar/navbar-dropdown/navbar-dropdown.component';
 import { RegisterComponent } from './components/register/register.component';
+import { PlaneComponent } from './components/main/plane/plane.component';
+import { HotelComponent } from './components/main/hotel/hotel.component';
+import { TrainComponent } from './components/main/train/train.component';
+import { HomeComponent } from './components/main/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +30,16 @@ import { RegisterComponent } from './components/register/register.component';
     ImageTextComponent,
     NavbarComponent,
     NavbarDropdownComponent,
+    RegisterComponent,
+    PlaneComponent,
+    HotelComponent,
+    TrainComponent,
+    HomeComponent
+  ],
+  entryComponents: [
+    LoginComponent,
     RegisterComponent
   ],
-  entryComponents: [LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

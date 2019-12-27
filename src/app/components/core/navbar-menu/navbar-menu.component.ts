@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar-menu',
@@ -8,19 +9,25 @@ import {Component, Input, OnInit} from '@angular/core';
 export class NavbarMenuComponent implements OnInit {
 
   hover: boolean;
-  isLogin: boolean;
-  isRegister: boolean;
+  routerable: string[] = [
+    'Flight',
+    'Train',
+    'Hotel'
+  ];
+  isRouterable: boolean;
 
   @Input('titleMenu') title: string;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
-    this.hover = this.isLogin = this.isRegister = false;
+    this.isRouterable = false;
 
-    if (this.title === 'Login') {
-      this.isLogin = true;
+    for(const curr of this.routerable) {
+      if(curr === this.title) {
+        this.isRouterable = true;
+      }
     }
   }
 
@@ -46,5 +53,9 @@ export class NavbarMenuComponent implements OnInit {
       checkTitle === 'Check Order' ||
       checkTitle === 'Login' ||
       checkTitle === 'Register') ? 'bold' : 'none';
+  }
+
+  toRouter(): void {
+    this.router.navigateByUrl('/' + this.title);
   }
 }

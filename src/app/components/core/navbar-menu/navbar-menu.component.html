@@ -1,10 +1,23 @@
-<a (mouseover)="hover = true"
+<a *ngIf="!isRouterable; else usingRouting"
+   (mouseover)="hover = true"
    (mouseleave)="hover = false"
    [ngStyle]="{'font-size.px': setFontSize(title),
                'font-weight': setFontWeight(title)
-              }"
-    >
+              }">
     {{title}}
     <div [ngStyle]="{'background-color': setUnderline(title)}" class="border-title"></div>
 </a>
+
+<ng-template #usingRouting>
+  <a (click)="toRouter()"
+     (mouseover)="hover = true"
+     (mouseleave)="hover = false"
+     [ngStyle]="{'font-size.px': setFontSize(title),
+               'font-weight': setFontWeight(title)
+              }">
+    {{title}}
+    <div [ngStyle]="{'background-color': setUnderline(title)}" class="border-title"></div>
+  </a>
+
+</ng-template>
 
