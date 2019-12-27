@@ -1,8 +1,4 @@
-<div class="title-container">
-  <img src="assets/core/login/tiket-logo-member.webp" alt="">
-</div>
-
-<div>
+<div class="login-container">
 
   <div class="left-container">
 
@@ -12,9 +8,8 @@
         <p> Join now to enjoy our features. </p>
       </div>
 
-      <div *ngFor="let feature of features;" class="data-content">
+      <div class="data-content" *ngFor="let feature of features;">
         <app-image-text [dataPass]="feature" ></app-image-text>
-        <div class="custom-line"></div>
       </div>
 
     </div>
@@ -23,10 +18,33 @@
 
   <div class="right-container">
 
-    <p class="login-title"><b>Log in/Register</b></p>
+    <p class="login-title"><b>Log in</b></p>
     <p class="login-subtitle">Your amazing trip starts here.</p>
 
-    <app-text-field [inputForm]="inputForm"></app-text-field>
+    <div class="text-field" *ngFor="let data of inputForm;">
+      <app-text-field [inputForm]="data"></app-text-field>
+    </div>
+
+    <div class="button-login"><b>CONTINUE</b></div>
+
+    <div class="separator-login">
+      or with
+    </div>
+
+    <div class="connect-other">
+
+      <div class="connect-container">
+        <img src="assets/login/google.svg" alt="Google">
+        <p>Google</p>
+      </div>
+
+      <div class="connect-container">
+        <img src="assets/login/facebook.svg" alt="Facebook">
+        <p>Facebook</p>
+      </div>
+
+    </div>
+
 
   </div>
 

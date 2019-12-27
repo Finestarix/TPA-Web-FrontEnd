@@ -1,40 +1,45 @@
-<div class="header navbar-container">
+<div class="outer-container">
 
-  <!-- Menu Top Left -->
-  <div>
-    <div *ngFor="let menu of menusTop;">
-      <app-navbar-menu [titleMenu]="menu"></app-navbar-menu>
+  <div class="header-container">
+
+    <div class="header-left-container">
+      <div class="header-left-menu" *ngFor="let menu of menusTop;">
+        <app-navbar-menu [titleMenu]="menu"></app-navbar-menu>
+      </div>
     </div>
+
+    <div class="header-right-container">
+      <app-navbar-dropdown class="header-right-dropdown" [type]="menusType[1]" [menu]="menusLanguage"></app-navbar-dropdown>
+      <app-navbar-dropdown class="header-right-dropdown" [type]="menusType[0]" [menu]="menusMoney"></app-navbar-dropdown>
+    </div>
+
   </div>
 
-  <!-- Menu Top Right (Dropdown) -->
-  <div class="downdown-header">
-    <app-navbar-dropdown [type]="menusType[1]" [menu]="menusLanguage"></app-navbar-dropdown>
-    <app-navbar-dropdown [type]="menusType[0]" [menu]="menusMoney"></app-navbar-dropdown>
-  </div>
+  <div class="navbar-container">
 
-</div>
+    <div class="navbar-left-container">
 
-<div class="navbar-container">
+      <div class="navbar-hamburger">
+        <img (click)="configNavbar()" class="navbar-hamburger-image" src="assets/navbar/Icon_Menu.png" alt="">
+        <img class="navbar-hamburger-logo" src="assets/core/Logo.png" alt="Logo">
+      </div>
 
-  <!-- Menu Bottom Left (Core) -->
-  <div>
-    <div class="navbar-menu-hamburger">
-      <img class="navbar-menu-hamburger-image" src="assets/navbar/Icon_Menu.png" alt="">
+      <img class="navbar-logo" src="assets/core/Logo.png" alt="Logo">
+
+      <div class="navbar-menu" *ngFor="let menu of menusLeft;">
+        <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
+      </div>
+
     </div>
 
-    <img class="navbar-logo" src="assets/core/Logo.png" alt="Logo">
+    <div class="navbar-right-container">
 
-    <div *ngFor="let menu of menusLeft;">
-      <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
-    </div>
-  </div>
+      <div class="navbar-menu" *ngFor="let menu of menusRight;">
+        <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
+      </div>
 
-  <!-- Menu Bottom Right -->
-  <div>
-    <div *ngFor="let menu of menusRight;">
-      <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
     </div>
+
   </div>
 
 </div>

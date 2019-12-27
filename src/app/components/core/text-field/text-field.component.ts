@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-text-field',
   templateUrl: './text-field.component.html',
   styleUrls: ['./text-field.component.scss']
 })
-export class TextFieldComponent implements OnInit {
+export class TextFieldComponent implements OnInit, AfterViewInit {
 
   @Input('inputForm') inputForm: any;
 
@@ -13,15 +13,21 @@ export class TextFieldComponent implements OnInit {
   myInput: HTMLElement;
 
   changeLabel(): void {
-    this.myInput.classList.add('active');
+    if (this.myLabel) {
+      this.myLabel.classList.add('active');
+    }
   }
 
   constructor() {
   }
 
   ngOnInit() {
-    this.myLabel = document.getElementById('text-input');
-    this.myInput = document.getElementById('label-input');
+  }
+
+  ngAfterViewInit(): void {
+    this.myInput = document.getElementById(this.inputForm.name);
+    this.myLabel = document.getElementById('label-' + this.inputForm.name);
+    console.log(this.myInput);
   }
 
 }

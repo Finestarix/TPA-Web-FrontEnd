@@ -10,7 +10,12 @@ import {LoginComponent} from '../login/login.component';
 export class NavbarComponent implements OnInit {
 
   constructor() {
+    this.isOpen = false;
   }
+
+  NavbarMenu: any;
+  isOpen: boolean;
+
 
   menusLeft: string[] = [
     'Flight',
@@ -54,7 +59,22 @@ export class NavbarComponent implements OnInit {
     'image'
   ];
 
+  configNavbar(): void {
+    this.isOpen = !this.isOpen;
+
+    if (this.isOpen) {
+      for (const items of this.NavbarMenu) {
+        items.setAttribute('style', 'display: block');
+      }
+    } else {
+      for (const items of this.NavbarMenu) {
+        items.setAttribute('style', 'display: none');
+      }
+    }
+  }
+
   ngOnInit() {
+    this.NavbarMenu = document.getElementsByClassName('navbar-menu');
   }
 
 

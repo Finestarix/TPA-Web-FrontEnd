@@ -33,10 +33,16 @@ export class LoginComponent implements OnInit {
     }
   ];
 
-  inputForm: object = {
-    name: 'login-input',
-    placeholder: 'Mobile Number or Email'
-  };
+  inputForm: object[] = [
+    {
+      name: 'phone-email',
+      placeholder: 'Mobile Number or Email'
+    },
+    {
+      name: 'password',
+      placeholder: 'Password'
+    }
+  ];
 
   ngOnInit() {
   }

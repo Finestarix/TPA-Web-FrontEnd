@@ -13,6 +13,7 @@ import {ImageTextComponent} from './components/core/image-text/image-text.compon
 import {NavbarMenuComponent} from './components/core/navbar-menu/navbar-menu.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import {NavbarDropdownComponent} from './components/navbar/navbar-dropdown/navbar-dropdown.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NavbarDropdownComponent} from './components/navbar/navbar-dropdown/navba
     FooterComponent,
     ImageTextComponent,
     NavbarComponent,
-    NavbarDropdownComponent
+    NavbarDropdownComponent,
+    RegisterComponent
   ],
   entryComponents: [LoginComponent],
   imports: [

@@ -9,8 +9,6 @@ a {
   color: #35405a;
   white-space: nowrap;
 
-  margin: 0px 20px 0px 0px;
-
   &:hover {
     color: royalblue;
     cursor: pointer;
@@ -23,7 +21,7 @@ a {
 
 }
 
-#border-title {
+.border-title {
   margin-top: 5px;
   width: 50%;
   height: 1px;
