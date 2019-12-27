@@ -3,12 +3,12 @@
   <!-- Menu Top Left -->
   <div>
     <div *ngFor="let menu of menusTop;">
-      <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
+      <app-navbar-menu [titleMenu]="menu"></app-navbar-menu>
     </div>
   </div>
 
   <!-- Menu Top Right (Dropdown) -->
-  <div>
+  <div class="downdown-header">
     <app-navbar-dropdown [type]="menusType[1]" [menu]="menusLanguage"></app-navbar-dropdown>
     <app-navbar-dropdown [type]="menusType[0]" [menu]="menusMoney"></app-navbar-dropdown>
   </div>
@@ -19,7 +19,11 @@
 
   <!-- Menu Bottom Left (Core) -->
   <div>
-    <img src="assets/core/Logo.png" alt="Logo">
+    <div class="navbar-menu-hamburger">
+      <img class="navbar-menu-hamburger-image" src="assets/navbar/Icon_Menu.png" alt="">
+    </div>
+
+    <img class="navbar-logo" src="assets/core/Logo.png" alt="Logo">
 
     <div *ngFor="let menu of menusLeft;">
       <app-navbar-menu [titleMenu]=menu></app-navbar-menu>

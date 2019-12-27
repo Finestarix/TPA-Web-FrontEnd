@@ -1,7 +1,7 @@
 <div class="header-dropdown">
 
   <div (click)="isClick = !isClick">
-    <img *ngIf="!isText; else otherTitle" class="flag-image header-dropdown-title" src="assets/core/navbar/US-Flag.webp"
+    <img *ngIf="!isText; else otherTitle" class="flag-image header-dropdown-title" src="assets/navbar/US-Flag.webp"
          alt="">
     <ng-template #otherTitle>
       <a class="header-dropdown-title"> IDR </a>
@@ -11,7 +11,7 @@
 
   <div *ngIf="!isText; else otherContent" [ngStyle]="{'display': setDisplay()}" class="header-dropdown-container">
     <div *ngFor="let language of menuComponent;" class="header-content-language">
-      <img class="flag-image" src="assets/core/navbar/{{language.image}}.webp">
+      <img class="flag-image" src="assets/navbar/{{language.image}}.webp">
       <a class="header-content-language-name" href="">{{language.name}}</a>
     </div>
 

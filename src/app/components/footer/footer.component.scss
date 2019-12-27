@@ -1,0 +1,100 @@
+.footer-image {
+  width: 182px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.footer-title {
+  font-family: "Open Sans", serif;
+  color: #58627a !important;
+  margin: 20px 0px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.footer-container {
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  .middle-part {
+
+    p {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 20px 0px;
+    }
+
+    div {
+      margin: 10px 0px;
+    }
+
+  }
+
+  .right-part {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      margin-bottom: 10px;
+    }
+
+  }
+
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  .wonderful-indonesia {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 10px;
+    font-family: "Open Sans";
+
+    img {
+      width: 150px;
+      height: 55px;
+    }
+
+  }
+
+  .image-container {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0px 20px;
+
+    p {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    div {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      div {
+        img {
+          margin-bottom: 10px;
+          margin-right: 15px;
+          height: 27px;
+        }
+      }
+
+    }
+
+
+  }
+
+}

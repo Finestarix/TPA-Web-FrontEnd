@@ -1,0 +1,59 @@
+<div class="footer-container">
+
+  <!-- Footer Left -->
+  <div class="left-part">
+
+    <img class="footer-image" src="assets/core/Logo.png" alt="Logo">
+
+    <div *ngFor="let currService of services">
+      <app-image-text [dataPass]="currService"></app-image-text>
+    </div>
+
+  </div>
+
+  <!-- Footer Middle-->
+  <div class="middle-part" *ngFor="let service of footerData;">
+
+    <p class="footer-title">{{service.title}}</p>
+
+    <div *ngFor="let content of service.content; ">
+      <app-navbar-menu [titleMenu]="content"></app-navbar-menu>
+    </div>
+
+  </div>
+
+  <!--  Footer Right-->
+  <div class="right-part">
+
+    <p class="footer-title"> Download </p>
+    <img src="assets/footer/download-app-store.png" alt="">
+    <img src="assets/footer/download-google-play.png" alt="">
+
+
+  </div>
+
+</div>
+
+<div class="bottom-container">
+
+  <div class="wonderful-indonesia">
+    <img src="assets/footer/wonderful-indonesia.webp" alt="">
+    <p>
+      Official Partner of <br>
+      the Ministry of Tourism, <br>
+      Republic of Indonesia
+    </p>
+  </div>
+
+  <div class="image-container" *ngFor="let trans of images;">
+
+    <p>{{trans.title}}</p>
+
+    <div>
+      <div *ngFor="let link of trans.imageLink;">
+        <img src="assets/footer/{{link}}" alt="">
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {LoginComponent} from '../../login/login.component';
 
 @Component({
@@ -53,5 +53,4 @@ export class NavbarMenuComponent implements OnInit {
       checkTitle === 'Login' ||
       checkTitle === 'Register') ? 'bold' : 'none';
   }
-
 }
