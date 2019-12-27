@@ -1,3 +1,33 @@
+a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  text-decoration: none;
+  color: black;
+  font-family: "Open Sans", serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #35405a;
+  white-space: nowrap;
+
+  margin: 10px;
+
+  margin: 0px 10px !important;
+  width: 100%;
+
+
+  &:hover {
+    color: royalblue;
+    cursor: pointer;
+  }
+
+}
+
+.support {
+  padding-bottom: 5px;
+}
+
 .outer-container {
 
   margin: 0px 20px;

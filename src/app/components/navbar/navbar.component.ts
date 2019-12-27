@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {LoginComponent} from '../login/login.component';
+import {RegisterComponent} from '../register/register.component';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ import {LoginComponent} from '../login/login.component';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() {
+  constructor(private dialog: MatDialog, private dialog2: MatDialog) {
     this.isOpen = false;
   }
 
@@ -27,9 +28,7 @@ export class NavbarComponent implements OnInit {
 
   menusRight: string[] = [
     'Tix Point',
-    'Check Order',
-    'Login',
-    'Register'
+    'Check Order'
   ];
 
   menusTop: string[] = [
@@ -58,6 +57,14 @@ export class NavbarComponent implements OnInit {
     'text',
     'image'
   ];
+
+  loginAction(): void {
+    this.dialog.open(LoginComponent);
+  }
+
+  registerAction(): void {
+    this.dialog2.open(RegisterComponent);
+  }
 
   configNavbar(): void {
     this.isOpen = !this.isOpen;

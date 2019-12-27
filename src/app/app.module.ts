@@ -28,7 +28,7 @@ import { RegisterComponent } from './components/register/register.component';
     NavbarDropdownComponent,
     RegisterComponent
   ],
-  entryComponents: [LoginComponent],
+  entryComponents: [LoginComponent, RegisterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

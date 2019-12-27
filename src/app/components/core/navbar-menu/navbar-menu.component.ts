@@ -1,6 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {LoginComponent} from '../../login/login.component';
 
 @Component({
   selector: 'app-navbar-menu',
@@ -15,7 +13,7 @@ export class NavbarMenuComponent implements OnInit {
 
   @Input('titleMenu') title: string;
 
-  constructor(private dialog: MatDialog) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -24,10 +22,6 @@ export class NavbarMenuComponent implements OnInit {
     if (this.title === 'Login') {
       this.isLogin = true;
     }
-  }
-
-  loginAction(): void {
-    this.dialog.open(LoginComponent);
   }
 
   setFontSize(checkTitle): number {
