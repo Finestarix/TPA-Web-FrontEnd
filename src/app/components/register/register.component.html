@@ -1,1 +1,39 @@
-<p>register works!</p>
+<div class="login-container">
+
+  <div class="left-container">
+
+    <div class="left-container-inside">
+
+      <div class="title-content">
+        <p> Join now to enjoy our features. </p>
+      </div>
+
+      <div class="data-content" *ngFor="let feature of features;">
+        <app-image-text [dataPass]="feature" ></app-image-text>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="right-container">
+
+    <p class="register-title"><b>Register</b></p>
+    <p class="register-subtitle">Your amazing trip starts here.</p>
+
+    <div class="text-field">
+      <app-text-field [inputForm]="phoneEmailData" (data)="setPhoneEmail($event)"></app-text-field>
+    </div>
+
+    <div class="text-field">
+      <app-text-field [inputForm]="passwordData" (data)="setPassword($event)"></app-text-field>
+    </div>
+
+    <div (click)="registerAction()" class="button-register"><b>CONTINUE</b></div>
+
+
+
+  </div>
+
+</div>
+

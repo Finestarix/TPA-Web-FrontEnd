@@ -21,11 +21,15 @@
     <p class="login-title"><b>Log in</b></p>
     <p class="login-subtitle">Your amazing trip starts here.</p>
 
-    <div class="text-field" *ngFor="let data of inputForm;">
-      <app-text-field [inputForm]="data"></app-text-field>
+    <div class="text-field">
+      <app-text-field [inputForm]="phoneEmailData" (data)="setPhoneEmail($event)"></app-text-field>
     </div>
 
-    <div class="button-login"><b>CONTINUE</b></div>
+    <div class="text-field">
+      <app-text-field [inputForm]="passwordData" (data)="setPassword($event)"></app-text-field>
+    </div>
+
+    <div (click)="loginAction()" class="button-login"><b>CONTINUE</b></div>
 
     <div class="separator-login">
       or with
@@ -44,6 +48,12 @@
       </div>
 
     </div>
+
+    <p class="term-condition">
+      By registering you have agreed to our
+<!--      <br>-->
+      <a href="https://en.tiket.com/info/privacy-policy">Privacy Policy</a> and <a href="https://en.tiket.com/info">Term & Conditions</a>.
+    </p>
 
 
   </div>

@@ -1,4 +1,11 @@
 <div>
-  <label (click)="changeLabel()" id="label-{{inputForm.name}}"> {{inputForm.placeholder}} </label>
-  <input (focusin)="changeLabel()" name="{{inputForm.name}}" type="text" id="{{inputForm.name}}" autocomplete="off" required >
+  <label (click)="setActive()"
+         [ngStyle]="{'color': setColor()}"
+         id="label-{{inputForm.name}}"> {{inputForm.placeholder}} </label>
+  <input (focusin)="setActive()"
+         (focusout)="setText()"
+         [(ngModel)]="value"
+         [ngStyle]="{'border': setBorder()}"
+         name="{{inputForm.name}}" type="text" id="{{inputForm.name}}" autocomplete="off" required>
+  <p>{{error}}</p>
 </div>

@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {TextFieldComponent} from '../core/text-field/text-field.component';
 
 @Component({
   selector: 'app-login',
@@ -33,16 +34,32 @@ export class LoginComponent implements OnInit {
     }
   ];
 
-  inputForm: object[] = [
-    {
-      name: 'phone-email',
-      placeholder: 'Mobile Number or Email'
-    },
-    {
-      name: 'password',
-      placeholder: 'Password'
+  phoneEmailData: object = {
+    name: 'phone-email',
+    placeholder: 'Mobile Number or Email'
+  };
+
+  passwordData: object = {
+    name: 'password',
+    placeholder: 'Password'
+  };
+
+  email: string;
+  password: string;
+
+  setPhoneEmail(email: string): void {
+    this.email = email;
+  }
+
+  setPassword(password: string): void {
+    this.password = password;
+  }
+
+  loginAction(): void {
+    if (this.email !== 'Error' && this.password !== 'Error') {
+
     }
-  ];
+  }
 
   ngOnInit() {
   }

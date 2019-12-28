@@ -48,7 +48,7 @@
     border: 1px solid lightgray;
     border-radius: 5px;
 
-    width: 320px;
+    width: 290px;
     height: 500px;
 
     font-family: "Open Sans", serif;
@@ -131,6 +131,22 @@
           margin: 10px;
         }
 
+      }
+
+    }
+
+    .term-condition {
+      font-size: 12px !important;
+      margin-left: 20px;
+
+      width: 250px;
+      text-align: center;
+      margin-top: 10px;
+
+      a {
+        color: #0064d2;
+        text-decoration: none;
+        cursor: pointer;
       }
 
     }
