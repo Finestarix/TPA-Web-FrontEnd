@@ -22,7 +22,7 @@
     <p class="login-subtitle">Your amazing trip starts here.</p>
 
     <div class="text-field">
-      <app-text-field [inputForm]="phoneEmailData" (data)="setPhoneEmail($event)"></app-text-field>
+      <app-text-field [inputForm]="phoneEmailData" (data)="setPhonePhoneEmail($event)"></app-text-field>
     </div>
 
     <div class="text-field">
@@ -32,13 +32,15 @@
     <div (click)="loginAction()" class="button-login"><b>CONTINUE</b></div>
 
     <div class="separator-login">
-      or with
+      ---- or with ----
     </div>
 
     <div class="connect-other">
 
+      <div class="g-signin2"></div>
+
       <div class="connect-container">
-        <img src="assets/login/google.svg" alt="Google">
+        <img src="assets/login/google.svg" (click)="googleSignIn()" alt="Google">
         <p>Google</p>
       </div>
 
@@ -51,7 +53,6 @@
 
     <p class="term-condition">
       By registering you have agreed to our
-<!--      <br>-->
       <a href="https://en.tiket.com/info/privacy-policy">Privacy Policy</a> and <a href="https://en.tiket.com/info">Term & Conditions</a>.
     </p>
 

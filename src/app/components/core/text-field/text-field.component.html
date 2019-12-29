@@ -5,7 +5,8 @@
   <input (focusin)="setActive()"
          (focusout)="setText()"
          [(ngModel)]="value"
+         tabindex="-1"
          [ngStyle]="{'border': setBorder()}"
-         name="{{inputForm.name}}" type="text" id="{{inputForm.name}}" autocomplete="off" required>
+         name="{{inputForm.name}}" type="{{typeInput}}" id="{{inputForm.name}}" autocomplete="off" required>
   <p>{{error}}</p>
 </div>

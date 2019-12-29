@@ -9,9 +9,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/",
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~8.2.14",
@@ -24,7 +21,15 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@graphql-modules/core": "^0.7.13",
+    "apollo-angular": "^1.8.0",
+    "apollo-angular-link-http": "^1.9.0",
+    "apollo-cache-inmemory": "^1.6.5",
+    "apollo-client": "^2.6.8",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "hammerjs": "^2.0.8",
+    "ng-gapi": "0.0.73",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

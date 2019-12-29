@@ -1,14 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {TextFieldComponent} from '../core/text-field/text-field.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {GoogleAuthService, GoogleApiService} from 'ng-gapi';
+import {Subscription, Observable} from 'rxjs';
+import {UserLogin} from '../../models/user-login';
+import {LoginService} from '../../services/login.service';
+import gql from 'graphql-tag';
+import {Apollo} from 'apollo-angular';
+import {GoogleSigninService} from '../../services/google-signin.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  userLogin$: Observable<UserLogin>;
+  userLoginData: UserLogin;
+
+  constructor(private loginService: LoginService,
+              private googleSignInService: GoogleSigninService,
+              private apollo: Apollo) {
   }
 
   features: object[] = [
@@ -44,11 +55,11 @@ export class LoginComponent implements OnInit {
     placeholder: 'Password'
   };
 
-  email: string;
+  phoneemail: string;
   password: string;
 
-  setPhoneEmail(email: string): void {
-    this.email = email;
+  setPhonePhoneEmail(email: string): void {
+    this.phoneemail = email;
   }
 
   setPassword(password: string): void {
@@ -56,12 +67,19 @@ export class LoginComponent implements OnInit {
   }
 
   loginAction(): void {
-    if (this.email !== 'Error' && this.password !== 'Error') {
+    console.log(this.phoneemail + ' ' + this.password);
+  }
 
-    }
+  googleSignIn(): void {
+    this.googleSignInService.signIn();
+    console.log(this.googleSignInService.getCurrUser());
+    this.googleSignInService.signOut();
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
   }
 
 }

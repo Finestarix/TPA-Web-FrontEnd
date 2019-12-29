@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {log} from 'util';
 
 @Component({
   selector: 'app-text-field',
@@ -17,20 +18,28 @@ export class TextFieldComponent implements OnInit, AfterViewInit {
   error: string;
   value: string;
 
+  typeInput: string;
+
   setActive(): void {
+    this.myInput.focus();
     this.border = 'Selected';
     this.myLabel.classList.add('active');
   }
 
   setText(): void {
+
     if (this.value === '') {
-      this.data.emit(this.value);
+
+      this.data.emit('Error');
       this.border = 'Wrong';
       this.error = 'Please Enter ' + this.inputForm.placeholder + '.';
+
     } else {
-      this.data.emit('Error');
+
+      this.data.emit(this.value);
       this.border = '';
       this.error = '';
+
     }
   }
 
@@ -48,7 +57,8 @@ export class TextFieldComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.value = this.error = '';
+    this.value = '';
+    this.typeInput = (this.inputForm.placeholder.toLowerCase().includes('password')) ? 'password' : 'text';
   }
 
   ngAfterViewInit(): void {
