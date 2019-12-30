@@ -4,7 +4,7 @@
 
     <div class="header-left-container">
       <div class="header-left-menu" *ngFor="let menu of menusTop;">
-        <app-navbar-menu [titleMenu]="menu"></app-navbar-menu>
+        <app-custom-menu-link [titleMenu]="menu"></app-custom-menu-link>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
       <img class="navbar-logo" src="assets/core/Logo.png" alt="Logo">
 
       <div class="navbar-menu" *ngFor="let menu of menusLeft;">
-        <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
+        <app-custom-menu-link [titleMenu]=menu></app-custom-menu-link>
       </div>
 
     </div>
@@ -35,7 +35,7 @@
     <div class="navbar-right-container">
 
       <div class="navbar-menu" *ngFor="let menu of menusRight;">
-        <app-navbar-menu [titleMenu]=menu></app-navbar-menu>
+        <app-custom-menu-link [titleMenu]=menu></app-custom-menu-link>
       </div>
 
       <a class="navbar-menu support" (click)="loginAction()"> Login </a>

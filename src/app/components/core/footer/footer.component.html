@@ -6,7 +6,7 @@
     <img class="footer-image" src="assets/core/Logo.png" alt="Logo">
 
     <div *ngFor="let currService of services">
-      <app-image-text [dataPass]="currService"></app-image-text>
+      <app-image-text [dataImageText]="currService"></app-image-text>
     </div>
 
   </div>
@@ -17,7 +17,7 @@
     <p class="footer-title">{{service.title}}</p>
 
     <div *ngFor="let content of service.content; ">
-      <app-navbar-menu [titleMenu]="content"></app-navbar-menu>
+      <app-custom-menu-link [titleMenu]="content"></app-custom-menu-link>
     </div>
 
   </div>
