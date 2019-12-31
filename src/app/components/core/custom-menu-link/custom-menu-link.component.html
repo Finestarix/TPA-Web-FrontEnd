@@ -1,1 +1,23 @@
-<p>custom-menu-link works!</p>
+<a *ngIf="!isRoutable; else usingRouting"
+   (mouseover)="styleHover = true"
+   (mouseleave)="styleHover = false"
+   [ngStyle]="{'font-size.px': setFontSize(titleMenu),
+               'font-weight': setFontWeight(titleMenu)
+              }">
+  {{titleMenu}}
+  <div [ngStyle]="{'background-color': setUnderline(titleMenu)}"></div>
+</a>
+
+<ng-template #usingRouting>
+  <a (click)="setRouter()"
+     (mouseover)="styleHover = true"
+     (mouseleave)="styleHover = false"
+     [ngStyle]="{'font-size.px': setFontSize(titleMenu),
+                 'font-weight': setFontWeight(titleMenu)
+              }">
+    {{titleMenu}}
+    <div [ngStyle]="{'background-color': setUnderline(titleMenu)}"></div>
+  </a>
+
+</ng-template>
+

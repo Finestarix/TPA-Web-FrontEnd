@@ -1,28 +1,45 @@
 <div class="header-dropdown">
 
   <div (click)="isClick = !isClick">
-    <img *ngIf="!isText; else otherTitle" class="flag-image header-dropdown-title" src="assets/navbar/US-Flag.webp"
-         alt="">
+
+    <img *ngIf="!isTextType; else otherTitle"
+         class="flag-image header-dropdown-title"
+         src="assets/navbar/US-Flag.webp"
+         alt="Flag">
+
     <ng-template #otherTitle>
       <a class="header-dropdown-title"> IDR </a>
     </ng-template>
+
     &#11167;
+
   </div>
 
-  <div *ngIf="!isText; else otherContent" [ngStyle]="{'display': setDisplay()}" class="header-dropdown-container">
-    <div *ngFor="let language of menuComponent;" class="header-content-language">
+  <div *ngIf="!isTextType; else otherContent"
+       [ngStyle]="{'display': setDisplay()}"
+       class="header-dropdown-container">
+
+    <div *ngFor="let language of dataDropdown;"
+         class="header-content-language">
+
       <img class="flag-image" src="assets/navbar/{{language.image}}.webp">
-      <a class="header-content-language-name" href="">{{language.name}}</a>
+      <a class="header-content-language-name" href="">{{language.languageName}}</a>
+
     </div>
 
   </div>
 
   <ng-template #otherContent>
-    <div [ngStyle]="{'display': setDisplay()}" class="header-dropdown-container">
-      <div *ngFor="let money of menuComponent;" class="header-content-money">
+
+    <div [ngStyle]="{'display': setDisplay()}"
+         class="header-dropdown-container">
+
+      <div *ngFor="let money of dataDropdown;" class="header-content-money">
         <a href="">{{money}}</a>
       </div>
+
     </div>
+
   </ng-template>
 
 </div>

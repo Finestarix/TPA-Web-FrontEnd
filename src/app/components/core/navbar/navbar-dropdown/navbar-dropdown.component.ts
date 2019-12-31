@@ -7,17 +7,17 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class NavbarDropdownComponent implements OnInit {
 
-  @Input('type') typeComponent: string;
-  @Input('menu') menuComponent: string;
+  @Input('typeDropdown') typeDropdown: string;
+  @Input('dataDropdown') dataDropdown: any;
 
-  isText: boolean;
+  isTextType: boolean;
   isClick: boolean;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.isText = (this.typeComponent === 'text') ? true : false;
+    this.isTextType = (this.typeDropdown === 'text') ? true : false;
     this.isClick = false;
   }
 

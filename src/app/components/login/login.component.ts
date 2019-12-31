@@ -1,11 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {GoogleAuthService, GoogleApiService} from 'ng-gapi';
 import {Subscription, Observable} from 'rxjs';
-import {UserLogin} from '../../models/user-login';
 import {LoginService} from '../../services/login.service';
-import gql from 'graphql-tag';
-import {Apollo} from 'apollo-angular';
 import {GoogleSigninService} from '../../services/google-signin.service';
+
+import featureLoginRegister from '../../models/login-register';
 
 @Component({
   selector: 'app-login',
@@ -14,36 +12,10 @@ import {GoogleSigninService} from '../../services/google-signin.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  userLogin$: Observable<UserLogin>;
-  userLoginData: UserLogin;
+  featureLoginRegister: object[];
 
-  constructor(private loginService: LoginService,
-              private googleSignInService: GoogleSigninService,
-              private apollo: Apollo) {
-  }
-
-  features: object[] = [
-    {
-      title: 'Smart Profile',
-      image: 'smart-profile.webp',
-      content: 'Book faster with one tap to fill all passengers details.'
-    },
-    {
-      title: 'TIX Point & TIX Spot',
-      image: 'tix.webp',
-      content: 'Get and collect it, then redeem for rewards or discount.'
-    },
-    {
-      title: 'Smart Pay',
-      image: 'smart-pay.webp',
-      content: 'Handle payment and transaction in a fast and secure way.'
-    },
-    {
-      title: 'Smart Reschedule & Refund List',
-      image: 'scheduler.webp',
-      content: 'No more complicated rescheduling and refund process.'
-    }
-  ];
+  userLogin$: Subscription;
+  userLoginData: any;
 
   phoneEmailData: object = {
     name: 'phone-email',
@@ -58,6 +30,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   phoneemail: string;
   password: string;
 
+  constructor(private loginService: LoginService,
+              private googleSignInService: GoogleSigninService) {
+    this.featureLoginRegister = featureLoginRegister;
+  }
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy(): void {
+    if (this.userLogin$) {
+      this.userLogin$.unsubscribe();
+    }
+  }
+
   setPhonePhoneEmail(email: string): void {
     this.phoneemail = email;
   }
@@ -67,19 +53,16 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loginAction(): void {
-    console.log(this.phoneemail + ' ' + this.password);
+    this.userLogin$ = this.loginService.getUser(this.phoneemail).subscribe(async query => {
+      this.userLoginData = query.data.UserByEmailAndPhone;
+      await console.log(this.userLoginData);
+    });
   }
 
   googleSignIn(): void {
     this.googleSignInService.signIn();
     console.log(this.googleSignInService.getCurrUser());
     this.googleSignInService.signOut();
-  }
-
-  ngOnInit() {
-  }
-
-  ngOnDestroy(): void {
   }
 
 }

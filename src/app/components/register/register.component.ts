@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import featureLoginRegister from '../../models/login-register';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  featureLoginRegister: object[];
+
+  constructor() {
+    this.featureLoginRegister = featureLoginRegister;
+  }
 
   features: object[] = [
     {
@@ -32,9 +38,24 @@ export class RegisterComponent implements OnInit {
     }
   ];
 
-  phoneEmailData: object = {
-    name: 'phone-email',
-    placeholder: 'Mobile Number or Email'
+  emailData: object = {
+    name: 'email',
+    placeholder: 'Email'
+  };
+
+  firstNameData: object = {
+    name: 'first-name',
+    placeholder: 'First Name'
+  };
+
+  lastNameData: object = {
+    name: 'last-name',
+    placeholder: 'Last Name'
+  };
+
+  phoneData: object = {
+    name: 'phone',
+    placeholder: 'Mobile Phone'
   };
 
   passwordData: object = {

@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {LoginComponent} from '../login/login.component';
-import {RegisterComponent} from '../register/register.component';
+import {LoginComponent} from '../../login/login.component';
+import {RegisterComponent} from '../../register/register.component';
+
+import {menusLeft, menusRight, menusTop, menusType, menusMoney, menusLanguage} from './navbar';
 
 @Component({
   selector: 'app-navbar',
@@ -10,78 +12,50 @@ import {RegisterComponent} from '../register/register.component';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private dialog: MatDialog, private dialog2: MatDialog) {
+  menusLeft: string[];
+  menusRight: string[];
+  menusTop: string[];
+  menusType: string[];
+  menusMoney: string[];
+  menusLanguage: string[];
+
+  navbarMenu: any;
+  isOpen: boolean;
+
+  constructor(private dialogLogin: MatDialog, private dialogRegister: MatDialog) {
+    this.menusLeft = menusLeft;
+    this.menusRight = menusRight;
+    this.menusTop = menusTop;
+    this.menusType = menusType;
+    this.menusMoney = menusMoney;
+    this.menusLanguage = menusLanguage;
     this.isOpen = false;
   }
 
-  NavbarMenu: any;
-  isOpen: boolean;
-
-
-  menusLeft: string[] = [
-    'Flight',
-    'Hotel',
-    'Train',
-    'Car Rental',
-    'Entertainment'
-  ];
-
-  menusRight: string[] = [
-    'Tix Point',
-    'Check Order'
-  ];
-
-  menusTop: string[] = [
-    'Download Karcis.co App',
-    'Promos',
-    'Help Center'
-  ];
-
-  menusLanguage: any[] = [
-    {
-      image: 'ID-Flag',
-      name: 'Bahasa Indonesia'
-    },
-    {
-      image: 'US-Flag',
-      name: 'English'
-    }
-  ];
-
-  menusMoney: string[] = [
-    'IDR - Indonesia Rupiah',
-    'SGD - Singapore Dollar'
-  ];
-
-  menusType: string[] = [
-    'text',
-    'image'
-  ];
+  ngOnInit() {
+    this.navbarMenu = document.getElementsByClassName('navbar-menu');
+  }
 
   loginAction(): void {
-    this.dialog.open(LoginComponent);
+    this.dialogLogin.open(LoginComponent);
   }
 
   registerAction(): void {
-    this.dialog2.open(RegisterComponent);
+    this.dialogRegister.open(RegisterComponent);
   }
 
   configNavbar(): void {
     this.isOpen = !this.isOpen;
 
     if (this.isOpen) {
-      for (const items of this.NavbarMenu) {
+      for (const items of this.navbarMenu) {
         items.setAttribute('style', 'display: block');
       }
     } else {
-      for (const items of this.NavbarMenu) {
+      for (const items of this.navbarMenu) {
         items.setAttribute('style', 'display: none');
       }
     }
-  }
-
-  ngOnInit() {
-    this.NavbarMenu = document.getElementsByClassName('navbar-menu');
   }
 
 

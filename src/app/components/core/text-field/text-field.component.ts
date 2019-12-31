@@ -9,61 +9,60 @@ import {log} from 'util';
 export class TextFieldComponent implements OnInit, AfterViewInit {
 
   @Input('inputForm') inputForm: any;
-  @Output() data: EventEmitter<string> = new EventEmitter<string>();
+  @Output() sendToParent: EventEmitter<string> = new EventEmitter<string>();
 
   myLabel: HTMLElement;
   myInput: HTMLElement;
 
-  border: string;
-  error: string;
-  value: string;
-
+  borderStyle: string;
+  errorMessage: string;
+  valueInput: string;
   typeInput: string;
-
-  setActive(): void {
-    this.myInput.focus();
-    this.border = 'Selected';
-    this.myLabel.classList.add('active');
-  }
-
-  setText(): void {
-
-    if (this.value === '') {
-
-      this.data.emit('Error');
-      this.border = 'Wrong';
-      this.error = 'Please Enter ' + this.inputForm.placeholder + '.';
-
-    } else {
-
-      this.data.emit(this.value);
-      this.border = '';
-      this.error = '';
-
-    }
-  }
-
-  setBorder(): string {
-    return (this.border === 'Selected') ? '1px solid #0064d2' :
-      (this.border === 'Wrong') ? '1px solid red' : '1px solid #c6cbda';
-  }
-
-  setColor(): string {
-    return (this.border === 'Selected') ? '#0064d2' :
-      (this.border === 'Wrong') ? 'red' : '#c6cbda';
-  }
 
   constructor() {
   }
 
   ngOnInit() {
-    this.value = '';
+    this.valueInput = '';
     this.typeInput = (this.inputForm.placeholder.toLowerCase().includes('password')) ? 'password' : 'text';
   }
 
   ngAfterViewInit(): void {
     this.myInput = document.getElementById(this.inputForm.name);
     this.myLabel = document.getElementById('label-' + this.inputForm.name);
+  }
+
+  setActive(): void {
+    this.myInput.focus();
+    this.borderStyle = 'Selected';
+    this.myLabel.classList.add('activeLabel');
+  }
+
+  setText(): void {
+
+    if (this.valueInput === '') {
+
+      this.sendToParent.emit('Error');
+      this.borderStyle = 'Wrong';
+      this.errorMessage = 'Please Enter ' + this.inputForm.placeholder + '.';
+
+    } else {
+
+      this.sendToParent.emit(this.valueInput);
+      this.borderStyle = '';
+      this.errorMessage = '';
+
+    }
+  }
+
+  setBorder(): string {
+    return (this.borderStyle === 'Selected') ? '1px solid #0064d2' :
+      (this.borderStyle === 'Wrong') ? '1px solid red' : '1px solid #c6cbda';
+  }
+
+  setColor(): string {
+    return (this.borderStyle === 'Selected') ? '#0064d2' :
+      (this.borderStyle === 'Wrong') ? 'red' : '#c6cbda';
   }
 
 }

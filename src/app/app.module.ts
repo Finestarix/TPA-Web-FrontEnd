@@ -5,33 +5,25 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpLinkModule, HttpLink} from 'apollo-angular-link-http';
-import {ApolloModule, Apollo, APOLLO_OPTIONS} from 'apollo-angular';
-import {InMemoryCache} from 'apollo-cache-inmemory';
+import {HttpLinkModule} from 'apollo-angular-link-http';
+import {ApolloModule} from 'apollo-angular';
 import {GoogleApiModule, GoogleApiService, GoogleAuthService, GoogleApiConfig, NG_GAPI_CONFIG, NgGapiClientConfig} from 'ng-gapi';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
 import {TextFieldComponent} from './components/core/text-field/text-field.component';
 import {MainComponent} from './components/main/main.component';
-import {FooterComponent} from './components/footer/footer.component';
+import {FooterComponent} from './components/core/footer/footer.component';
 import {ImageTextComponent} from './components/core/image-text/image-text.component';
-import {NavbarMenuComponent} from './components/core/navbar-menu/navbar-menu.component';
-import {NavbarComponent} from './components/navbar/navbar.component';
-import {NavbarDropdownComponent} from './components/navbar/navbar-dropdown/navbar-dropdown.component';
+import {NavbarComponent} from './components/core/navbar/navbar.component';
+import {NavbarDropdownComponent} from './components/core/navbar/navbar-dropdown/navbar-dropdown.component';
 import {RegisterComponent} from './components/register/register.component';
 import {PlaneComponent} from './components/main/plane/plane.component';
 import {HotelComponent} from './components/main/hotel/hotel.component';
 import {TrainComponent} from './components/main/train/train.component';
 import {HomeComponent} from './components/main/home/home.component';
-
-export function createApollo(httpLink: HttpLink) {
-  console.log('Connect to API');
-  return {
-    link: httpLink.create({uri: 'http://localhost:4201/'}),
-    cache: new InMemoryCache(),
-  };
-}
+import {CustomMenuLinkComponent} from './components/core/custom-menu-link/custom-menu-link.component'
+import { GraphQLModule } from './graphql.module';
 
 const googleClientConfig: NgGapiClientConfig = {
   client_id: '336495925518-defp19eeubg3kq7erdlna5n7bteffog0.apps.googleusercontent.com',
@@ -43,7 +35,6 @@ const googleClientConfig: NgGapiClientConfig = {
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarMenuComponent,
     LoginComponent,
     TextFieldComponent,
     MainComponent,
@@ -56,6 +47,7 @@ const googleClientConfig: NgGapiClientConfig = {
     HotelComponent,
     TrainComponent,
     HomeComponent,
+    CustomMenuLinkComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -74,14 +66,9 @@ const googleClientConfig: NgGapiClientConfig = {
       provide: NG_GAPI_CONFIG,
       useValue: googleClientConfig
     }),
+    GraphQLModule,
   ],
-  providers: [
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: createApollo,
-      deps: [HttpLink],
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 

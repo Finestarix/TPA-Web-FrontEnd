@@ -8,8 +8,8 @@
         <p> Join now to enjoy our features. </p>
       </div>
 
-      <div class="data-content" *ngFor="let feature of features;">
-        <app-image-text [dataPass]="feature" ></app-image-text>
+      <div class="data-content" *ngFor="let feature of featureLoginRegister;">
+        <app-image-text [dataImageText]="feature" ></app-image-text>
       </div>
 
     </div>
@@ -22,11 +22,11 @@
     <p class="login-subtitle">Your amazing trip starts here.</p>
 
     <div class="text-field">
-      <app-text-field [inputForm]="phoneEmailData" (data)="setPhonePhoneEmail($event)"></app-text-field>
+      <app-text-field [inputForm]="phoneEmailData" (sendToParent)="setPhonePhoneEmail($event)"></app-text-field>
     </div>
 
     <div class="text-field">
-      <app-text-field [inputForm]="passwordData" (data)="setPassword($event)"></app-text-field>
+      <app-text-field [inputForm]="passwordData" (sendToParent)="setPassword($event)"></app-text-field>
     </div>
 
     <div (click)="loginAction()" class="button-login"><b>CONTINUE</b></div>

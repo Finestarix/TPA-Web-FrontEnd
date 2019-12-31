@@ -1,36 +1,35 @@
-p {
-  font-size: 14px;
-  color: #58627a;
-
-  margin: 3px 0px;
-
-  b {
-    color: #35405a !important;
-  }
-
-}
-
-img {
-  margin: 10px 20px;
-  width: 40px;
-}
-
 .feature-container {
 
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   justify-content: flex-start;
 
   font-family: "Open Sans", serif;
+  font-size: 14px;
+  color: #58627a;
 
   width: 355px;
+
+  div img {
+    margin: 10px 20px;
+    width: 40px;
+  }
 
   .feature-content {
 
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    p {
+
+      margin: 3px 0px;
+
+      b {
+        color: #35405a !important;
+      }
+
+    }
 
   }
 

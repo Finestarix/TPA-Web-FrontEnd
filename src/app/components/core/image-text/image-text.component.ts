@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ImageTextComponent implements OnInit {
 
-  @Input('dataPass') dataPass: any;
+  @Input('dataImageText') dataImageText: any;
 
   constructor() {
   }

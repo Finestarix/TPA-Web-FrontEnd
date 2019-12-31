@@ -1,0 +1,34 @@
+a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  text-decoration: none;
+  font-family: "Open Sans", serif;
+  color: #35405a;
+  white-space: nowrap;
+
+  &:hover {
+    color: royalblue;
+    cursor: pointer;
+
+    div {
+      background-color: royalblue;
+    }
+
+  }
+
+  div {
+    margin-top: 5px;
+    width: 50%;
+    height: 1px;
+    background-color: transparent;
+  }
+
+}
+
+@media only screen and (max-width: 1000px) {
+  div {
+    background-color: transparent !important;
+  }
+}

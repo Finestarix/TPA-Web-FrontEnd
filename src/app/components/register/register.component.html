@@ -1,5 +1,9 @@
 <div class="login-container">
 
+  <div>
+
+  </div>
+
   <div class="left-container">
 
     <div class="left-container-inside">
@@ -8,8 +12,8 @@
         <p> Join now to enjoy our features. </p>
       </div>
 
-      <div class="data-content" *ngFor="let feature of features;">
-        <app-image-text [dataPass]="feature" ></app-image-text>
+      <div class="data-content" *ngFor="let feature of featureLoginRegister;">
+        <app-image-text [dataImageText]="feature" ></app-image-text>
       </div>
 
     </div>
@@ -22,14 +26,28 @@
     <p class="register-subtitle">Your amazing trip starts here.</p>
 
     <div class="text-field">
-      <app-text-field [inputForm]="phoneEmailData" (data)="setPhoneEmail($event)"></app-text-field>
+      <p>Email</p>
+      <p>email@email.com</p>
     </div>
+
+    <div class="text-field">
+      <app-text-field [inputForm]="firstNameData" (data)="setEmail($event)"></app-text-field>
+    </div>
+
+    <div class="text-field">
+      <app-text-field [inputForm]="lastNameData" (data)="setEmail($event)"></app-text-field>
+    </div>
+
+    <div class="text-field">
+      <app-text-field [inputForm]="phoneData" (data)="setEmail($event)"></app-text-field>
+    </div>
+
 
     <div class="text-field">
       <app-text-field [inputForm]="passwordData" (data)="setPassword($event)"></app-text-field>
     </div>
 
-    <div (click)="registerAction()" class="button-register"><b>CONTINUE</b></div>
+    <div (click)="registerAction()" class="button-register"><b>CREATE ACCOUNT</b></div>
 
 
 

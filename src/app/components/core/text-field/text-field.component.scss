@@ -1,9 +1,4 @@
-* {
-  font-size: 16px;
-  font-family: "Open Sans", serif;
-}
-
-.active {
+.activeLabel {
   top: -20px !important;
   font-size: 12px !important;
 }
@@ -13,11 +8,13 @@
 }
 
 div {
-  position: relative;
 
   width: 220px;
-
   margin-bottom: 10px;
+
+  font-size: 16px;
+  font-family: "Open Sans", serif;
+  position: relative;
 
   label {
     position: absolute;
