@@ -1,33 +1,37 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {log} from 'util';
+import {AfterViewInit, Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
-  selector: 'app-text-field',
-  templateUrl: './text-field.component.html',
-  styleUrls: ['./text-field.component.scss']
+  selector: 'app-password-field',
+  templateUrl: './password-field.component.html',
+  styleUrls: ['./password-field.component.scss']
 })
-export class TextFieldComponent implements OnInit, AfterViewInit {
+export class PasswordFieldComponent implements OnInit, AfterViewInit {
 
   @Input('inputForm') inputForm: any;
   @Output() sendToParent: EventEmitter<string> = new EventEmitter<string>();
 
   myLabel: HTMLElement;
   myInput: HTMLElement;
+  myImage: HTMLElement;
 
   borderStyle: string;
   errorMessage: string;
   valueInput: string;
+
+  isPassMode: string;
 
   constructor() {
   }
 
   ngOnInit() {
     this.valueInput = '';
+    this.isPassMode = 'password';
   }
 
   ngAfterViewInit(): void {
     this.myInput = document.getElementById(this.inputForm.name);
     this.myLabel = document.getElementById('label-' + this.inputForm.name);
+    this.myImage = document.getElementById('image-eye');
   }
 
   setActive(): void {
@@ -45,26 +49,12 @@ export class TextFieldComponent implements OnInit, AfterViewInit {
 
       this.errorMessage = 'Please Enter ' + this.inputForm.placeholder + '.';
 
-    } else if (this.inputForm.placeholder.toLowerCase().includes('email') &&
-      this.inputForm.placeholder.toLowerCase().includes('mobile number')) {
+    } else {
 
-      const ruleDigit = /^\d+$/;
-      if (ruleDigit.test(this.valueInput)) {
+      const rulePassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}/;
 
-        const rulePhone = /^[0-9]{11,13}$/;
-
-        if (!rulePhone.test(this.valueInput)) {
-          this.errorMessage = 'Enter Valid Phone Number Format.';
-        }
-
-      } else {
-
-        const ruleEmail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
-
-        if (!ruleEmail.test(this.valueInput)) {
-          this.errorMessage = 'Enter Valid Email Format.';
-        }
-
+      if (!rulePassword.test(this.valueInput)) {
+        this.errorMessage = 'Min. 8 Character & Alphanumeric.';
       }
 
     }
@@ -73,8 +63,13 @@ export class TextFieldComponent implements OnInit, AfterViewInit {
       this.borderStyle = 'Wrong';
     }
 
-
     this.sendToParent.emit((this.borderStyle === 'Wrong') ? 'Error' : this.valueInput);
+  }
+
+  changeState(): void {
+    this.isPassMode = (this.isPassMode === 'password') ? 'text' : 'password';
+    this.myImage.setAttribute('src', (this.isPassMode === 'text') ?
+      'assets/core/eye-passwordfield-off.png' : 'assets/core/eye-passwordfield-on.png');
   }
 
   setBorder(): string {

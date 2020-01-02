@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogRef} from '@angular/material';
 import {LoginComponent} from '../../login/login.component';
 import {RegisterComponent} from '../../register/register.component';
 
@@ -22,7 +22,14 @@ export class NavbarComponent implements OnInit {
   navbarMenu: any;
   isOpen: boolean;
 
-  constructor(private dialogLogin: MatDialog, private dialogRegister: MatDialog) {
+  emailphone: string;
+
+  private dialogRefLogin: MatDialogRef<LoginComponent>;
+  private dialogRefRegister: MatDialogRef<RegisterComponent>;
+
+
+  constructor(private dialogLogin: MatDialog,
+              private dialogRegister: MatDialog) {
     this.menusLeft = menusLeft;
     this.menusRight = menusRight;
     this.menusTop = menusTop;
@@ -37,11 +44,21 @@ export class NavbarComponent implements OnInit {
   }
 
   loginAction(): void {
-    this.dialogLogin.open(LoginComponent);
-  }
+    this.dialogRefLogin = this.dialogLogin.open(LoginComponent);
 
-  registerAction(): void {
-    this.dialogRegister.open(RegisterComponent);
+    this.dialogRefLogin.afterClosed().subscribe(temp => {
+      if (temp) {
+        this.emailphone = temp;
+
+        if (temp.status === true) {
+          this.dialogRefRegister = this.dialogRegister.open(RegisterComponent, {
+            data: temp.emailphone
+          });
+        }
+
+      }
+    });
+
   }
 
   configNavbar(): void {
@@ -56,7 +73,7 @@ export class NavbarComponent implements OnInit {
         items.setAttribute('style', 'display: none');
       }
     }
-  }
 
+  }
 
 }

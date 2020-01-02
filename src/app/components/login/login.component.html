@@ -18,24 +18,29 @@
 
   <div class="right-container">
 
-    <p class="login-title"><b>Log in</b></p>
-    <p class="login-subtitle">Your amazing trip starts here.</p>
+    <p class="login-title general-style">
+      <b>Log in</b>
+    </p>
 
-    <div class="text-field">
+    <p class="login-subtitle general-style">
+      Your amazing trip starts here.
+    </p>
+
+    <div class="text-field general-style">
       <app-text-field [inputForm]="phoneEmailData" (sendToParent)="setPhonePhoneEmail($event)"></app-text-field>
     </div>
 
-    <div class="text-field">
-      <app-text-field [inputForm]="passwordData" (sendToParent)="setPassword($event)"></app-text-field>
+    <div class="text-field general-style" id="password">
+      <app-password-field [inputForm]="passwordData" (sendToParent)="setPassword($event)"></app-password-field>
     </div>
 
-    <div (click)="loginAction()" class="button-login"><b>CONTINUE</b></div>
+    <div (click)="loginAction()" class="button-login general-style"><b>CONTINUE</b></div>
 
     <div class="separator-login">
       ---- or with ----
     </div>
 
-    <div class="connect-other">
+    <div class="connect-other general-style">
 
       <div class="g-signin2"></div>
 
@@ -51,7 +56,7 @@
 
     </div>
 
-    <p class="term-condition">
+    <p class="term-condition general-style">
       By registering you have agreed to our
       <a href="https://en.tiket.com/info/privacy-policy">Privacy Policy</a> and <a href="https://en.tiket.com/info">Term & Conditions</a>.
     </p>

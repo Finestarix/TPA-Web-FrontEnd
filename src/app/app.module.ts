@@ -24,6 +24,7 @@ import {TrainComponent} from './components/main/train/train.component';
 import {HomeComponent} from './components/main/home/home.component';
 import {CustomMenuLinkComponent} from './components/core/custom-menu-link/custom-menu-link.component'
 import { GraphQLModule } from './graphql.module';
+import {PasswordFieldComponent} from './components/core/password-field/password-field.component';
 
 const googleClientConfig: NgGapiClientConfig = {
   client_id: '336495925518-defp19eeubg3kq7erdlna5n7bteffog0.apps.googleusercontent.com',
@@ -37,6 +38,7 @@ const googleClientConfig: NgGapiClientConfig = {
     AppComponent,
     LoginComponent,
     TextFieldComponent,
+    PasswordFieldComponent,
     MainComponent,
     FooterComponent,
     ImageTextComponent,

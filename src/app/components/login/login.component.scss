@@ -59,20 +59,26 @@
     align-items: flex-start;
     justify-content: flex-start;
 
+    .general-style {
+      margin-left: 20px;
+    }
+
     .login-title {
       margin-top: 20px;
-      margin-left: 20px;
       font-size: 18px;
     }
 
     .login-subtitle {
       margin-top: 10px;
-      margin-left: 20px;
       font-size: 14px;
     }
 
     .text-field {
-      margin: 25px 0px 0px 20px;
+      margin-top: 25px;
+    }
+
+    #password {
+      display: none;
     }
 
     .button-login {
@@ -88,7 +94,6 @@
       align-items: center;
 
       margin-top: 20px;
-      margin-left: 20px;
 
       cursor: pointer;
     }
@@ -111,8 +116,6 @@
       border-radius: 5px;
       border: 1px solid #888888;
 
-      margin-left: 20px;
-
       width: 250px;
 
       .connect-container {
@@ -123,11 +126,7 @@
 
         cursor: pointer;
 
-        img {
-          margin: 10px;
-        }
-
-        p {
+        img, p {
           margin: 10px;
         }
 
@@ -137,7 +136,6 @@
 
     .term-condition {
       font-size: 12px !important;
-      margin-left: 20px;
 
       width: 250px;
       text-align: center;

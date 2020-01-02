@@ -3,7 +3,7 @@ import {Apollo} from 'apollo-angular';
 import {Observable} from 'rxjs';
 import gql from 'graphql-tag';
 
-import {getEmailAndPhone} from './query/user';
+import {getEmailAndPhone, getValidUser} from './query/user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,29 +13,30 @@ export class LoginService {
   constructor(private apollo: Apollo) {
   }
 
-
   getUser(emailphoneParam: string): Observable<any> {
 
-    const convertedData = String(emailphoneParam)
+    const convertedData = String(emailphoneParam);
 
     return this.apollo.query<any>({
-      query: gql`
-        query getCurrentUser($param: String!) {
-          UserByEmailAndPhone(emailphone: $param) {
-            id
-            firstname
-            lastname
-            email
-            phone
-          }
-        }
-      `,
+      query: getEmailAndPhone,
       variables: {
-        param: convertedData
+        param: convertedData,
       }
-    })
-      ;
+    });
   }
 
+  getValidUser(emailphoneParam: string, passwordParam: string): Observable<any> {
+
+    const emailphone = String(emailphoneParam);
+    const password = String(passwordParam);
+
+    return this.apollo.query<any>({
+      query: getValidUser,
+      variables: {
+        searchEmailPhone: emailphone,
+        searchPassword: password
+      }
+    });
+  }
 
 }
