@@ -13,7 +13,7 @@
       </div>
 
       <div class="data-content" *ngFor="let feature of featureLoginRegister;">
-        <app-image-text [dataImageText]="feature" ></app-image-text>
+        <app-image-text [dataImageText]="feature"></app-image-text>
       </div>
 
     </div>
@@ -25,30 +25,42 @@
     <p class="register-title"><b>Register</b></p>
     <p class="register-subtitle">Your amazing trip starts here.</p>
 
-    <div class="text-field">
+    <div *ngIf="isEmail; else otherFieldStatic" class="text-field">
       <p>Email</p>
-      <p>email@email.com</p>
+      <p>{{dataFromLogin.phoneemail}}</p>
+    </div>
+
+    <ng-template #otherFieldStatic>
+      <div class="text-field">
+        <p>Email</p>
+        <p>{{dataFromLogin.phoneemail}}</p>
+      </div>
+    </ng-template>
+
+    <div class="text-field">
+      <app-text-field [inputForm]="firstNameData" (sendToParent)="setFirstName($event)"></app-text-field>
     </div>
 
     <div class="text-field">
-      <app-text-field [inputForm]="firstNameData" (data)="setEmail($event)"></app-text-field>
+      <app-text-field [inputForm]="lastNameData" (sendToParent)="setLastName($event)"></app-text-field>
     </div>
 
-    <div class="text-field">
-      <app-text-field [inputForm]="lastNameData" (data)="setEmail($event)"></app-text-field>
+    <div *ngIf="!isEmail; else otherField" class="text-field">
+      <app-text-field [inputForm]="emailData" (sendToParent)="setEmail($event)"></app-text-field>
     </div>
 
-    <div class="text-field">
-      <app-text-field [inputForm]="phoneData" (data)="setEmail($event)"></app-text-field>
-    </div>
+    <ng-template #otherField>
+      <div class="text-field">
+        <app-option-field [inputForm]="phoneCodeData" (sendToParent)="setPhoneCode($event)"></app-option-field>
+        <app-text-field [inputForm]="phoneData" (sendToParent)="setPhone($event)"></app-text-field>
+      </div>
+    </ng-template>
 
-
     <div class="text-field">
-      <app-text-field [inputForm]="passwordData" (data)="setPassword($event)"></app-text-field>
+      <app-password-field [inputForm]="passwordData" (sendToParent)="setPassword($event)"></app-password-field>
     </div>
 
     <div (click)="registerAction()" class="button-register"><b>CREATE ACCOUNT</b></div>
-
 
 
   </div>

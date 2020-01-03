@@ -1,12 +1,11 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {log} from 'util';
 
 @Component({
-  selector: 'app-text-field',
-  templateUrl: './text-field.component.html',
-  styleUrls: ['./text-field.component.scss']
+  selector: 'app-option-field',
+  templateUrl: './option-field.component.html',
+  styleUrls: ['./option-field.component.scss']
 })
-export class TextFieldComponent implements OnInit, AfterViewInit {
+export class OptionFieldComponent implements OnInit, AfterViewInit {
 
   @Input('inputForm') inputForm: any;
   @Output() sendToParent: EventEmitter<string> = new EventEmitter<string>();
@@ -28,6 +27,7 @@ export class TextFieldComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.myInput = document.getElementById(this.inputForm.name);
     this.myLabel = document.getElementById('label-' + this.inputForm.name);
+    console.log(this.inputForm);
   }
 
   setActive(): void {

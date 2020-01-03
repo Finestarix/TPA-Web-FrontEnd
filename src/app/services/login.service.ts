@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {Observable} from 'rxjs';
-import gql from 'graphql-tag';
 
-import {getEmailAndPhone, getValidUser} from './query/user';
+import {getEmailAndPhone, getValidUser} from './query/loginService';
 
 @Injectable({
   providedIn: 'root'

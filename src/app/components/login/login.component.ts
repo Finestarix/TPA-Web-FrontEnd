@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     name: 'phone-email',
     placeholder: 'Mobile Number or Email'
   };
+
   password: string;
   passwordData: object = {
     name: 'password',
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.password = password;
   }
 
-  handleLoginAction(): void {
+  handleSearchUser(): void {
 
     if (this.userLoginData.length === 0) {
 
@@ -62,9 +63,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       chooseConfirm = confirm('Continue registering with ' + this.phoneemail + ' ?');
 
       if (chooseConfirm) {
+
         const sendUserLogin = {
           phoneemail: this.phoneemail,
-          status: true
+          status: true,
+          data: (/^\d+$/.test(this.phoneemail)) ? 'phone' : 'email',
         };
 
         this.dialogRef.close(sendUserLogin);
@@ -81,18 +84,39 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
+  handleUserLogin(): void {
+
+    if (this.userLoginData.length === 0) {
+      alert('Email or password doesn\'t match. !');
+    } else {
+      // Success Login
+    }
+
+  }
+
   loginAction(): void {
 
-    if (this.phoneemail !== 'Error' && !this.isUserExist) {
+    if (this.phoneemail !== 'Error' && this.phoneemail !== '' && !this.isUserExist) {
+
+      if (this.phoneemail[0] === '0') {
+        this.phoneemail = this.phoneemail.substring(1);
+      }
+
       this.userLogin$ = this.loginService.getUser(this.phoneemail).subscribe(async query => {
         this.userLoginData = query.data.UserByEmailAndPhone;
-        await this.handleLoginAction();
+        await this.handleSearchUser();
       });
-    } else if (this.phoneemail !== 'Error' && this.password !== 'Error' && this.isUserExist) {
-      console.log()
+
+    } else if (this.phoneemail !== 'Error' && this.phoneemail !== '' &&
+      this.password !== 'Error' && this.password !== '' && this.isUserExist) {
+
+      if (this.phoneemail[0] === '0') {
+        this.phoneemail = this.phoneemail.substring(1);
+      }
+
       this.userLogin$ = this.loginService.getValidUser(this.phoneemail, this.password).subscribe(async query => {
         this.userLoginData = query.data.UserLogin;
-        await console.log(this.userLoginData);
+        await this.handleUserLogin();
       });
     }
   }

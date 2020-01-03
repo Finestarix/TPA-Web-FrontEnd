@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {LoginComponent} from '../../login/login.component';
 import {RegisterComponent} from '../../register/register.component';
@@ -21,8 +21,6 @@ export class NavbarComponent implements OnInit {
 
   navbarMenu: any;
   isOpen: boolean;
-
-  emailphone: string;
 
   private dialogRefLogin: MatDialogRef<LoginComponent>;
   private dialogRefRegister: MatDialogRef<RegisterComponent>;
@@ -47,14 +45,10 @@ export class NavbarComponent implements OnInit {
     this.dialogRefLogin = this.dialogLogin.open(LoginComponent);
 
     this.dialogRefLogin.afterClosed().subscribe(temp => {
-      if (temp) {
-        this.emailphone = temp;
-
-        if (temp.status === true) {
-          this.dialogRefRegister = this.dialogRegister.open(RegisterComponent, {
-            data: temp.emailphone
-          });
-        }
+      if (temp && temp.status === true) {
+        this.dialogRefRegister = this.dialogRegister.open(RegisterComponent, {
+          data: temp
+        });
 
       }
     });

@@ -1,1 +1,14 @@
-<p>home works!</p>
+<div class="image-slider-container">
+
+  <div  class="image-slider-content" >
+    <img (click)="prevImageSlider()" class="image-arrow" src="assets/home-imageslider/left.webp" alt="">
+    <div class="image-slider" *ngFor="let currImage of imageList; let i = index;">
+      <img *ngIf="i === currIndex"
+           [@imageSliderAnimation] = currentState
+           src="{{currImage}}" alt="">
+    </div>
+    <img (click)="nextImageSlider()" class="image-arrow" src="assets/home-imageslider/right.webp" alt="">
+  </div>
+
+</div>
+

@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {HttpLinkModule} from 'apollo-angular-link-http';
 import {ApolloModule} from 'apollo-angular';
+import {GraphQLModule} from './graphql.module';
 import {GoogleApiModule, GoogleApiService, GoogleAuthService, GoogleApiConfig, NG_GAPI_CONFIG, NgGapiClientConfig} from 'ng-gapi';
 
 import {AppComponent} from './app.component';
@@ -22,9 +23,9 @@ import {PlaneComponent} from './components/main/plane/plane.component';
 import {HotelComponent} from './components/main/hotel/hotel.component';
 import {TrainComponent} from './components/main/train/train.component';
 import {HomeComponent} from './components/main/home/home.component';
-import {CustomMenuLinkComponent} from './components/core/custom-menu-link/custom-menu-link.component'
-import { GraphQLModule } from './graphql.module';
+import {CustomMenuLinkComponent} from './components/core/custom-menu-link/custom-menu-link.component';
 import {PasswordFieldComponent} from './components/core/password-field/password-field.component';
+import {OptionFieldComponent} from './components/core/option-field/option-field.component';
 
 const googleClientConfig: NgGapiClientConfig = {
   client_id: '336495925518-defp19eeubg3kq7erdlna5n7bteffog0.apps.googleusercontent.com',
@@ -39,6 +40,7 @@ const googleClientConfig: NgGapiClientConfig = {
     LoginComponent,
     TextFieldComponent,
     PasswordFieldComponent,
+    OptionFieldComponent,
     MainComponent,
     FooterComponent,
     ImageTextComponent,
@@ -73,7 +75,6 @@ const googleClientConfig: NgGapiClientConfig = {
   providers: [],
   bootstrap: [AppComponent]
 })
-
 
 
 export class AppModule {

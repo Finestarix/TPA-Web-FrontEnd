@@ -1,0 +1,14 @@
+<div>
+
+  <label class="activeLabel"
+         [ngStyle]="{'color': setColor()}"
+         id="label-{{inputForm.name}}"> {{inputForm.placeholder}} </label>
+
+  <select>
+    <option *ngFor="let currPhoneCode of inputForm.data;">
+      {{currPhoneCode.country}} ({{currPhoneCode.phonecode}})
+    </option>
+  </select>
+
+
+</div>
