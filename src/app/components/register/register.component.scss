@@ -49,8 +49,8 @@
     border: 1px solid lightgray;
     border-radius: 5px;
 
-    width: 290px;
-    height: 580px;
+    width: 320px;
+    height: 530px;
 
     font-family: "Open Sans", serif;
     color: #35405a;
@@ -60,20 +60,22 @@
     align-items: flex-start;
     justify-content: flex-start;
 
+    .general {
+      margin-left: 20px;
+    }
+
     .register-title {
       margin-top: 20px;
-      margin-left: 20px;
       font-size: 18px;
     }
 
-    .register-subtitle {
-      margin-top: 10px;
-      margin-left: 20px;
-      font-size: 14px;
+    .text-field {
+      margin-top: 25px;
     }
 
-    .text-field {
-      margin: 25px 0px 0px 20px;
+    .phone {
+      display: flex;
+      flex-direction: row;
     }
 
     .button-register {
@@ -81,7 +83,7 @@
       background-color: #fedd00;
       color: #0064d2;
 
-      width: 250px;
+      width: 280px;
       height: 40px;
 
       display: flex;
@@ -89,7 +91,6 @@
       align-items: center;
 
       margin-top: 20px;
-      margin-left: 20px;
 
       cursor: pointer;
     }

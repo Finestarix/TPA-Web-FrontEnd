@@ -1,12 +1,15 @@
-<div>
+<div [ngStyle]="{'width.px': inputForm.width}">
 
-  <label class="activeLabel"
-         [ngStyle]="{'color': setColor()}"
-         id="label-{{inputForm.name}}"> {{inputForm.placeholder}} </label>
+  <label [ngStyle]="{'color': setColor()}"
+          id="label-{{inputForm.name}}"> {{inputForm.placeholder}} </label>
 
-  <select>
-    <option *ngFor="let currPhoneCode of inputForm.data;">
-      {{currPhoneCode.country}} ({{currPhoneCode.phonecode}})
+  <select [ngStyle]="{'border': setBorder()}"
+          (focusin)="setActive()"
+          (focusout)="setPassive()"
+          (change)="setData($event)"
+          tabindex="-1">
+    <option class="phonecode-list" *ngFor="let currPhoneCode of inputForm.data">
+      {{currPhoneCode.phonecode}} - {{currPhoneCode.country}}
     </option>
   </select>
 

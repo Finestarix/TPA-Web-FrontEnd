@@ -16,8 +16,8 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       state('imageSliderEnd', style({
         left: '150%',
       })),
-      transition('imageSliderStart <=> imageSliderMiddle', animate('600ms')),
-      transition('imageSliderStart <=> imageSliderEnd', animate('600ms'))
+      transition('imageSliderStart <=> imageSliderMiddle', animate('200ms')),
+      transition('imageSliderStart <=> imageSliderEnd', animate('200ms'))
     ]),
   ],
 })
@@ -39,7 +39,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currIndex = 1;
+    this.currentState = 'imageSliderStart';
+    this.currIndex = 0;
     this.imageSlider();
   }
 
@@ -89,13 +90,13 @@ export class HomeComponent implements OnInit {
         this.currentState = 'imageSliderEnd';
         this.currIndex++;
         this.validateIndex();
-      }, 800);
+      }, 300);
 
       setTimeout(() => {
         this.currentState = 'imageSliderStart';
-      }, 800);
+      }, 300);
 
-    }, 4000);
+    }, 9000);
   }
 
 

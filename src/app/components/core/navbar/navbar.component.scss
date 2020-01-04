@@ -123,6 +123,10 @@ a {
       .header-left-container .header-left-menu {
           display: none;
       }
+
+      .header-right-container {
+        margin-left: 20px;
+      }
     }
   }
 }
@@ -166,6 +170,12 @@ a {
           justify-content: flex-start;
           margin: 10px;
           display: none;
+
+          color: black;
+
+          &:hover {
+            color: white;
+          }
         }
 
       }

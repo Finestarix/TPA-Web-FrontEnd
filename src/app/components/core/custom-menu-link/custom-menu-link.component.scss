@@ -31,4 +31,12 @@ a {
   div {
     background-color: transparent !important;
   }
+
+  a {
+    color: black;
+
+    &:hover {
+      color: white;
+    }
+  }
 }

@@ -14,6 +14,7 @@ export class PasswordFieldComponent implements OnInit, AfterViewInit {
   myInput: HTMLElement;
   myImage: HTMLElement;
 
+  widthDiv: number;
   borderStyle: string;
   errorMessage: string;
   valueInput: string;
@@ -26,6 +27,8 @@ export class PasswordFieldComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.valueInput = '';
     this.isPassMode = 'password';
+
+    this.widthDiv = (this.inputForm.width !== undefined) ? this.inputForm.width : 220;
   }
 
   ngAfterViewInit(): void {

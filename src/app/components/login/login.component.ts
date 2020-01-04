@@ -2,9 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription, Observable} from 'rxjs';
 import {LoginService} from '../../services/login.service';
 import {GoogleSigninService} from '../../services/google-signin.service';
+import {MatDialogRef} from '@angular/material';
 
 import featureLoginRegister from '../../models/login-register';
-import {MatDialogRef} from '@angular/material';
+import {phoneEmailData, passwordData} from './login';
+import {Validator} from '../../helpers/validator';
 
 @Component({
   selector: 'app-login',
@@ -16,19 +18,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   userLogin$: Subscription;
   userLoginData: any;
+
   isUserExist: boolean;
 
   phoneemail: string;
-  phoneEmailData: object = {
-    name: 'phone-email',
-    placeholder: 'Mobile Number or Email'
-  };
-
   password: string;
-  passwordData: object = {
-    name: 'password',
-    placeholder: 'Password'
-  };
+  phoneEmailData: object;
+  passwordData: object;
+
+  errorText: string;
 
   constructor(private dialogRef: MatDialogRef<LoginComponent>,
               private loginService: LoginService,
@@ -36,6 +34,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.featureLoginRegister = featureLoginRegister;
     this.isUserExist = false;
     this.phoneemail = this.password = '';
+    this.phoneEmailData = phoneEmailData;
+    this.passwordData = passwordData;
+
+    this.errorText = 'Fill All Document';
   }
 
   ngOnInit() {
@@ -59,26 +61,17 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     if (this.userLoginData.length === 0) {
 
-      let chooseConfirm: any;
-      chooseConfirm = confirm('Continue registering with ' + this.phoneemail + ' ?');
-
-      if (chooseConfirm) {
-
-        const sendUserLogin = {
+      if (confirm('Continue registering with ' + this.phoneemail + ' ?')) {
+        this.dialogRef.close({
           phoneemail: this.phoneemail,
           status: true,
-          data: (/^\d+$/.test(this.phoneemail)) ? 'phone' : 'email',
-        };
-
-        this.dialogRef.close(sendUserLogin);
+          data: (Validator.isNumeric(this.phoneemail)) ? 'phone' : 'email',
+        });
       }
 
     } else if (!this.isUserExist) {
 
-      let passwordField: HTMLElement;
-      passwordField = document.getElementById('password');
-      passwordField.style.display = 'block';
-
+      document.getElementById('password').style.display = 'block';
       this.isUserExist = true;
 
     }
@@ -94,30 +87,32 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   }
 
+  checkValidity(checkData: string): boolean {
+    return checkData !== 'Error' &&
+      !Validator.isNoValue(checkData);
+  }
+
   loginAction(): void {
 
-    if (this.phoneemail !== 'Error' && this.phoneemail !== '' && !this.isUserExist) {
+    if (this.checkValidity(this.phoneemail) &&
+      !this.isUserExist) {
 
-      if (this.phoneemail[0] === '0') {
-        this.phoneemail = this.phoneemail.substring(1);
-      }
-
+      this.phoneemail = (this.phoneemail[0] === '0') ? this.phoneemail.substring(1) : this.phoneemail;
       this.userLogin$ = this.loginService.getUser(this.phoneemail).subscribe(async query => {
         this.userLoginData = query.data.UserByEmailAndPhone;
         await this.handleSearchUser();
       });
 
-    } else if (this.phoneemail !== 'Error' && this.phoneemail !== '' &&
-      this.password !== 'Error' && this.password !== '' && this.isUserExist) {
+    } else if (this.checkValidity(this.phoneemail) &&
+      this.checkValidity(this.password) &&
+      this.isUserExist) {
 
-      if (this.phoneemail[0] === '0') {
-        this.phoneemail = this.phoneemail.substring(1);
-      }
-
+      this.phoneemail = (this.phoneemail[0] === '0') ? this.phoneemail.substring(1) : this.phoneemail;
       this.userLogin$ = this.loginService.getValidUser(this.phoneemail, this.password).subscribe(async query => {
         this.userLoginData = query.data.UserLogin;
         await this.handleUserLogin();
       });
+
     }
   }
 

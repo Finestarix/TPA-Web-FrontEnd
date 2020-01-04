@@ -1,9 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
+import {RegisterService} from '../../services/register.service';
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {Subscription} from 'rxjs';
 
 import featureLoginRegister from '../../models/login-register';
-import {MAT_DIALOG_DATA} from '@angular/material';
-import {RegisterService} from '../../services/register.service';
-import {Subscription} from 'rxjs';
+import {emailData, firstNameData, lastNameData, phoneData, passwordData} from './register';
+import {Validator} from '../../helpers/validator';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -14,65 +17,79 @@ export class RegisterComponent implements OnInit {
 
   featureLoginRegister: object[];
 
-  email: string;
-  emailData: object = {
-    name: 'email',
-    placeholder: 'Email'
-  };
+  userRegister$: Subscription;
+  userRegister: any;
 
-  firstName: string;
-  firstNameData: object = {
-    name: 'first-name',
-    placeholder: 'First Name'
-  };
-
-  lastName: string;
-  lastNameData: object = {
-    name: 'last-name',
-    placeholder: 'Last Name'
-  };
-
-  phoneCode: string;
   phoneCode$: any;
   phoneCodeCountry: any;
-  phoneCodeData: object;
 
+  email: string;
+  lastName: string;
+  firstName: string;
+  phoneCode: string;
   phone: string;
-  phoneData: object = {
-    name: 'phone',
-    placeholder: 'Mobile Phone'
-  };
-
   password: string;
-  passwordData: object = {
-    name: 'password',
-    placeholder: 'Password'
-  };
+
+  firstNameData: object;
+  emailData: object;
+  lastNameData: object;
+  phoneCodeData: object;
+  phoneData: object;
+  passwordData: object;
 
   isEmail: boolean;
-  isDone: boolean;
+  location: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) private dataFromLogin,
-              private registerService: RegisterService) {
-    this.isDone = false;
+              private registerService: RegisterService,
+              private http: HttpClient) {
     this.featureLoginRegister = featureLoginRegister;
     this.isEmail = (dataFromLogin.data === 'email') ? true : false;
+    this.http.get<any>('https://ipapi.co/json/').subscribe(async data => {
+      this.location = data;
+    });
+
+    this.email = '';
+    this.lastName = '';
+    this.firstName = '';
+    this.phoneCode = '';
+    this.phone = '';
+    this.password = '';
+
+    this.emailData = emailData;
+    this.firstNameData = firstNameData;
+    this.lastNameData = lastNameData;
+    this.phoneData = phoneData;
+    this.passwordData = passwordData;
   }
 
   ngOnInit() {
     this.phoneCode$ = this.registerService.getPhoneCode().subscribe(async query => {
-      this.phoneCodeCountry = query.data.AllPhoneCode;
-      this.afterFetchData();
+      await this.afterFetchData(query);
     });
   }
 
-  afterFetchData(): void {
-    this.isDone = true;
+  afterFetchData(query): void {
+    this.phoneCodeCountry = query.data.AllPhoneCode;
+
+    this.http.get<any>('https://ipapi.co/json/').subscribe(async locationData => {
+      await this.finalFetchData(locationData);
+    });
+
+  }
+
+  finalFetchData(locationData): void {
+
+    this.location = locationData;
+
     this.phoneCodeData = {
       name: 'phone-code',
-      placeholder: 'Phone Code',
+      placeholder: 'Code',
+      width: 90,
+      default: this.location.country_calling_code,
       data: this.phoneCodeCountry,
     };
+
   }
 
   setEmail(email: string): void {
@@ -88,6 +105,7 @@ export class RegisterComponent implements OnInit {
   }
 
   setPhoneCode(phoneCode: string): void {
+    console.log(phoneCode);
     this.phoneCode = phoneCode;
   }
 
@@ -99,20 +117,40 @@ export class RegisterComponent implements OnInit {
     this.password = password;
   }
 
-  registerAction(): void {
-    if (this.email !== 'Error' &&
-      this.firstName !== 'Error' &&
-      this.lastName !== 'Error' &&
-      this.phoneCode !== 'Error' &&
-      this.phone !== 'Error' &&
-      this.password !== 'Error' &&
-      this.email !== '' &&
-      this.firstName !== '' &&
-      this.lastName !== '' &&
-      this.phoneCode !== '' &&
-      this.phone !== '' &&
-      this.password !== '') {
+  checkValidity(checkData: string): boolean {
+    return checkData !== 'Error' &&
+      !Validator.isNoValue(checkData);
+  }
 
+  getNewUser(value) {
+    this.userRegister = value.data.InsertNewUser;
+    console.log(this.userRegister);
+  }
+
+  registerAction(): void {
+
+    if (this.dataFromLogin.data === 'email') {
+      this.email = this.dataFromLogin.phoneemail;
+    } else if (this.dataFromLogin.data === 'phone') {
+      this.phone = this.dataFromLogin.phoneemail;
+    }
+
+    if (this.phoneCode === '') {
+      this.phoneCode = this.location.country_calling_code;
+    }
+
+    this.userRegister$ = this.registerService
+      .insertUser(this.email, this.firstName, this.lastName, this.phoneCode, this.phone, this.password)
+      .subscribe(async value => {
+        await this.getNewUser(value);
+      })
+
+    if (this.checkValidity(this.email) &&
+      this.checkValidity(this.firstName) &&
+      this.checkValidity(this.lastName) &&
+      this.checkValidity(this.phoneCode) &&
+      this.checkValidity(this.phone) &&
+      this.checkValidity(this.password)) {
     }
   }
 

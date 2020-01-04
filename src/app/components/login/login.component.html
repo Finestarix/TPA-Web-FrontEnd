@@ -19,7 +19,7 @@
   <div class="right-container">
 
     <p class="login-title general-style">
-      <b>Log in</b>
+      <b>Log in/Register</b>
     </p>
 
     <p class="login-subtitle general-style">
@@ -34,7 +34,10 @@
       <app-password-field [inputForm]="passwordData" (sendToParent)="setPassword($event)"></app-password-field>
     </div>
 
-    <div (click)="loginAction()" class="button-login general-style"><b>CONTINUE</b></div>
+    <div (click)="loginAction()" class="button-login general-style">
+      <b>CONTINUE</b>
+      <span class="error-text" id="error-text">{{errorText}}</span>
+    </div>
 
     <div class="separator-login">
       ---- or with ----

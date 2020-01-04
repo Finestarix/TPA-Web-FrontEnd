@@ -57,6 +57,8 @@ a {
     right: 0px;
     width: 220px;
 
+    z-index: 10;
+
     box-shadow: 1px 1px 8px 1px rgba(0, 0, 0, 0.4);
     border-radius: 2px;
 
@@ -75,6 +77,12 @@ a {
 
   }
 
+}
+
+@media only screen and (max-width: 600px) {
+  .header-dropdown-container {
+    right: -175px !important;
+  }
 }
 
 

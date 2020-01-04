@@ -13,6 +13,9 @@
 
     .image-slider img {
       position: relative;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility:    hidden;
+      -ms-backface-visibility:     hidden;
       width: auto;
     }
 
@@ -64,3 +67,4 @@
     }
   }
 }
+

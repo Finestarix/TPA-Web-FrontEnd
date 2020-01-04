@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {log} from 'util';
+import {Validator} from './../../../helpers/validator';
 
 @Component({
   selector: 'app-text-field',
@@ -13,8 +13,9 @@ export class TextFieldComponent implements OnInit, AfterViewInit {
 
   myLabel: HTMLElement;
   myInput: HTMLElement;
-
   borderStyle: string;
+
+  widthDiv: number;
   errorMessage: string;
   valueInput: string;
 
@@ -23,6 +24,7 @@ export class TextFieldComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.valueInput = '';
+    this.widthDiv = (this.inputForm.width !== undefined) ? this.inputForm.width : 220;
   }
 
   ngAfterViewInit(): void {
@@ -41,38 +43,35 @@ export class TextFieldComponent implements OnInit, AfterViewInit {
     this.borderStyle = '';
     this.errorMessage = '';
 
-    if (this.valueInput === '') {
-
+    if (Validator.isNoValue(this.valueInput)) {
       this.errorMessage = 'Please Enter ' + this.inputForm.placeholder + '.';
 
-    } else if (this.inputForm.placeholder.toLowerCase().includes('email') &&
-      this.inputForm.placeholder.toLowerCase().includes('mobile number')) {
+    } else if (Validator.isContainEmail(this.inputForm.placeholder) &&
+      Validator.isContainPhone(this.inputForm.placeholder)) {
 
-      const ruleDigit = /^\d+$/;
-      if (ruleDigit.test(this.valueInput)) {
+      this.errorMessage =
+        (Validator.isNumeric(this.valueInput)) ?
+          (!Validator.validatePhoneRule(this.valueInput)) ?
+            'Enter Valid Phone Number Format.' : ''
+          :
+          (!Validator.validateEmailRule(this.valueInput)) ?
+            'Enter Valid Email Format.' : '';
 
-        const rulePhone = /^[0-9]{11,13}$/;
+    } else if (Validator.isContainEmail(this.inputForm.placeholder)) {
 
-        if (!rulePhone.test(this.valueInput)) {
-          this.errorMessage = 'Enter Valid Phone Number Format.';
-        }
+      this.errorMessage =
+        (!Validator.validateEmailRule(this.valueInput)) ?
+          'Enter Valid Email Format.' : '';
 
-      } else {
+    } else if (Validator.isContainPhone(this.inputForm.placeholder)) {
 
-        const ruleEmail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
-
-        if (!ruleEmail.test(this.valueInput)) {
-          this.errorMessage = 'Enter Valid Email Format.';
-        }
-
-      }
+      this.errorMessage =
+        (!Validator.validatePhoneRule(this.valueInput)) ?
+          'Enter Valid Phone Number Format.' : '';
 
     }
 
-    if (this.errorMessage !== '') {
-      this.borderStyle = 'Wrong';
-    }
-
+    this.borderStyle = (this.errorMessage !== '') ? 'Wrong' : '';
     this.sendToParent.emit((this.borderStyle === 'Wrong') ? 'Error' : this.valueInput);
   }
 
