@@ -63,9 +63,10 @@
       <app-password-field [inputForm]="passwordData" (sendToParent)="setPassword($event)"></app-password-field>
     </div>
 
-    <div (click)="registerAction()" class="button-register general"><b>CREATE ACCOUNT</b></div>
-
-
+    <div (click)="registerAction()" class="button-register general">
+      <b>CREATE ACCOUNT</b>
+      <span class="error-text" id="error-text">{{errorText}}</span>
+    </div>
   </div>
 
 </div>

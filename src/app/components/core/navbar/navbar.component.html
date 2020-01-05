@@ -21,10 +21,10 @@
 
       <div class="navbar-hamburger">
         <img (click)="configNavbar()" class="navbar-hamburger-image" src="assets/navbar/Icon_Menu.png" alt="">
-        <img class="navbar-hamburger-logo" src="assets/core/Logo_Edit.png" alt="Logo">
+        <img class="navbar-hamburger-logo" [routerLink]="'/'" src="assets/core/Logo_Edit.png" alt="Logo">
       </div>
 
-      <img class="navbar-logo" src="assets/core/Logo.png" alt="Logo">
+      <img class="navbar-logo" [routerLink]="'/'" src="assets/core/Logo.png" alt="Logo">
 
       <div class="navbar-menu" *ngFor="let menu of menusLeft;">
         <app-custom-menu-link [titleMenu]=menu></app-custom-menu-link>

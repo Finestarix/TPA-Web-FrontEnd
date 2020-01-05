@@ -40,6 +40,8 @@ export class RegisterComponent implements OnInit {
   isEmail: boolean;
   location: any;
 
+  errorText: string;
+
   constructor(@Inject(MAT_DIALOG_DATA) private dataFromLogin,
               private registerService: RegisterService,
               private http: HttpClient) {
@@ -124,7 +126,15 @@ export class RegisterComponent implements OnInit {
 
   getNewUser(value) {
     this.userRegister = value.data.InsertNewUser;
-    console.log(this.userRegister);
+  }
+
+  setError(error: string): void {
+    this.errorText = error;
+
+    document.getElementById('error-text').classList.add('pop-up-error-show');
+    setTimeout(() => {
+      document.getElementById('error-text').classList.remove('pop-up-error-show');
+    }, 2000);
   }
 
   registerAction(): void {
@@ -139,11 +149,15 @@ export class RegisterComponent implements OnInit {
       this.phoneCode = this.location.country_calling_code;
     }
 
-    this.userRegister$ = this.registerService
-      .insertUser(this.email, this.firstName, this.lastName, this.phoneCode, this.phone, this.password)
-      .subscribe(async value => {
-        await this.getNewUser(value);
-      })
+    if (!this.checkValidity(this.email) ||
+      !this.checkValidity(this.firstName) ||
+      !this.checkValidity(this.lastName) ||
+      !this.checkValidity(this.phoneCode) ||
+      !this.checkValidity(this.phone) ||
+      !this.checkValidity(this.password)) {
+      this.setError('Fill All Field !');
+      return;
+    }
 
     if (this.checkValidity(this.email) &&
       this.checkValidity(this.firstName) &&
@@ -151,6 +165,13 @@ export class RegisterComponent implements OnInit {
       this.checkValidity(this.phoneCode) &&
       this.checkValidity(this.phone) &&
       this.checkValidity(this.password)) {
+      this.userRegister$ = this.registerService
+        .insertUser(this.email, this.firstName, this.lastName, this.phoneCode, this.phone, this.password)
+        .subscribe(async value => {
+          await this.getNewUser(value);
+        });
+      this.setError('Register Success !');
+      return;
     }
   }
 

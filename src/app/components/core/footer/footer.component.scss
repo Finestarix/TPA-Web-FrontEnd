@@ -1,100 +1,198 @@
-.footer-image {
-  width: 182px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-}
-
-.footer-title {
-  font-family: "Open Sans", serif;
-  color: #58627a !important;
-  margin: 20px 0px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.footer-container {
-  margin-top: 20px;
+.all-container {
 
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
 
-  .middle-part {
+  .footer-container {
+    margin-top: 20px;
 
-    p {
-      font-size: 16px;
-      font-weight: bold;
-      margin: 20px 0px;
-    }
-
-    div {
-      margin: 10px 0px;
-    }
-
-  }
-
-  .right-part {
-    display: flex;
-    flex-direction: column;
-
-    img {
-      margin-bottom: 10px;
-    }
-
-  }
-
-}
-
-.bottom-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  .wonderful-indonesia {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
-    font-size: 10px;
-    font-family: "Open Sans";
+    font-family: "Open Sans", serif;
+    color: #58627a !important;
 
-    img {
-      width: 150px;
-      height: 55px;
+    .left-part .footer-image {
+      width: 182px;
+      margin: 0px 0px 20px 20px;
     }
 
-  }
+    .middle-part {
 
-  .image-container {
-    display: flex;
-    flex-direction: column;
-
-    margin: 0px 20px;
-
-    p {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    div {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 20px 0px;
+      }
 
       div {
-        img {
-          margin-bottom: 10px;
-          margin-right: 15px;
-          height: 27px;
-        }
+        margin: 5px 0px;
       }
 
     }
 
+    .right-part {
+
+      margin: 0px 20px 20px 0px;
+
+      display: flex;
+      flex-direction: column;
+
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        margin: 20px 0px;
+      }
+
+      img {
+        margin-bottom: 10px;
+        width: 190px;
+      }
+
+    }
 
   }
+
+  .bottom-container {
+
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    font-family: "Open Sans";
+    color: #58627a !important;
+
+    .wonderful-indonesia {
+
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      white-space: nowrap;
+
+      p {
+        font-size: 10px;
+      }
+
+      img {
+        margin-left: 10px;
+        width: 150px;
+        height: 55px;
+      }
+
+    }
+
+    .image-container {
+      display: flex;
+      flex-direction: column;
+
+      margin-right: 20px;
+
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      div {
+
+        display: flex;
+        flex-direction: row;
+
+        div img {
+          margin-bottom: 10px;
+          margin-right: 15px;
+          height: 25px;
+        }
+
+      }
+
+    }
+
+  }
+}
+
+@media only screen and (max-width: 630px) {
+  .all-container {
+
+    .footer-container {
+      .left-part img {
+        width: 140px !important;
+      }
+
+      .right-part {
+        img {
+          width: 130px;
+        }
+      }
+    }
+
+    .bottom-container {
+      .wonderful-indonesia {
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+
+ .all-container {
+
+   flex-direction: row;
+   align-items: flex-start;
+
+   .footer-container {
+     width: 50%;
+     flex-direction: column;
+
+     .middle-part {
+
+       margin-left: 20px;
+
+       div {
+         //display: none;
+       }
+
+     }
+
+     .right-part {
+
+       margin-left: 20px;
+
+     }
+
+   }
+
+   .bottom-container {
+     width: 50%;
+
+     flex-direction: column;
+     align-items: flex-start;
+
+     .wonderful-indonesia {
+       margin-bottom: 20px;
+     }
+
+     div {
+       margin-bottom: 20px;
+     }
+
+     .image-container {
+       margin-left: 20px;
+
+       div {
+         flex-wrap: wrap;
+         margin-bottom: 5px;
+       }
+
+     }
+
+   }
+ }
 
 }

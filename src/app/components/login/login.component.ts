@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.phoneEmailData = phoneEmailData;
     this.passwordData = passwordData;
 
-    this.errorText = 'Fill All Document';
+
   }
 
   ngOnInit() {
@@ -80,9 +80,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   handleUserLogin(): void {
 
     if (this.userLoginData.length === 0) {
-      alert('Email or password doesn\'t match. !');
+      this.setError('Email or password doesn\'t match !');
     } else {
-      // Success Login
+      this.setError('Login Success!');
+      // TODO: `Refresh and Change Navbar`
     }
 
   }
@@ -92,10 +93,27 @@ export class LoginComponent implements OnInit, OnDestroy {
       !Validator.isNoValue(checkData);
   }
 
+  setError(error: string): void {
+    this.errorText = error;
+
+    document.getElementById('error-text').classList.add('pop-up-error-show');
+    setTimeout(() => {
+      document.getElementById('error-text').classList.remove('pop-up-error-show');
+    }, 2000);
+  }
+
   loginAction(): void {
+
+    if ((!this.checkValidity(this.phoneemail) && !this.isUserExist) ||
+      (!this.checkValidity(this.password) && this.isUserExist)) {
+      this.setError('Fill All Field !');
+      return;
+    }
 
     if (this.checkValidity(this.phoneemail) &&
       !this.isUserExist) {
+
+      this.errorText = '';
 
       this.phoneemail = (this.phoneemail[0] === '0') ? this.phoneemail.substring(1) : this.phoneemail;
       this.userLogin$ = this.loginService.getUser(this.phoneemail).subscribe(async query => {
@@ -106,6 +124,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else if (this.checkValidity(this.phoneemail) &&
       this.checkValidity(this.password) &&
       this.isUserExist) {
+
+      this.errorText = '';
 
       this.phoneemail = (this.phoneemail[0] === '0') ? this.phoneemail.substring(1) : this.phoneemail;
       this.userLogin$ = this.loginService.getValidUser(this.phoneemail, this.password).subscribe(async query => {
