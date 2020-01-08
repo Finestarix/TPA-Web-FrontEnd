@@ -57,9 +57,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.password = password;
   }
 
-  handleSearchUser(): void {
+  handleSearchUser(query): void {
 
-    if (this.userLoginData.length === 0) {
+    this.userLoginData = query.data.UserByEmailAndPhone;
+
+    if (this.userLoginData.id === 0) {
 
       if (confirm('Continue registering with ' + this.phoneemail + ' ?')) {
         this.dialogRef.close({
@@ -77,9 +79,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleUserLogin(): void {
+  handleUserLogin(query): void {
 
-    if (this.userLoginData.length === 0) {
+    this.userLoginData = query.data.UserLogin;
+
+    if (this.userLoginData.id === 0) {
       this.setError('Email or password doesn\'t match !');
     } else {
       this.setError('Login Success!');
@@ -117,8 +121,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.phoneemail = (this.phoneemail[0] === '0') ? this.phoneemail.substring(1) : this.phoneemail;
       this.userLogin$ = this.loginService.getUser(this.phoneemail).subscribe(async query => {
-        this.userLoginData = query.data.UserByEmailAndPhone;
-        await this.handleSearchUser();
+        await this.handleSearchUser(query);
       });
 
     } else if (this.checkValidity(this.phoneemail) &&
@@ -129,8 +132,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.phoneemail = (this.phoneemail[0] === '0') ? this.phoneemail.substring(1) : this.phoneemail;
       this.userLogin$ = this.loginService.getValidUser(this.phoneemail, this.password).subscribe(async query => {
-        this.userLoginData = query.data.UserLogin;
-        await this.handleUserLogin();
+        await this.handleUserLogin(query);
       });
 
     }

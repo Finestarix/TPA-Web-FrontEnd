@@ -133,7 +133,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1150px) {
 
   .outer-container {
 
@@ -173,10 +173,10 @@ a {
           margin: 10px;
           display: none;
 
-          color: black;
+          color: white;
 
           &:hover {
-            color: white;
+            color: black;
           }
         }
 

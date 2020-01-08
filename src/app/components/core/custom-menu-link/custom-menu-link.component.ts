@@ -21,7 +21,7 @@ export class CustomMenuLinkComponent implements OnInit {
   ngOnInit() {
     this.isRoutable = false;
 
-    if (routable.includes(this.titleMenu)) {
+    if (routable.includes(this.titleMenu.trim())) {
       this.isRoutable = true;
     }
 
@@ -43,7 +43,7 @@ export class CustomMenuLinkComponent implements OnInit {
   }
 
   setRouter(): void {
-    this.router.navigateByUrl('/' + this.titleMenu);
+    this.router.navigateByUrl('/' + this.titleMenu.trim());
   }
 
 }

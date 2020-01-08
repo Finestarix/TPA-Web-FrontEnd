@@ -9,7 +9,7 @@
           (change)="setData($event)"
           tabindex="-1">
     <option class="phonecode-list" *ngFor="let currPhoneCode of inputForm.data">
-      {{currPhoneCode.phonecode}} - {{currPhoneCode.country}}
+      {{currPhoneCode.code}} - {{currPhoneCode.country}}
     </option>
   </select>
 

@@ -4,7 +4,7 @@ export const getPhoneCode = gql`
     query getPhoneCode {
         AllPhoneCode {
             country
-            phonecode
+            code
         }
     }
 `;

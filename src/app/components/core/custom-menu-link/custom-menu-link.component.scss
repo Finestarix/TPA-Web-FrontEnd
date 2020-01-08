@@ -27,13 +27,13 @@ a {
 
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1150px) {
   div {
     background-color: transparent !important;
   }
 
   a {
-    color: black;
+    color: white;
 
     &:hover {
       color: black;
