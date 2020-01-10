@@ -8,8 +8,6 @@
   font-size: 14px;
   color: #58627a;
 
-  //width: 355px;
-
   div img {
     margin: 10px 20px;
     width: 40px;
@@ -31,6 +29,17 @@
 
     }
 
+  }
+
+}
+
+@media only screen and (max-width: 1150px) {
+
+  .coloring p {
+    color: white !important;
+    b{
+      color: white !important;
+    }
   }
 
 }

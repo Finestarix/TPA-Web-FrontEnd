@@ -15,10 +15,17 @@ export class ImageTextComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.getElementById('feature-other').classList.add('coloring');
-    this.textColor = (this.dataImageText.title === 'Whatsapp' ||
+    if (this.dataImageText.title === 'Whatsapp' ||
       this.dataImageText.title === 'Email' ||
-      this.dataImageText.title === 'Call Center') ? 'white' : 'black';
+      this.dataImageText.title === 'Call Center') {
+
+      const coloring = document.getElementsByClassName('feature-other');
+      // @ts-ignore
+      for(const color of coloring) {
+        color.classList.add('coloring');
+      }
+
+    }
   }
 
 }

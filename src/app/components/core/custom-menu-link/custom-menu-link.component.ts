@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {checkTopLeftMenu, checkMainMenu, checkOtherMenu, routable} from './custom-menu-link';
+import {NameLink} from '../../../models/name-link';
 
 @Component({
   selector: 'app-custom-menu-link',
@@ -10,7 +11,7 @@ import {checkTopLeftMenu, checkMainMenu, checkOtherMenu, routable} from './custo
 })
 export class CustomMenuLinkComponent implements OnInit {
 
-  @Input('titleMenu') titleMenu: string;
+  @Input('titleMenu') titleMenu: NameLink;
 
   styleHover: boolean;
   isRoutable: boolean;
@@ -21,7 +22,7 @@ export class CustomMenuLinkComponent implements OnInit {
   ngOnInit() {
     this.isRoutable = false;
 
-    if (routable.includes(this.titleMenu.trim())) {
+    if (this.titleMenu.link === '') {
       this.isRoutable = true;
     }
 
@@ -43,7 +44,7 @@ export class CustomMenuLinkComponent implements OnInit {
   }
 
   setRouter(): void {
-    this.router.navigateByUrl('/' + this.titleMenu.trim());
+    this.router.navigateByUrl('/' + this.titleMenu.name.trim());
   }
 
 }

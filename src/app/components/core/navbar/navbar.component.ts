@@ -4,6 +4,8 @@ import {LoginComponent} from '../../login/login.component';
 import {RegisterComponent} from '../../register/register.component';
 
 import {menusLeft, menusRight, menusTop, menusType, menusMoney, menusLanguage} from './navbar';
+import {NameLink} from '../../../models/name-link';
+import {SessionService} from '../../../services/session.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,9 +14,9 @@ import {menusLeft, menusRight, menusTop, menusType, menusMoney, menusLanguage} f
 })
 export class NavbarComponent implements OnInit {
 
-  menusLeft: string[];
-  menusRight: string[];
-  menusTop: string[];
+  menusLeft: NameLink[];
+  menusRight: NameLink[];
+  menusTop: NameLink[];
   menusType: string[];
   menusMoney: string[];
   menusLanguage: string[];
@@ -25,8 +27,8 @@ export class NavbarComponent implements OnInit {
   private dialogRefLogin: MatDialogRef<LoginComponent>;
   private dialogRefRegister: MatDialogRef<RegisterComponent>;
 
-
   constructor(private dialogLogin: MatDialog,
+              private sessionService: SessionService,
               private dialogRegister: MatDialog) {
     this.menusLeft = menusLeft;
     this.menusRight = menusRight;
@@ -35,6 +37,7 @@ export class NavbarComponent implements OnInit {
     this.menusMoney = menusMoney;
     this.menusLanguage = menusLanguage;
     this.isOpen = false;
+    console.log(sessionService.getSession());
   }
 
   ngOnInit() {
@@ -49,10 +52,8 @@ export class NavbarComponent implements OnInit {
         this.dialogRefRegister = this.dialogRegister.open(RegisterComponent, {
           data: temp
         });
-
       }
     });
-
   }
 
   configNavbar(): void {
@@ -68,6 +69,14 @@ export class NavbarComponent implements OnInit {
       }
     }
 
+  }
+
+  isLoginRegister() {
+    return (!this.sessionService.getSession() || this.sessionService.getSession() === undefined ) ? true : false;
+  }
+
+  isAlreadyLogin() {
+    return !this.isLoginRegister();
   }
 
 }

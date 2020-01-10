@@ -1,10 +1,11 @@
 <a *ngIf="!isRoutable; else usingRouting"
+   href="{{titleMenu.link}}"
    (mouseover)="styleHover = true"
    (mouseleave)="styleHover = false"
    [ngStyle]="{'font-size.px': setFontSize(titleMenu),
                'font-weight': setFontWeight(titleMenu)
               }">
-  {{titleMenu}}
+  {{titleMenu.name}}
   <div [ngStyle]="{'background-color': setUnderline(titleMenu)}"></div>
 </a>
 
@@ -15,7 +16,7 @@
      [ngStyle]="{'font-size.px': setFontSize(titleMenu),
                  'font-weight': setFontWeight(titleMenu)
               }">
-    {{titleMenu}}
+    {{titleMenu.name}}
     <div [ngStyle]="{'background-color': setUnderline(titleMenu)}"></div>
   </a>
 

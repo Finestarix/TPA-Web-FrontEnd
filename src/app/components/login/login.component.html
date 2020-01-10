@@ -47,13 +47,13 @@
 
       <div class="g-signin2"></div>
 
-      <div class="connect-container">
+      <div class="connect-container" id="gapi">
         <img src="assets/login/google.svg" (click)="googleSignIn()" alt="Google">
         <p>Google</p>
       </div>
 
-      <div class="connect-container">
-        <img src="assets/login/facebook.svg" alt="Facebook">
+      <div class="connect-container" id="gfb">
+        <img src="assets/login/facebook.svg" (click)="facebookSignIn()" alt="Facebook">
         <p>Facebook</p>
       </div>
 

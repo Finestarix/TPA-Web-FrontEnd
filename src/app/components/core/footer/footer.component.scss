@@ -73,7 +73,6 @@
 
     .wonderful-indonesia {
 
-
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -159,6 +158,10 @@
       width: 50%;
       flex-direction: column;
 
+      div {
+        margin-left: 0px !important;
+      }
+
       .left-part {
         display: flex;
         flex-direction: column;
@@ -180,7 +183,6 @@
 
       .middle-part {
 
-        margin-left: 20px;
         text-align: center;
 
         p {
@@ -191,7 +193,10 @@
 
       .right-part {
 
-        margin-left: 20px;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0px !important;
+        color: white;
 
       }
 
@@ -201,10 +206,13 @@
       width: 50%;
 
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
 
       .wonderful-indonesia {
         margin-bottom: 20px;
+
+        justify-content: center;
+        align-items: center;
       }
 
       div {
@@ -213,8 +221,17 @@
 
       .image-container {
         margin-left: 20px;
+        align-items: center;
+        color: white;
 
         div {
+
+          //div {
+            display: flex;
+            align-items: center;
+          justify-content: center;
+          //}
+
           flex-wrap: wrap;
           margin-bottom: 5px;
         }

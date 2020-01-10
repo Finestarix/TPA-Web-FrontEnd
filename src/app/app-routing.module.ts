@@ -6,6 +6,8 @@ import {PlaneComponent} from './components/main/plane/plane.component';
 import {HotelComponent} from './components/main/hotel/hotel.component';
 import {TrainComponent} from './components/main/train/train.component';
 import {HomeComponent} from './components/main/home/home.component';
+import {CarComponent} from './components/main/car/car.component';
+import {EntertainmentComponent} from './components/main/entertainment/entertainment.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,14 @@ const routes: Routes = [
       {
         path: 'Train',
         component: TrainComponent
+      },
+      {
+        path: 'Car Rental',
+        component: CarComponent
+      },
+      {
+        path: 'Entertainment',
+        component: EntertainmentComponent
       }
     ]
   }

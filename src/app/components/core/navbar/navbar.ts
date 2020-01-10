@@ -1,20 +1,45 @@
-export const menusLeft: string[] = [
-  'Flight',
-  'Hotel',
-  'Train',
-  'Car Rental',
-  'Entertainment'
+import {NameLink} from '../../../models/name-link';
+
+export const menusLeft: NameLink[] = [
+  {
+    name: 'Flight ',
+    link: ''
+  }, {
+    name: 'Hotel ',
+    link: ''
+  }, {
+    name: 'Train ',
+    link: ''
+  }, {
+    name: 'Car Rental ',
+    link: ''
+  }, {
+    name: 'Entertainment ',
+    link: ''
+  }
 ];
 
-export const menusRight: string[] = [
-  'Tix Point',
-  'Check Order'
+export const menusRight: NameLink[] = [
+  {
+    name: 'TIX Point',
+    link: 'https://en.tiket.com/tix'
+  }, {
+    name: 'Check Order ',
+    link: ''
+  }
 ];
 
-export const menusTop: string[] = [
-  'Download Karcis.co App',
-  'Promos',
-  'Help Center'
+export const menusTop: NameLink[] = [
+  {
+    name: 'Download Karcis.co App',
+    link: ''
+  }, {
+    name: 'Promos',
+    link: ''
+  }, {
+    name: 'Help Center',
+    link: ''
+  }
 ];
 
 export const menusType: string[] = [

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-import {getPhoneCode, insertNewUser} from './query/registerService';
+import {getPhoneCode, insertNewUser} from './queries/registerService';
 import {Apollo} from 'apollo-angular';
 
 @Injectable({

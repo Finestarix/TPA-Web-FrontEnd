@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {Observable} from 'rxjs';
 
-import {getEmailAndPhone, getValidUser} from './query/loginService';
+import {getEmailAndPhone, getValidUser} from './queries/loginService';
 
 @Injectable({
   providedIn: 'root'

@@ -20,32 +20,75 @@ export const footerData: object[] = [
   {
     title: 'Company',
     content: [
-      'Blog',
-      'Carrier',
-      'Corporate',
-      'TIX Point',
-      'Protection',
-      'Installment',
-      'Register Your Hotel',
+      {
+        name: 'Blog',
+        link: 'https://blog.tiket.com/'
+      }, {
+        name: 'Carrier',
+        link: 'https://www.tiket.com/careers/'
+      }, {
+        name: 'Corporate',
+        link: 'https://en.tiket.com/corporate?_ga=2.115548678.1863183591.1578634660-1379741216.1577096117'
+      }, {
+        name: 'Partner',
+        link: 'https://en.tiket.com/partner'
+      }, {
+        name: 'TIX Point',
+        link: 'https://en.tiket.com/tix'
+      }, {
+        name: 'Protection',
+        link: 'https://en.tiket.com/insurance'
+      }, {
+        name: 'Installment',
+        link: 'https://en.tiket.com/info/cicilan'
+      }, {
+        name: 'Register Your Hotel',
+        link: 'https://tix.tiket.com/register'
+      }
     ]
   },
   {
     title: 'Product',
     content: [
-      'Flight ',
-      'Hotel ',
-      'Train ',
-      'Car Rental ',
-      'Entertainment ',
+      {
+        name: 'Flight ',
+        link: ''
+      }, {
+        name: 'Hotel ',
+        link: ''
+      }, {
+        name: 'Train ',
+        link: ''
+      }, {
+        name: 'Car Rental ',
+        link: ''
+      }, {
+        name: 'Entertainment ',
+        link: ''
+      }
     ]
   },
   {
     title: 'Support',
     content: [
-      'Help Center ',
-      'Terms and Conditions',
-      'Privacy and Policy',
-      'Worry-Free Fare',
+      {
+        name: 'Help Center ',
+        link: 'https://en.tiket.com/help-center'
+      }, {
+        name: 'Terms and Conditions',
+        link: 'https://en.tiket.com/info',
+      }, {
+        name: 'Privacy and Policy',
+        link: 'https://en.tiket.com/info/privacy-policy'
+      }, {
+        name: 'Worry-Free Fare',
+        link: 'https://en.tiket.com/info/tiket-anti-galau'
+      }
+
+
+
+
+
     ]
   }
 ];

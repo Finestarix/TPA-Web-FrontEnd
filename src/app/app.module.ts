@@ -8,7 +8,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpLinkModule} from 'apollo-angular-link-http';
 import {ApolloModule} from 'apollo-angular';
 import {GraphQLModule} from './graphql.module';
-import {GoogleApiModule, GoogleApiService, GoogleAuthService, GoogleApiConfig, NG_GAPI_CONFIG, NgGapiClientConfig} from 'ng-gapi';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -26,13 +25,10 @@ import {HomeComponent} from './components/main/home/home.component';
 import {CustomMenuLinkComponent} from './components/core/custom-menu-link/custom-menu-link.component';
 import {PasswordFieldComponent} from './components/core/password-field/password-field.component';
 import {OptionFieldComponent} from './components/core/option-field/option-field.component';
-
-const googleClientConfig: NgGapiClientConfig = {
-  client_id: '336495925518-defp19eeubg3kq7erdlna5n7bteffog0.apps.googleusercontent.com',
-  discoveryDocs: ['https://analyticsreporting.googleapis.com/$discovery/rest?version=v4'],
-  ux_mode: 'popup',
-  redirect_uri: 'http://localhost:4200',
-};
+import {CarComponent} from './components/main/car/car.component';
+import {EntertainmentComponent} from './components/main/entertainment/entertainment.component';
+import {OrderComponent} from './components/main/order/order.component';
+import {ProfileComponent} from './components/core/navbar/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +47,11 @@ const googleClientConfig: NgGapiClientConfig = {
     HotelComponent,
     TrainComponent,
     HomeComponent,
-    CustomMenuLinkComponent
+    CustomMenuLinkComponent,
+    CarComponent,
+    EntertainmentComponent,
+    OrderComponent,
+    ProfileComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -66,16 +66,11 @@ const googleClientConfig: NgGapiClientConfig = {
     HttpClientModule,
     HttpLinkModule,
     ApolloModule,
-    GoogleApiModule.forRoot({
-      provide: NG_GAPI_CONFIG,
-      useValue: googleClientConfig
-    }),
     GraphQLModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-
 
 export class AppModule {
 }
