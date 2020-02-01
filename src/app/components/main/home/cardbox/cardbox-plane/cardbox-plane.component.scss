@@ -2,6 +2,8 @@
 
   .cardbox-plane-top {
 
+    padding: 0px 50px;
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -21,6 +23,9 @@
   }
 
   .cardbox-plane-mid {
+
+    padding: 0px 50px;
+    margin-bottom: 30px;
 
     display: flex;
     flex-direction: row;
@@ -48,9 +53,16 @@
 
   }
 
+  .cardbox-plane-separator {
+    height: 1px;
+    width: 100%;
+
+    background-color: rgba(169, 169, 169, .8);
+  }
+
   .cardbox-plane-bottom {
 
-    margin-top: 20px;
+    position: relative;
 
     display: flex;
     flex-direction: row;
@@ -61,8 +73,32 @@
       display: flex;
       flex-direction: column;
 
-      border: 1px solid rgba(169, 169, 169, .4);
-      padding: 15px;
+      padding: 15px 15px 5px 15px;
+    }
+
+    .cardbox-plane-arrow {
+      padding: 5px;
+
+      position: absolute;
+      z-index: 2;
+      width: 17px;
+      top: 42px;
+      left: 225px;
+
+      background-color: white;
+      border: 1px solid rgba(169, 169, 169, .8);
+      border-radius: 100%;
+    }
+
+    .cardbox-plane-from {
+      padding-left: 50px;
+      padding-right: 20px;
+      border-right: 1px dashed rgba(169, 169, 169, .8);
+    }
+
+    .cardbox-plane-to {
+      padding-left: 20px;
+      border-right: 1px solid rgba(169, 169, 169, .8);
     }
 
     .cardbox-plane-from, .cardbox-plane-to, .cardbox-plane-cabin {
@@ -72,7 +108,7 @@
         padding-bottom: 5px;
 
         font-size: 15px;
-        width: 182px;
+        width: 170px;
 
         border: 0px;
         outline: 0px;
@@ -80,22 +116,32 @@
       }
     }
 
+    .cardbox-plane-departure {
+      border-right: 1px solid rgba(169, 169, 169, .8);
+    }
+
     .cardbox-plane-return {
+      border-right: 1px solid rgba(169, 169, 169, .8);
 
       .cardbox-plane-return-top {
         display: flex;
         flex-direction: row;
-      }
 
-      input[type=checkbox] {
-        border: 0px;
-        width: 20px;
-        height: 20px;
+        input[type=checkbox] {
+          border: 0px;
+          width: 20px;
+          height: 20px;
 
-        margin-right: 10px;
+          margin-right: 10px;
+        }
       }
     }
 
+    .cardbox-plane-cabin {
+      input[type=text] {
+        width: 190px !important;
+      }
+    }
   }
 
   .cardbox-plane-button {
@@ -103,6 +149,7 @@
     float: right;
     width: fit-content;
     margin-top: 15px;
+    margin-right: 50px;
 
     background-color: rgb(240,230,140);
 
@@ -124,5 +171,5 @@
 }
 
 .mat-form-field {
-  width: 182px !important;
+  width: 150px !important;
 }

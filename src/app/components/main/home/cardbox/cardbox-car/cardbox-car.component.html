@@ -1,1 +1,69 @@
-<p>cardbox-car works!</p>
+<div class="cardbox-car-container">
+
+  <div class="cardbox-car-top">
+    <img class="cardbox-car-container-image" src="assets/quick-card/car-icon.png" alt="">
+    <p class="cardbox-car-container-text">Find Cheap Car Rentals Deals Here</p>
+  </div>
+
+  <div class="cardbox-car-separator"></div>
+
+  <div class="cardbox-car-bottom">
+
+    <div class="cardbox-car-location cardbox-car-bottom-content">
+      Rental Location
+      <input type="text">
+    </div>
+
+    <div class="cardbox-car-startdate cardbox-car-bottom-content">
+
+      Start Date
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="startDatePicker"
+               [matDatepickerFilter]="startDateFilter"
+               [formControl]="startDate"
+               disabled (dateChange)="addStartEvent('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker color="primary" disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <div class="cardbox-car-day">
+      <p>☼ {{totalDay}}</p>
+      <p>Day(s)</p>
+    </div>
+
+    <div class="cardbox-car-enddate cardbox-car-bottom-content">
+
+      End Date
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="endDatePicker"
+               [matDatepickerFilter]="endDateFilter"
+               [formControl]="endDate"
+               (dateChange)="addEndEvent('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker color="primary" disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <div class="cardbox-car-numcar cardbox-car-bottom-content abcsadfadsad">
+      Number of Car
+      <input type="text">
+    </div>
+
+    <div class="cardbox-car-driver">
+      <input type="checkbox"> Rent car <br> without Driver
+    </div>
+
+  </div>
+
+  <div class="cardbox-car-separator"></div>
+
+  <div class="cardbox-car-button">
+    <input type="button" value="Search Car">
+  </div>
+
+</div>

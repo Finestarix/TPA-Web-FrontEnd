@@ -1,60 +1,66 @@
-<div class="cardbox-plane-container">
+<div class="cardbox-hotel-container">
 
-  <div class="cardbox-plane-top">
-    <img class="cardbox-plane-container-image" src="assets/quick-card/plane-icon.png" alt="">
-    <p class="cardbox-plane-container-text">Cheap Online Hotel Booking with Promo</p>
+  <div class="cardbox-hotel-top">
+    <img class="cardbox-hotel-container-image" src="assets/quick-card/hotel-icon.png" alt="">
+    <p class="cardbox-hotel-container-text">Cheap Online Hotel Booking with Promo</p>
   </div>
 
-  <div class="cardbox-plane-bottom">
+  <div class="cardbox-hotel-separator"></div>
 
-    <div class="cardbox-plane-from cardbox-plane-bottom-content">
-      From
+  <div class="cardbox-hotel-bottom">
+
+    <div class="cardbox-hotel-destination cardbox-hotel-bottom-content">
+      Destination
       <input type="text">
     </div>
 
-    <div class="cardbox-plane-to cardbox-plane-bottom-content">
-      To
-      <input type="text">
-    </div>
+    <div class="cardbox-hotel-checkin cardbox-hotel-bottom-content">
 
-    <div class="cardbox-plane-departure cardbox-plane-bottom-content">
-
-      Departure
+      Check-In
 
       <mat-form-field>
-        <input matInput [matDatepicker]="departurePicker" [matDatepickerFilter]="departureFilter"
-               disabled (dateChange)="addDepartureEvent('change', $event)">
-        <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
-        <mat-datepicker #departurePicker color="primary" disabled="false"></mat-datepicker>
+        <input matInput [matDatepicker]="checkinPicker"
+               [matDatepickerFilter]="checkinFilter"
+               [formControl]="checkinDate"
+               (dateChange)="addCheckinEvent('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="checkinPicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkinPicker color="primary" disabled="false"></mat-datepicker>
       </mat-form-field>
 
     </div>
 
-    <div class="cardbox-plane-return cardbox-plane-bottom-content">
+    <div class="cardbox-hotel-night">
+      <p>☾ {{totalNight}}</p>
+      <p>Night(s)</p>
+    </div>
 
-      <div class="cardbox-plane-return-top">
-        <input type="checkbox" (change)="changeStatus()" [checked]="isRoundtrip"> Return
-      </div>
+    <div class="cardbox-hotel-checkout cardbox-hotel-bottom-content">
+
+      Check-Out
 
       <mat-form-field>
-        <input matInput [matDatepicker]="returnPicker" [matDatepickerFilter]="returnFilter"
-               disabled (dateChange)="addReturnEvent('change', $event)">
-        <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
-        <mat-datepicker #returnPicker color="primary" [disabled]="!isRoundtrip"></mat-datepicker>
+        <input matInput [matDatepicker]="checkoutPicker"
+               [matDatepickerFilter]="checkoutFilter"
+               [formControl]="checkoutDate"
+               (dateChange)="addCheckoutEvent('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="checkoutPicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkoutPicker color="primary" disabled="false"></mat-datepicker>
       </mat-form-field>
 
     </div>
 
-    <div class="cardbox-plane-cabin cardbox-plane-bottom-content">
-      Passenger & Cabin Class
+    <div class="cardbox-hotel-room cardbox-hotel-bottom-content">
+      Guess & Room
       <input type="text">
     </div>
 
   </div>
+
+  <div class="cardbox-hotel-separator"></div>
 
   <div class="cardbox-plane-button">
 
-    <input type="button" value="Search Flight">
+    <input type="button" value="Search Hotel">
 
   </div>
 

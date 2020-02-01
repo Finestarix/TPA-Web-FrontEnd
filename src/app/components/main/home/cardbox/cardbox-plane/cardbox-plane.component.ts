@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 
@@ -36,31 +36,28 @@ export const MY_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
-export class CardboxPlaneComponent implements OnInit {
+export class CardboxPlaneComponent implements OnInit, AfterViewInit {
 
   constructor() {
     this.isOneWay = false;
     this.isRoundtrip = false;
-    this.departureDate = this.returnDate = moment();
+
+    this.departureDate = new FormControl(moment());
+    this.returnDate = new FormControl(moment());
   }
 
   isOneWay: boolean;
   isRoundtrip: boolean;
 
-  departureDate: Moment;
-  returnDate: Moment;
+  form: FormControl;
+  departureDate: FormControl;
+  returnDate: FormControl;
 
   ngOnInit() {
+    this.returnDate.disable();
   }
 
-  addDepartureEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    // @ts-ignore
-    this.departureDate = event.value;
-  }
-
-  addReturnEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    // @ts-ignore
-    this.returnDate = event.value;
+  ngAfterViewInit() {
   }
 
   departureFilter = (date: Moment): boolean => {
@@ -72,12 +69,18 @@ export class CardboxPlaneComponent implements OnInit {
   }
 
   returnFilter = (date: Moment): boolean => {
-    return date.date() >= this.departureDate.date() &&
-      date.month() >= this.departureDate.month() &&
-      date.year() >= this.departureDate.year();
+    return date.date() >= this.departureDate.value.date() &&
+      date.month() >= this.departureDate.value.month() &&
+      date.year() >= this.departureDate.value.year();
   }
 
   changeStatus() {
     this.isRoundtrip = !this.isRoundtrip;
+
+    if (!this.isRoundtrip ) {
+      this.returnDate.disable();
+    } else if (this.isRoundtrip) {
+      this.returnDate.enable();
+    }
   }
 }

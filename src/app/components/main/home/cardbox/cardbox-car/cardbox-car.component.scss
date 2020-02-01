@@ -1,0 +1,142 @@
+.cardbox-car-container {
+
+  .cardbox-car-top {
+
+    padding: 0px 50px 20px 50px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .cardbox-car-container-image {
+      background-color: lightpink;
+      border-radius: 100%;
+
+      width: 30px;
+      padding: 5px;
+    }
+
+    .cardbox-car-container-text {
+      font-size: 20px;
+      margin-left: 20px;
+    }
+  }
+
+  .cardbox-car-separator {
+    height: 1px;
+    width: 100%;
+
+    background-color: rgba(169, 169, 169, .8);
+  }
+
+  .cardbox-car-bottom {
+
+    display: flex;
+    flex-direction: row;
+
+    color: #808080;
+
+    .cardbox-car-bottom-content {
+      display: flex;
+      flex-direction: column;
+
+      padding-top: 15px !important;
+    }
+
+    .cardbox-car-location {
+      padding-left: 50px;
+      padding-right: 20px;
+
+      border-right: 1px solid rgba(169, 169, 169, .8) !important;
+
+      input[type=text] {
+        margin-top: 22px;
+        padding-bottom: 5px;
+
+        font-size: 15px;
+        width: 190px !important;
+
+        border: 0px;
+        outline: 0px;
+        border-bottom: 1px solid rgba(169, 169, 169, .8);
+      }
+    }
+
+    .cardbox-car-day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cardbox-car-startdate, .cardbox-car-enddate {
+      padding: 0px 20px;
+    }
+
+    .cardbox-car-enddate {
+      border-right: 1px solid rgba(169, 169, 169, .8);
+    }
+
+    .cardbox-car-numcar {
+
+      padding-left: 20px;
+      padding-right: 20px;
+
+      border-right: 1px solid rgba(169, 169, 169, .8);
+
+      input[type=text] {
+        margin-top: 22px;
+        padding-bottom: 5px;
+
+        font-size: 15px;
+        width: 120px !important;
+
+        border: 0px;
+        outline: 0px;
+        border-bottom: 1px solid rgba(169, 169, 169, .8);
+      }
+    }
+
+    .cardbox-car-driver {
+      padding-left: 20px;
+
+      display: flex;
+      //flex-wrap: wrap;
+      align-items: center;
+
+      input[type=checkbox] {
+        margin-right: 12px;
+      }
+    }
+
+  }
+
+  .cardbox-car-button {
+
+    float: right;
+    width: fit-content;
+    margin-top: 15px;
+    margin-right: 50px;
+
+    background-color: rgb(240,230,140);
+
+    padding: 15px;
+    border-radius: 20px;
+
+
+    input[type=button] {
+      background-color: transparent;
+      border: 0px;
+      outline: 0px;
+      font-size: 20px;
+
+      cursor: pointer;
+    }
+
+  }
+
+}
+
+.mat-form-field {
+  width: 160px !important;
+}

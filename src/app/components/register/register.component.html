@@ -24,6 +24,14 @@
 
     <p class="register-title general"><b>Register</b></p>
 
+    <div class="google" id="gapi">
+      <img (click)="googleSignIn()" src="assets/login/google.svg" alt="Google">
+    </div>
+
+    <div class="facebook" id="gfb">
+      <img (click)="facebookSignIn()" src="assets/login/facebook.svg" alt="Facebook">
+    </div>
+
     <div *ngIf="isEmail; else otherFieldStatic" class="text-field general">
       <p>Email</p>
       <p>{{dataFromLogin.phoneemail}}</p>

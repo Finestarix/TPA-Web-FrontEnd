@@ -17,12 +17,16 @@
 
   </div>
 
+  <div class="cardbox-plane-separator"></div>
+
   <div class="cardbox-plane-bottom">
 
     <div class="cardbox-plane-from cardbox-plane-bottom-content">
       From
       <input type="text">
     </div>
+
+    <img class="cardbox-plane-arrow" src="assets/quick-card/2-way-arrow.png" alt="">
 
     <div class="cardbox-plane-to cardbox-plane-bottom-content">
       To
@@ -34,10 +38,11 @@
       Departure
 
       <mat-form-field>
-        <input matInput [matDatepicker]="departurePicker" [matDatepickerFilter]="departureFilter"
-               disabled (dateChange)="addDepartureEvent('change', $event)">
+        <input matInput [matDatepicker]="departurePicker"
+               [matDatepickerFilter]="departureFilter"
+               [formControl]="departureDate">
         <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
-        <mat-datepicker #departurePicker color="primary" disabled="false"></mat-datepicker>
+        <mat-datepicker #departurePicker color="primary"></mat-datepicker>
       </mat-form-field>
 
     </div>
@@ -49,10 +54,11 @@
       </div>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="returnPicker" [matDatepickerFilter]="returnFilter"
-               disabled (dateChange)="addReturnEvent('change', $event)">
+        <input matInput [matDatepicker]="returnPicker"
+               [matDatepickerFilter]="returnFilter"
+               [formControl]="returnDate">
         <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
-        <mat-datepicker #returnPicker color="primary" [disabled]="!isRoundtrip"></mat-datepicker>
+        <mat-datepicker #returnPicker color="primary"></mat-datepicker>
       </mat-form-field>
 
     </div>
@@ -63,6 +69,8 @@
     </div>
 
   </div>
+
+  <div class="cardbox-plane-separator"></div>
 
   <div class="cardbox-plane-button">
 

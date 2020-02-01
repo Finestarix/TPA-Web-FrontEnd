@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {linkPlane, linkHotel, linkTrain, linkCar, linkEntertainment} from './cardboxData';
 
 @Component({
@@ -6,7 +6,7 @@ import {linkPlane, linkHotel, linkTrain, linkCar, linkEntertainment} from './car
   templateUrl: './cardbox.component.html',
   styleUrls: ['./cardbox.component.scss']
 })
-export class CardboxComponent implements OnInit {
+export class CardboxComponent implements OnInit, AfterViewInit {
 
   linkPlane: object;
   linkHotel: object;
@@ -25,11 +25,45 @@ export class CardboxComponent implements OnInit {
   currentState: number;
 
   ngOnInit() {
-    this.currentState = 1;
+    this.currentState = 0;
+    this.setState(3);
+  }
+
+  ngAfterViewInit() {
+    document.getElementById('linkEntertainment').classList.add('passive-content');
+    document.getElementById('linkTrain').classList.add('passive-content');
+  }
+
+  stateCondition(stateNumber: number) {
+    return this.currentState === stateNumber && this.currentState !== 0;
   }
 
   setState(nextState: number) {
+
+    document.getElementById('linkPlane').classList.add('passive-content');
+    document.getElementById('linkHotel').classList.add('passive-content');
+    document.getElementById('linkCar').classList.add('passive-content');
+
+    if (this.stateCondition(1)) {
+      document.getElementById('linkPlane').classList.remove('active-content');
+    } else if (this.stateCondition(2)) {
+      document.getElementById('linkHotel').classList.remove('active-content');
+    } else if(this.stateCondition(3)) {
+      document.getElementById('linkCar').classList.remove('active-content');
+    }
+
     this.currentState = nextState;
+
+    if (this.stateCondition(1)) {
+      document.getElementById('linkPlane').classList.add('active-content');
+      document.getElementById('linkPlane').classList.remove('passive-content');
+    } else if (this.stateCondition(2)) {
+      document.getElementById('linkHotel').classList.add('active-content');
+      document.getElementById('linkHotel').classList.remove('passive-content');
+    } else if (this.stateCondition(3)) {
+      document.getElementById('linkCar').classList.add('active-content');
+      document.getElementById('linkCar').classList.remove('passive-content');
+    }
   }
 
 

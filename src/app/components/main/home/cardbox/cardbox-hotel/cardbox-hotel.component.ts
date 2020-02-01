@@ -39,32 +39,36 @@ export const MY_FORMATS = {
 export class CardboxHotelComponent implements OnInit {
 
   constructor() {
-    this.isOneWay = false;
-    this.isRoundtrip = false;
-    this.departureDate = this.returnDate = moment();
+    this.checkinDate = new FormControl(moment());
+    this.checkoutDate = new FormControl(moment().add(23, 'hours'));
+    this.setTotalNight();
   }
 
-  isOneWay: boolean;
-  isRoundtrip: boolean;
+  checkinDate: FormControl;
+  checkoutDate: FormControl;
 
-  departureDate: Moment;
-  returnDate: Moment;
+  start: Moment;
+  end: Moment;
+  totalNight: number;
 
   ngOnInit() {
   }
 
-
-  addDepartureEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    // @ts-ignore
-    this.departureDate = event.value;
+  setTotalNight() {
+    this.start = this.checkinDate.value;
+    this.end = this.checkoutDate.value;
+    this.totalNight = Math.ceil(moment.duration(this.end.diff(this.start)).asDays());
   }
 
-  addReturnEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    // @ts-ignore
-    this.returnDate = event.value;
+  addCheckinEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.setTotalNight();
   }
 
-  departureFilter = (date: Moment): boolean => {
+  addCheckoutEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.setTotalNight();
+  }
+
+  checkinFilter = (date: Moment): boolean => {
     const currDate = new Date();
 
     return date.date() >= currDate.getDate() &&
@@ -72,14 +76,10 @@ export class CardboxHotelComponent implements OnInit {
       date.year() >= currDate.getFullYear();
   }
 
-  returnFilter = (date: Moment): boolean => {
-    return date.date() >= this.departureDate.date() &&
-      date.month() >= this.departureDate.month() &&
-      date.year() >= this.departureDate.year();
-  }
-
-  changeStatus() {
-    this.isRoundtrip = !this.isRoundtrip;
+  checkoutFilter = (date: Moment): boolean => {
+    return date.date() > this.checkinDate.value.date() &&
+      date.month() >= this.checkinDate.value.month() &&
+      date.year() >= this.checkinDate.value.year();
   }
 
 }

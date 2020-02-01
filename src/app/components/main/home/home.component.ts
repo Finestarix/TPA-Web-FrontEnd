@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -18,10 +18,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
       })),
       transition('imageSliderStart <=> imageSliderMiddle', animate('200ms')),
       transition('imageSliderStart <=> imageSliderEnd', animate('200ms'))
-    ]),
+    ])
   ],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   currIndex: number;
   imageList: string[] = [
@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit {
   ];
 
   currentState: string;
+  quickCard: HTMLElement;
+  startPosition: number;
 
   constructor() {
   }
@@ -44,13 +46,16 @@ export class HomeComponent implements OnInit {
     this.imageSlider();
   }
 
+  ngAfterViewInit(): void {
+    this.quickCard = document.getElementById('overlay-screen');
+  }
+
   validateIndex(): void {
     if (this.currIndex >= 5) {
       this.currIndex = 0;
     } else if (this.currIndex <= 0) {
       this.currIndex = 5;
     }
-
   }
 
   nextImageSlider(): void {
@@ -99,5 +104,41 @@ export class HomeComponent implements OnInit {
     }, 9000);
   }
 
+  something() {
+    this.quickCard.classList.remove('overlay-screen');
+  }
+
+  setLayout() {
+    // @ts-ignore
+    scrollTo(document.documentElement, 347);
+    this.quickCard.classList.add('overlay-screen');
+  }
+
+  // tslint:disable-next-line:no-shadowed-variable
+  scrollTo(element: HTMLElement, to: number) {
+    const start = element.scrollTop;
+    const change = to - start;
+    let currentTime = 0;
+    const increment = 20;
+
+    const animateScroll = () => {
+      currentTime += increment;
+      const val = this.easeInOutQuad(currentTime, start, change, 1000000);
+      element.scrollTop = val;
+      if (currentTime < 1000000) {
+        setTimeout(animateScroll, 10);
+      }
+    };
+    animateScroll();
+  }
+
+  easeInOutQuad = (t, b, c, d) => {
+    t /= d / 2;
+    if (t < 1) {
+      return c / 2 * t * t + b;
+    }
+    t--;
+    return -c / 2 * (t * (t - 2) - 1) + b;
+  }
 
 }

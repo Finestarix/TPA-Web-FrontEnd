@@ -1,7 +1,8 @@
 .cardbox-container {
 
   width: 80%;
-  padding: 40px 50px;
+  padding: 40px 0px;
+  background-color: black;
 
   position: absolute;
   top: -60px;
@@ -15,19 +16,44 @@
 
   .cardbox-container-top {
 
+    padding: 0px 50px;
+
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    div {
+      .big-text {
+        font-size: 20px;
+      }
+
+      .small-text {
+        font-size: 40px;
+        font-weight: bold;
+      }
+    }
 
     .cardbox-content {
       display: flex;
       flex-direction: row;
 
+      font-family: "Open Sans", serif;
+
+      .active-content {
+        border: 2px solid #0264D3;
+      }
+
+      .passive-content {
+        border: 1px solid gray;
+        &:hover {
+          border: 1px solid #0264D3;
+        }
+      }
+
       app-cardbox-imagetext {
         width: fit-content;
         margin: 0px 10px;
 
-        border: 1px solid gray;
         border-radius: 10px;
       }
 

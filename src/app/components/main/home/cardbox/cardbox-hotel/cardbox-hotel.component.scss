@@ -1,50 +1,60 @@
-.cardbox-plane-container {
+.cardbox-hotel-container {
 
-  .cardbox-plane-top {
+  .cardbox-hotel-top {
+
+    padding: 0px 50px 20px 50px;
 
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    .cardbox-plane-container-image {
-      background-color: cornflowerblue;
+    .cardbox-hotel-container-image {
+      background-color: lightpink;
       border-radius: 100%;
 
-      width: 40px;
+      width: 30px;
+      padding: 10px 5px;
     }
 
-    .cardbox-plane-container-text {
+    .cardbox-hotel-container-text {
       font-size: 20px;
       margin-left: 20px;
     }
-
   }
 
-  .cardbox-plane-bottom {
+  .cardbox-hotel-separator {
+    height: 1px;
+    width: 100%;
 
-    margin-top: 20px;
+    background-color: rgba(169, 169, 169, .8);
+  }
+
+  .cardbox-hotel-bottom {
 
     display: flex;
     flex-direction: row;
 
     color: #808080;
 
-    .cardbox-plane-bottom-content {
+    .cardbox-hotel-bottom-content {
       display: flex;
       flex-direction: column;
 
-      border: 1px solid rgba(169, 169, 169, .4);
-      padding: 15px;
+      padding-top: 15px !important;
     }
 
-    .cardbox-plane-from, .cardbox-plane-to, .cardbox-plane-cabin {
+    .cardbox-hotel-destination {
+      padding-left: 50px;
+      padding-right: 20px;
+
+      border-right: 1px solid rgba(169, 169, 169, .8) !important;
 
       input[type=text] {
         margin-top: 22px;
         padding-bottom: 5px;
 
         font-size: 15px;
-        width: 182px;
+        width: 230px !important;
 
         border: 0px;
         outline: 0px;
@@ -52,19 +62,35 @@
       }
     }
 
-    .cardbox-plane-return {
+    .cardbox-hotel-night {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .cardbox-plane-return-top {
-        display: flex;
-        flex-direction: row;
-      }
+    .cardbox-hotel-checkin, .cardbox-hotel-checkout {
+      padding: 0px 20px;
+    }
 
-      input[type=checkbox] {
+    .cardbox-hotel-checkout {
+      border-right: 1px solid rgba(169, 169, 169, .8);
+    }
+
+    .cardbox-hotel-room {
+
+      padding-left: 20px;
+
+      input[type=text] {
+        margin-top: 22px;
+        padding-bottom: 5px;
+
+        font-size: 15px;
+        width: 190px !important;
+
         border: 0px;
-        width: 20px;
-        height: 20px;
-
-        margin-right: 10px;
+        outline: 0px;
+        border-bottom: 1px solid rgba(169, 169, 169, .8);
       }
     }
 
@@ -75,6 +101,7 @@
     float: right;
     width: fit-content;
     margin-top: 15px;
+    margin-right: 50px;
 
     background-color: rgb(240,230,140);
 

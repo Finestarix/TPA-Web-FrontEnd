@@ -44,6 +44,8 @@
 
   .right-container {
 
+    position: relative;
+
     background-color: white;
     box-shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.2);
     border: 1px solid lightgray;
@@ -67,6 +69,24 @@
     .register-title {
       margin-top: 20px;
       font-size: 18px;
+    }
+
+    .google {
+      position: absolute;
+      top: 20px;
+      right: 52px;
+      img {
+        height: 35px;
+      }
+    }
+
+    .facebook {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      img {
+        height: 35px;
+      }
     }
 
     .text-field {

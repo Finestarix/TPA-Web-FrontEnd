@@ -2,16 +2,16 @@
 
   <div class="cardbox-container-top">
     <div>
-      <h2>Hey, you</h2>
-      <h1>Going anywhere ?</h1>
+      <p class="big-text">Hey, you</p>
+      <p class="small-text">Going anywhere ?</p>
     </div>
 
     <div class="cardbox-content">
-      <app-cardbox-imagetext [linkImageText]="linkPlane" (click)="setState(1)"></app-cardbox-imagetext>
-      <app-cardbox-imagetext [linkImageText]="linkHotel" (click)="setState(2)"></app-cardbox-imagetext>
-      <app-cardbox-imagetext [linkImageText]="linkTrain"></app-cardbox-imagetext>
-      <app-cardbox-imagetext [linkImageText]="linkCar" (click)="setState(3)"></app-cardbox-imagetext>
-      <app-cardbox-imagetext [linkImageText]="linkEntertainment"></app-cardbox-imagetext>
+      <app-cardbox-imagetext id="linkPlane" [linkImageText]="linkPlane" (click)="setState(1)"></app-cardbox-imagetext>
+      <app-cardbox-imagetext id="linkHotel" [linkImageText]="linkHotel" (click)="setState(2)"></app-cardbox-imagetext>
+      <app-cardbox-imagetext id="linkTrain"  [linkImageText]="linkTrain"></app-cardbox-imagetext>
+      <app-cardbox-imagetext id="linkCar" [linkImageText]="linkCar" (click)="setState(3)"></app-cardbox-imagetext>
+      <app-cardbox-imagetext id="linkEntertainment"  [linkImageText]="linkEntertainment"></app-cardbox-imagetext>
     </div>
   </div>
 
