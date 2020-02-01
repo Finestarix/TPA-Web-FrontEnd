@@ -14,19 +14,6 @@ import {SessionService} from '../../../services/session.service';
 })
 export class NavbarComponent implements OnInit {
 
-  menusLeft: NameLink[];
-  menusRight: NameLink[];
-  menusTop: NameLink[];
-  menusType: string[];
-  menusMoney: string[];
-  menusLanguage: string[];
-
-  navbarMenu: any;
-  isOpen: boolean;
-
-  private dialogRefLogin: MatDialogRef<LoginComponent>;
-  private dialogRefRegister: MatDialogRef<RegisterComponent>;
-
   constructor(private dialogLogin: MatDialog,
               private sessionService: SessionService,
               private dialogRegister: MatDialog) {
@@ -37,8 +24,24 @@ export class NavbarComponent implements OnInit {
     this.menusMoney = menusMoney;
     this.menusLanguage = menusLanguage;
     this.isOpen = false;
-    console.log(sessionService.getSession());
+
+    this.flag = this.isLoginRegister() === true ? 'No User' : 'User';
+    console.log(this.flag);
   }
+
+  menusLeft: NameLink[];
+  menusRight: NameLink[];
+  menusTop: NameLink[];
+  menusType: string[];
+  menusMoney: string[];
+  menusLanguage: string[];
+
+  navbarMenu: any;
+  isOpen: boolean;
+  flag: string;
+
+  private dialogRefLogin: MatDialogRef<LoginComponent>;
+  private dialogRefRegister: MatDialogRef<RegisterComponent>;
 
   ngOnInit() {
     this.navbarMenu = document.getElementsByClassName('navbar-menu');
@@ -72,11 +75,30 @@ export class NavbarComponent implements OnInit {
   }
 
   isLoginRegister() {
-    return (!this.sessionService.getSession() || this.sessionService.getSession() === undefined ) ? true : false;
+    return (!this.sessionService.getSession() || this.sessionService.getSession() === undefined) ? true : false;
   }
 
-  isAlreadyLogin() {
-    return !this.isLoginRegister();
+  getStatus(isShowLogout: number) {
+
+    let tempFlag = this.flag;
+
+    if (this.isLoginRegister() && this.flag === 'User') {
+      tempFlag = 'No User';
+    } else if (!this.isLoginRegister() && this.flag === 'No User') {
+      tempFlag = 'User';
+    }
+
+    if (tempFlag !== this.flag) {
+      // window.location.reload();
+      this.flag = this.flag;
+    }
+
+    if (isShowLogout === 1) {
+      return this.isLoginRegister();
+    } else {
+      return !this.isLoginRegister();
+    }
+
   }
 
 }

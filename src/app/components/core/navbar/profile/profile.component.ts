@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SessionService} from '../../../../services/session.service';
 
 @Component({
@@ -8,13 +8,25 @@ import {SessionService} from '../../../../services/session.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private sessionService: SessionService) { }
-
-  ngOnInit() {
+  constructor(private sessionService: SessionService) {
   }
 
-  logoutAction() {
+  displayStatus: string;
+
+  ngOnInit() {
+    this.displayStatus = 'none';
+  }
+
+  logoutAction(): void {
     this.sessionService.removeSession();
+  }
+
+  getDisplay(): string {
+    return this.displayStatus;
+  }
+
+  changeStateProfile(): void {
+    this.displayStatus = (this.displayStatus === 'none') ? 'flex': 'none';
   }
 
 }

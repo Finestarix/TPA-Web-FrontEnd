@@ -84,11 +84,6 @@ export const footerData: object[] = [
         name: 'Worry-Free Fare',
         link: 'https://en.tiket.com/info/tiket-anti-galau'
       }
-
-
-
-
-
     ]
   }
 ];

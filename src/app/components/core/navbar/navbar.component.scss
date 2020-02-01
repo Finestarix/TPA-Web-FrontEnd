@@ -59,6 +59,10 @@ a {
 
   }
 
+  .navbar-profile {
+    display: none;
+  }
+
   .navbar-container {
 
     display: flex;
@@ -141,6 +145,13 @@ a {
     margin: 0px;
     padding: 0px 20px;
 
+    .navbar-profile {
+      display: flex;
+      position: absolute;
+      right: 35px;
+      top: 65px;
+    }
+
     .navbar-container {
 
       padding: 20px;
@@ -162,6 +173,14 @@ a {
           .navbar-hamburger-logo {
             width: 150px;
           }
+
+          .navbar-hamburger-profile {
+            float: right;
+          }
+        }
+
+        .profile-hide {
+          display: none;
         }
 
         .navbar-logo {

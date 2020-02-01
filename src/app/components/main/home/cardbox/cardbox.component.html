@@ -1,0 +1,31 @@
+<div class="cardbox-container">
+
+  <div class="cardbox-container-top">
+    <div>
+      <h2>Hey, you</h2>
+      <h1>Going anywhere ?</h1>
+    </div>
+
+    <div class="cardbox-content">
+      <app-cardbox-imagetext [linkImageText]="linkPlane" (click)="setState(1)"></app-cardbox-imagetext>
+      <app-cardbox-imagetext [linkImageText]="linkHotel" (click)="setState(2)"></app-cardbox-imagetext>
+      <app-cardbox-imagetext [linkImageText]="linkTrain"></app-cardbox-imagetext>
+      <app-cardbox-imagetext [linkImageText]="linkCar" (click)="setState(3)"></app-cardbox-imagetext>
+      <app-cardbox-imagetext [linkImageText]="linkEntertainment"></app-cardbox-imagetext>
+    </div>
+  </div>
+
+  <div class="cardbox-container-down">
+    <app-cardbox-plane *ngIf="currentState == 1; else cond2"></app-cardbox-plane>
+
+    <ng-template #cond2>
+      <app-cardbox-hotel *ngIf="currentState == 2; else cond3"></app-cardbox-hotel>
+    </ng-template>
+
+    <ng-template #cond3>
+      <app-cardbox-car></app-cardbox-car>
+    </ng-template>
+
+  </div>
+
+</div>

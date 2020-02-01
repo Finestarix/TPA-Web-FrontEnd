@@ -30,6 +30,10 @@ export class RegisterService {
     const phoneConvert = String(phone);
     const passwordConvert = String(password);
 
+    // console.log(emailConvert + ' ' + firstNameConvert + ' ' +
+    //   lastNameConvert + ' ' + phoneCodeConvert + ' ' +
+    //   phoneConvert + ' ' + passwordConvert);
+
     return this.apollo.mutate<any>({
       mutation: insertNewUser,
       variables: {

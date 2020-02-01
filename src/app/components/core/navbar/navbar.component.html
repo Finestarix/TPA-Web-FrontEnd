@@ -38,13 +38,19 @@
         <app-custom-menu-link [titleMenu]=menu></app-custom-menu-link>
       </div>
 
-      <a *ngIf="isLoginRegister()" class="navbar-menu support" (click)="loginAction()"> Login </a>
-      <a *ngIf="isLoginRegister()" class="navbar-menu support" (click)="loginAction()"> Register </a>
+      <a *ngIf="getStatus(1)" class="navbar-menu support" (click)="loginAction()"> Login </a>
+      <a *ngIf="getStatus(1)" class="navbar-menu support" (click)="loginAction()"> Register </a>
 
-      <app-profile *ngIf="isAlreadyLogin()"></app-profile>
+      <div class="profile-hide">
+        <app-profile class="navbar-logo" *ngIf="getStatus(0)" class="support"></app-profile>
+      </div>
 
     </div>
 
+  </div>
+
+  <div class="navbar-profile">
+    <app-profile class="navbar-hamburger-profile" *ngIf="getStatus(0)" class="support"></app-profile>
   </div>
 
 </div>

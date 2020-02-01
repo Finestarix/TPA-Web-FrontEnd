@@ -1,12 +1,14 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {LoginComponent} from './components/login/login.component';
 import {MainComponent} from './components/main/main.component';
 import {PlaneComponent} from './components/main/plane/plane.component';
+import {CardboxPlaneComponent} from './components/main/home/cardbox/cardbox-plane/cardbox-plane.component';
 import {HotelComponent} from './components/main/hotel/hotel.component';
+import {CardboxHotelComponent} from './components/main/home/cardbox/cardbox-hotel/cardbox-hotel.component';
 import {TrainComponent} from './components/main/train/train.component';
 import {HomeComponent} from './components/main/home/home.component';
 import {CarComponent} from './components/main/car/car.component';
+import {CardboxCarComponent} from './components/main/home/cardbox/cardbox-car/cardbox-car.component';
 import {EntertainmentComponent} from './components/main/entertainment/entertainment.component';
 
 const routes: Routes = [

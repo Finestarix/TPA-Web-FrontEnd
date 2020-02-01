@@ -1,0 +1,37 @@
+.cardbox-container {
+
+  width: 80%;
+  padding: 40px 50px;
+
+  position: absolute;
+  top: -60px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px 2px #888888;
+
+  .cardbox-container-top {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .cardbox-content {
+      display: flex;
+      flex-direction: row;
+
+      app-cardbox-imagetext {
+        width: fit-content;
+        margin: 0px 10px;
+
+        border: 1px solid gray;
+        border-radius: 10px;
+      }
+
+    }
+  }
+
+}

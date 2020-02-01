@@ -11,6 +11,8 @@
     align-items: center;
     justify-content: center;
 
+    height: 305px;
+
     .image-slider img {
       position: relative;
       -webkit-backface-visibility: hidden;
@@ -35,6 +37,8 @@
 
     .image-slider-content {
 
+      height: 205px;
+
       .image-slider img {
         height: 200px;
       }
@@ -55,6 +59,8 @@
 
     .image-slider-content {
 
+      height: 105px;
+
       .image-slider img {
         height: 100px;
       }
@@ -68,3 +74,9 @@
   }
 }
 
+.cardbox {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+}

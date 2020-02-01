@@ -2,13 +2,14 @@ import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {Subscription, Observable} from 'rxjs';
 import {LoginService} from '../../services/login.service';
 import {MatDialogRef} from '@angular/material';
+import {AuthService} from '../../services/auth.service';
 
 import featureLoginRegister from '../../models/login-register';
 import {phoneEmailData, passwordData} from './login';
 import {Validator} from '../../helpers/validator';
 import {SessionService} from '../../services/session.service';
 import {RegisterService} from '../../services/register.service';
-import {HttpClient} from '@angular/common/http';
+import {User} from '../../models/user';
 
 declare const gapi: any;
 declare var FB: any;
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               private loginService: LoginService,
               private registerService: RegisterService,
               private sessionService: SessionService,
+              private authService: AuthService,
               private element: ElementRef) {
     this.featureLoginRegister = featureLoginRegister;
     this.isUserExist = false;
@@ -66,6 +68,27 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.userLogin$) {
       this.userLogin$.unsubscribe();
     }
+  }
+
+  googleInit() {
+    const that = this;
+    gapi.load('auth2', () => {
+      that.auth2 = gapi.auth2.init({
+        client_id: that.googleClientID,
+        cookiepolicy: 'single_host_origin',
+        scope: that.scope
+      });
+      that.attachGoogleSignIn(that.element.nativeElement.querySelector('#gapi'));
+    });
+  }
+
+  facebookInit() {
+    FB.init({
+      appId: '807634042995508',
+      cookie: false,
+      xfbml: true,
+      version: 'v5.0'
+    });
   }
 
   setPhonePhoneEmail(email: string): void {
@@ -101,13 +124,22 @@ export class LoginComponent implements OnInit, OnDestroy {
   handleUserLogin(query): void {
 
     this.userLoginData = query.data.UserLogin;
+    console.log(this.userLoginData.id);
+    console.log(this.userLoginData.email);
 
     if (this.userLoginData.id === 0) {
       this.setError('Email or password doesn\'t match !');
     } else {
-      this.setError('Login Success!');
-      // TODO: `Refresh and Change Navbar`
+      // this.setError('Login Success!');
+
+      // const loggedInUser: User = {
+      //   id: this.userLoginData.id,
+      //   email: this.userLoginData.email
+      // };
+      // this.authService.setUser(loggedInUser);
+
       this.sessionService.setSession(this.userLoginData.id);
+      this.dialogRef.close();
     }
 
   }
@@ -158,45 +190,23 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  googleInit() {
-    const that = this;
-    gapi.load('auth2', () => {
-      that.auth2 = gapi.auth2.init({
-        client_id: that.googleClientID,
-        cookiepolicy: 'single_host_origin',
-        scope: that.scope
-      });
-      that.attachGoogleSignIn(that.element.nativeElement.querySelector('#gapi'));
-    });
-  }
-
-  facebookInit() {
-
-    FB.init({
-      appId: '807634042995508',
-      cookie: false,
-      xfbml: true,
-      version: 'v5.0'
-    });
-
-  }
-
-  handleGoogleUser(query, profile) {
+  handleGoogleUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle) {
     this.userLoginData = query.data.UserByEmailAndPhone;
+    console.log(this.userLoginData);
 
     if (this.userLoginData.id === 0) {
 
-      // TODO: `Google User Found`
+      const firstNameGoogle = nameGoogle.substring(0, nameGoogle.indexOf(' '));
+      const lastNameGoogle = nameGoogle.substring(nameGoogle.indexOf(' ') + 1);
+
       this.userRegister$ = this.registerService
-        .insertUser(profile.getEmail(), profile.getName().substring(0, profile.getName().indexOf(' ')),
-          profile.getName().substring(profile.getName().indexOf(' ') + 1), '0', '0', profile.getToken())
+        .insertUser(emailGoogle, firstNameGoogle, lastNameGoogle, '+62','', '')
         .subscribe(async value => {
           this.userLoginData = value.data.InsertNewUser;
         });
 
     } else {
 
-      // TODO: `Google User Not Found`
 
 
     }
@@ -214,9 +224,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail());
 
-        // this.userLogin$ = this.loginService.getUser(profile.getEmail()).subscribe(async query => {
-        //   await this.handleGoogleUser(query, profile);
-        // });
+        const idGoogle = profile.getId();
+        const nameGoogle = profile.getName();
+        const imageGoogle = profile.getName();
+        const emailGoogle = profile.getEmail();
+
+        this.userLogin$ = this.loginService.getUser(profile.getEmail()).subscribe(async query => {
+          await this.handleGoogleUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle);
+        });
 
       }, (error) => {
         console.log(JSON.stringify(error, undefined, 2));
@@ -249,7 +264,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   googleSignIn(): void {
-    this.attachGoogleSignIn(this);
+    const that = this;
+    this.attachGoogleSignIn(that.element.nativeElement.querySelector('#gapi'));
   }
 
   facebookSignIn(): void {

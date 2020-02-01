@@ -8,6 +8,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {HttpLinkModule} from 'apollo-angular-link-http';
 import {ApolloModule} from 'apollo-angular';
 import {GraphQLModule} from './graphql.module';
+import {JwtModule} from '@auth0/angular-jwt';
+import {MatNativeDateModule} from '@angular/material/core';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -29,6 +31,12 @@ import {CarComponent} from './components/main/car/car.component';
 import {EntertainmentComponent} from './components/main/entertainment/entertainment.component';
 import {OrderComponent} from './components/main/order/order.component';
 import {ProfileComponent} from './components/core/navbar/profile/profile.component';
+import {CardboxComponent} from './components/main/home/cardbox/cardbox.component';
+import {CardboxImagetextComponent} from './components/main/home/cardbox/cardbox-imagetext/cardbox-imagetext.component';
+import {CardboxPlaneComponent} from './components/main/home/cardbox/cardbox-plane/cardbox-plane.component';
+import {CardboxCarComponent} from './components/main/home/cardbox/cardbox-car/cardbox-car.component';
+import {CardboxHotelComponent} from './components/main/home/cardbox/cardbox-hotel/cardbox-hotel.component';
+import {MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -51,11 +59,17 @@ import {ProfileComponent} from './components/core/navbar/profile/profile.compone
     CarComponent,
     EntertainmentComponent,
     OrderComponent,
-    ProfileComponent
+    ProfileComponent,
+    CardboxComponent,
+    CardboxImagetextComponent,
+    CardboxPlaneComponent,
+    CardboxCarComponent,
+    CardboxHotelComponent,
   ],
   entryComponents: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CardboxPlaneComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +81,19 @@ import {ProfileComponent} from './components/core/navbar/profile/profile.compone
     HttpLinkModule,
     ApolloModule,
     GraphQLModule,
+    MatNativeDateModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access-token');
+        },
+        // whitelistedDomains: ['localhost'],
+        blacklistedRoutes: ['localhost']
+      }
+    }),
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,128 @@
+.cardbox-plane-container {
+
+  .cardbox-plane-top {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .cardbox-plane-container-image {
+      background-color: cornflowerblue;
+      border-radius: 100%;
+
+      width: 40px;
+    }
+
+    .cardbox-plane-container-text {
+      font-size: 20px;
+      margin-left: 20px;
+    }
+
+  }
+
+  .cardbox-plane-mid {
+
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 25px;
+
+    .cardbox-plane-radio {
+
+      display: flex;
+      align-items: center;
+
+      margin-right: 30px;
+
+      input {
+        margin-right: 5px;
+      }
+
+    }
+
+    input[type=radio] {
+      border: 0px;
+      width: 20px;
+      height: 20px;
+    }
+
+  }
+
+  .cardbox-plane-bottom {
+
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: row;
+
+    color: #808080;
+
+    .cardbox-plane-bottom-content {
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid rgba(169, 169, 169, .4);
+      padding: 15px;
+    }
+
+    .cardbox-plane-from, .cardbox-plane-to, .cardbox-plane-cabin {
+
+      input[type=text] {
+        margin-top: 22px;
+        padding-bottom: 5px;
+
+        font-size: 15px;
+        width: 182px;
+
+        border: 0px;
+        outline: 0px;
+        border-bottom: 1px solid rgba(169, 169, 169, .8);
+      }
+    }
+
+    .cardbox-plane-return {
+
+      .cardbox-plane-return-top {
+        display: flex;
+        flex-direction: row;
+      }
+
+      input[type=checkbox] {
+        border: 0px;
+        width: 20px;
+        height: 20px;
+
+        margin-right: 10px;
+      }
+    }
+
+  }
+
+  .cardbox-plane-button {
+
+    float: right;
+    width: fit-content;
+    margin-top: 15px;
+
+    background-color: rgb(240,230,140);
+
+    padding: 15px;
+    border-radius: 20px;
+
+
+    input[type=button] {
+      background-color: transparent;
+      border: 0px;
+      outline: 0px;
+      font-size: 20px;
+
+      cursor: pointer;
+    }
+
+  }
+
+}
+
+.mat-form-field {
+  width: 182px !important;
+}

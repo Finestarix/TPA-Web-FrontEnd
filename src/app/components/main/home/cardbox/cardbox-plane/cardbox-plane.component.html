@@ -1,0 +1,73 @@
+<div class="cardbox-plane-container">
+
+  <div class="cardbox-plane-top">
+    <img class="cardbox-plane-container-image" src="assets/quick-card/plane-icon.png" alt="">
+    <p class="cardbox-plane-container-text">Find Cheap Flight Tickets Price</p>
+  </div>
+
+  <div class="cardbox-plane-mid">
+
+    <div class="cardbox-plane-radio">
+      <input type="radio" name="trip-type" (change)="isRoundtrip = false" [checked]="!isRoundtrip"> One Way
+    </div>
+
+    <div class="cardbox-plane-radio">
+      <input type="radio" name="trip-type" (change)="isRoundtrip = true" [checked]="isRoundtrip"> Roundtrip
+    </div>
+
+  </div>
+
+  <div class="cardbox-plane-bottom">
+
+    <div class="cardbox-plane-from cardbox-plane-bottom-content">
+      From
+      <input type="text">
+    </div>
+
+    <div class="cardbox-plane-to cardbox-plane-bottom-content">
+      To
+      <input type="text">
+    </div>
+
+    <div class="cardbox-plane-departure cardbox-plane-bottom-content">
+
+      Departure
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="departurePicker" [matDatepickerFilter]="departureFilter"
+               disabled (dateChange)="addDepartureEvent('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="departurePicker"></mat-datepicker-toggle>
+        <mat-datepicker #departurePicker color="primary" disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <div class="cardbox-plane-return cardbox-plane-bottom-content">
+
+      <div class="cardbox-plane-return-top">
+        <input type="checkbox" (change)="changeStatus()" [checked]="isRoundtrip"> Return
+      </div>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="returnPicker" [matDatepickerFilter]="returnFilter"
+               disabled (dateChange)="addReturnEvent('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+        <mat-datepicker #returnPicker color="primary" [disabled]="!isRoundtrip"></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <div class="cardbox-plane-cabin cardbox-plane-bottom-content">
+      Passenger & Cabin Class
+      <input type="text">
+    </div>
+
+  </div>
+
+  <div class="cardbox-plane-button">
+
+    <input type="button" value="Search Flight">
+
+  </div>
+
+</div>

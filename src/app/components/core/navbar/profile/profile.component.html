@@ -1,1 +1,24 @@
-<p (click)="logoutAction()"> Logout </p>
+<div (click)="changeStateProfile()" class="profile-container">
+
+  <img class="icon-profile" src="assets/navbar/Icon_Default.png" alt="">
+
+  <div class="profile-dropdown" [ngStyle]="{'display': getDisplay()}">
+
+    <div>Ignatius Renaldy</div>
+    <div class="attr-tix">
+      <img class="tix-image" src="assets/navbar/tix_point.svg" alt="TIX">
+      <p class="tix-point">1000</p>
+    </div>
+
+    <div class="profile-separator"></div>
+
+    <div class="attr-general"> My Order </div>
+    <div class="attr-general"> Smart Profile </div>
+    <div class="attr-general"> Smart Pay </div>
+    <div class="attr-general"> Refund List </div>
+    <div class="attr-general"> Setting </div>
+    <div class="attr-general" (click)="logoutAction()"> Log Out </div>
+
+  </div>
+
+</div>

@@ -1,6 +1,6 @@
 <div class="image-slider-container">
 
-  <div  class="image-slider-content" >
+  <div class="image-slider-content" >
     <img (click)="prevImageSlider()" class="image-arrow" src="assets/home-imageslider/left.webp" alt="">
     <div class="image-slider" *ngFor="let currImage of imageList; let i = index;">
       <img *ngIf="i === currIndex"
@@ -10,9 +10,12 @@
     <img (click)="nextImageSlider()" class="image-arrow" src="assets/home-imageslider/right.webp" alt="">
   </div>
 
-  <div>
-
-  </div>
-
 </div>
 
+<div>
+  <app-cardbox class="cardbox"></app-cardbox>
+</div>
+
+<div style="margin-top: 400px">
+  Recommended Hotel
+</div>
