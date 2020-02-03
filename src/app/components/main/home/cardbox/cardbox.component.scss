@@ -1,8 +1,7 @@
 .cardbox-container {
 
   width: 80%;
-  padding: 40px 0px;
-  background-color: black;
+  padding: 40px 0;
 
   position: absolute;
   top: -60px;
@@ -16,7 +15,7 @@
 
   .cardbox-container-top {
 
-    padding: 0px 50px;
+    padding: 0 50px;
 
     display: flex;
     flex-direction: row;
@@ -52,12 +51,96 @@
 
       app-cardbox-imagetext {
         width: fit-content;
-        margin: 0px 10px;
+        margin: 0 10px;
 
         border-radius: 10px;
       }
 
     }
   }
+
+}
+
+@media only screen and (max-width: 600px) {
+
+  .cardbox-container {
+
+    padding: 20px 0;
+    top: -20px !important;
+
+    .cardbox-container-top {
+
+      padding: 0 20px;
+
+      div {
+        .big-text {
+          font-size: 10px;
+        }
+
+        .small-text {
+          font-size: 20px;
+          font-weight: bold;
+        }
+      }
+
+      .cardbox-content {
+        display: flex;
+        flex-direction: row;
+
+        font-family: "Open Sans", serif;
+
+        .active-content {
+          border: 2px solid #0264D3;
+        }
+
+        .passive-content {
+          border: 1px solid gray;
+          &:hover {
+            border: 1px solid #0264D3;
+          }
+        }
+
+        app-cardbox-imagetext {
+          width: fit-content;
+          margin: 0 10px;
+
+          border-radius: 10px;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 1150px) {
+
+  .cardbox-container {
+
+    top: -45px;
+
+    .cardbox-container-top {
+
+      flex-direction: column;
+
+      .cardbox-content {
+
+        flex-wrap: wrap;
+
+        app-cardbox-imagetext {
+          width: fit-content;
+          margin: 10px 10px;
+
+          border-radius: 10px;
+        }
+
+      }
+
+    }
+
+  }
+
 
 }

@@ -22,7 +22,7 @@
         <input matInput [matDatepicker]="startDatePicker"
                [matDatepickerFilter]="startDateFilter"
                [formControl]="startDate"
-               disabled (dateChange)="addStartEvent('change', $event)">
+               (dateChange)="addStartEvent('change', $event)">
         <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
         <mat-datepicker #startDatePicker color="primary" disabled="false"></mat-datepicker>
       </mat-form-field>

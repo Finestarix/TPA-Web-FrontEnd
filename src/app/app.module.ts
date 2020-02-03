@@ -10,6 +10,7 @@ import {ApolloModule} from 'apollo-angular';
 import {GraphQLModule} from './graphql.module';
 import {JwtModule} from '@auth0/angular-jwt';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -36,7 +37,24 @@ import {CardboxImagetextComponent} from './components/main/home/cardbox/cardbox-
 import {CardboxPlaneComponent} from './components/main/home/cardbox/cardbox-plane/cardbox-plane.component';
 import {CardboxCarComponent} from './components/main/home/cardbox/cardbox-car/cardbox-car.component';
 import {CardboxHotelComponent} from './components/main/home/cardbox/cardbox-hotel/cardbox-hotel.component';
-import {MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MapComponent} from './components/main/hotel/map/map.component';
+import {StarBarComponent} from './components/core/star-bar/star-bar.component';
+
+import { icon, Marker } from 'leaflet';
+const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
+const iconUrl = 'assets/leaflet/images/marker-icon.png';
+const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
+const iconDefault = icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+Marker.prototype.options.icon = iconDefault;
 
 @NgModule({
   declarations: [
@@ -65,6 +83,8 @@ import {MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/
     CardboxPlaneComponent,
     CardboxCarComponent,
     CardboxHotelComponent,
+    MapComponent,
+    StarBarComponent
   ],
   entryComponents: [
     LoginComponent,

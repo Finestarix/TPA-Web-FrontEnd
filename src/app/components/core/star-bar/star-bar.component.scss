@@ -1,0 +1,25 @@
+.rating-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  vertical-align: middle;
+
+  color: #58627a;
+}
+
+.rating {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+
+  white-space: nowrap;
+  color: #0264D3;
+}
+
+.container:before, .rating:before {
+  content:"\2605\2605\2605\2605\2605";
+  font-size: 20pt;
+}
+
