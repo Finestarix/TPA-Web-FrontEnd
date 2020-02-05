@@ -1,25 +1,40 @@
 .cardbox-plane-container {
 
-  .cardbox-plane-top {
+  .cardbox-plane-top-top {
 
     padding: 0px 50px;
 
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 
-    .cardbox-plane-container-image {
-      background-color: cornflowerblue;
-      border-radius: 100%;
 
-      width: 40px;
+    .cardbox-history {
+      padding-right: 10px;
+      color: #0264D3;
+      cursor: pointer;
     }
 
-    .cardbox-plane-container-text {
-      font-size: 20px;
-      margin-left: 20px;
-    }
+    .cardbox-plane-top {
 
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .cardbox-plane-container-image {
+        background-color: cornflowerblue;
+        border-radius: 100%;
+
+        width: 40px;
+      }
+
+      .cardbox-plane-container-text {
+        font-size: 20px;
+        margin-left: 20px;
+      }
+
+    }
   }
 
   .cardbox-plane-mid {
@@ -83,26 +98,31 @@
       z-index: 2;
       width: 17px;
       top: 42px;
-      left: 225px;
+      left: 205px;
 
       background-color: white;
       border: 1px solid rgba(169, 169, 169, .8);
       border-radius: 100%;
     }
 
-    .cardbox-plane-from {
-      padding-left: 50px;
-      padding-right: 20px;
-      border-right: 1px dashed rgba(169, 169, 169, .8);
+    .cardbox-time {
+
+      display: flex;
+      flex-direction: row;
+
+      .cardbox-plane-from {
+        padding-left: 50px;
+        padding-right: 20px;
+        border-right: 1px dashed rgba(169, 169, 169, .8);
+      }
+
+      .cardbox-plane-to {
+        padding-left: 20px;
+        border-right: 1px solid rgba(169, 169, 169, .8);
+      }
     }
 
-    .cardbox-plane-to {
-      padding-left: 20px;
-      border-right: 1px solid rgba(169, 169, 169, .8);
-    }
-
-    .cardbox-plane-from, .cardbox-plane-to, .cardbox-plane-cabin {
-
+    .cardbox-plane-cabin {
       input[type=text] {
         margin-top: 22px;
         padding-bottom: 5px;
@@ -172,4 +192,55 @@
 
 .mat-form-field {
   width: 150px !important;
+}
+
+@media only screen and (max-width: 850px)  {
+  .cardbox-plane-container {
+
+    .cardbox-plane-top-top {
+      flex-direction: column-reverse;
+      margin-bottom: 10px;
+
+      .cardbox-plane-top {
+        .cardbox-plane-container-text {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .cardbox-plane-mid {
+
+      align-items: center;
+      justify-content: space-around;
+
+      .cardbox-plane-radio {
+
+        margin-right: 0px !important;
+
+      }
+
+    }
+
+    .cardbox-plane-bottom {
+
+      justify-content: center;
+
+      .cardbox-plane-arrow {
+        left: 241px;
+      }
+
+      .cardbox-time {
+
+        .cardbox-plane-from {
+          padding: 15px 20px 5px 5px;
+
+          border-right: 1px dashed rgba(169, 169, 169, .8);
+        }
+
+        .cardbox-plane-to {
+          border-right: 0px;
+        }
+      }
+    }
+  }
 }

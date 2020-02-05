@@ -1,0 +1,14 @@
+
+<div class="hotel-container">
+
+  <p class="hotel-title">Places to Stay Around the World !</p>
+
+  <div class="hotel-content">
+    <div *ngFor="let hotel of recHotel">
+      <img class="hotel-image" src="assets/hotels/{{hotel.photo[0].source}}" alt="Hotel">
+      <p>{{hotel.name}}</p>
+      <p>$ {{hotel.price}} / Night</p>
+      <app-star-bar [widthRating]="hotel.rating/5 * 100"></app-star-bar>
+    </div>
+  </div>
+</div>

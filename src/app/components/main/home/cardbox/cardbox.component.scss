@@ -65,6 +65,7 @@
 
   .cardbox-container {
 
+    width: 90% !important;
     padding: 20px 0;
     top: -20px !important;
 
@@ -73,14 +74,7 @@
       padding: 0 20px;
 
       div {
-        .big-text {
-          font-size: 10px;
-        }
-
-        .small-text {
-          font-size: 20px;
-          font-weight: bold;
-        }
+        display: none;
       }
 
       .cardbox-content {
@@ -119,15 +113,29 @@
 
   .cardbox-container {
 
+    width: 65%;
     top: -45px;
 
     .cardbox-container-top {
 
       flex-direction: column;
 
+      div {
+        .big-text {
+          font-size: 15px;
+        }
+
+        .small-text {
+          font-size: 28px;
+          font-weight: bold;
+        }
+      }
+
       .cardbox-content {
 
         flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
 
         app-cardbox-imagetext {
           width: fit-content;

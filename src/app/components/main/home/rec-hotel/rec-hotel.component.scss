@@ -1,0 +1,35 @@
+.hotel-container {
+
+  margin: 440px 20px 0px 20px;
+
+  .hotel-title {
+    margin: 10px 0px;
+
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .hotel-content {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    div {
+
+      margin: 2px;
+      padding: 10px;
+
+      .hotel-image {
+        border-radius: 10px;
+        width: 300px;
+      }
+
+    }
+
+  }
+
+}
+

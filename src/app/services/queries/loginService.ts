@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const getEmailAndPhone = gql`
-  query getCurrentUser($param: String!)     {
+  query getCurrentUser($param: String!) {
     UserByEmailAndPhone(emailphone: $param) {
       id
       firstname

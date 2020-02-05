@@ -16,18 +16,6 @@
   <app-cardbox class="cardbox"></app-cardbox>
 </div>
 
-<div class="hotel-container">
-
-  <p class="hotel-title">Places to Stay Around the World !</p>
-
-  <div class="hotel-content">
-    <div *ngFor="let x of [70, 60, 20, 45, 26]">
-      <img class="hotel-image" src="assets/hotels/InterContinental_Hotel_1.webp" alt="Hotel">
-      <p>Name</p>
-      <p>$ Price / Night</p>
-      <app-star-bar [widthRating]="x"></app-star-bar>
-    </div>
-  </div>
-</div>
+<app-rec-hotel></app-rec-hotel>
 
 <div id="overlay-screen" (click)="something()"></div>

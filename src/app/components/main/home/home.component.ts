@@ -35,7 +35,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   currentState: string;
   quickCard: HTMLElement;
-  startPosition: number;
 
   constructor() {
   }

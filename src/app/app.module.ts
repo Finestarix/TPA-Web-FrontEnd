@@ -10,7 +10,7 @@ import {ApolloModule} from 'apollo-angular';
 import {GraphQLModule} from './graphql.module';
 import {JwtModule} from '@auth0/angular-jwt';
 import {MatNativeDateModule} from '@angular/material/core';
-import {MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatAutocompleteModule, MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -38,9 +38,11 @@ import {CardboxPlaneComponent} from './components/main/home/cardbox/cardbox-plan
 import {CardboxCarComponent} from './components/main/home/cardbox/cardbox-car/cardbox-car.component';
 import {CardboxHotelComponent} from './components/main/home/cardbox/cardbox-hotel/cardbox-hotel.component';
 import {MapComponent} from './components/main/hotel/map/map.component';
+import {RecHotelComponent} from './components/main/home/rec-hotel/rec-hotel.component';
 import {StarBarComponent} from './components/core/star-bar/star-bar.component';
 
 import { icon, Marker } from 'leaflet';
+import {FlightClassComponent} from './components/main/home/cardbox/cardbox-plane/flight-class/flight-class.component';
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
 const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
@@ -84,7 +86,9 @@ Marker.prototype.options.icon = iconDefault;
     CardboxCarComponent,
     CardboxHotelComponent,
     MapComponent,
-    StarBarComponent
+    StarBarComponent,
+    RecHotelComponent,
+    FlightClassComponent,
   ],
   entryComponents: [
     LoginComponent,
@@ -115,6 +119,7 @@ Marker.prototype.options.icon = iconDefault;
     MatDatepickerModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

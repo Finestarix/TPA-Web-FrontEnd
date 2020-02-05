@@ -2,12 +2,17 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {HttpClient} from '@angular/common/http';
+import {LocationService} from '../../../../../services/location.service';
+import {Observable, Subscription} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 // @ts-ignore
 import {default as _rollupMoment, Moment} from 'moment';
-import {MatDatepickerInputEvent} from '@angular/material';
+import {type} from 'os';
+
 
 const moment = _rollupMoment || _moment;
 
@@ -36,20 +41,29 @@ export const MY_FORMATS = {
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
   ]
 })
-export class CardboxPlaneComponent implements OnInit, AfterViewInit {
+export class CardboxPlaneComponent implements OnInit {
 
-  constructor() {
-    this.isOneWay = false;
+  constructor(private http: HttpClient,
+              private locationService: LocationService) {
     this.isRoundtrip = false;
 
     this.departureDate = new FormControl(moment());
     this.returnDate = new FormControl(moment());
+
+    this.location$ = this.locationService.getLocation().subscribe( async query => {
+      await this.afterFetchData(query);
+    });
   }
 
-  isOneWay: boolean;
+  selectedLocation1 = new FormControl();
+  selectedLocation2 = new FormControl();
+  location$: Subscription;
+  location: string[] = [];
+  filteredLocation1: Observable<string[]>;
+  filteredLocation2: Observable<string[]>;
+
   isRoundtrip: boolean;
 
-  form: FormControl;
   departureDate: FormControl;
   returnDate: FormControl;
 
@@ -57,7 +71,30 @@ export class CardboxPlaneComponent implements OnInit, AfterViewInit {
     this.returnDate.disable();
   }
 
-  ngAfterViewInit() {
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.location.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  afterFetchData(query) {
+    const temp = query.data.AllLocation;
+
+    for (let i = 0 ; i < temp.length ; i++) {
+      this.location.push(temp[i].city);
+    }
+
+    this.filteredLocation1 = this.selectedLocation1.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+
+    this.filteredLocation2 = this.selectedLocation2.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
   }
 
   departureFilter = (date: Moment): boolean => {
@@ -66,21 +103,22 @@ export class CardboxPlaneComponent implements OnInit, AfterViewInit {
     return date.date() >= currDate.getDate() &&
       date.month() >= currDate.getMonth() &&
       date.year() >= currDate.getFullYear();
-  }
+  };
 
   returnFilter = (date: Moment): boolean => {
     return date.date() >= this.departureDate.value.date() &&
       date.month() >= this.departureDate.value.month() &&
       date.year() >= this.departureDate.value.year();
-  }
+  };
 
   changeStatus() {
     this.isRoundtrip = !this.isRoundtrip;
 
-    if (!this.isRoundtrip ) {
+    if (!this.isRoundtrip) {
       this.returnDate.disable();
     } else if (this.isRoundtrip) {
       this.returnDate.enable();
     }
   }
 }
+

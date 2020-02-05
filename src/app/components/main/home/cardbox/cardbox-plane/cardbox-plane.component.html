@@ -1,8 +1,15 @@
 <div class="cardbox-plane-container">
 
-  <div class="cardbox-plane-top">
-    <img class="cardbox-plane-container-image" src="assets/quick-card/plane-icon.png" alt="">
-    <p class="cardbox-plane-container-text">Find Cheap Flight Tickets Price</p>
+  <div class="cardbox-plane-top-top">
+
+    <div class="cardbox-plane-top">
+      <img class="cardbox-plane-container-image" src="assets/quick-card/plane-icon.png" alt="">
+      <p class="cardbox-plane-container-text">Find Cheap Flight Tickets Price</p>
+    </div>
+
+    <div class="cardbox-history">
+      Lastest History
+    </div>
   </div>
 
   <div class="cardbox-plane-mid">
@@ -21,16 +28,32 @@
 
   <div class="cardbox-plane-bottom">
 
-    <div class="cardbox-plane-from cardbox-plane-bottom-content">
-      From
-      <input type="text">
-    </div>
+    <div class="cardbox-time">
+      <div class="cardbox-plane-from cardbox-plane-bottom-content">
+        From
+        <mat-form-field class="cardbox-text">
+          <input type="text" matInput aria-label="Number" [formControl]="selectedLocation1" [matAutocomplete]="auto1">
+          <mat-autocomplete #auto1="matAutocomplete">
+            <mat-option *ngFor="let option of filteredLocation1 | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
 
-    <img class="cardbox-plane-arrow" src="assets/quick-card/2-way-arrow.png" alt="">
+      <img class="cardbox-plane-arrow" src="assets/quick-card/2-way-arrow.png" alt="">
 
-    <div class="cardbox-plane-to cardbox-plane-bottom-content">
-      To
-      <input type="text">
+      <div class="cardbox-plane-to cardbox-plane-bottom-content">
+        To
+        <mat-form-field class="cardbox-text">
+          <input type="text" matInput aria-label="Number" [formControl]="selectedLocation2" [matAutocomplete]="auto2">
+          <mat-autocomplete #auto2="matAutocomplete">
+            <mat-option *ngFor="let option of filteredLocation2 | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
     </div>
 
     <div class="cardbox-plane-departure cardbox-plane-bottom-content">
@@ -78,4 +101,4 @@
 
   </div>
 
-</div>
+  </div>
