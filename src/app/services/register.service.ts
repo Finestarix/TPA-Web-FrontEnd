@@ -21,7 +21,8 @@ export class RegisterService {
   }
 
   public insertUser(email: string, firstName: string, lastName: string,
-                    phoneCode: string, phone: string, password: string): Observable<any> {
+                    phoneCode: string, phone: string, password: string,
+                    image: string): Observable<any> {
 
     const emailConvert = String(email);
     const firstNameConvert = String(firstName);
@@ -29,6 +30,7 @@ export class RegisterService {
     const phoneCodeConvert = String(phoneCode);
     const phoneConvert = String(phone);
     const passwordConvert = String(password);
+    const imageConvert = String(image);
 
     // console.log(emailConvert + ' ' + firstNameConvert + ' ' +
     //   lastNameConvert + ' ' + phoneCodeConvert + ' ' +
@@ -43,6 +45,7 @@ export class RegisterService {
         phoneCodeData: phoneCodeConvert,
         phoneData: phoneConvert,
         passwordData: passwordConvert,
+        imageData: imageConvert
       }
     });
 

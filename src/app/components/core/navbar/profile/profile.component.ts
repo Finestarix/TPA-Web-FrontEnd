@@ -8,7 +8,7 @@ import {SessionService} from '../../../../services/session.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private sessionService: SessionService) {
+  constructor(private sessionService: SessionService,) {
   }
 
   displayStatus: string;

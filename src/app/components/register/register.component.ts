@@ -1,6 +1,6 @@
 import {Component, ElementRef, Inject, OnInit} from '@angular/core';
 import {RegisterService} from '../../services/register.service';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Subscription} from 'rxjs';
 
 import featureLoginRegister from '../../models/login-register';
@@ -8,6 +8,7 @@ import {emailData, firstNameData, lastNameData, phoneData, passwordData} from '.
 import {Validator} from '../../helpers/validator';
 import {HttpClient} from '@angular/common/http';
 import {LoginService} from '../../services/login.service';
+import {SessionService} from '../../services/session.service';
 
 declare const gapi: any;
 declare var FB: any;
@@ -58,6 +59,8 @@ export class RegisterComponent implements OnInit {
   ].join(' ');
 
   constructor(@Inject(MAT_DIALOG_DATA) private dataFromLogin,
+              private dialogRef: MatDialogRef<RegisterComponent>,
+              private sessionService: SessionService,
               private registerService: RegisterService,
               private loginService: LoginService,
               private http: HttpClient,
@@ -218,50 +221,44 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  handleGoogleUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle) {
+  handleAPIUser(query, id, name, image, email) {
     this.userLoginData = query.data.UserByEmailAndPhone;
     console.log(this.userLoginData);
 
     if (this.userLoginData.id === 0) {
 
-      const firstNameGoogle = nameGoogle.substring(0, nameGoogle.indexOf(' '));
-      const lastNameGoogle = nameGoogle.substring(nameGoogle.indexOf(' ') + 1);
+      const firstName = name.substring(0, name.indexOf(' '));
+      const lastName = name.substring(name.indexOf(' ') + 1);
 
       this.userRegister$ = this.registerService
-        .insertUser(emailGoogle, firstNameGoogle, lastNameGoogle, '+62','', '')
+        .insertUser(email, firstName, lastName, '+62', '', '')
         .subscribe(async value => {
           this.userLoginData = value.data.InsertNewUser;
         });
 
     } else {
 
+      // TODO: Add JWT TOKEN
 
-
+      this.sessionService.setSession(this.userLoginData.id);
+      this.dialogRef.close();
     }
   }
 
   attachGoogleSignIn(element) {
-
-    console.log(element);
-
     const that = this;
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
 
         const profile = googleUser.getBasicProfile();
-        // console.log('Token || ' + googleUser.getAuthResponse().id_token);
-        // console.log('ID: ' + profile.getId());
-        // console.log('Name: ' + profile.getName());
-        // console.log('Image URL: ' + profile.getImageUrl());
-        // console.log('Email: ' + profile.getEmail());
 
         const idGoogle = profile.getId();
         const nameGoogle = profile.getName();
         const imageGoogle = profile.getName();
         const emailGoogle = profile.getEmail();
 
-        this.userLogin$ = this.loginService.getUser(profile.getEmail()).subscribe(async query => {
-          await this.handleGoogleUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle);
+        this.userLogin$ = this.loginService.getUser(emailGoogle).subscribe(async query => {
+          await this.handleAPIUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle);
         });
 
       }, (error) => {
@@ -271,26 +268,27 @@ export class RegisterComponent implements OnInit {
 
   attachFacebookSignIn() {
     FB.login((response) => {
+      console.log('submitLogin', response);
       if (response.authResponse) {
+        console.log(response.authResponse.userID);
         FB.api(
-          '?fields=email,name',
-          'GET',
-          {},
+          '/me',
+          {fields: 'name, id, picture.width(150).height(150), email'},
           (userData) => {
-            console.table(userData);
-            console.log(userData);
+            const idFacebook = userData.id;
+            const nameFacebook = userData.name;
+            const imageFacebook = userData.picture;
+            const emailFacebook = userData.email;
+
+            this.userLogin$ = this.loginService.getUser(emailFacebook).subscribe(async query => {
+              await this.handleAPIUser(query, idFacebook, nameFacebook, imageFacebook, emailFacebook);
+            });
           }
         );
-        //   FB.api('/me', 'GET', { fields: 'first_name,last_name,name,id,picture.width(150).height(150),email' },
-        //     (res) => {
-        //       this.imgPath = res.picture.data.url;
-        //       console.log(this.imgPath);
-        //       console.log(res);
-        //     });
       } else {
         console.log('User login failed');
       }
-    }, {scope: 'email'});
+    }, {});
   }
 
   googleSignIn(): void {

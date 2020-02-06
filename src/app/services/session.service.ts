@@ -11,7 +11,7 @@ export class SessionService {
 
   setSession(value: string) {
     sessionStorage.setItem('id',  value);
-    this.router.navigateByUrl('\\');
+    this.router.navigateByUrl('');
   }
 
   getSession() {

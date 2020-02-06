@@ -124,13 +124,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   handleUserLogin(query): void {
 
     this.userLoginData = query.data.UserLogin;
-    console.log(this.userLoginData.id);
-    console.log(this.userLoginData.email);
 
     if (this.userLoginData.id === 0) {
       this.setError('Email or password doesn\'t match !');
     } else {
-      // this.setError('Login Success!');
+
+      // TODO: Add JWT TOKEN
 
       // const loggedInUser: User = {
       //   id: this.userLoginData.id,
@@ -190,25 +189,26 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleGoogleUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle) {
+  handleAPIUser(query, id, name, image, email) {
     this.userLoginData = query.data.UserByEmailAndPhone;
     console.log(this.userLoginData);
 
     if (this.userLoginData.id === 0) {
 
-      const firstNameGoogle = nameGoogle.substring(0, nameGoogle.indexOf(' '));
-      const lastNameGoogle = nameGoogle.substring(nameGoogle.indexOf(' ') + 1);
+      const firstName = name.substring(0, name.indexOf(' '));
+      const lastName = name.substring(name.indexOf(' ') + 1);
 
       this.userRegister$ = this.registerService
-        .insertUser(emailGoogle, firstNameGoogle, lastNameGoogle, '+62','', '')
+        .insertUser(email, firstName, lastName, '+62', '', '', image)
         .subscribe(async value => {
           this.userLoginData = value.data.InsertNewUser;
         });
 
     } else {
 
-
-
+      // TODO: Add JWT TOKEN
+      this.sessionService.setSession(this.userLoginData.id);
+      this.dialogRef.close();
     }
   }
 
@@ -218,19 +218,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       (googleUser) => {
 
         const profile = googleUser.getBasicProfile();
-        console.log('Token || ' + googleUser.getAuthResponse().id_token);
-        console.log('ID: ' + profile.getId());
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
 
         const idGoogle = profile.getId();
         const nameGoogle = profile.getName();
         const imageGoogle = profile.getName();
         const emailGoogle = profile.getEmail();
 
-        this.userLogin$ = this.loginService.getUser(profile.getEmail()).subscribe(async query => {
-          await this.handleGoogleUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle);
+        this.userLogin$ = this.loginService.getUser(emailGoogle).subscribe(async query => {
+          await this.handleAPIUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle);
         });
 
       }, (error) => {
@@ -245,22 +240,22 @@ export class LoginComponent implements OnInit, OnDestroy {
         console.log(response.authResponse.userID);
         FB.api(
           '/me',
-          'GET',
-          {},
+          {fields: 'name, id, picture.width(150).height(150), email'},
           (userData) => {
-            console.table(userData);
+            const idFacebook = userData.id;
+            const nameFacebook = userData.name;
+            const imageFacebook = userData.picture;
+            const emailFacebook = userData.email;
+
+            this.userLogin$ = this.loginService.getUser(emailFacebook).subscribe(async query => {
+              await this.handleAPIUser(query, idFacebook, nameFacebook, '', emailFacebook);
+            });
           }
         );
-        //   FB.api('/me', 'GET', { fields: 'first_name,last_name,name,id,picture.width(150).height(150),email' },
-        //     (res) => {
-        //       this.imgPath = res.picture.data.url;
-        //       console.log(this.imgPath);
-        //       console.log(res);
-        //     });
       } else {
         console.log('User login failed');
       }
-    }, {scope: 'email'});
+    }, {});
   }
 
   googleSignIn(): void {
