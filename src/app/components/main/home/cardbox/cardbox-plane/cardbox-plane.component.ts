@@ -50,17 +50,17 @@ export class CardboxPlaneComponent implements OnInit {
     this.departureDate = new FormControl(moment());
     this.returnDate = new FormControl(moment());
 
-    this.location$ = this.locationService.getLocation().subscribe( async query => {
-      await this.afterFetchData(query);
-    });
+    // this.location$ = this.locationService.getLocation().subscribe( async query => {
+    //   await this.afterFetchData(query);
+    // });
   }
 
-  selectedLocation1 = new FormControl();
-  selectedLocation2 = new FormControl();
-  location$: Subscription;
-  location: string[] = [];
-  filteredLocation1: Observable<string[]>;
-  filteredLocation2: Observable<string[]>;
+  // selectedLocation1 = new FormControl();
+  // selectedLocation2 = new FormControl();
+  // location$: Subscription;
+  // location: string[] = [];
+  // filteredLocation1: Observable<string[]>;
+  // filteredLocation2: Observable<string[]>;
 
   isRoundtrip: boolean;
 
@@ -71,31 +71,31 @@ export class CardboxPlaneComponent implements OnInit {
     this.returnDate.disable();
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  // private _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+  //
+  //   return this.location.filter(option => option.toLowerCase().includes(filterValue));
+  // }
 
-    return this.location.filter(option => option.toLowerCase().includes(filterValue));
-  }
+  // afterFetchData(query) {
+  //   const temp = query.data.AllLocation;
 
-  afterFetchData(query) {
-    const temp = query.data.AllLocation;
+    // for (let i = 0 ; i < temp.length ; i++) {
+    //   this.location.push(temp[i].city);
+    // }
 
-    for (let i = 0 ; i < temp.length ; i++) {
-      this.location.push(temp[i].city);
-    }
-
-    this.filteredLocation1 = this.selectedLocation1.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-
-    this.filteredLocation2 = this.selectedLocation2.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
-  }
+    // this.filteredLocation1 = this.selectedLocation1.valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this._filter(value))
+    //   );
+    //
+    // this.filteredLocation2 = this.selectedLocation2.valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this._filter(value))
+    //   );
+  // }
 
   departureFilter = (date: Moment): boolean => {
     const currDate = new Date();

@@ -10,7 +10,7 @@ import {ApolloModule} from 'apollo-angular';
 import {GraphQLModule} from './graphql.module';
 import {JwtModule} from '@auth0/angular-jwt';
 import {MatNativeDateModule} from '@angular/material/core';
-import {MatAutocompleteModule, MatDatepickerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatAutocompleteModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSliderModule} from '@angular/material';
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -40,9 +40,11 @@ import {CardboxHotelComponent} from './components/main/home/cardbox/cardbox-hote
 import {MapComponent} from './components/main/hotel/map/map.component';
 import {RecHotelComponent} from './components/main/home/rec-hotel/rec-hotel.component';
 import {StarBarComponent} from './components/core/star-bar/star-bar.component';
+import {FlightClassComponent} from './components/main/home/cardbox/cardbox-plane/flight-class/flight-class.component';
+import {HotelRoomComponent} from './components/main/home/cardbox/cardbox-hotel/hotel-room/hotel-room.component';
+import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-hotel.component';
 
 import { icon, Marker } from 'leaflet';
-import {FlightClassComponent} from './components/main/home/cardbox/cardbox-plane/flight-class/flight-class.component';
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
 const shadowUrl = 'assets/leaflet/images/marker-shadow.png';
@@ -89,6 +91,8 @@ Marker.prototype.options.icon = iconDefault;
     StarBarComponent,
     RecHotelComponent,
     FlightClassComponent,
+    HotelRoomComponent,
+    SearchHotelComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -120,6 +124,7 @@ Marker.prototype.options.icon = iconDefault;
     MatInputModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,28 @@
+.cardbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .cardbox-content {
+    z-index: 20;
+
+    margin-top: 30px;
+    padding: 10px 0;
+    width: 1000px;
+
+    background-color: white;
+    box-shadow: 2px 2px 8px 2px #222222;
+    border-radius: 10px;
+  }
+
+}
+
+.overlay-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .8);
+}

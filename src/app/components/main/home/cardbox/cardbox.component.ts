@@ -26,7 +26,7 @@ export class CardboxComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.currentState = 0;
-    this.setState(1);
+    this.setState(2);
   }
 
   ngAfterViewInit() {

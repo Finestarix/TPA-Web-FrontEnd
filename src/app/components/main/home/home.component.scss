@@ -7,14 +7,22 @@
   background-color: #0264D3;
 
   .image-slider-content {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 
     height: 305px;
 
+    .image-slider-template {
+      height: 305px;
+      width: 970px;
+    }
+
     .image-slider img {
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 15% !important;
       -webkit-backface-visibility: hidden;
       -moz-backface-visibility:    hidden;
       -ms-backface-visibility:     hidden;

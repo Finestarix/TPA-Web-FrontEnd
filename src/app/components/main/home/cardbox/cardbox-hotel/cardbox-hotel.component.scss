@@ -49,17 +49,17 @@
 
       border-right: 1px solid rgba(169, 169, 169, .8) !important;
 
-      input[type=text] {
-        margin-top: 22px;
-        padding-bottom: 5px;
-
-        font-size: 15px;
-        width: 230px !important;
-
-        border: 0px;
-        outline: 0px;
-        border-bottom: 1px solid rgba(169, 169, 169, .8);
-      }
+      //input[type=text] {
+      //  margin-top: 22px;
+      //  padding-bottom: 5px;
+      //
+      //  font-size: 15px;
+      //  width: 230px !important;
+      //
+      //  border: 0px;
+      //  outline: 0px;
+      //  border-bottom: 1px solid rgba(169, 169, 169, .8);
+      //}
     }
 
     .cardbox-hotel-night {
@@ -70,7 +70,7 @@
     }
 
     .cardbox-hotel-checkin, .cardbox-hotel-checkout {
-      padding: 0px 20px;
+      padding: 0 20px;
     }
 
     .cardbox-hotel-checkout {
@@ -79,6 +79,7 @@
 
     .cardbox-hotel-room {
 
+      position: relative;
       padding-left: 20px;
 
       input[type=text] {
@@ -88,9 +89,19 @@
         font-size: 15px;
         width: 190px !important;
 
-        border: 0px;
-        outline: 0px;
+        border: 0;
+        outline: 0;
         border-bottom: 1px solid rgba(169, 169, 169, .8);
+      }
+
+      app-hotel-room {
+        position: absolute;
+        top: 80px;
+        padding: 10px;
+
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 2px 2px 8px 2px #888888;
       }
     }
 
@@ -124,4 +135,8 @@
 
 .mat-form-field {
   width: 182px !important;
+}
+
+.mat-autocomplete-panel {
+  overflow: hidden !important;
 }

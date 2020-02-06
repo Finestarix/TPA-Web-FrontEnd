@@ -10,6 +10,8 @@ import {HomeComponent} from './components/main/home/home.component';
 import {CarComponent} from './components/main/car/car.component';
 import {CardboxCarComponent} from './components/main/home/cardbox/cardbox-car/cardbox-car.component';
 import {EntertainmentComponent} from './components/main/entertainment/entertainment.component';
+import {MapComponent} from './components/main/hotel/map/map.component';
+import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-hotel.component';
 
 const routes: Routes = [
   {
@@ -26,7 +28,20 @@ const routes: Routes = [
       },
       {
         path: 'Hotel',
-        component: HotelComponent
+        children: [
+          {
+            path: '',
+            component: HotelComponent,
+          },
+          {
+            path: 'Map',
+            component: MapComponent
+          },
+          {
+            path: 'Search',
+            component: SearchHotelComponent
+          }
+        ]
       },
       {
         path: 'Train',

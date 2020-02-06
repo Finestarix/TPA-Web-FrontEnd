@@ -31,28 +31,30 @@
     <div class="cardbox-time">
       <div class="cardbox-plane-from cardbox-plane-bottom-content">
         From
-        <mat-form-field class="cardbox-text">
-          <input type="text" matInput aria-label="Number" [formControl]="selectedLocation1" [matAutocomplete]="auto1">
-          <mat-autocomplete #auto1="matAutocomplete">
-            <mat-option *ngFor="let option of filteredLocation1 | async" [value]="option">
-              {{option}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+<!--        <mat-form-field class="cardbox-text">-->
+<!--          <input type="text" matInput aria-label="Number" [formControl]="selectedLocation1" [matAutocomplete]="auto1">-->
+<!--          <mat-autocomplete #auto1="matAutocomplete">-->
+<!--            <mat-option *ngFor="let option of filteredLocation1 | async" [value]="option">-->
+<!--              {{option}}-->
+<!--            </mat-option>-->
+<!--          </mat-autocomplete>-->
+<!--        </mat-form-field>-->
+        <input type="text">
       </div>
 
       <img class="cardbox-plane-arrow" src="assets/quick-card/2-way-arrow.png" alt="">
 
       <div class="cardbox-plane-to cardbox-plane-bottom-content">
         To
-        <mat-form-field class="cardbox-text">
-          <input type="text" matInput aria-label="Number" [formControl]="selectedLocation2" [matAutocomplete]="auto2">
-          <mat-autocomplete #auto2="matAutocomplete">
-            <mat-option *ngFor="let option of filteredLocation2 | async" [value]="option">
-              {{option}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
+<!--        <mat-form-field class="cardbox-text">-->
+<!--          <input type="text" matInput aria-label="Number" [formControl]="selectedLocation2" [matAutocomplete]="auto2">-->
+<!--          <mat-autocomplete #auto2="matAutocomplete">-->
+<!--            <mat-option *ngFor="let option of filteredLocation2 | async" [value]="option">-->
+<!--              {{option}}-->
+<!--            </mat-option>-->
+<!--          </mat-autocomplete>-->
+<!--        </mat-form-field>-->
+        <input type="text">
       </div>
     </div>
 

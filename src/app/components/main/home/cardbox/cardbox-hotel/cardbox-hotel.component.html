@@ -11,7 +11,15 @@
 
     <div class="cardbox-hotel-destination cardbox-hotel-bottom-content">
       Destination
-      <input type="text">
+        <mat-form-field class="cardbox-text">
+          <input type="text" matInput aria-label="Number" [formControl]="selectedLocation" [matAutocomplete]="auto2">
+          <mat-autocomplete #auto2="matAutocomplete">
+            <mat-option *ngFor="let option of filteredLocation | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+<!--      <input type="text">-->
     </div>
 
     <div class="cardbox-hotel-checkin cardbox-hotel-bottom-content">
@@ -51,7 +59,8 @@
 
     <div class="cardbox-hotel-room cardbox-hotel-bottom-content">
       Guess & Room
-      <input type="text">
+      <input type="text" (click)="isShowRoom = !isShowRoom" [value]="totalValue" readonly>
+      <app-hotel-room (valueGuess)="setGuess($event)" (valueRoom)="setRoom($event)"  [ngStyle]="{'display': showRoom()}"></app-hotel-room>
     </div>
 
   </div>
@@ -60,7 +69,7 @@
 
   <div class="cardbox-plane-button">
 
-    <input type="button" value="Search Hotel">
+    <input (click)="searchHotel()" type="button" value="Search Hotel">
 
   </div>
 

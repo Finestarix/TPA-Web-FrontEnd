@@ -48,6 +48,8 @@
       </div>
     </ng-template>
 
+    <input type="text" [formControl]="a">
+
     <div class="text-field general">
       <app-text-field [inputForm]="firstNameData" (sendToParent)="setFirstName($event)"></app-text-field>
     </div>

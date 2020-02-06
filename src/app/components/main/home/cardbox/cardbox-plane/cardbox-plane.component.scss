@@ -122,19 +122,19 @@
       }
     }
 
-    .cardbox-plane-cabin {
+    //.cardbox-plane-cabin {
       input[type=text] {
         margin-top: 22px;
         padding-bottom: 5px;
 
         font-size: 15px;
-        width: 170px;
+        width: 150px;
 
         border: 0px;
         outline: 0px;
         border-bottom: 1px solid rgba(169, 169, 169, .8);
       }
-    }
+    //}
 
     .cardbox-plane-departure {
       border-right: 1px solid rgba(169, 169, 169, .8);

@@ -7,9 +7,7 @@ import featureLoginRegister from '../../models/login-register';
 import {emailData, firstNameData, lastNameData, phoneData, passwordData} from './register';
 import {Validator} from '../../helpers/validator';
 import {HttpClient} from '@angular/common/http';
-import {LoginComponent} from '../login/login.component';
 import {LoginService} from '../../services/login.service';
-import {AuthService} from '../../services/auth.service';
 
 declare const gapi: any;
 declare var FB: any;
@@ -22,7 +20,6 @@ declare var FB: any;
 export class RegisterComponent implements OnInit {
 
   featureLoginRegister: object[];
-
   userLogin$: Subscription;
   userRegister$: Subscription;
   userRegister: any;
@@ -252,11 +249,11 @@ export class RegisterComponent implements OnInit {
       (googleUser) => {
 
         const profile = googleUser.getBasicProfile();
-        console.log('Token || ' + googleUser.getAuthResponse().id_token);
-        console.log('ID: ' + profile.getId());
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail());
+        // console.log('Token || ' + googleUser.getAuthResponse().id_token);
+        // console.log('ID: ' + profile.getId());
+        // console.log('Name: ' + profile.getName());
+        // console.log('Image URL: ' + profile.getImageUrl());
+        // console.log('Email: ' + profile.getEmail());
 
         const idGoogle = profile.getId();
         const nameGoogle = profile.getName();
@@ -274,15 +271,14 @@ export class RegisterComponent implements OnInit {
 
   attachFacebookSignIn() {
     FB.login((response) => {
-      console.log('submitLogin', response);
       if (response.authResponse) {
-        console.log(response.authResponse.userID);
         FB.api(
-          '/me',
+          '?fields=email,name',
           'GET',
           {},
           (userData) => {
             console.table(userData);
+            console.log(userData);
           }
         );
         //   FB.api('/me', 'GET', { fields: 'first_name,last_name,name,id,picture.width(150).height(150),email' },
