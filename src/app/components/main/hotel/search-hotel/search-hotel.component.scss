@@ -1,0 +1,336 @@
+.hotel-container {
+
+  font-family: "Open Sans", serif !important;
+
+  .hotel-top-container {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 10px 20px;
+
+    .hotel-result-search {
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .hotel-result-icon {
+        width: 40px;
+        height: 40px;
+
+        padding: 0 15px 0 0;
+      }
+
+      .hotel-result-content {
+        font-size: 20px;
+      }
+
+    }
+
+    .hotel-search {
+      color: orange;
+      border: 1px solid orange;
+      border-radius: 10px;
+      padding: 10px;
+
+      cursor: pointer;
+    }
+
+  }
+
+  .hotel-bottom-container {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 10px 20px;
+
+    .hotel-filter {
+
+      display: flex;
+      flex-direction: column;
+      margin-top: 22px;
+
+      width: 20%;
+
+      .hotel-filter-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .hotel-filter-reset {
+          color: #0264D3;
+          cursor: pointer;
+        }
+      }
+
+      .hotel-filter-content {
+
+        padding: 20px;
+        margin-top: 20px;
+
+        border: 1px solid #c6cbda;
+        border-radius: 10px;
+
+        .separator {
+          margin: 20px 0 !important;
+          border: 1px dashed grey;
+        }
+
+        .hotel-search {
+
+          font-size: 18px;
+
+          .hotel-search-content {
+
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+
+            border: 1px solid dimgray;
+            border-radius: 10px;
+
+            input[type=text] {
+              font-size: 18px;
+              margin-left: 10px;
+              width: 170px;
+              outline: none;
+              border: none;
+            }
+
+            img {
+              width: 30px;
+            }
+          }
+
+        }
+
+        .hotel-filter-star {
+
+          margin: 15px 0;
+          font-size: 18px;
+
+          .hotel-filter-star-content {
+            margin: 10px 0;
+
+            font-size: 14px;
+          }
+
+        }
+
+        .hotel-filter-price {
+          margin-top: 10px;
+          font-size: 18px;
+
+          .hotel-filter-price-slider {
+            margin-top: 40px;
+          }
+        }
+
+        .hotel-filter-facility {
+          font-size: 18px;
+
+          .hotel-filter-facility-content {
+            margin: 10px 0;
+          }
+        }
+      }
+    }
+
+    .hotel-data-container {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 0 0 0 20px;
+
+      .hotel-data-top {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .hotel-data-total {
+          font-weight: bold;
+          color: #0264D3;
+        }
+
+        .hotel-condition {
+
+          display: flex;
+          flex-direction: row;
+
+          .hotel-display-price, .hotel-sort-by {
+            display: flex;
+            flex-direction: column;
+            margin: 0 0 0 20px;
+          }
+
+        }
+      }
+
+      .hotel-data {
+        display: flex;
+
+        .hotel-data-content {
+
+          padding: 20px;
+          margin-bottom: 20px;
+
+          box-shadow: 2px 2px 2px 2px gray;
+          border-radius: 10px;
+          width: 100%;
+
+          .hotel-data-content-top{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .hotel-data-image img {
+              width: 250px;
+              margin-right: 20px;
+            }
+
+            .hotel-data-core {
+              display: flex;
+              flex-direction: column;
+
+              .hotel-data-title {
+                font-size: 30px;
+                font-weight: bold;
+              }
+
+              .hotel-data-address {
+                margin-top: 20px;
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                img {
+                  width: 20px;
+                }
+
+                div {
+                  color: #0264D3;
+                  font-weight: bold;
+                  cursor: pointer;
+                }
+
+              }
+            }
+          }
+
+          .hotel-data-content-bottom {
+            margin-top: 15px;
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            .hotel-data-facility-container {
+
+              display: flex;
+              flex-direction: row;
+
+              img, .hotel-facility-left {
+                padding: 7px;
+                border-radius: 100%;
+
+                background-color: #c6cbda;
+                margin-right: 10px;
+                width: 28px;
+              }
+
+              .hotel-facility-left {
+                height: 28px;
+                font-size: 18px;
+                vertical-align: center;
+                text-align: center;
+              }
+            }
+          }
+
+          .hotel-data-price {
+
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+
+            p {
+              font-size: 25px;
+              color: orange;
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.hotel-map {
+  position: fixed;
+  bottom: 85px;
+  right: 0;
+
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: cornflowerblue;
+  border-radius: 10px;
+
+  img{
+    width: 40px;
+  }
+}
+
+.hotel-whatsapp {
+  position: fixed;
+  bottom: 5px;
+  right: 0;
+
+  padding: 5px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: lightgreen;
+  border-radius: 10px;
+
+  img{
+    width: 40px;
+  }
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  opacity: 0.03 !important;
+  background-color: darkgoldenrod !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: darkgoldenrod;
+}
+
+::ng-deep {
+  .ng5-slider {
+    .ng5-slider-pointer {
+      display: none !important;
+    }
+    .ng5-slider-selection {
+      background: #9b870c !important;
+    }
+  }
+}
+
+

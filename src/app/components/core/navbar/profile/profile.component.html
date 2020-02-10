@@ -1,10 +1,11 @@
-<div (click)="changeStateProfile()" class="profile-container">
+<div *ngIf="userProfile" (click)="changeStateProfile()" class="profile-container">
 
-  <img class="icon-profile" src="assets/profilepic/Icon_Default.png" alt="">
+  <img *ngIf="checkResource()" class="icon-profile" src="assets/profilepic/{{userProfile.image}}" alt="">
+  <img *ngIf="!checkResource()" class="icon-profile" src="{{userProfile.image}}" alt="">
 
   <div class="profile-dropdown" [ngStyle]="{'display': getDisplay()}">
 
-    <div>Ignatius Renaldy</div>
+    <div>{{userProfile.firstname}} {{userProfile.lastname}}</div>
     <div class="attr-tix">
       <img class="tix-image" src="assets/navbar/tix_point.svg" alt="TIX">
       <p class="tix-point">1000</p>

@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
-import {Subscription, Observable} from 'rxjs';
-import {LoginService} from '../../services/login.service';
+import {Subscription} from 'rxjs';
+import {UserService} from '../../services/user.service';
 import {MatDialogRef} from '@angular/material';
 import {AuthService} from '../../services/auth.service';
 
@@ -8,8 +8,7 @@ import featureLoginRegister from '../../models/login-register';
 import {phoneEmailData, passwordData} from './login';
 import {Validator} from '../../helpers/validator';
 import {SessionService} from '../../services/session.service';
-import {RegisterService} from '../../services/register.service';
-import {User} from '../../models/user';
+import {Router} from '@angular/router';
 
 declare const gapi: any;
 declare var FB: any;
@@ -46,10 +45,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   ].join(' ');
 
   constructor(private dialogRef: MatDialogRef<LoginComponent>,
-              private loginService: LoginService,
-              private registerService: RegisterService,
+              private userService: UserService,
               private sessionService: SessionService,
               private authService: AuthService,
+              private router: Router,
               private element: ElementRef) {
     this.featureLoginRegister = featureLoginRegister;
     this.isUserExist = false;
@@ -171,7 +170,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.errorText = '';
 
       this.phoneemail = (this.phoneemail[0] === '0') ? this.phoneemail.substring(1) : this.phoneemail;
-      this.userLogin$ = this.loginService.getUser(this.phoneemail).subscribe(async query => {
+      this.userLogin$ = this.userService.getUser(this.phoneemail).subscribe(async query => {
         await this.handleSearchUser(query);
       });
 
@@ -182,7 +181,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.errorText = '';
 
       this.phoneemail = (this.phoneemail[0] === '0') ? this.phoneemail.substring(1) : this.phoneemail;
-      this.userLogin$ = this.loginService.getValidUser(this.phoneemail, this.password).subscribe(async query => {
+      this.userLogin$ = this.userService.getValidUser(this.phoneemail, this.password).subscribe(async query => {
         await this.handleUserLogin(query);
       });
 
@@ -198,22 +197,26 @@ export class LoginComponent implements OnInit, OnDestroy {
       const firstName = name.substring(0, name.indexOf(' '));
       const lastName = name.substring(name.indexOf(' ') + 1);
 
-      this.userRegister$ = this.registerService
+      console.log('>>' + image);
+
+      this.userRegister$ = this.userService
         .insertUser(email, firstName, lastName, '+62', '', '', image)
         .subscribe(async value => {
           this.userLoginData = value.data.InsertNewUser;
         });
 
+      this.router.navigateByUrl('');
+
     } else {
 
       // TODO: Add JWT TOKEN
+
       this.sessionService.setSession(this.userLoginData.id);
       this.dialogRef.close();
     }
   }
 
   attachGoogleSignIn(element) {
-    const that = this;
     this.auth2.attachClickHandler(element, {},
       (googleUser) => {
 
@@ -221,10 +224,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
         const idGoogle = profile.getId();
         const nameGoogle = profile.getName();
-        const imageGoogle = profile.getName();
+        const imageGoogle = profile.getImageUrl();
         const emailGoogle = profile.getEmail();
 
-        this.userLogin$ = this.loginService.getUser(emailGoogle).subscribe(async query => {
+        this.userLogin$ = this.userService.getUser(emailGoogle).subscribe(async query => {
           await this.handleAPIUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle);
         });
 
@@ -244,10 +247,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           (userData) => {
             const idFacebook = userData.id;
             const nameFacebook = userData.name;
-            const imageFacebook = userData.picture;
             const emailFacebook = userData.email;
 
-            this.userLogin$ = this.loginService.getUser(emailFacebook).subscribe(async query => {
+            this.userLogin$ = this.userService.getUser(emailFacebook).subscribe(async query => {
               await this.handleAPIUser(query, idFacebook, nameFacebook, '', emailFacebook);
             });
           }

@@ -3,7 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {HttpClient} from '@angular/common/http';
-import {LocationService} from '../../../../../services/location.service';
+import {LocationsService} from '../../../../../services/locations.service';
 import {Observable, Subscription} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
@@ -44,7 +44,7 @@ export const MY_FORMATS = {
 export class CardboxPlaneComponent implements OnInit {
 
   constructor(private http: HttpClient,
-              private locationService: LocationService) {
+              private locationService: LocationsService) {
     this.isRoundtrip = false;
 
     this.departureDate = new FormControl(moment());

@@ -27,7 +27,7 @@ export class MapComponent implements OnInit {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
 
-      this.map.scrollWheelZoom.disable();
+      // this.map.scrollWheelZoom.disable();
 
       const temp = L.marker([this.userLocation.coords.latitude, this.userLocation.coords.longitude]);
       temp.addTo(this.map);

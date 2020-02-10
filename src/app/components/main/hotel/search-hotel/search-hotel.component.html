@@ -1,1 +1,182 @@
-<p>search-hotel works!</p>
+<div class="hotel-container">
+
+  <div class="hotel-top-container">
+
+    <div class="hotel-result-search">
+      <img class="hotel-result-icon" src="assets/hotels/hotel-icon.png" alt="Icon">
+      <div class="hotel-result-content">
+        <div>
+          {{destination}}
+        </div>
+        <div>
+          {{startDate | date: 'EEE, dd MMM yyyy'}} - {{endDate | date: 'EEE, dd MMM yyyy'}} &bull; {{room}} Room &bull; {{guest}} Guest
+        </div>
+      </div>
+    </div>
+
+    <div (click)="goToSearchHotel()" class="hotel-search">
+      Change Search
+    </div>
+  </div>
+
+  <div class="hotel-bottom-container">
+
+    <div class="hotel-filter">
+
+      <div class="hotel-filter-top">
+        <div>
+          Filter
+        </div>
+        <div class="hotel-filter-reset" (click)="resetAll()">
+          RESET
+        </div>
+      </div>
+
+      <div class="hotel-filter-content">
+
+        <div class="hotel-search">
+          Search
+          <div class="hotel-search-content">
+            <input [(ngModel)]="searchHotel" (keyup)="detectChange()" type="text">
+            <img src="assets/core/search.png" alt="">
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="hotel-filter-star">
+          Hotel Star
+          <div class="hotel-filter-star-content" *ngFor="let rating of hotelTotalRating; let i = index;">
+            <mat-checkbox [(ngModel)]="checkboxStar[i]" (change)="detectChange()">
+              <div>
+                <app-star-bar [widthRating]="20 * (i + 1)"></app-star-bar>
+                <div>{{rating}} properties</div>
+              </div>
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="hotel-filter-price">
+          Price Range per Night
+          <ng5-slider class="hotel-filter-price-slider" (valueChange)="detectChange()" (highValueChange)="detectChange()"
+                      [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+        </div>
+
+        <hr class="separator">
+
+        <div class="hotel-filter-facility">
+          Facilities
+          <div class="hotel-filter-facility-content" *ngFor="let facility of hotelFacility; let i = index">
+            <mat-checkbox [(ngModel)]="chekboxFacility[i]" (change)="detectChange()">
+              {{facility}}
+            </mat-checkbox>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="hotel-data-container" *ngIf="hotelData">
+
+      <div class="hotel-data-top">
+        <div>Showing <span class="hotel-data-total">{{hotelData.length}}</span> best hotels with best deals</div>
+        <div class="hotel-condition">
+          <div class="hotel-display-price">
+            <mat-form-field>
+              <mat-label>Display Price</mat-label>
+              <mat-select [(value)]="selectedPriceDisplay">
+                <mat-option value="Night">Per Room Per Night</mat-option>
+                <mat-option value="All">Total Price</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="hotel-sort-by">
+            <mat-form-field>
+              <mat-label>Sort By</mat-label>
+              <mat-select [(value)]="selectedSortBy">
+                <mat-option value="Recommended">Recommended</mat-option>
+                <mat-option value="High Price">High Price</mat-option>
+                <mat-option value="Low Price">Low Price</mat-option>
+                <mat-option value="High Rating">High Rating</mat-option>
+                <mat-option value="Low Rating">Low Rating</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+
+      <div class="hotel-data" *ngFor="let hotel of hotelData |
+          searchHotel: [
+            searchHotel,
+            checkboxStar[0],checkboxStar[1],checkboxStar[2],checkboxStar[3],checkboxStar[4],
+            value, highValue,
+            chekboxFacility[0], chekboxFacility[1], chekboxFacility[2], chekboxFacility[3],
+            chekboxFacility[4], chekboxFacility[5], chekboxFacility[6], chekboxFacility[7],
+            lastValue
+          ]">
+
+        <div class="hotel-data-content">
+
+          <div class="hotel-data-content-top">
+            <div class="hotel-data-image">
+              <img src="assets/hotels/{{hotel.photo[0].source}}" alt="">
+            </div>
+
+            <div class="hotel-data-core">
+              <div class="hotel-data-title">{{hotel.name}}</div>
+              <div>
+                <app-star-bar [widthRating]="hotel.rating/5 * 100"></app-star-bar>
+              </div>
+              <div class="hotel-data-address">
+                <img src="assets/hotels/location.jpg" alt="">
+                {{hotel.address}} &mdash; &nbsp;
+                <div>SHOW ON MAP</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hotel-data-content-bottom">
+
+            <div class="hotel-data-facility-container">
+              <div class="hotel-data-facility" *ngFor="let facility of hotel.facility | slice: 0: 4">
+                <img src="/assets/hotels/facility/{{facility.photo}}" alt="">
+              </div>
+
+              <div *ngIf="hotel.facility.length == 5" class="hotel-data-facility">
+                <img src="/assets/hotels/facility/{{facility[5].photo}}" alt="">
+              </div>
+
+              <div *ngIf="hotel.facility.length > 5" class="hotel-data-facility">
+                <div class="hotel-facility-left">+{{hotel.facility.length - 4}}</div>
+              </div>
+            </div>
+
+            <div class="hotel-data-price">
+              <p>{{hotel.price | currency:'IDR'}}</p>  / room / night
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="hotel-map">
+    <img src="assets/hotels/map-icon.png" alt="">
+    MAP
+  </div>
+
+  <div class="hotel-whatsapp">
+    <img src="assets/hotels/whatsapp.png" alt="">
+     WHATSAPP
+  </div>
+
+</div>
+
+

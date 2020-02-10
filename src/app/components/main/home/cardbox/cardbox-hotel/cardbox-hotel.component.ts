@@ -9,7 +9,7 @@ import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
 import {MatDatepickerInputEvent} from '@angular/material';
 import {Observable, Subscription} from 'rxjs';
-import {LocationService} from '../../../../../services/location.service';
+import {LocationsService} from '../../../../../services/locations.service';
 import {map, startWith} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
@@ -42,7 +42,7 @@ export const MY_FORMATS = {
 })
 export class CardboxHotelComponent implements OnInit {
 
-  constructor(private locationService: LocationService,
+  constructor(private locationService: LocationsService,
               private router: Router) {
 
     this.totalRoom = this.totalGuess = 0;
@@ -154,7 +154,7 @@ export class CardboxHotelComponent implements OnInit {
         startDate: this.start,
         endDate: this.end,
         room: this.totalRoom,
-        guess: this.totalGuess
+        guest: this.totalGuess
       }
     });
   }

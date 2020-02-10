@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {RecHotelService} from '../../../../services/rec-hotel.service';
+import {HotelService} from '../../../../services/hotel.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -15,7 +15,7 @@ export class RecHotelComponent implements OnInit {
   ratingWidth: number;
 
   constructor(private http: HttpClient,
-              private recHotelService: RecHotelService) {
+              private recHotelService: HotelService) {
 
     navigator.geolocation.getCurrentPosition((succ) => {
 

@@ -1,13 +1,14 @@
 import {Component, ElementRef, Inject, OnInit} from '@angular/core';
-import {RegisterService} from '../../services/register.service';
+import {PhonecodeService} from '../../services/phonecode.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 
 import featureLoginRegister from '../../models/login-register';
 import {emailData, firstNameData, lastNameData, phoneData, passwordData} from './register';
 import {Validator} from '../../helpers/validator';
-import {HttpClient} from '@angular/common/http';
-import {LoginService} from '../../services/login.service';
+import {UserService} from '../../services/user.service';
 import {SessionService} from '../../services/session.service';
 
 declare const gapi: any;
@@ -61,8 +62,9 @@ export class RegisterComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) private dataFromLogin,
               private dialogRef: MatDialogRef<RegisterComponent>,
               private sessionService: SessionService,
-              private registerService: RegisterService,
-              private loginService: LoginService,
+              private phonecodeService: PhonecodeService,
+              private userService: UserService,
+              private router: Router,
               private http: HttpClient,
               private element: ElementRef) {
     this.featureLoginRegister = featureLoginRegister;
@@ -88,7 +90,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.phoneCode$ = this.registerService.getPhoneCode().subscribe(async query => {
+    this.phoneCode$ = this.phonecodeService.getPhoneCode().subscribe(async query => {
       await this.afterFetchData(query);
     });
 
@@ -211,12 +213,12 @@ export class RegisterComponent implements OnInit {
       this.checkValidity(this.phoneCode) &&
       this.checkValidity(this.phone) &&
       this.checkValidity(this.password)) {
-      this.userRegister$ = this.registerService
-        .insertUser(this.email, this.firstName, this.lastName, this.phoneCode, this.phone, this.password)
+      this.userRegister$ = this.userService
+        .insertUser(this.email, this.firstName, this.lastName, this.phoneCode, this.phone, this.password, '')
         .subscribe(async value => {
           await this.getNewUser(value);
         });
-      this.setError('Register Success !');
+      this.router.navigateByUrl('');
       return;
     }
   }
@@ -230,11 +232,15 @@ export class RegisterComponent implements OnInit {
       const firstName = name.substring(0, name.indexOf(' '));
       const lastName = name.substring(name.indexOf(' ') + 1);
 
-      this.userRegister$ = this.registerService
-        .insertUser(email, firstName, lastName, '+62', '', '')
+      console.log('>>' + image);
+
+      this.userRegister$ = this.userService
+        .insertUser(email, firstName, lastName, '+62', '', '', image)
         .subscribe(async value => {
           this.userLoginData = value.data.InsertNewUser;
         });
+
+      this.router.navigateByUrl('');
 
     } else {
 
@@ -254,10 +260,11 @@ export class RegisterComponent implements OnInit {
 
         const idGoogle = profile.getId();
         const nameGoogle = profile.getName();
-        const imageGoogle = profile.getName();
+        const imageGoogle = profile.getImageUrl();
+        console.log(imageGoogle);
         const emailGoogle = profile.getEmail();
 
-        this.userLogin$ = this.loginService.getUser(emailGoogle).subscribe(async query => {
+        this.userLogin$ = this.userService.getUser(emailGoogle).subscribe(async query => {
           await this.handleAPIUser(query, idGoogle, nameGoogle, imageGoogle, emailGoogle);
         });
 
@@ -277,11 +284,10 @@ export class RegisterComponent implements OnInit {
           (userData) => {
             const idFacebook = userData.id;
             const nameFacebook = userData.name;
-            const imageFacebook = userData.picture;
             const emailFacebook = userData.email;
 
-            this.userLogin$ = this.loginService.getUser(emailFacebook).subscribe(async query => {
-              await this.handleAPIUser(query, idFacebook, nameFacebook, imageFacebook, emailFacebook);
+            this.userLogin$ = this.userService.getUser(emailFacebook).subscribe(async query => {
+              await this.handleAPIUser(query, idFacebook, nameFacebook, '', emailFacebook);
             });
           }
         );
