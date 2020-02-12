@@ -138,6 +138,15 @@
             margin: 10px 0;
           }
         }
+
+        .hotel-filter-area {
+          font-size: 18px;
+
+          .hotel-filter-area-content {
+            margin: 10px 0;
+          }
+        }
+
       }
     }
 
@@ -184,7 +193,7 @@
           border-radius: 10px;
           width: 100%;
 
-          .hotel-data-content-top{
+          .hotel-data-content-top {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -269,6 +278,21 @@
           }
         }
       }
+
+      .hotel-no-data {
+
+        position: relative;
+
+        img {
+          width: 100%;
+        }
+        div {
+          position: absolute;
+          font-size: 40px;
+          top: 65%;
+          right: 40%;
+        }
+      }
     }
   }
 }
@@ -288,7 +312,7 @@
   background-color: cornflowerblue;
   border-radius: 10px;
 
-  img{
+  img {
     width: 40px;
   }
 }
@@ -308,7 +332,7 @@
   background-color: lightgreen;
   border-radius: 10px;
 
-  img{
+  img {
     width: 40px;
   }
 }
@@ -318,7 +342,7 @@
   background-color: darkgoldenrod !important;
 }
 
-::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: darkgoldenrod;
 }
 
@@ -327,6 +351,7 @@
     .ng5-slider-pointer {
       display: none !important;
     }
+
     .ng5-slider-selection {
       background: #9b870c !important;
     }

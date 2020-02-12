@@ -13,9 +13,9 @@ export const getRecommendedHotel = gql`
     }
 `;
 
-export const getHotelByCity = gql `
-    query hotelByLocation($cityData: String!){
-        GetHotelByLocation(city: $cityData) {
+export const getHotelByProvince = gql `
+    query hotelByLocation($provinceData: String!) {
+        GetHotelByLocation(province: $provinceData) {
             id
             photo {
                 hotelid

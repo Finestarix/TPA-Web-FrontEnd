@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {getHotelByCity, getRecommendedHotel} from './queries/hotelQuery';
-import {getPhoneCode} from './queries/phonecodeQuery';
+import {getHotelByProvince, getRecommendedHotel} from './queries/hotelQuery';
 import {Apollo} from 'apollo-angular';
 
 @Injectable({
@@ -26,14 +25,14 @@ export class HotelService {
     });
   }
 
-  getHotelByCity(city: string): Observable<any> {
+  getHotelByCity(province: string): Observable<any> {
 
-    const convertedCity = String(city);
+    const convertedProvince = String(province);
 
     return this.apollo.query<any>({
-      query: getHotelByCity,
+      query: getHotelByProvince,
       variables: {
-        cityData: convertedCity,
+        provinceData: convertedProvince,
       }
     });
   }

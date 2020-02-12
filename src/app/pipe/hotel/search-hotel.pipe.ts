@@ -71,6 +71,7 @@ export class SearchHotelPipe implements PipeTransform {
     if (!this.checkEmpty(this.checkFilter)) {
       this.checkFilter[0] = this.checkFilter[0].toLowerCase();
       this.hotel = this.hotel.filter(h => {
+        // @ts-ignore
         return h.name.toLowerCase().includes(this.checkFilter[0]);
       });
     }
@@ -78,6 +79,7 @@ export class SearchHotelPipe implements PipeTransform {
 
   filterPrice(): void {
     this.hotel = this.hotel.filter(h => {
+      // @ts-ignore
       return h.price > this.checkFilter[6] && h.price < this.checkFilter[7];
     });
   }
@@ -102,27 +104,35 @@ export class SearchHotelPipe implements PipeTransform {
 
   filterFacility(): void {
     if (this.checkFilter[8]) {
+      // @ts-ignore
       this.hotel6 = this.hotel.filter(h => (h.facility.filter(this.is24HourFrontDesk).length !== 0) ? h : null);
     }
     if (this.checkFilter[9]) {
+      // @ts-ignore
       this.hotel7 = this.hotel.filter(h => (h.facility.filter(this.isAC).length !== 0) ? h : null);
     }
     if (this.checkFilter[10]) {
+      // @ts-ignore
       this.hotel8 = this.hotel.filter(h => (h.facility.filter(this.isElevator).length !== 0) ? h : null);
     }
     if (this.checkFilter[11]) {
+      // @ts-ignore
       this.hotel9 = this.hotel.filter(h => (h.facility.filter(this.isParking).length !== 0) ? h : null);
     }
     if (this.checkFilter[12]) {
+      // @ts-ignore
       this.hotel10 = this.hotel.filter(h => (h.facility.filter(this.isRestaurant).length !== 0) ? h : null);
     }
     if (this.checkFilter[13]) {
+      // @ts-ignore
       this.hotel11 = this.hotel.filter(h => (h.facility.filter(this.isSPA).length !== 0) ? h : null);
     }
     if (this.checkFilter[14]) {
+      // @ts-ignore
       this.hotel12 = this.hotel.filter(h => (h.facility.filter(this.isSwimmingPool).length !== 0) ? h : null);
     }
     if (this.checkFilter[15]) {
+      // @ts-ignore
       this.hotel13 = this.hotel.filter(h => (h.facility.filter(this.isWiFi).length !== 0) ? h : null);
     }
   }
@@ -134,6 +144,7 @@ export class SearchHotelPipe implements PipeTransform {
       ...this.hotel11, ...this.hotel12, ...this.hotel13
     ];
 
+    // @ts-ignore
     filteredHotel = filteredHotel.filter(fH => fH.length !== 0);
     filteredHotel = this.uniqueValue(filteredHotel, 'name');
 

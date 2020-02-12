@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {Observable} from 'rxjs';
-import {getLocation} from './queries/locationQuery';
+import {getLocation, getLocationProvince} from './queries/locationQuery';
 
 @Injectable({
   providedIn: 'root'
@@ -15,5 +15,18 @@ export class LocationsService {
     return this.apollo.query<any>({
       query: getLocation,
     });
+  }
+
+  getLocationWithProvince(province: string): Observable<any> {
+
+    const convertedProvince = String(province);
+
+    return this.apollo.query<any>({
+      query: getLocationProvince,
+      variables: {
+        provinceData: convertedProvince,
+      }
+    });
+
   }
 }

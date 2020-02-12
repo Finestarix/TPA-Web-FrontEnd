@@ -85,12 +85,16 @@ export class CardboxHotelComponent implements OnInit {
     return this.location.filter(option => option.toLowerCase().includes(filterValue));
   }
 
+  onlyUnique = (value, index, self) => self.indexOf(value) === index;
+
   afterFetchData(query) {
     const temp = query.data.AllLocation;
 
     for (let i = 0; i < temp.length; i++) {
-      this.location.push(temp[i].city);
+      this.location.push(temp[i].province);
     }
+
+    this.location = this.location.filter(this.onlyUnique)
 
     this.filteredLocation = this.selectedLocation.valueChanges
       .pipe(

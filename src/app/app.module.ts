@@ -54,7 +54,9 @@ import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-
 
 import {icon, Marker} from 'leaflet';
 
-import {SearchHotelPipe} from './pipe/search-hotel.pipe';
+import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
+import {SearchHotelAreaPipe} from './pipe/hotel/search-hotel-area.pipe';
+import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -104,7 +106,9 @@ Marker.prototype.options.icon = iconDefault;
     FlightClassComponent,
     HotelRoomComponent,
     SearchHotelComponent,
-    SearchHotelPipe
+    SearchHotelPipe,
+    SearchHotelAreaPipe,
+    SortHotelPipe
   ],
   entryComponents: [
     LoginComponent,

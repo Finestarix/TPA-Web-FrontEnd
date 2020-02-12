@@ -75,6 +75,17 @@
           </div>
         </div>
 
+        <hr class="separator">
+
+        <div class="hotel-filter-area">
+          Area
+          <div class="hotel-filter-area-content" *ngFor="let area of hotelArea; let i = index">
+            <mat-checkbox [(ngModel)]="chekboxArea[i]" (change)="detectChange()" >
+              {{area.city}}
+            </mat-checkbox>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -116,7 +127,9 @@
             chekboxFacility[0], chekboxFacility[1], chekboxFacility[2], chekboxFacility[3],
             chekboxFacility[4], chekboxFacility[5], chekboxFacility[6], chekboxFacility[7],
             lastValue
-          ]">
+          ] |
+          searchHotelArea: [chekboxArea, hotelArea, lastValue] |
+          sortHotel: selectedSortBy">
 
         <div class="hotel-data-content">
 
@@ -155,13 +168,26 @@
             </div>
 
             <div class="hotel-data-price">
-              <p>{{hotel.price | currency:'IDR'}}</p>  / room / night
+              <div *ngIf="selectedPriceDisplay === 'Night'">
+                <p>{{hotel.price | currency:'IDR'}}</p>  / room / night
+              </div>
+              <ng-template>
+                <div *ngIf="selectedPriceDisplay === 'Night'">
+                  <p>{{hotel.price * this.dateDiff | currency:'IDR'}}</p>
+                </div>
+              </ng-template>
             </div>
           </div>
 
         </div>
 
       </div>
+
+      <div class="hotel-no-data" *ngIf="hotelData.length === 0">
+        <img src="assets/hotels/no-hotel.svg" alt="">
+        <div>No Hotel Found</div>
+      </div>
+
 
     </div>
 

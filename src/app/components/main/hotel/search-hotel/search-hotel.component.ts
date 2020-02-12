@@ -5,6 +5,8 @@ import {HotelService} from '../../../../services/hotel.service';
 import {Subscription} from 'rxjs';
 import {LabelType, Options} from 'ng5-slider';
 import * as moment from 'moment';
+import {LocationsService} from '../../../../services/locations.service';
+import {type} from 'os';
 
 @Component({
   selector: 'app-search-hotel',
@@ -15,7 +17,8 @@ export class SearchHotelComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
-              private hotelService: HotelService) {
+              private hotelService: HotelService,
+              private locationService: LocationsService) {
     this.activatedRoute.queryParams.subscribe(async params => {
       await this.getAllParameterData(params);
     });
@@ -26,13 +29,16 @@ export class SearchHotelComponent implements OnInit {
   }
 
   checkboxStar: boolean[] = [false, false, false, false, false];
+  chekboxArea: boolean[] = [];
   chekboxFacility: boolean[] = [false, false, false, false, false, false, false, false];
   hotelFacility: string[] = ['24 Hour-Frontdesk', 'AC', 'Elevator', 'Parking', 'Restaurant', 'SPA', 'Swimming Pool', 'WiFi'];
 
   searchHotel: string;
 
   hotelData$: Subscription;
+  hotelArea$: Subscription;
   hotelData: object[] = [];
+  hotelArea: object[] = [];
   hotelTotalRating: number[] = [0, 0, 0, 0, 0];
 
   selectedPriceDisplay: string;
@@ -56,10 +62,11 @@ export class SearchHotelComponent implements OnInit {
   };
 
   destination: string;
-  startDate: Moment;
-  endDate: Moment;
+  startDate: Date;
+  endDate: Date;
   room: number;
   guest: number;
+  dateDiff: number;
 
   lastValue: number;
 
@@ -75,13 +82,20 @@ export class SearchHotelComponent implements OnInit {
     }
 
     this.destination = params.destination;
-    this.startDate = params.startDate;
-    this.endDate = params.endDate;
+    this.startDate = new Date(params.startDate);
+    this.endDate = new Date(params.endDate);
     this.room = params.room;
     this.guest = params.guest;
 
+    this.dateDiff = this.endDate.getDate() - this.startDate.getDate();
+    // console.log();
+
     this.hotelData$ = this.hotelService.getHotelByCity(this.destination).subscribe(async query => {
       await this.getHotelData(query);
+    });
+
+    this.hotelArea$ = this.locationService.getLocationWithProvince(this.destination).subscribe(async query => {
+      await this.getHotelArea(query);
     });
   }
 
@@ -111,6 +125,15 @@ export class SearchHotelComponent implements OnInit {
     this.increaseTotalRating();
   }
 
+  getHotelArea(query) {
+    this.hotelArea = query.data.GetCityByProvince;
+
+    for (let i = 0 ; i < this.hotelArea.length ; i++) {
+      this.chekboxArea[i] = false;
+    }
+
+  }
+
   goToSearchHotel() {
     this.router.navigateByUrl('Hotel');
   }
@@ -125,11 +148,12 @@ export class SearchHotelComponent implements OnInit {
   }
 
   detectChange() {
-    if (this.checkboxStar.includes(true) || this.chekboxFacility.includes(true) ||
+    if (this.checkboxStar.includes(true) || this.chekboxFacility.includes(true) || this.chekboxArea.includes(true) ||
       this.value !== 0 || this.highValue !== 5000000 || this.searchHotel !== '') {
       this.lastValue = 1;
     } else {
       this.lastValue = 0;
     }
   }
+
 }
