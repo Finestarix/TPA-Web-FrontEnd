@@ -1,1 +1,120 @@
-<div class="map" id="map" style="width: 100%; height: 100%;"></div>
+<div class="map-container">
+
+  <div class="hotel-top-container">
+
+    <div class="hotel-result-search">
+      <img class="hotel-result-icon" src="assets/hotels/hotel-icon.png" alt="Icon">
+      <div class="hotel-result-content">
+        <div>
+          {{destination}}
+        </div>
+        <div>
+          {{startDate | date: 'EEE, dd MMM yyyy'}} - {{endDate | date: 'EEE, dd MMM yyyy'}} &bull; {{room}} Room &bull; {{guest}} Guest
+        </div>
+      </div>
+    </div>
+
+    <div (click)="goToSearchHotel()" class="hotel-search">
+      Change Search
+    </div>
+
+    <div class="hotel-back" (click)="goToListHotel()">
+      Back
+    </div>
+
+  </div>
+
+  <div class="hotel-map-content">
+
+    <div class="hotel-filter">
+
+      <div class="hotel-filter-top">
+        <div>
+          Filter
+        </div>
+        <div class="hotel-filter-reset" (click)="resetAll()">
+          RESET
+        </div>
+      </div>
+
+      <div class="hotel-filter-content">
+
+        <div class="hotel-search">
+          Search
+          <div class="hotel-search-content">
+            <input [(ngModel)]="searchHotel" (keyup)="detectChange()" type="text">
+            <img src="assets/core/search.png" alt="">
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="hotel-filter-star">
+          Hotel Star
+
+          <div class="hide-hotel-filter-star" (click)="changeHideStar()">
+            {{hideStar}}
+          </div>
+
+          <div [ngStyle]="{'display': (hideStar === 'Show') ? 'block': 'none'}" class="hotel-filter-star-content" *ngFor="let rating of hotelTotalRating; let i = index;">
+            <mat-checkbox [(ngModel)]="checkboxStar[i]" (change)="detectChange()">
+              <div>
+                <app-star-bar [widthRating]="20 * (i + 1)"></app-star-bar>
+                <div>{{rating}} properties</div>
+              </div>
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="hotel-filter-price">
+          Price Range per Night
+          <ng5-slider class="hotel-filter-price-slider" (valueChange)="detectChange()" (highValueChange)="detectChange()"
+                      [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+        </div>
+
+        <hr class="separator">
+
+        <div class="hotel-filter-facility">
+          Facilities
+
+          <div class="hide-hotel-filter-facility" (click)="changeHideFacility()">
+            {{hideFacility}}
+          </div>
+
+          <div [ngStyle]="{'display': (hideFacility === 'Show') ? 'block': 'none'}" class="hotel-filter-facility-content" *ngFor="let facility of hotelFacility; let i = index">
+            <mat-checkbox [(ngModel)]="chekboxFacility[i]" (change)="detectChange()">
+              {{facility}}
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="hotel-filter-area">
+          Area
+
+          <div class="hide-hotel-filter-area" (click)="changeHideArea()">
+            {{hideArea}}
+          </div>
+
+          <div [ngStyle]="{'display': (hideArea === 'Show') ? 'block': 'none'}" class="hotel-filter-area-content" *ngFor="let area of hotelArea; let i = index">
+            <mat-checkbox [(ngModel)]="chekboxArea[i]" (change)="detectChange()" >
+              {{area.city}}
+            </mat-checkbox>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="map" id="map"></div>
+
+    <div class="hotel-data">
+
+    </div>
+
+  </div>
+
+</div>

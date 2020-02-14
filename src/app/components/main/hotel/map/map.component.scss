@@ -1,5 +1,226 @@
 .map-container {
-  //display: flex;
-  //justify-content: inherit;
-  //margin-top: 20px;
+
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+
+  background-color: white;
+
+  .hotel-top-container {
+
+    background-color: white;
+    padding: 12px;
+
+    .hotel-result-search {
+
+      float: left;
+      vertical-align: center;
+
+      .hotel-result-icon {
+        float: left;
+        transform: translateY(10%);
+
+        width: 40px;
+        height: 40px;
+
+        padding: 0 15px 0 0;
+      }
+
+      .hotel-result-content {
+        float: right;
+        font-size: 20px;
+      }
+
+    }
+
+    .hotel-search, .hotel-back {
+      color: orange;
+      border: 1px solid orange;
+      border-radius: 10px;
+      padding: 10px;
+      margin-left: 20px;
+
+      cursor: pointer;
+      float: left;
+    }
+
+  }
+
+  .hotel-map-content {
+
+    .hotel-filter {
+
+      overflow: scroll;
+      overflow-x: hidden;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+        width: 0px;
+        background: transparent;
+      }
+
+      position: absolute;
+      top: 80px;
+      left: 10px;
+
+      z-index: 100;
+      background-color: white;
+
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      height: 80%;
+
+      width: 20%;
+
+      .hotel-filter-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .hotel-filter-reset {
+          color: #0264D3;
+          cursor: pointer;
+        }
+      }
+
+      .hotel-filter-content {
+
+        padding: 20px;
+        margin-top: 20px;
+
+        border: 1px solid #c6cbda;
+        border-radius: 10px;
+
+        .separator {
+          margin: 20px 0 !important;
+          border: 1px dashed grey;
+        }
+
+        .hotel-search {
+
+          font-size: 18px;
+
+          .hotel-search-content {
+
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+
+            border: 1px solid dimgray;
+            border-radius: 10px;
+
+            input[type=text] {
+              font-size: 18px;
+              margin-left: 10px;
+              width: 170px;
+              outline: none;
+              border: none;
+            }
+
+            img {
+              width: 30px;
+            }
+          }
+
+        }
+
+        .hotel-filter-star {
+
+          position: relative;
+
+          margin: 15px 0;
+          font-size: 18px;
+
+          .hide-hotel-filter-star {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            color: orange;
+            border: 1px solid orange;
+            border-radius: 10px;
+
+            padding: 0 7px;
+            cursor: pointer;
+          }
+
+          .hotel-filter-star-content {
+            margin: 10px 0;
+
+            font-size: 14px;
+          }
+
+        }
+
+        .hotel-filter-price {
+          margin-top: 10px;
+          font-size: 18px;
+
+          .hotel-filter-price-slider {
+            margin-top: 40px;
+          }
+        }
+
+        .hotel-filter-facility {
+          font-size: 18px;
+          position: relative;
+
+          .hide-hotel-filter-facility {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            color: orange;
+            border: 1px solid orange;
+            border-radius: 10px;
+
+            padding: 0 7px;
+            cursor: pointer;
+          }
+
+          .hotel-filter-facility-content {
+            margin: 10px 0;
+          }
+        }
+
+        .hotel-filter-area {
+          font-size: 18px;
+          position: relative;
+
+          .hide-hotel-filter-area {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            color: orange;
+            border: 1px solid orange;
+            border-radius: 10px;
+
+            padding: 0 7px;
+            cursor: pointer;
+          }
+
+          .hotel-filter-area-content {
+            margin: 10px 0;
+          }
+        }
+
+      }
+    }
+
+    .map {
+      position: fixed;
+      top: 60px;
+
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+
+
 }

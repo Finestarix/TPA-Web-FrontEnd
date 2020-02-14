@@ -61,7 +61,7 @@ export class SortHotelPipe implements PipeTransform {
     return sortHotel;
   }
 
-  transform(hotel: any[], sortBy: string): any[] {
+  transform(hotel: object[], sortBy: string): any[] {
 
     if (sortBy === 'Recommended') {
       return hotel;

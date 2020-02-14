@@ -111,8 +111,23 @@
 
         .hotel-filter-star {
 
+          position: relative;
+
           margin: 15px 0;
           font-size: 18px;
+
+          .hide-hotel-filter-star {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            color: orange;
+            border: 1px solid orange;
+            border-radius: 10px;
+
+            padding: 0 7px;
+            cursor: pointer;
+          }
 
           .hotel-filter-star-content {
             margin: 10px 0;
@@ -133,6 +148,20 @@
 
         .hotel-filter-facility {
           font-size: 18px;
+          position: relative;
+
+          .hide-hotel-filter-facility {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            color: orange;
+            border: 1px solid orange;
+            border-radius: 10px;
+
+            padding: 0 7px;
+            cursor: pointer;
+          }
 
           .hotel-filter-facility-content {
             margin: 10px 0;
@@ -141,6 +170,20 @@
 
         .hotel-filter-area {
           font-size: 18px;
+          position: relative;
+
+          .hide-hotel-filter-area {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            color: orange;
+            border: 1px solid orange;
+            border-radius: 10px;
+
+            padding: 0 7px;
+            cursor: pointer;
+          }
 
           .hotel-filter-area-content {
             margin: 10px 0;
@@ -303,6 +346,7 @@
   right: 0;
 
   padding: 10px;
+  cursor: pointer;
 
   display: flex;
   flex-direction: column;
@@ -323,6 +367,7 @@
   right: 0;
 
   padding: 5px;
+  cursor: pointer;
 
   display: flex;
   flex-direction: column;
@@ -334,6 +379,30 @@
 
   img {
     width: 40px;
+  }
+}
+
+.hideData {
+  display: none;
+}
+
+.hotel-button-readmore {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  span {
+    padding: 5px 10px;
+
+    color: orange;
+    font-size: 16px;
+
+    border: 1px solid orange;
+    border-radius: 10px;
   }
 }
 

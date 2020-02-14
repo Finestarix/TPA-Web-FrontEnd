@@ -26,6 +26,11 @@ export class SearchHotelComponent implements OnInit {
     this.selectedPriceDisplay = 'Night';
     this.selectedSortBy = 'Recommended';
     this.searchHotel = '';
+    this.isReadMore = false;
+
+    this.hideStar = 'Hide';
+    this.hideFacility = 'Hide';
+    this.hideArea = 'Hide';
   }
 
   checkboxStar: boolean[] = [false, false, false, false, false];
@@ -34,6 +39,10 @@ export class SearchHotelComponent implements OnInit {
   hotelFacility: string[] = ['24 Hour-Frontdesk', 'AC', 'Elevator', 'Parking', 'Restaurant', 'SPA', 'Swimming Pool', 'WiFi'];
 
   searchHotel: string;
+
+  hideStar: string;
+  hideFacility: string;
+  hideArea: string;
 
   hotelData$: Subscription;
   hotelArea$: Subscription;
@@ -69,6 +78,7 @@ export class SearchHotelComponent implements OnInit {
   dateDiff: number;
 
   lastValue: number;
+  isReadMore: boolean;
 
   ngOnInit() {
     this.lastValue = 0;
@@ -88,7 +98,6 @@ export class SearchHotelComponent implements OnInit {
     this.guest = params.guest;
 
     this.dateDiff = this.endDate.getDate() - this.startDate.getDate();
-    // console.log();
 
     this.hotelData$ = this.hotelService.getHotelByCity(this.destination).subscribe(async query => {
       await this.getHotelData(query);
@@ -148,12 +157,45 @@ export class SearchHotelComponent implements OnInit {
   }
 
   detectChange() {
+
     if (this.checkboxStar.includes(true) || this.chekboxFacility.includes(true) || this.chekboxArea.includes(true) ||
       this.value !== 0 || this.highValue !== 5000000 || this.searchHotel !== '') {
       this.lastValue = 1;
     } else {
       this.lastValue = 0;
     }
+    console.log(this.lastValue);
   }
 
+  openWhatsapp() {
+    window.open('https://api.whatsapp.com/send?phone=62895384152587');
+  }
+
+  openMap() {
+    this.router.navigate(['/Hotel/Map'], {
+      queryParams: {
+        destination: this.destination,
+        startDate: moment(this.startDate).format('MM-DD-YYYY'),
+        endDate: moment(this.endDate).format('MM-DD-YYYY'),
+        room: this.room,
+        guest: this.guest
+      }
+    });
+  }
+
+  changeReadMore() {
+    this.isReadMore = true;
+  }
+
+  changeHideStar() {
+    this.hideStar = (this.hideStar === 'Show') ? 'Hide' : 'Show';
+  }
+
+  changeHideFacility() {
+    this.hideFacility = (this.hideFacility === 'Show') ? 'Hide' : 'Show';
+  }
+
+  changeHideArea() {
+    this.hideArea = (this.hideArea === 'Show') ? 'Hide' : 'Show';
+  }
 }

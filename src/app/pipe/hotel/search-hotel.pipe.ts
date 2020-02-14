@@ -2,31 +2,35 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {element} from 'protractor';
 
 @Pipe({
-  name: 'searchHotel'
+  name: 'searchHotel',
+  pure: true
 })
 export class SearchHotelPipe implements PipeTransform {
 
   private checkFilter: any;
   private hotel: object[] = [];
-  private hotel1: object[] = [];
-  private hotel2: object[] = [];
-  private hotel3: object[] = [];
-  private hotel4: object[] = [];
-  private hotel5: object[] = [];
-  private hotel6: object[] = [];
-  private hotel7: object[] = [];
-  private hotel8: object[] = [];
-  private hotel9: object[] = [];
-  private hotel10: object[] = [];
-  private hotel11: object[] = [];
-  private hotel12: object[] = [];
-  private hotel13: object[] = [];
+  private rating1: object[] = [];
+  private rating2: object[] = [];
+  private rating3: object[] = [];
+  private rating4: object[] = [];
+  private rating5: object[] = [];
+  private facility1: object[] = [];
+  private facility2: object[] = [];
+  private facility3: object[] = [];
+  private facility4: object[] = [];
+  private facility5: object[] = [];
+  private facility6: object[] = [];
+  private facility7: object[] = [];
+  private facility8: object[] = [];
 
   checkEmpty = (searchText: string) => searchText === '';
   allEmpty = () => !this.checkFilter[1] && !this.checkFilter[2] && !this.checkFilter[3] && !this.checkFilter[4] && !this.checkFilter[5] &&
     !this.checkFilter[8] && !this.checkFilter[9] && !this.checkFilter[10] && !this.checkFilter[11] && !this.checkFilter[12] &&
+    !this.checkFilter[13] && !this.checkFilter[14] && !this.checkFilter[15] && !this.checkFilter[16].includes(true);
+  ratingEmpty = () => !this.checkFilter[1] && !this.checkFilter[2] && !this.checkFilter[3] && !this.checkFilter[4] && !this.checkFilter[5];
+  facilityEmpty = () => !this.checkFilter[8] && !this.checkFilter[9] && !this.checkFilter[10] && !this.checkFilter[11] && !this.checkFilter[12] &&
     !this.checkFilter[13] && !this.checkFilter[14] && !this.checkFilter[15];
-  nothingChange = () => this.checkFilter[16] === 0;
+  nothingChange = () => this.checkFilter[18] === 0;
   isStarOne = (currElement, index, array) => Math.ceil(currElement.rating) === 1;
   isStarTwo = (currElement, index, array) => Math.ceil(currElement.rating) === 2;
   isStarThree = (currElement, index, array) => Math.ceil(currElement.rating) === 3;
@@ -52,19 +56,19 @@ export class SearchHotelPipe implements PipeTransform {
   resetAll(): void {
     this.checkFilter = null;
     this.hotel = [];
-    this.hotel1 = [];
-    this.hotel2 = [];
-    this.hotel3 = [];
-    this.hotel4 = [];
-    this.hotel5 = [];
-    this.hotel6 = [];
-    this.hotel7 = [];
-    this.hotel8 = [];
-    this.hotel9 = [];
-    this.hotel10 = [];
-    this.hotel11 = [];
-    this.hotel12 = [];
-    this.hotel13 = [];
+    this.rating1 = [];
+    this.rating2 = [];
+    this.rating3 = [];
+    this.rating4 = [];
+    this.rating5 = [];
+    this.facility1 = [];
+    this.facility2 = [];
+    this.facility3 = [];
+    this.facility4 = [];
+    this.facility5 = [];
+    this.facility6 = [];
+    this.facility7 = [];
+    this.facility8 = [];
   }
 
   filterText(): void {
@@ -86,67 +90,109 @@ export class SearchHotelPipe implements PipeTransform {
 
   filterRating(): void {
     if (this.checkFilter[1]) {
-      this.hotel1 = this.hotel.filter(this.isStarOne);
+      this.rating1 = this.hotel.filter(this.isStarOne);
     }
     if (this.checkFilter[2]) {
-      this.hotel2 = this.hotel.filter(this.isStarTwo);
+      this.rating2 = this.hotel.filter(this.isStarTwo);
     }
     if (this.checkFilter[3]) {
-      this.hotel3 = this.hotel.filter(this.isStarThree);
+      this.rating3 = this.hotel.filter(this.isStarThree);
     }
     if (this.checkFilter[4]) {
-      this.hotel4 = this.hotel.filter(this.isStarFour);
+      this.rating4 = this.hotel.filter(this.isStarFour);
     }
     if (this.checkFilter[5]) {
-      this.hotel5 = this.hotel.filter(this.isStarFive);
+      this.rating5 = this.hotel.filter(this.isStarFive);
     }
   }
 
-  filterFacility(): void {
-    if (this.checkFilter[8]) {
-      // @ts-ignore
-      this.hotel6 = this.hotel.filter(h => (h.facility.filter(this.is24HourFrontDesk).length !== 0) ? h : null);
-    }
-    if (this.checkFilter[9]) {
-      // @ts-ignore
-      this.hotel7 = this.hotel.filter(h => (h.facility.filter(this.isAC).length !== 0) ? h : null);
-    }
-    if (this.checkFilter[10]) {
-      // @ts-ignore
-      this.hotel8 = this.hotel.filter(h => (h.facility.filter(this.isElevator).length !== 0) ? h : null);
-    }
-    if (this.checkFilter[11]) {
-      // @ts-ignore
-      this.hotel9 = this.hotel.filter(h => (h.facility.filter(this.isParking).length !== 0) ? h : null);
-    }
-    if (this.checkFilter[12]) {
-      // @ts-ignore
-      this.hotel10 = this.hotel.filter(h => (h.facility.filter(this.isRestaurant).length !== 0) ? h : null);
-    }
-    if (this.checkFilter[13]) {
-      // @ts-ignore
-      this.hotel11 = this.hotel.filter(h => (h.facility.filter(this.isSPA).length !== 0) ? h : null);
-    }
-    if (this.checkFilter[14]) {
-      // @ts-ignore
-      this.hotel12 = this.hotel.filter(h => (h.facility.filter(this.isSwimmingPool).length !== 0) ? h : null);
-    }
-    if (this.checkFilter[15]) {
-      // @ts-ignore
-      this.hotel13 = this.hotel.filter(h => (h.facility.filter(this.isWiFi).length !== 0) ? h : null);
-    }
-  }
+  combineAfterRating(): object[] {
 
-  filterResult(): object[] {
     let filteredHotel: object[] = [
-      ...this.hotel1, ...this.hotel2, ...this.hotel3, ...this.hotel4, ...this.hotel5,
-      ...this.hotel6, ...this.hotel7, ...this.hotel8, ...this.hotel9, ...this.hotel10,
-      ...this.hotel11, ...this.hotel12, ...this.hotel13
+      ...this.rating1, ...this.rating2, ...this.rating3, ...this.rating4, ...this.rating5,
     ];
 
     // @ts-ignore
     filteredHotel = filteredHotel.filter(fH => fH.length !== 0);
     filteredHotel = this.uniqueValue(filteredHotel, 'name');
+
+    return filteredHotel;
+  }
+
+  filterFacility(): void {
+    if (this.checkFilter[8]) {
+      // @ts-ignore
+      this.facility1 = this.hotel.filter(h => (h.facility.filter(this.is24HourFrontDesk).length !== 0) ? h : null);
+    }
+    if (this.checkFilter[9]) {
+      // @ts-ignore
+      this.facility2 = this.hotel.filter(h => (h.facility.filter(this.isAC).length !== 0) ? h : null);
+    }
+    if (this.checkFilter[10]) {
+      // @ts-ignore
+      this.facility3 = this.hotel.filter(h => (h.facility.filter(this.isElevator).length !== 0) ? h : null);
+    }
+    if (this.checkFilter[11]) {
+      // @ts-ignore
+      this.facility4 = this.hotel.filter(h => (h.facility.filter(this.isParking).length !== 0) ? h : null);
+    }
+    if (this.checkFilter[12]) {
+      // @ts-ignore
+      this.facility5 = this.hotel.filter(h => (h.facility.filter(this.isRestaurant).length !== 0) ? h : null);
+    }
+    if (this.checkFilter[13]) {
+      // @ts-ignore
+      this.facility6 = this.hotel.filter(h => (h.facility.filter(this.isSPA).length !== 0) ? h : null);
+    }
+    if (this.checkFilter[14]) {
+      // @ts-ignore
+      this.facility7 = this.hotel.filter(h => (h.facility.filter(this.isSwimmingPool).length !== 0) ? h : null);
+    }
+    if (this.checkFilter[15]) {
+      // @ts-ignore
+      this.facility8 = this.hotel.filter(h => (h.facility.filter(this.isWiFi).length !== 0) ? h : null);
+    }
+
+    console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+    console.table(this.facility1);
+    console.table(this.facility2);
+    console.table(this.facility3);
+    console.table(this.facility4);
+    console.table(this.facility5);
+    console.table(this.facility6);
+    console.table(this.facility7);
+    console.table(this.facility8);
+  }
+
+  combineAfterFacility(): object[] {
+    let filteredHotel: object[] = [
+      ...this.facility1, ...this.facility2, ...this.facility3,
+      ...this.facility4, ...this.facility5, ...this.facility6,
+      ...this.facility7, ...this.facility8
+    ];
+
+    // @ts-ignore
+    filteredHotel = filteredHotel.filter(fH => fH.length !== 0);
+    filteredHotel = this.uniqueValue(filteredHotel, 'name');
+
+    return filteredHotel;
+  }
+
+  filterArea(): object[] {
+    const filteredHotel: object[] = [];
+
+    for (let i = 0; i < this.checkFilter[16].length; i++) {
+
+      if (this.checkFilter[16][i] === true) {
+        for (const h of this.hotel) {
+          // @ts-ignore
+          if (h.location.city === this.checkFilter[17][i].city) {
+            filteredHotel.push(h);
+          }
+        }
+      }
+
+    }
 
     return filteredHotel;
   }
@@ -165,14 +211,35 @@ export class SearchHotelPipe implements PipeTransform {
     this.filterText();
     this.filterPrice();
 
+    console.log(this.checkFilter[16])
+    console.log(this.checkFilter[17])
+
     if (this.allEmpty()) {
       return this.hotel;
     }
+    console.log('A');
 
-    this.filterRating();
-    this.filterFacility();
+    // console.table(this.hotel);
+    if (!this.ratingEmpty()) {
+      this.filterRating();
+      this.hotel = this.combineAfterRating();
+    }
 
-    return this.filterResult();
+    if (!this.facilityEmpty()) {
+      this.filterFacility();
+      this.hotel = this.combineAfterFacility();
+    }
+
+    console.log('Before');
+    console.table(this.hotel);
+    if (checkFilter[16].includes(true)) {
+      this.hotel = this.filterArea();
+    }
+
+    console.log('After');
+    console.table(this.hotel);
+
+    return this.hotel;
   }
 
 }

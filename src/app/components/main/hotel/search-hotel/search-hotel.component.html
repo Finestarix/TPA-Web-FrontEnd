@@ -46,7 +46,12 @@
 
         <div class="hotel-filter-star">
           Hotel Star
-          <div class="hotel-filter-star-content" *ngFor="let rating of hotelTotalRating; let i = index;">
+
+          <div class="hide-hotel-filter-star" (click)="changeHideStar()">
+            {{hideStar}}
+          </div>
+
+          <div [ngStyle]="{'display': (hideStar === 'Show') ? 'block': 'none'}" class="hotel-filter-star-content" *ngFor="let rating of hotelTotalRating; let i = index;">
             <mat-checkbox [(ngModel)]="checkboxStar[i]" (change)="detectChange()">
               <div>
                 <app-star-bar [widthRating]="20 * (i + 1)"></app-star-bar>
@@ -68,7 +73,12 @@
 
         <div class="hotel-filter-facility">
           Facilities
-          <div class="hotel-filter-facility-content" *ngFor="let facility of hotelFacility; let i = index">
+
+          <div class="hide-hotel-filter-facility" (click)="changeHideFacility()">
+            {{hideFacility}}
+          </div>
+
+          <div [ngStyle]="{'display': (hideFacility === 'Show') ? 'block': 'none'}" class="hotel-filter-facility-content" *ngFor="let facility of hotelFacility; let i = index">
             <mat-checkbox [(ngModel)]="chekboxFacility[i]" (change)="detectChange()">
               {{facility}}
             </mat-checkbox>
@@ -79,7 +89,12 @@
 
         <div class="hotel-filter-area">
           Area
-          <div class="hotel-filter-area-content" *ngFor="let area of hotelArea; let i = index">
+
+          <div class="hide-hotel-filter-area" (click)="changeHideArea()">
+            {{hideArea}}
+          </div>
+
+          <div [ngStyle]="{'display': (hideArea === 'Show') ? 'block': 'none'}" class="hotel-filter-area-content" *ngFor="let area of hotelArea; let i = index">
             <mat-checkbox [(ngModel)]="chekboxArea[i]" (change)="detectChange()" >
               {{area.city}}
             </mat-checkbox>
@@ -120,18 +135,18 @@
       </div>
 
       <div class="hotel-data" *ngFor="let hotel of hotelData |
+          sortHotel: selectedSortBy |
           searchHotel: [
             searchHotel,
             checkboxStar[0],checkboxStar[1],checkboxStar[2],checkboxStar[3],checkboxStar[4],
             value, highValue,
             chekboxFacility[0], chekboxFacility[1], chekboxFacility[2], chekboxFacility[3],
             chekboxFacility[4], chekboxFacility[5], chekboxFacility[6], chekboxFacility[7],
+            chekboxArea, hotelArea,
             lastValue
-          ] |
-          searchHotelArea: [chekboxArea, hotelArea, lastValue] |
-          sortHotel: selectedSortBy">
+           ]">
 
-        <div class="hotel-data-content">
+        <div [ngClass]="{'hideData': isReadMore}" class="hotel-data-content">
 
           <div class="hotel-data-content-top">
             <div class="hotel-data-image">
@@ -145,7 +160,7 @@
               </div>
               <div class="hotel-data-address">
                 <img src="assets/hotels/location.jpg" alt="">
-                {{hotel.address}} &mdash; &nbsp;
+                {{hotel.location.city}}, {{hotel.location.province}} &mdash; &nbsp;
                 <div>SHOW ON MAP</div>
               </div>
             </div>
@@ -168,11 +183,11 @@
             </div>
 
             <div class="hotel-data-price">
-              <div *ngIf="selectedPriceDisplay === 'Night'">
+              <div *ngIf="selectedPriceDisplay === 'Night'; else totalPrice">
                 <p>{{hotel.price | currency:'IDR'}}</p>  / room / night
               </div>
-              <ng-template>
-                <div *ngIf="selectedPriceDisplay === 'Night'">
+              <ng-template #totalPrice>
+                <div>
                   <p>{{hotel.price * this.dateDiff | currency:'IDR'}}</p>
                 </div>
               </ng-template>
@@ -188,19 +203,18 @@
         <div>No Hotel Found</div>
       </div>
 
-
     </div>
 
   </div>
 
-  <div class="hotel-map">
+  <div class="hotel-map" (click)="openMap()">
     <img src="assets/hotels/map-icon.png" alt="">
     MAP
   </div>
 
-  <div class="hotel-whatsapp">
+  <div class="hotel-whatsapp" (click)="openWhatsapp()">
     <img src="assets/hotels/whatsapp.png" alt="">
-     WHATSAPP
+    WHATSAPP
   </div>
 
 </div>
