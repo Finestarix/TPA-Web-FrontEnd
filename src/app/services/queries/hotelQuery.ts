@@ -27,6 +27,8 @@ export const getHotelByProvince = gql `
             }
             name
             address
+            latitude
+            longitude
             rating
             price
             location {

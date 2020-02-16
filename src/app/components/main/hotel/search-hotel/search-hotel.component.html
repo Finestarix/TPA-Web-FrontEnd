@@ -146,7 +146,7 @@
             lastValue
            ]">
 
-        <div [ngClass]="{'hideData': isReadMore}" class="hotel-data-content">
+        <div class="hotel-data-content">
 
           <div class="hotel-data-content-top">
             <div class="hotel-data-image">
@@ -161,7 +161,7 @@
               <div class="hotel-data-address">
                 <img src="assets/hotels/location.jpg" alt="">
                 {{hotel.location.city}}, {{hotel.location.province}} &mdash; &nbsp;
-                <div>SHOW ON MAP</div>
+                <div (click)="openMap()">SHOW ON MAP</div>
               </div>
             </div>
           </div>

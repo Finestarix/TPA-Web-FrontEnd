@@ -26,7 +26,6 @@ export class SearchHotelComponent implements OnInit {
     this.selectedPriceDisplay = 'Night';
     this.selectedSortBy = 'Recommended';
     this.searchHotel = '';
-    this.isReadMore = false;
 
     this.hideStar = 'Hide';
     this.hideFacility = 'Hide';
@@ -78,7 +77,6 @@ export class SearchHotelComponent implements OnInit {
   dateDiff: number;
 
   lastValue: number;
-  isReadMore: boolean;
 
   ngOnInit() {
     this.lastValue = 0;
@@ -164,7 +162,6 @@ export class SearchHotelComponent implements OnInit {
     } else {
       this.lastValue = 0;
     }
-    console.log(this.lastValue);
   }
 
   openWhatsapp() {
@@ -181,10 +178,6 @@ export class SearchHotelComponent implements OnInit {
         guest: this.guest
       }
     });
-  }
-
-  changeReadMore() {
-    this.isReadMore = true;
   }
 
   changeHideStar() {
