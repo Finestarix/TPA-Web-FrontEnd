@@ -6,8 +6,7 @@ import {HotelService} from '../../../../services/hotel.service';
 import {LocationsService} from '../../../../services/locations.service';
 import * as moment from 'moment';
 import {LabelType, Options} from 'ng5-slider';
-import {SearchHotel} from "../../../../helpers/search-hotel";
-import {filter} from "rxjs/operators";
+import {SearchHotel} from '../../../../helpers/search-hotel';
 
 
 @Component({
@@ -21,16 +20,16 @@ export class MapComponent implements OnInit {
               private router: Router,
               private hotelService: HotelService,
               private locationService: LocationsService) {
-    this.activatedRoute.queryParams.subscribe(async params => {
-      await this.getAllParameterData(params);
-    });
-
     this.searchHotel = '';
+    this.currentPrice = 'Night';
 
     this.hideStar = 'Hide';
     this.hideFacility = 'Hide';
     this.hideArea = 'Hide';
+
   }
+
+  currentPrice: string;
 
   map: any;
   userLocation: any;
@@ -71,13 +70,14 @@ export class MapComponent implements OnInit {
   hotelArea: object[] = [];
   hotelTotalRating: number[] = [0, 0, 0, 0, 0];
 
-  currrentHotel: object;
+  currentHotel: object;
 
   destination: string;
   startDate: Date;
   endDate: Date;
   room: number;
   guest: number;
+  dateDiff: number;
 
   lastValue: number;
 
@@ -103,6 +103,9 @@ export class MapComponent implements OnInit {
     }, () => {
     });
 
+    this.activatedRoute.queryParams.subscribe(async params => {
+      await this.getAllParameterData(params);
+    });
   }
 
   getAllParameterData(params) {
@@ -117,6 +120,8 @@ export class MapComponent implements OnInit {
     this.endDate = new Date(params.endDate);
     this.room = params.room;
     this.guest = params.guest;
+
+    this.dateDiff = this.endDate.getDate() - this.startDate.getDate();
 
     this.hotelData$ = this.hotelService.getHotelByCity(this.destination).subscribe(async query => {
       await this.getHotelData(query);
@@ -154,16 +159,8 @@ export class MapComponent implements OnInit {
 
     for (const hotel of this.hotelData) {
       // @ts-ignore
-      this.marker[counter] = new L.marker([hotel.latitude, hotel.longitude]);
-      // @ts-ignore
-      this.marker[counter].bindTooltip(String(this.formatter.format(hotel.price)), {permanent: true});
-      this.marker[counter++].on('click', this.markerOnClick);
+      this.marker[counter++] = new L.marker([hotel.latitude, hotel.longitude]);
     }
-  }
-
-  markerOnClick(e) {
-    // alert('hi. you clicked the marker at ' + e.latlng);
-    console.log(this.marker);
   }
 
   getHotelData(query) {
@@ -203,31 +200,71 @@ export class MapComponent implements OnInit {
   }
 
   removeAllLayer(allMarker, filteredMarker) {
+
+    if (!this.map) {
+      return;
+    }
+
     for (const mark of allMarker) {
       this.map.removeLayer(mark);
     }
+
     for (const mark of filteredMarker) {
       this.map.removeLayer(mark);
     }
   }
 
   markAllLayer(allMarker) {
+
+    let counter = 0;
+
+    if (!this.map) {
+      return;
+    }
+
     for (const mark of allMarker) {
+
+      if (this.currentPrice === 'Night') {
+        // @ts-ignore
+        mark.bindTooltip(String(this.formatter.format(this.hotelData[counter++].price)), {permanent: true});
+      } else {
+        // @ts-ignore
+        mark.bindTooltip(String(this.formatter.format(this.hotelData[counter++].price * this.dateDiff)), {permanent: true});
+      }
+
+      mark.on('click', (e) => {
+        this.hotelService.getHotelByLatLong(e.latlng.lat, e.latlng.lng).subscribe(async query => {
+          await this.changeCurrentHotel(query);
+        });
+      });
       mark.addTo(this.map);
     }
   }
 
   markFilteredHotel(filteredHotel) {
+
+    if (!this.map) {
+      return;
+    }
+
     let counter = 0;
 
     for (const hotel of filteredHotel) {
       // @ts-ignore
       this.filteredMarker[counter] = new L.marker([hotel.latitude, hotel.longitude]);
       // @ts-ignore
-      this.filteredMarker[counter].bindTooltip(String(this.formatter.format(hotel.price)), {permanent: true});
-      this.filteredMarker[counter].on('click', this.markerOnClick);
+      this.filteredMarker[counter].bindTooltip(String(this.formatter.format(hotel.price * this.dateDiff)), {permanent: true});
+      this.filteredMarker[counter].on('click', (e) => {
+        this.hotelService.getHotelByLatLong(e.latlng.lat, e.latlng.lng).subscribe(async query => {
+          await this.changeCurrentHotel(query);
+        });
+      });
       this.filteredMarker[counter++].addTo(this.map);
     }
+  }
+
+  changeCurrentHotel(query) {
+    this.currentHotel = query.data.GetHotelByLatLong;
   }
 
   detectChange() {
@@ -245,7 +282,7 @@ export class MapComponent implements OnInit {
         this.chekboxFacility[0], this.chekboxFacility[1], this.chekboxFacility[2], this.chekboxFacility[3],
         this.chekboxFacility[4], this.chekboxFacility[5], this.chekboxFacility[6], this.chekboxFacility[7],
         this.chekboxArea, this.hotelArea,
-        this.lastValue] );
+        this.lastValue]);
       this.markFilteredHotel(filteredHotel);
     } else {
       this.lastValue = 0;

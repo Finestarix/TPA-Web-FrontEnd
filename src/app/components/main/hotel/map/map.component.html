@@ -106,13 +106,48 @@
           </div>
         </div>
 
+        <hr class="separator">
+
+        <div class="hotel-display-price">
+          <mat-form-field>
+            <mat-label>Display Price</mat-label>
+            <mat-select [(value)]="currentPrice" (closed)="detectChange()">
+              <mat-option value="Night">Per Room Per Night</mat-option>
+              <mat-option value="All">Total Price</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
       </div>
     </div>
 
     <div class="map" id="map"></div>
 
-    <div class="hotel-data">
+    <div class="hotel-data" *ngIf="currentHotel">
 
+      <div class="hotel-image">
+        <img src="assets/hotels/{{currentHotel.photo[0].source}}" alt="">
+      </div>
+
+      <div class="hotel-header">
+        <div>{{currentHotel.name}}</div>
+        <app-star-bar [widthRating]="currentHotel.rating/5 * 100"></app-star-bar>
+      </div>
+
+      <div class="hotel-data-address">
+        <img src="assets/hotels/location.jpg" alt="">
+        {{currentHotel.location.city}}, {{currentHotel.location.province}}
+      </div>
+
+      <div class="hotel-data-facility-container">
+        <div class="hotel-data-facility" *ngFor="let facility of currentHotel.facility">
+          <img src="/assets/hotels/facility/{{facility.photo}}" alt="">
+        </div>
+      </div>
+
+      <div class="hotel-button-order">
+        Order Now
+      </div>
 
 
     </div>

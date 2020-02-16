@@ -222,7 +222,6 @@
       width: 100%;
 
       border: 1px solid black;
-
     }
 
     .hotel-data {
@@ -252,6 +251,65 @@
       width: 19%;
       border-radius: 10px;
       box-shadow: 1px 1px 2px 1px black;
+
+      .hotel-image img {
+        width: 100%;
+      }
+
+      .hotel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+          font-size: 18px;
+        }
+      }
+
+      .hotel-data-address {
+        margin-top: 10px;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        img {
+          width: 20px;
+        }
+      }
+
+      .hotel-data-facility-container {
+
+        margin-top: 10px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .hotel-data-facility img {
+          padding: 7px;
+          border-radius: 100%;
+
+          background-color: #c6cbda;
+          margin-right: 6px;
+          width: 28px;
+        }
+      }
+
+      .hotel-button-order {
+
+        margin-top: 10px;
+        padding: 10px;
+
+        background-color: orange;
+        color: white;
+        font-size: 22px;
+        text-align: center;
+
+        border-radius: 10px;
+
+        cursor: pointer;
+      }
     }
   }
 }

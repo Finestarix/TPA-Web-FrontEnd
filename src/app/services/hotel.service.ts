@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {getHotelByProvince, getRecommendedHotel} from './queries/hotelQuery';
+import {getHotelByProvince, getRecommendedHotel, getHotelByLatLong} from './queries/hotelQuery';
 import {Apollo} from 'apollo-angular';
 
 @Injectable({
@@ -33,6 +33,19 @@ export class HotelService {
       query: getHotelByProvince,
       variables: {
         provinceData: convertedProvince,
+      }
+    });
+  }
+
+  getHotelByLatLong(latitude: any, longitude: any) {
+    const convertedLatitude = parseFloat(latitude);
+    const convertedLongitude = parseFloat(longitude);
+
+    return this.apollo.query<any>({
+      query: getHotelByLatLong,
+      variables: {
+        latitude: convertedLatitude,
+        longitude: convertedLongitude,
       }
     });
   }

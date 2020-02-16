@@ -40,3 +40,30 @@ export const getHotelByProvince = gql `
     }
 `;
 
+export const getHotelByLatLong = gql `
+    query getHotelByLatLong($latitude: Float!, $longitude: Float!) {
+        GetHotelByLatLong(latitude: $latitude, longitude: $longitude) {
+            id
+            photo {
+                hotelid
+                source
+            }
+            facility {
+                name
+                photo
+            }
+            name
+            address
+            latitude
+            longitude
+            rating
+            price
+            location {
+                city
+                province
+                region
+            }
+        }
+    }
+`;
+
