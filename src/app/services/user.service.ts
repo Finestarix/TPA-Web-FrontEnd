@@ -72,7 +72,7 @@ export class UserService {
       variables: {
         searchID: id,
       }
-    })
+    });
 
   }
 

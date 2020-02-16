@@ -290,11 +290,6 @@ export class MapComponent implements OnInit {
       this.markAllLayer(allMarker);
     }
 
-    if (this.checkboxStar.includes(true)) {
-
-    }
-
-
   }
 
   changeHideStar() {
@@ -307,5 +302,17 @@ export class MapComponent implements OnInit {
 
   changeHideArea() {
     this.hideArea = (this.hideArea === 'Show') ? 'Hide' : 'Show';
+  }
+
+  goToDetailPage() {
+    this.router.navigate(['/Hotel/Search'], {
+      queryParams: {
+        destination: this.destination,
+        startDate: moment(this.startDate).format('MM-DD-YYYY'),
+        endDate: moment(this.endDate).format('MM-DD-YYYY'),
+        room: this.room,
+        guest: this.guest
+      }
+    });
   }
 }

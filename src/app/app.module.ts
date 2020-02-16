@@ -51,6 +51,7 @@ import {StarBarComponent} from './components/core/star-bar/star-bar.component';
 import {FlightClassComponent} from './components/main/home/cardbox/cardbox-plane/flight-class/flight-class.component';
 import {HotelRoomComponent} from './components/main/home/cardbox/cardbox-hotel/hotel-room/hotel-room.component';
 import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-hotel.component';
+import {DetailHotelComponent} from './components/main/hotel/detail-hotel/detail-hotel.component';
 
 import {icon, Marker} from 'leaflet';
 
@@ -105,6 +106,7 @@ Marker.prototype.options.icon = iconDefault;
     FlightClassComponent,
     HotelRoomComponent,
     SearchHotelComponent,
+    DetailHotelComponent,
     SearchHotelPipe,
     SortHotelPipe
   ],

@@ -1,5 +1,15 @@
 <div class="all-container">
 
+  <div class="footer-subscription">
+    <div class="footer-subscription-title">Subscribe & get updates on special promos</div>
+    <div class="footer-subscription-right">
+      <div class="footer-subscription-input">
+        <input type="email" [(ngModel)]="emailSubscription" placeholder="Input Your Email Here">
+      </div>
+      <div class="footer-subscription-button" (click)="addSubscription()">SUBSCRIBE</div>
+    </div>
+  </div>
+
   <div class="footer-container">
 
     <!-- Footer Left -->
