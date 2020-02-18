@@ -135,7 +135,7 @@ export class SearchHotelComponent implements OnInit {
   getHotelArea(query) {
     this.hotelArea = query.data.GetCityByProvince;
 
-    for (let i = 0 ; i < this.hotelArea.length ; i++) {
+    for (let i = 0; i < this.hotelArea.length; i++) {
       this.chekboxArea[i] = false;
     }
 
@@ -190,5 +190,17 @@ export class SearchHotelComponent implements OnInit {
 
   changeHideArea() {
     this.hideArea = (this.hideArea === 'Show') ? 'Hide' : 'Show';
+  }
+
+  goToDetail(dataHotel) {
+    this.router.navigate(['/Hotel/Detail'], {
+      queryParams: {
+        id: dataHotel.id,
+        startDate: moment(this.startDate).format('MM-DD-YYYY'),
+        endDate: moment(this.endDate).format('MM-DD-YYYY'),
+        room: this.room,
+        guest: this.guest
+      }
+    });
   }
 }

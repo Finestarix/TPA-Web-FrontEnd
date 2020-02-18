@@ -14,6 +14,8 @@ export class RecHotelComponent implements OnInit {
   recHotel: any;
   ratingWidth: number;
 
+  loadingPlaceholder: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
+
   constructor(private http: HttpClient,
               private recHotelService: HotelService) {
 

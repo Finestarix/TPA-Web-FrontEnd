@@ -1,9 +1,21 @@
 <div class="cardbox-hotel-container">
 
-  <div class="cardbox-hotel-top">
-    <img class="cardbox-hotel-container-image" src="assets/quick-card/hotel-icon.png" alt="">
-    <p class="cardbox-hotel-container-text">Cheap Online Hotel Booking with Promo</p>
+  <div class="cardbox-hotel-top-top">
+    <div class="cardbox-hotel-top">
+      <img class="cardbox-hotel-container-image" src="assets/quick-card/hotel-icon.png" alt="">
+      <p class="cardbox-hotel-container-text">Cheap Online Hotel Booking with Promo</p>
+    </div>
+
+    <div class="cardbox-history" (click)="historyStatus = !historyStatus">
+      Lastest History
+    </div>
+
   </div>
+
+  <div class="cardbox-history-container" [ngStyle]="{'display': (historyStatus) ? 'block': 'none'}" >
+    <app-hotel-history (sendToParent)="setData($event)"></app-hotel-history>
+  </div>
+
 
   <div class="cardbox-hotel-separator"></div>
 
@@ -11,15 +23,14 @@
 
     <div class="cardbox-hotel-destination cardbox-hotel-bottom-content">
       Destination
-        <mat-form-field class="cardbox-text">
-          <input type="text" matInput aria-label="Number" [formControl]="selectedLocation" [matAutocomplete]="auto2">
-          <mat-autocomplete #auto2="matAutocomplete">
-            <mat-option *ngFor="let option of filteredLocation | async" [value]="option">
-              {{option}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-<!--      <input type="text">-->
+      <mat-form-field class="cardbox-text">
+        <input type="text" matInput aria-label="Number" [formControl]="selectedLocation" [matAutocomplete]="auto2">
+        <mat-autocomplete #auto2="matAutocomplete">
+          <mat-option *ngFor="let option of filteredLocation | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
 
     <div class="cardbox-hotel-checkin cardbox-hotel-bottom-content">

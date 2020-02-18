@@ -11,7 +11,14 @@
 
     <div class="cardbox-car-location cardbox-car-bottom-content">
       Rental Location
-      <input type="text">
+      <mat-form-field class="cardbox-text">
+        <input type="text" matInput aria-label="Number" [formControl]="selectedLocation" [matAutocomplete]="auto2">
+        <mat-autocomplete #auto2="matAutocomplete">
+          <mat-option *ngFor="let option of filteredLocation | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
     </div>
 
     <div class="cardbox-car-startdate cardbox-car-bottom-content">
@@ -51,7 +58,7 @@
 
     <div class="cardbox-car-numcar cardbox-car-bottom-content abcsadfadsad">
       Number of Car
-      <input type="text">
+      <input type="text" [(ngModel)]="totalCar">
     </div>
 
     <div class="cardbox-car-driver">
@@ -62,7 +69,7 @@
 
   <div class="cardbox-car-separator"></div>
 
-  <div class="cardbox-car-button">
+  <div class="cardbox-car-button" (click)="searchCar()">
     <input type="button" value="Search Car">
   </div>
 

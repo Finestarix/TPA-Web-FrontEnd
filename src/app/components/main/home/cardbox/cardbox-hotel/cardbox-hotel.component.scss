@@ -1,25 +1,39 @@
 .cardbox-hotel-container {
 
-  .cardbox-hotel-top {
+  .cardbox-hotel-top-top {
 
     padding: 0px 50px 20px 50px;
 
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 
-    .cardbox-hotel-container-image {
-      background-color: lightpink;
-      border-radius: 100%;
+    .cardbox-hotel-top {
 
-      width: 30px;
-      padding: 10px 5px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .cardbox-hotel-container-image {
+        background-color: lightpink;
+        border-radius: 100%;
+
+        width: 30px;
+        padding: 10px 5px;
+      }
+
+      .cardbox-hotel-container-text {
+        font-size: 20px;
+        margin-left: 20px;
+      }
     }
 
-    .cardbox-hotel-container-text {
-      font-size: 20px;
-      margin-left: 20px;
+    .cardbox-history {
+      color: #0264D3;
+      cursor: pointer;
     }
+
   }
 
   .cardbox-hotel-separator {
@@ -48,18 +62,6 @@
       padding-right: 20px;
 
       border-right: 1px solid rgba(169, 169, 169, .8) !important;
-
-      //input[type=text] {
-      //  margin-top: 22px;
-      //  padding-bottom: 5px;
-      //
-      //  font-size: 15px;
-      //  width: 230px !important;
-      //
-      //  border: 0px;
-      //  outline: 0px;
-      //  border-bottom: 1px solid rgba(169, 169, 169, .8);
-      //}
     }
 
     .cardbox-hotel-night {
@@ -114,7 +116,7 @@
     margin-top: 15px;
     margin-right: 50px;
 
-    background-color: rgb(240,230,140);
+    background-color: rgb(240, 230, 140);
 
     padding: 15px;
     border-radius: 20px;

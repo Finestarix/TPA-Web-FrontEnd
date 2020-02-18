@@ -12,6 +12,7 @@ import {Observable, Subscription} from 'rxjs';
 import {LocationsService} from '../../../../../services/locations.service';
 import {map, startWith} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {HistoryService} from "../../../../../services/history.service";
 
 const moment = _rollupMoment || _moment;
 
@@ -43,7 +44,8 @@ export const MY_FORMATS = {
 export class CardboxHotelComponent implements OnInit {
 
   constructor(private locationService: LocationsService,
-              private router: Router) {
+              private router: Router,
+              private historyService: HistoryService) {
 
     this.totalRoom = this.totalGuess = 0;
     this.totalValue = '0 Guess, 0 Room';
@@ -53,6 +55,8 @@ export class CardboxHotelComponent implements OnInit {
     this.start = this.checkinDate.value;
     this.end = this.checkoutDate.value;
     this.totalNight = 1;
+
+    this.historyStatus = false;
 
     this.location$ = this.locationService.getLocation().subscribe(async query => {
       await this.afterFetchData(query);
@@ -75,6 +79,8 @@ export class CardboxHotelComponent implements OnInit {
   totalGuess: number;
   totalRoom: number;
   totalValue: string;
+
+  historyStatus: boolean;
 
   ngOnInit() {
   }
@@ -152,14 +158,39 @@ export class CardboxHotelComponent implements OnInit {
       return;
     }
 
+    const passObject = {
+      hotel: {
+        destination: this.selectedLocation.value,
+        startDate: moment(this.start).format('MM-DD-YYYY'),
+        endDate: moment(this.end).format('MM-DD-YYYY'),
+        room: this.totalRoom,
+        guest: this.totalGuess
+      }
+    };
+
+    this.historyService.setSession(passObject);
+
     this.router.navigate(['/Hotel/Search'], {
       queryParams: {
         destination: this.selectedLocation.value,
-        startDate: this.start,
-        endDate: this.end,
+        startDate: moment(this.start).format('MM-DD-YYYY'),
+        endDate: moment(this.end).format('MM-DD-YYYY'),
         room: this.totalRoom,
         guest: this.totalGuess
       }
     });
   }
+
+  setData(event) {
+    const allHotelHistory = JSON.parse(this.historyService.getSession());
+    const currHotelHistory = allHotelHistory[event];
+
+    this.selectedLocation.setValue(currHotelHistory.hotel.destination);
+    this.checkinDate.setValue(new Date(currHotelHistory.hotel.startDate));
+    this.checkoutDate.setValue(new Date(currHotelHistory.hotel.endDate));
+    this.totalRoom = currHotelHistory.hotel.room;
+    this.totalGuess = currHotelHistory.hotel.guest;
+    this.totalValue = this.totalGuess + ' Guess, ' + this.totalRoom + ' Room';
+  }
+
 }

@@ -1,0 +1,36 @@
+.history-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 200px;
+  height: 100%;
+
+  background-color: white;
+
+  box-shadow: 2px 2px 2px 2px black;
+
+  z-index: 1000;
+
+  .history-title {
+    font-size: 20px;
+    margin: 10px;
+  }
+
+  .history-content {
+
+    padding: 10px;
+    margin: 10px;
+
+    border-radius: 20px;
+    box-shadow: 2px 2px 2px 2px black;
+
+    cursor: pointer;
+
+    div {
+      margin: 5px 0;
+    }
+
+  }
+
+}

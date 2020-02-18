@@ -30,6 +30,7 @@ export class FooterComponent implements OnInit, OnDestroy {
     this.emailSubsciption$ = this.subscriptionService.insertSubscription(this.emailSubscription).subscribe(async query => {
       await alert('Subscription Added !\n Please Check your Email !');
     });
+    this.emailSubscription = '';
   }
 
   ngOnDestroy(): void {

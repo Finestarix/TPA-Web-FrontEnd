@@ -1,0 +1,8 @@
+<div class="history-container">
+  <div class="history-title">Search History</div>
+  <div class="history-content" *ngFor="let history of historyHotelData; let i = index" (click)="passData(i)">
+    <div> {{historyHotelData[i].hotel.startDate | date: 'dd MMM yy'}} - {{historyHotelData[i].hotel.endDate | date: 'dd MMM yy'}} </div>
+    <div>{{historyHotelData[i].hotel.destination}} </div>
+    <div>{{historyHotelData[i].hotel.guest}} Guest - {{historyHotelData[i].hotel.room}} Room</div>
+  </div>
+</div>

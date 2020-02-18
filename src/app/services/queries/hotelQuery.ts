@@ -67,3 +67,27 @@ export const getHotelByLatLong = gql `
     }
 `;
 
+export const getHotelByID = gql `
+    query getHotelByID($idData: Int!) {
+        GetHotelByID(id: $idData) {
+            id
+            name
+            location {
+                city
+                province
+                region
+            }
+            facility {
+                name
+                photo
+            }
+            photo {
+                source
+                id
+                hotelid
+            }
+            latitude
+            longitude
+        }
+    }
+`;

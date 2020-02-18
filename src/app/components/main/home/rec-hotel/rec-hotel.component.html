@@ -1,7 +1,31 @@
-
-<div class="hotel-container">
+<div class="hotel-container" style="height: 600px">
 
   <p class="hotel-title">Places to Stay Around the World !</p>
+
+  <div class="loading-placeholder" *ngIf="!recHotel">
+    <ngx-content-loading
+      [speed]="'1500ms'"
+      [width]="1349"
+      [height]="800"
+      [primaryColor]="'#222'"
+      [secondaryColor]="'#5e5e5e'">
+      <svg:g ngx-rect width="310" height="285" y="10" x="35" rx="5" ry="5"></svg:g>
+
+      <svg:g ngx-rect width="310" height="285" y="10" x="355" rx="5" ry="5"></svg:g>
+
+      <svg:g ngx-rect width="310" height="285" y="10" x="680" rx="5" ry="5"></svg:g>
+
+      <svg:g ngx-rect width="310" height="285" y="10" x="1010" rx="5" ry="5"></svg:g>
+
+      <svg:g ngx-rect width="310" height="285" y="315" x="35" rx="5" ry="5"></svg:g>
+
+      <svg:g ngx-rect width="310" height="285" y="315" x="355" rx="5" ry="5"></svg:g>
+
+      <svg:g ngx-rect width="310" height="285" y="315" x="680" rx="5" ry="5"></svg:g>
+
+      <svg:g ngx-rect width="310" height="285" y="315" x="1010" rx="5" ry="5"></svg:g>
+    </ngx-content-loading>
+  </div>
 
   <div class="hotel-content">
     <div *ngFor="let hotel of recHotel">
@@ -11,4 +35,5 @@
       <app-star-bar [widthRating]="hotel.rating/5 * 100"></app-star-bar>
     </div>
   </div>
+
 </div>

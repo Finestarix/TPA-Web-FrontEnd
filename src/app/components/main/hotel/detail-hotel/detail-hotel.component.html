@@ -1,1 +1,15 @@
-<p>detail-hotel works!</p>
+<div *ngIf="hotelData">
+  <div>
+    <div>{{hotelData.location.region}}</div>
+    >
+    <div>{{hotelData.location.province}}</div>
+    >
+    <div>{{hotelData.location.city}}</div>
+  </div>
+  <div>
+    <div>{{hotelData.name}}</div>
+    <div>
+      <app-star-bar [widthRating]="hotelData.rating/5 * 100"></app-star-bar>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import {GraphQLModule} from './graphql.module';
 import {JwtModule} from '@auth0/angular-jwt';
 import {MatNativeDateModule} from '@angular/material/core';
 import {Ng5SliderModule} from 'ng5-slider';
+import {NgxContentLoadingModule} from 'ngx-content-loading';
 import {
   MatAutocompleteModule,
   MatCheckboxModule,
@@ -52,11 +53,13 @@ import {FlightClassComponent} from './components/main/home/cardbox/cardbox-plane
 import {HotelRoomComponent} from './components/main/home/cardbox/cardbox-hotel/hotel-room/hotel-room.component';
 import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-hotel.component';
 import {DetailHotelComponent} from './components/main/hotel/detail-hotel/detail-hotel.component';
+import {HotelHistoryComponent} from './components/main/home/cardbox/cardbox-hotel/hotel-history/hotel-history.component';
 
 import {icon, Marker} from 'leaflet';
 
 import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
+import {SearchCarComponent} from "./components/main/car/search-car/search-car.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -107,8 +110,10 @@ Marker.prototype.options.icon = iconDefault;
     HotelRoomComponent,
     SearchHotelComponent,
     DetailHotelComponent,
+    HotelHistoryComponent,
     SearchHotelPipe,
-    SortHotelPipe
+    SortHotelPipe,
+    SearchCarComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -144,6 +149,7 @@ Marker.prototype.options.icon = iconDefault;
     MatCheckboxModule,
     Ng5SliderModule,
     MatSelectModule,
+    NgxContentLoadingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
