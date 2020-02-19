@@ -1,0 +1,264 @@
+.car-container {
+
+  font-family: "Open Sans", serif !important;
+
+  .car-top-container {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 10px 20px;
+
+    .car-result-search {
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .car-result-icon {
+        width: 40px;
+        height: 40px;
+
+        padding: 0 15px 0 0;
+      }
+
+      .car-result-content {
+        font-size: 20px;
+      }
+
+    }
+
+    .car-search {
+      color: orange;
+      border: 1px solid orange;
+      border-radius: 10px;
+      padding: 10px;
+
+      cursor: pointer;
+    }
+
+  }
+
+  .car-bottom-container {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin: 10px 20px;
+
+    .car-filter {
+
+      display: flex;
+      flex-direction: column;
+      margin-top: 22px;
+
+      width: 20%;
+
+      .car-filter-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .car-filter-reset {
+          color: #0264D3;
+          cursor: pointer;
+        }
+      }
+
+      .car-filter-content {
+
+        padding: 20px;
+        margin-top: 20px;
+
+        border: 1px solid #c6cbda;
+        border-radius: 10px;
+
+        .separator {
+          margin: 20px 0 !important;
+          border: 1px dashed grey;
+        }
+
+        .car-search {
+
+          font-size: 18px;
+
+          .car-search-content {
+
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+
+            border: 1px solid dimgray;
+            border-radius: 10px;
+
+            input[type=text] {
+              font-size: 18px;
+              margin-left: 10px;
+              width: 170px;
+              outline: none;
+              border: none;
+            }
+
+            img {
+              width: 30px;
+            }
+          }
+
+        }
+
+        .car-filter-price {
+          margin-top: 10px;
+          font-size: 18px;
+
+          .car-filter-price-slider {
+            margin-top: 40px;
+          }
+        }
+
+        .car-filter-data {
+          font-size: 18px;
+          position: relative;
+
+          .hide-car-filter {
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            color: orange;
+            border: 1px solid orange;
+            border-radius: 10px;
+
+            padding: 0 7px;
+            cursor: pointer;
+          }
+
+          .car-filter-data-content {
+            margin: 10px 0;
+          }
+        }
+
+      }
+    }
+
+    .car-data {
+      width: 100%;
+      padding: 10px;
+
+      background: white;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+
+      .car-data-top {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 100%;
+
+        .car-data-title {
+          padding: 10px 0;
+
+          width: 100%;
+          font-size: 20px;
+
+          text-align: left;
+        }
+      }
+
+      .car-data-scrolling {
+
+        width: 100%;
+        .car-data-content {
+
+          width: 100%;
+
+          margin: 10px 0;
+
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          box-shadow: 1px 1px 1px 1px black;
+          border-radius: 10px;
+
+          .car-data-left {
+
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            .car-data-image img {
+              width: 200px;
+            }
+
+            .car-data-attr {
+              display: flex;
+              flex-direction: column;
+
+              .car-data-attr-name {
+                font-size: 17px;
+                margin: 10px 0;
+              }
+
+              .car-data-attr-data {
+                font-size: 15px;
+                margin: 5px 0;
+              }
+
+            }
+          }
+
+          .car-data-right {
+
+            padding: 10px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+
+            button {
+              margin-top: 10px;
+            }
+
+
+
+          }
+        }
+
+      }
+
+    }
+
+  }
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  opacity: 0.03 !important;
+  background-color: darkgoldenrod !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: darkgoldenrod;
+}
+
+::ng-deep {
+  .ng5-slider {
+    .ng5-slider-pointer {
+      display: none !important;
+    }
+
+    .ng5-slider-selection {
+      background: #9b870c !important;
+    }
+  }
+}

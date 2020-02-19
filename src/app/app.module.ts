@@ -12,6 +12,8 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {MatNativeDateModule} from '@angular/material/core';
 import {Ng5SliderModule} from 'ng5-slider';
 import {NgxContentLoadingModule} from 'ngx-content-loading';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {
   MatAutocompleteModule,
   MatCheckboxModule,
@@ -54,12 +56,15 @@ import {HotelRoomComponent} from './components/main/home/cardbox/cardbox-hotel/h
 import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-hotel.component';
 import {DetailHotelComponent} from './components/main/hotel/detail-hotel/detail-hotel.component';
 import {HotelHistoryComponent} from './components/main/home/cardbox/cardbox-hotel/hotel-history/hotel-history.component';
+import {SearchCarComponent} from './components/main/car/search-car/search-car.component';
 
 import {icon, Marker} from 'leaflet';
 
 import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
-import {SearchCarComponent} from "./components/main/car/search-car/search-car.component";
+import {SearchCarPipe} from "./pipe/car/search-car.pipe";
+import {SortCarPipe} from "./pipe/car/sort-car.pipe";
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -113,7 +118,9 @@ Marker.prototype.options.icon = iconDefault;
     HotelHistoryComponent,
     SearchHotelPipe,
     SortHotelPipe,
-    SearchCarComponent
+    SearchCarComponent,
+    SearchCarPipe,
+    SortCarPipe
   ],
   entryComponents: [
     LoginComponent,
@@ -150,6 +157,9 @@ Marker.prototype.options.icon = iconDefault;
     Ng5SliderModule,
     MatSelectModule,
     NgxContentLoadingModule,
+    MatButtonModule,
+    MatTooltipModule,
+    InfiniteScrollModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

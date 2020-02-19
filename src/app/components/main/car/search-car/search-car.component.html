@@ -1,1 +1,166 @@
-<p>search-car works!</p>
+<div class="car-container">
+
+  <div class="car-top-container">
+
+    <div class="car-result-search">
+      <img class="car-result-icon" src="assets/car/car-icon.png" alt="Icon">
+      <div class="car-result-content">
+        <div>
+          {{destination}}
+        </div>
+        <div>
+          {{startDate | date: 'EEE, dd MMM yyyy'}} - {{endDate | date: 'EEE, dd MMM yyyy'}} &bull; {{dateDiff}} Days
+        </div>
+      </div>
+    </div>
+
+    <div (click)="goToSearchCar()" class="car-search">
+      Change Search
+    </div>
+  </div>
+
+  <div class="car-bottom-container">
+
+    <div class="car-filter">
+
+      <div class="car-filter-top">
+        <div>
+          Filter
+        </div>
+        <div class="car-filter-reset" (click)="resetAll()">
+          RESET
+        </div>
+      </div>
+
+      <div class="car-filter-content">
+
+        <div class="car-search">
+          Search
+          <div class="car-search-content">
+            <input [(ngModel)]="searchCar" (keyup)="detectChange()" type="text">
+            <img src="assets/core/search.png" alt="">
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="car-filter-price">
+          Price Range per Day
+          <ng5-slider class="car-filter-price-slider" (valueChange)="detectChange()" (highValueChange)="detectChange()"
+                      [(value)]="value" [(highValue)]="highValue" [options]="options"></ng5-slider>
+        </div>
+
+        <hr class="separator">
+
+        <div class="car-filter-data">
+          Passenger
+
+          <div class="hide-car-filter" (click)="changeHideFacility()">
+            {{hidePassenger}}
+          </div>
+
+          <div [ngStyle]="{'display': (hidePassenger === 'Show') ? 'block': 'none'}" class="car-filter-data-content" *ngFor="let passenger of passengerData; let i = index">
+            <mat-checkbox [(ngModel)]="checkboxPassenger[i]" (change)="detectChange()">
+              {{passenger}}
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="car-filter-data">
+          Brand
+
+          <div class="hide-car-filter" (click)="changeHideBrand()">
+            {{hideBrand}}
+          </div>
+
+          <div [ngStyle]="{'display': (hideBrand === 'Show') ? 'block': 'none'}" class="car-filter-data-content" *ngFor="let brand of carModelBrand; let i = index">
+            <mat-checkbox [(ngModel)]="checkboxBrand[i]" (change)="detectChange()">
+              {{brand}}
+            </mat-checkbox>
+          </div>
+        </div>
+
+        <hr class="separator">
+
+        <div class="car-filter-data">
+          Model
+
+          <div class="hide-car-filter" (click)="changeHideModel()">
+            {{hideModel}}
+          </div>
+
+          <div [ngStyle]="{'display': (hideModel === 'Show') ? 'block': 'none'}" class="car-filter-data-content" *ngFor="let model of carModelData; let i = index">
+            <mat-checkbox [(ngModel)]="checkboxModel[i]" (change)="detectChange()">
+              {{model}}
+            </mat-checkbox>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="car-data" *ngIf="carData">
+
+      <div class="car-data-top">
+        <div class="car-data-title">Showing {{carData.length}} car types</div>
+        <div class="hotel-sort-by">
+          <mat-form-field>
+            <mat-label>Sort By</mat-label>
+            <mat-select [(value)]="selectedSortBy">
+              <mat-option value="Recommended">Recommended</mat-option>
+              <mat-option value="High Price">High Price</mat-option>
+              <mat-option value="Low Price">Low Price</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="car-data-scrolling"
+           infinite-scroll
+           [infiniteScrollDistance]="2"
+           [infiniteScrollThrottle]="50"
+           (scrolled)="onScroll()"
+            >
+        <div
+          class="car-data-content"
+          *ngFor="let car of carDataShow |
+         searchCar: [searchCar, value, highValue, checkboxPassenger, carModelData, checkboxModel, carModelBrand, checkboxBrand, lastValue] |
+         sortCar: selectedSortBy">
+
+          <div class="car-data-left">
+
+            <div class="car-data-image">
+              <img src="assets/car/{{car.carModel.image}}" alt="">
+            </div>
+
+            <div class="car-data-attr">
+              <div class="car-data-attr-name">{{car.carModel.brand}} {{car.carModel.model}}</div>
+              <div class="car-data-attr-data">{{car.carModel.passenger}} Passenger - {{car.carModel.baggage}} Baggage</div>
+            </div>
+          </div>
+
+          <div class="car-data-right">
+
+            <div>Start Form</div>
+            <div><b>{{car.price | currency: 'IDR'}}</b> / days</div>
+
+            <button mat-raised-button
+                    matTooltip="Select Button">
+              SELECT
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
