@@ -22,4 +22,17 @@ export class SessionService {
     sessionStorage.removeItem('id');
   }
 
+  setSessionAdmin(value: string) {
+    sessionStorage.setItem('id-admin',  value);
+    this.router.navigateByUrl('Admin/Home');
+  }
+
+  getSessionAdmin() {
+    return sessionStorage.getItem('id-admin');
+  }
+
+  removeSessionAdmin() {
+    sessionStorage.removeItem('id-admin');
+  }
+
 }

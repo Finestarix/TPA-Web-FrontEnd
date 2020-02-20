@@ -168,9 +168,8 @@ export class SearchCarComponent implements OnInit {
   }
 
   onScroll() {
-    console.log('A');
     if (this.totalShow <= this.carData.length) {
-      this.totalShow += 10;
+      this.totalShow += 2;
       this.carDataShow = this.carData.slice(0, this.totalShow);
     }
   }

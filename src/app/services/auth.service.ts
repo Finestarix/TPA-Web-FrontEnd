@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {JwtHelperService} from '@auth0/angular-jwt';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +8,18 @@ export class AuthService {
 
   basePath = '';
 
-  constructor(private jwtHelper: JwtHelperService) {}
+  constructor() {
+  }
 
   public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
+    const token = sessionStorage.getItem('id-admin');
+    const tokenData = jwt_decode(token);
+
+    if (tokenData.id !== 0) {
+      return true;
+    }
+
+    return false;
   }
 
 }
