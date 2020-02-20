@@ -65,12 +65,14 @@ export class UserService {
 
   }
 
-  getUserByID(id: number): Observable<any> {
+  getUserByID(id: any): Observable<any> {
+
+    const convertedID = String(id);
 
     return this.apollo.query<any>({
       query: getUserByID,
       variables: {
-        searchID: id,
+        searchID: convertedID,
       }
     });
 

@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   constructor(private sessionService: SessionService,
               private userService: UserService) {
     const id = sessionService.getSession();
-    this.userProfile$ = userService.getUserByID(Number(id)).subscribe(async query => {
+    this.userProfile$ = userService.getUserByID(id).subscribe(async query => {
       await this.setUser(query);
     });
   }

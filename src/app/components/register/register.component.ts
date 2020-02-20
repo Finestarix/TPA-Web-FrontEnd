@@ -243,10 +243,7 @@ export class RegisterComponent implements OnInit {
       this.router.navigateByUrl('');
 
     } else {
-
-      // TODO: Add JWT TOKEN
-
-      this.sessionService.setSession(this.userLoginData.id);
+      this.sessionService.setSession(this.userLoginData.jwtToken);
       this.dialogRef.close();
     }
   }

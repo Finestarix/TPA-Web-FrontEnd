@@ -65,6 +65,9 @@ import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 import {SearchCarPipe} from "./pipe/car/search-car.pipe";
 import {SortCarPipe} from "./pipe/car/sort-car.pipe";
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import {LoginAdminComponent} from "./components/admin/login-admin/login-admin.component";
+import {HotelAdminComponent} from "./components/admin/hotel-admin/hotel-admin.component";
+import {HomeAdminComponent} from "./components/admin/home-admin/home-admin.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -120,7 +123,10 @@ Marker.prototype.options.icon = iconDefault;
     SortHotelPipe,
     SearchCarComponent,
     SearchCarPipe,
-    SortCarPipe
+    SortCarPipe,
+    LoginAdminComponent,
+    HotelAdminComponent,
+    HomeAdminComponent
   ],
   entryComponents: [
     LoginComponent,

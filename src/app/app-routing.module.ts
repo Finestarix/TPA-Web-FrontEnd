@@ -10,7 +10,10 @@ import {EntertainmentComponent} from './components/main/entertainment/entertainm
 import {MapComponent} from './components/main/hotel/map/map.component';
 import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-hotel.component';
 import {DetailHotelComponent} from './components/main/hotel/detail-hotel/detail-hotel.component';
-import {SearchCarComponent} from "./components/main/car/search-car/search-car.component";
+import {SearchCarComponent} from './components/main/car/search-car/search-car.component';
+import {LoginAdminComponent} from './components/admin/login-admin/login-admin.component';
+import {AuthGuard} from './guards/auth.guard';
+import {HomeAdminComponent} from './components/admin/home-admin/home-admin.component';
 
 const routes: Routes = [
   {
@@ -26,7 +29,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: PlaneComponent
+            component: PlaneComponent,
           }
         ]
       },
@@ -71,6 +74,20 @@ const routes: Routes = [
       {
         path: 'Entertainment',
         component: EntertainmentComponent
+      }
+    ]
+  },
+  {
+    path: 'Admin',
+    children: [
+      {
+        path: '',
+        component: LoginAdminComponent,
+      },
+      {
+        path: 'Home',
+        component: HomeAdminComponent,
+        canActivate: [AuthGuard],
       }
     ]
   }

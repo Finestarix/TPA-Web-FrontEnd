@@ -130,13 +130,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       // TODO: Add JWT TOKEN
 
-      // const loggedInUser: User = {
-      //   id: this.userLoginData.id,
-      //   email: this.userLoginData.email
-      // };
-      // this.authService.setUser(loggedInUser);
-
-      this.sessionService.setSession(this.userLoginData.id);
+      this.sessionService.setSession(this.userLoginData.jwtToken);
       this.dialogRef.close();
     }
 
