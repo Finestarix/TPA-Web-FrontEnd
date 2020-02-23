@@ -91,3 +91,43 @@ export const getHotelByID = gql `
         }
     }
 `;
+
+export const getAllHotel = gql `
+    query {
+        AllHotel {
+            address
+            facility {
+                hotelid
+                id
+                name
+                photo
+            }
+            id
+            latitude
+            location {
+                city
+                id
+                province
+                region
+            }
+            locationid
+            longitude
+            name
+            photo {
+                hotelid
+                id
+                source
+            }
+            price
+            rating
+        }
+    }
+`;
+
+export const deleteHotelByID = gql `
+    mutation hotelData($idData: String!) {
+        DeleteHotel(id: $idData) {
+            id
+        }
+    }
+`;

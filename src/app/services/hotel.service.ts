@@ -1,6 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {getHotelByProvince, getRecommendedHotel, getHotelByLatLong, getHotelByID} from './queries/hotelQuery';
+import {
+  getHotelByProvince,
+  getRecommendedHotel,
+  getHotelByLatLong,
+  getHotelByID,
+  getAllHotel,
+  deleteHotelByID
+} from './queries/hotelQuery';
 import {Apollo} from 'apollo-angular';
 
 @Injectable({
@@ -55,6 +62,24 @@ export class HotelService {
 
     return this.apollo.query<any>({
       query: getHotelByID,
+      variables: {
+        idData: convertedID,
+      }
+    });
+  }
+
+  getAllHotel() {
+    return this.apollo.query<any>({
+      query: getAllHotel,
+    });
+  }
+
+  deleteHotelByID(id: any) {
+    const convertedID = String(id);
+    console.log(typeof convertedID);
+
+    return this.apollo.mutate<any>({
+      mutation: deleteHotelByID,
       variables: {
         idData: convertedID,
       }

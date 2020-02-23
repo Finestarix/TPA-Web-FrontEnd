@@ -1,1 +1,77 @@
-<p>hotel-admin works!</p>
+<div *ngIf="this.dataSource.data.length === 0" class="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div>
+  <div class="filter-data">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <div>
+
+    <mat-table class="table-data mat-elevation-z8" [dataSource]="dataSource" matSort>
+
+      <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef class="column-table" mat-sort-header> Hotel Image </mat-header-cell>
+        <mat-cell *matCellDef="let element"><img src="assets/hotels/{{element.image}}" alt=""> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef class="column-table" mat-sort-header> Hotel Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="rating">
+        <mat-header-cell *matHeaderCellDef class="column-table" mat-sort-header> Hotel Rating </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.rating}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef class="column-table" mat-sort-header> Hotel Address </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="city">
+        <mat-header-cell *matHeaderCellDef class="column-table" mat-sort-header> Hotel City </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="province">
+        <mat-header-cell *matHeaderCellDef class="column-table" mat-sort-header> Hotel Province </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.province}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="facility">
+        <mat-header-cell *matHeaderCellDef class="column-table" mat-sort-header> Hotel Facilities </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.facility}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <mat-header-cell  *matHeaderCellDef class="column-table" width ="7%">  </mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+          <button mat-button (click)="updateAction(row)">Update</button>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <mat-header-cell  *matHeaderCellDef >  </mat-header-cell>
+        <mat-cell *matCellDef="let row" >
+          <button mat-button (click)="deleteAction(row)">Delete</button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="allColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: allColumns;"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+
+</div>
+
+<div class="floating-button">
+  <button matTooltip="Insert Hotel" (click)="insertAction()" >+</button>
+</div>

@@ -1,7 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
@@ -9,19 +8,28 @@ import {HttpLinkModule} from 'apollo-angular-link-http';
 import {ApolloModule} from 'apollo-angular';
 import {GraphQLModule} from './graphql.module';
 import {JwtModule} from '@auth0/angular-jwt';
-import {MatNativeDateModule} from '@angular/material/core';
 import {Ng5SliderModule} from 'ng5-slider';
 import {NgxContentLoadingModule} from 'ngx-content-loading';
-import {MatButtonModule} from '@angular/material/button';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {
+  MatDialogModule,
+  MatNativeDateModule,
+  MatButtonModule,
+  MatTooltipModule,
   MatAutocompleteModule,
   MatCheckboxModule,
   MatDatepickerModule,
   MatFormFieldModule,
-  MatInputModule, MatSelectModule,
-  MatSliderModule
+  MatInputModule,
+  MatSelectModule,
+  MatSliderModule,
+  MatTabsModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
+
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -57,17 +65,20 @@ import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-
 import {DetailHotelComponent} from './components/main/hotel/detail-hotel/detail-hotel.component';
 import {HotelHistoryComponent} from './components/main/home/cardbox/cardbox-hotel/hotel-history/hotel-history.component';
 import {SearchCarComponent} from './components/main/car/search-car/search-car.component';
+import {LoginAdminComponent} from './components/admin/login-admin/login-admin.component';
+import {HotelAdminComponent} from './components/admin/hotel-admin/hotel-admin.component';
+import {HomeAdminComponent} from './components/admin/home-admin/home-admin.component';
+import {DialogConfirmationComponent} from './components/admin/core/dialog-confirmation/dialog-confirmation.component';
 
 import {icon, Marker} from 'leaflet';
 
 import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
-import {SearchCarPipe} from "./pipe/car/search-car.pipe";
-import {SortCarPipe} from "./pipe/car/sort-car.pipe";
-import {InfiniteScrollModule} from "ngx-infinite-scroll";
-import {LoginAdminComponent} from "./components/admin/login-admin/login-admin.component";
-import {HotelAdminComponent} from "./components/admin/hotel-admin/hotel-admin.component";
-import {HomeAdminComponent} from "./components/admin/home-admin/home-admin.component";
+import {SearchCarPipe} from './pipe/car/search-car.pipe';
+import {SortCarPipe} from './pipe/car/sort-car.pipe';
+import {DialogErrorComponent} from "./components/admin/core/dialog-error/dialog-error.component";
+import {InsertHotelAdminComponent} from "./components/admin/hotel-admin/insert-hotel-admin/insert-hotel-admin.component";
+import {UpdateHotelAdminComponent} from "./components/admin/hotel-admin/update-hotel-admin/update-hotel-admin.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -126,12 +137,19 @@ Marker.prototype.options.icon = iconDefault;
     SortCarPipe,
     LoginAdminComponent,
     HotelAdminComponent,
-    HomeAdminComponent
+    InsertHotelAdminComponent,
+    UpdateHotelAdminComponent,
+    HomeAdminComponent,
+    DialogConfirmationComponent,
+    DialogErrorComponent
   ],
   entryComponents: [
     LoginComponent,
     RegisterComponent,
-    CardboxPlaneComponent
+    InsertHotelAdminComponent,
+    UpdateHotelAdminComponent,
+    DialogConfirmationComponent,
+    DialogErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -166,9 +184,17 @@ Marker.prototype.options.icon = iconDefault;
     MatButtonModule,
     MatTooltipModule,
     InfiniteScrollModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    MatTableModule
+  ]
 })
 
 export class AppModule {

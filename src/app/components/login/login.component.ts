@@ -128,8 +128,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.setError('Email or password doesn\'t match !');
     } else {
 
-      // TODO: Add JWT TOKEN
-
       this.sessionService.setSession(this.userLoginData.jwtToken);
       this.dialogRef.close();
     }

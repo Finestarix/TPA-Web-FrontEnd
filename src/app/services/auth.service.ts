@@ -13,6 +13,11 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     const token = sessionStorage.getItem('id-admin');
+
+    if (token === '' || token === null) {
+      return false;
+    }
+
     const tokenData = jwt_decode(token);
 
     if (tokenData.id !== 0) {
