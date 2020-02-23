@@ -1,1 +1,66 @@
-<p>update-hotel-admin works!</p>
+<div class="update-hotel-container">
+
+  <div class="update-hotel-title"> Update Hotel</div>
+
+  <div class="insert-hotel-name general-update-hotel">
+    <div>Hotel Name</div>
+    <mat-form-field>
+      <mat-label>Hotel Name</mat-label>
+      <input matInput [formControl]="nameFormControl" required>
+      <mat-error *ngIf="nameFormControl.invalid">Please Fill Hotel Name</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-rating general-update-hotel">
+    <div>Hotel Rating</div>
+    <mat-form-field>
+      <mat-label>Hotel Rating</mat-label>
+      <input matInput [formControl]="ratingFormControl" required>
+      <mat-error *ngIf="ratingFormControl.invalid">Please Fill Hotel Rating</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-price general-update-hotel">
+    <div>Hotel Price</div>
+    <mat-form-field>
+      <mat-label>Hotel Price</mat-label>
+      <input matInput [formControl]="priceFormControl" required>
+      <mat-error *ngIf="priceFormControl.invalid">Please Fill Hotel Price</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-facility general-update-hotel">
+    <div>Hotel Facility</div>
+    <mat-form-field>
+      <mat-label>Hotel Facility</mat-label>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let selFac of selectedFacility"
+                  [removable]="true"
+                  (removed)="remove(selFac)">
+          {{selFac}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input matInput
+               matTooltip="24 Hour-Frontdesk, AC, Elevator, Parking, Restaurant, SPA, Swimming Pool, WiFi"
+               [formControl]="facilityFormControl"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-information general-update-hotel">
+    <div>Hotel Information</div>
+    <mat-form-field>
+      <mat-label>Hotel Information</mat-label>
+      <input matInput [formControl]="informationFormControl" required>
+      <mat-error *ngIf="informationFormControl.invalid">Please Fill Hotel Facility</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button [disabled]="isDisable" mat-button (click)="updateHotel()">Update Hotel</button>
+  </div>
+
+</div>

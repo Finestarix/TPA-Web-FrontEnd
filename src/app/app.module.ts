@@ -79,6 +79,8 @@ import {SortCarPipe} from './pipe/car/sort-car.pipe';
 import {DialogErrorComponent} from "./components/admin/core/dialog-error/dialog-error.component";
 import {InsertHotelAdminComponent} from "./components/admin/hotel-admin/insert-hotel-admin/insert-hotel-admin.component";
 import {UpdateHotelAdminComponent} from "./components/admin/hotel-admin/update-hotel-admin/update-hotel-admin.component";
+import {MatIconModule} from "@angular/material/icon";
+import {MatChipsModule} from "@angular/material/chips";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -189,6 +191,8 @@ Marker.prototype.options.icon = iconDefault;
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatIconModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

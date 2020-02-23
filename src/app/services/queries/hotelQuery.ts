@@ -13,7 +13,7 @@ export const getRecommendedHotel = gql`
     }
 `;
 
-export const getHotelByProvince = gql `
+export const getHotelByProvince = gql`
     query hotelByLocation($provinceData: String!) {
         GetHotelByLocation(province: $provinceData) {
             id
@@ -40,7 +40,7 @@ export const getHotelByProvince = gql `
     }
 `;
 
-export const getHotelByLatLong = gql `
+export const getHotelByLatLong = gql`
     query getHotelByLatLong($latitude: Float!, $longitude: Float!) {
         GetHotelByLatLong(latitude: $latitude, longitude: $longitude) {
             id
@@ -67,8 +67,8 @@ export const getHotelByLatLong = gql `
     }
 `;
 
-export const getHotelByID = gql `
-    query getHotelByID($idData: Int!) {
+export const getHotelByID = gql`
+    query getHotelByID($idData: String!) {
         GetHotelByID(id: $idData) {
             id
             name
@@ -92,7 +92,7 @@ export const getHotelByID = gql `
     }
 `;
 
-export const getAllHotel = gql `
+export const getAllHotel = gql`
     query {
         AllHotel {
             address
@@ -120,13 +120,46 @@ export const getAllHotel = gql `
             }
             price
             rating
+            information
         }
     }
 `;
 
-export const deleteHotelByID = gql `
+export const deleteHotelByID = gql`
     mutation hotelData($idData: String!) {
         DeleteHotel(id: $idData) {
+            id
+        }
+    }
+`;
+
+export const insertHotel = gql`
+    mutation insertHotel($nameData: String!, $ratingData: String!, $addressData: String!, 
+        $locationData: String!, $priceData: Int!, $latitudeData: String!, 
+        $longitudeData: String!, $informationData: String!) {
+        InsertNewHotel(name: $nameData, rating: $ratingData, address: $addressData, 
+            location: $locationData, price: $priceData, latitude: $latitudeData, 
+            longitude: $longitudeData, information: $informationData) {
+            id
+        }
+    }
+`;
+
+export const updateHotel = gql`
+    mutation updateHotel($idData: String!, $nameData:String!, $priceData: Int!, $ratingData: String!, $informationData: String!) {
+        UpdateHotel(id: $idData, name: $nameData, price: $priceData, rating: $ratingData, information: $informationData) {
+            id
+            name
+            price
+            rating
+            information
+        }
+    }
+`;
+
+export const insertHotelFacility = gql`
+    mutation insertHotelFacility($idData: Int!, $nameData: String!) {
+        InsertHotelFacility(hotelid: $idData, name: $nameData) {
             id
         }
     }

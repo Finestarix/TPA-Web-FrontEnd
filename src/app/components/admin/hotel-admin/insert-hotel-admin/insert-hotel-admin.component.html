@@ -1,3 +1,102 @@
-<div>
-  
+<div class="insert-hotel-container">
+
+  <div class="insert-hotel-title"> Insert Hotel</div>
+
+  <div class="insert-hotel-name general-insert-hotel">
+    <div>Hotel Name</div>
+    <mat-form-field>
+      <mat-label>Hotel Name</mat-label>
+      <input matInput [formControl]="nameFormControl" required>
+      <mat-error *ngIf="nameFormControl.invalid">Please Fill Hotel Name</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-rating general-insert-hotel">
+    <div>Hotel Rating</div>
+    <mat-form-field>
+      <mat-label>Hotel Rating</mat-label>
+      <input matInput [formControl]="ratingFormControl" required>
+      <mat-error *ngIf="ratingFormControl.invalid">Please Fill Hotel Rating</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-address general-insert-hotel">
+    <div>Hotel Address</div>
+    <mat-form-field>
+      <mat-label>Hotel Address</mat-label>
+      <input matInput [formControl]="addressFormControl" required>
+      <mat-error *ngIf="addressFormControl.invalid">Please Fill Hotel Address</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-city general-insert-hotel">
+    <div>Hotel City</div>
+    <mat-form-field>
+      <mat-label>Hotel City</mat-label>
+      <input matInput [formControl]="cityFormControl" required>
+      <mat-error *ngIf="cityFormControl.invalid">Please Fill Hotel City</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-price general-insert-hotel">
+    <div>Hotel Price</div>
+    <mat-form-field>
+      <mat-label>Hotel Price</mat-label>
+      <input matInput [formControl]="priceFormControl" required>
+      <mat-error *ngIf="cityFormControl.invalid">Please Fill Hotel Price</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-price general-insert-hotel">
+    <div>Hotel Latitude</div>
+    <mat-form-field>
+      <mat-label>Hotel Latitude</mat-label>
+      <input matInput [formControl]="latitudeFormControl" required>
+      <mat-error *ngIf="cityFormControl.invalid">Please Fill Hotel Latitude</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-price general-insert-hotel">
+    <div>Hotel Longitude</div>
+    <mat-form-field>
+      <mat-label>Hotel Longitude</mat-label>
+      <input matInput [formControl]="longitudeFormControl" required>
+      <mat-error *ngIf="cityFormControl.invalid">Please Fill Hotel Longitude</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-facility general-insert-hotel">
+    <div>Hotel Facility</div>
+    <mat-form-field>
+      <mat-label>Hotel Facility</mat-label>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let selFac of selectedFacility"
+                  [removable]="true"
+                  (removed)="remove(selFac)">
+          {{selFac}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input matInput
+               matTooltip="24 Hour-Frontdesk, AC, Elevator, Parking, Restaurant, SPA, Swimming Pool, WiFi"
+               [formControl]="facilityFormControl"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-information general-insert-hotel">
+    <div>Hotel Information</div>
+    <mat-form-field>
+      <mat-label>Hotel Information</mat-label>
+      <input matInput [formControl]="informationFormControl" required>
+      <mat-error *ngIf="nameFormControl.invalid">Please Fill Hotel Facility</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button [disabled]="isDisable" mat-button (click)="insertHotel()">Insert Hotel</button>
+  </div>
+
 </div>

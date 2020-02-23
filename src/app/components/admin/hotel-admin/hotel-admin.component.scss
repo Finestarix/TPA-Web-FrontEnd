@@ -17,14 +17,11 @@
   }
 }
 
-.table-data {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
+.table-data-container {
+  overflow: auto;
 
-  .mat-table {
-    overflow: auto;
-    max-height: 500px;
+  .mat-header-cell, .mat-cell {
+    width: 200px;
   }
 
   .mat-column-image {
@@ -33,16 +30,10 @@
       height: 100px;
     }
   }
-
-  .column-table {
-    margin-left: 20px;
-  }
-
-  .mat-column-update, .mat-column-delete {
-    flex: 0 0 80px;
-  }
-
 }
+
+
+
 
 ::ng-deep {
   .mat-button, .mat-raised-button {

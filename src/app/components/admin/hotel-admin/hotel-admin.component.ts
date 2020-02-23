@@ -5,8 +5,12 @@ import {Subscription} from 'rxjs';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DialogConfirmationComponent} from '../core/dialog-confirmation/dialog-confirmation.component';
 import {DialogErrorComponent} from '../core/dialog-error/dialog-error.component';
-import {InsertHotelAdminComponent} from "./insert-hotel-admin/insert-hotel-admin.component";
-import {UpdateHotelAdminComponent} from "./update-hotel-admin/update-hotel-admin.component";
+import {InsertHotelAdminComponent} from './insert-hotel-admin/insert-hotel-admin.component';
+import {UpdateHotelAdminComponent} from './update-hotel-admin/update-hotel-admin.component';
+import {HotelData} from '../../../models/hotel-interface';
+import DateTimeFormat = Intl.DateTimeFormat;
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-hotel-admin',
@@ -20,6 +24,7 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
 
   dataHotel$: Subscription;
   dataHotel: any;
+  dataHotelArr: HotelData[] = [];
 
   dataHotelDelete$: Subscription;
 
@@ -57,15 +62,13 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
   }
 
   fetchHotelData(query) {
-    this.dataHotel = null;
     this.dataHotel = query.data.AllHotel;
 
-    const hotels: HotelData[] = [];
     for (const hotel of this.dataHotel) {
-      hotels.push(this.createNewHotel(hotel));
+      this.dataHotelArr.push(this.createNewHotel(hotel));
     }
 
-    this.setDataSource(hotels);
+    this.setDataSource(this.dataHotelArr);
   }
 
   createNewHotel(hotel: any): HotelData {
@@ -78,20 +81,65 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
 
     facilities = facilities.slice(0, facilities.length - 1);
 
+    let imageShow: string;
+    if (hotel.photo !== undefined) {
+      if (hotel.photo.length === 0) {
+        imageShow = 'no-image.png';
+      } else {
+        imageShow = hotel.photo[0].source;
+      }
+    } else {
+      imageShow = 'no-image.png';
+    }
+
+    let cityShow: string;
+    if (hotel.location === undefined) {
+      cityShow = hotel.city;
+    } else {
+      cityShow = hotel.location.city;
+    }
+
+    let provinceShow: string;
+    if (hotel.location === undefined) {
+      provinceShow = hotel.province;
+    } else {
+      provinceShow = hotel.location.province;
+    }
+
     return {
       id: hotel.id,
       name: hotel.name,
       rating: hotel.rating,
       address: hotel.address,
-      city: hotel.location.city,
-      province: hotel.location.province,
-      image: hotel.photo[0].source,
-      facility: facilities
+      city: cityShow,
+      province: provinceShow,
+      image: imageShow,
+      facility: facilities,
+      information: hotel.information,
+      longitude: hotel.longitude,
+      latitude: hotel.latitude,
+      price: hotel.price
     };
   }
 
+  insertAction() {
+    this.dialogInsertRef = this.dialogInsert.open(InsertHotelAdminComponent);
+
+    this.dialogInsertRef.afterClosed().subscribe(data => {
+      this.hotelService.getHotelByID(data.dataHotel).subscribe(async data2 => {
+        await this.afterInsertHotelData(data2);
+      });
+    });
+
+  }
+
+  afterInsertHotelData(data) {
+    const newHotel = data.data.GetHotelByID;
+    this.dataHotelArr.push(this.createNewHotel(newHotel));
+    this.setDataSource(this.dataHotelArr);
+  }
+
   removeHotelData(id: number) {
-    console.log(id);
     this.dataHotelDelete$ = this.hotelService.deleteHotelByID(id).subscribe(async query => {
       await this.afterRemoveHotelData(query);
     });
@@ -107,13 +155,11 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    let hotel: any;
-    hotel = this.dataSource.data.filter((value, key) => {
+    this.dataHotelArr = this.dataHotelArr.filter((value, key) => {
       // @ts-ignore
       return value.id !== currID;
     });
-
-    this.setDataSource(hotel);
+    this.setDataSource(this.dataHotelArr);
 
     this.dialogError.open(DialogErrorComponent, {
       data: 'Success Delete Data !'
@@ -121,20 +167,14 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
     return;
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
-  }
-
   deleteAction(hotel) {
     this.dialogConfirmRef = this.dialogConfirm.open(DialogConfirmationComponent);
 
     this.dialogConfirmRef.afterClosed().subscribe(temp => {
-      if (temp === false) {
-        return;
-      } else {
+      if (temp === true) {
         this.removeHotelData(hotel.id);
+      } else if (temp === true) {
+        return;
       }
     });
 
@@ -145,27 +185,38 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
       data: hotel
     });
 
-    this.dialogUpdateRef.afterClosed().subscribe(data => {
-
+    this.dialogUpdateRef.afterClosed().subscribe(async data => {
+      await this.afterUpdateHotelData(data);
     });
   }
 
-  insertAction() {
-    this.dialogInsertRef = this.dialogInsert.open(InsertHotelAdminComponent);
+  afterUpdateHotelData(data) {
 
-    this.dialogInsertRef.afterClosed().subscribe(data => {
+    if (data === undefined) {
+      return;
+    }
 
+    const tempData = this.dataHotelArr.filter((value, key) => {
+      return value.id === data.dataHotel.id;
     });
-  }
-}
 
-export interface HotelData {
-  id: number;
-  name: string;
-  rating: string;
-  province: string;
-  city: string;
-  address: string;
-  image: string;
-  facility: string;
+    tempData[0].name = data.dataHotel.name;
+    tempData[0].information = data.dataHotel.information;
+    tempData[0].price = data.dataHotel.price;
+    tempData[0].rating = data.dataHotel.rating;
+
+    this.dataHotelArr = this.dataHotelArr.filter((value, key) => {
+      return value.id !== data.dataHotel.id;
+    });
+    this.dataHotelArr.push(this.createNewHotel(tempData[0]));
+    this.setDataSource(this.dataHotelArr);
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
+
 }

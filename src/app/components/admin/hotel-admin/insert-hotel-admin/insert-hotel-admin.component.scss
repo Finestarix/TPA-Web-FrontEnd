@@ -1,0 +1,39 @@
+.insert-hotel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 80vh;
+
+  .insert-hotel-title {
+    margin-top: 150px;
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+
+  .general-insert-hotel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      width: 150px;
+    }
+
+    mat-form-field {
+      width: 150px;
+    }
+
+  }
+
+  input[type=file] {
+    display: none;
+  }
+
+  button {
+    margin-bottom: 20px;
+  }
+
+}

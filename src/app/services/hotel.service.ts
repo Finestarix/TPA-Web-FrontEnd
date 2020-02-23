@@ -6,9 +6,10 @@ import {
   getHotelByLatLong,
   getHotelByID,
   getAllHotel,
-  deleteHotelByID
+  deleteHotelByID, insertHotel, insertHotelFacility, updateHotel
 } from './queries/hotelQuery';
 import {Apollo} from 'apollo-angular';
+import {HotelData} from "../models/hotel-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class HotelService {
   }
 
   getHotelByID(id: any) {
-    const convertedID = parseInt(id, 3);
+    const convertedID = String(id);
 
     return this.apollo.query<any>({
       query: getHotelByID,
@@ -76,12 +77,67 @@ export class HotelService {
 
   deleteHotelByID(id: any) {
     const convertedID = String(id);
-    console.log(typeof convertedID);
 
     return this.apollo.mutate<any>({
       mutation: deleteHotelByID,
       variables: {
         idData: convertedID,
+      }
+    });
+  }
+
+  insertHotel(hotelData: HotelData) {
+
+    const nameConverted = String(hotelData.name);
+    const ratingConverted = String(hotelData.rating);
+    const addressConverted = String(hotelData.address);
+    const locationConverted = String(hotelData.city);
+    const priceConverted = String(hotelData.price);
+    const latitudeConverted = String(hotelData.latitude);
+    const longitudeConverted = String(hotelData.longitude);
+    const informationConverted = String(hotelData.information);
+
+    return this.apollo.mutate<any>({
+      mutation: insertHotel,
+      variables: {
+        nameData: nameConverted,
+        ratingData: ratingConverted,
+        addressData: addressConverted,
+        locationData: locationConverted,
+        priceData: priceConverted,
+        latitudeData: latitudeConverted,
+        longitudeData: longitudeConverted,
+        informationData: informationConverted
+      }
+    });
+  }
+
+  updateHotel(hotelData: HotelData) {
+
+    const idConverted = String(hotelData.id);
+    const nameConverted = String(hotelData.name);
+    const ratingConverted = String(hotelData.rating);
+    const priceConverted = String(hotelData.price);
+    const informationConverted = String(hotelData.information);
+
+    return this.apollo.mutate<any>({
+      mutation: updateHotel,
+      variables: {
+        idData: idConverted,
+        nameData: nameConverted,
+        ratingData: ratingConverted,
+        priceData: priceConverted,
+        informationData: informationConverted
+      }
+    });
+  }
+
+  insertHotelFacility(id: number, name: string) {
+    return this.apollo.mutate<any>({
+      mutation: insertHotelFacility,
+      variables: {
+        idData: id,
+        nameData: name
       }
     });
   }
