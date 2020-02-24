@@ -33,19 +33,40 @@
     <div>Hotel Facility</div>
     <mat-form-field>
       <mat-label>Hotel Facility</mat-label>
-      <mat-chip-list #chipList>
+      <mat-chip-list #chipListFac>
         <mat-chip *ngFor="let selFac of selectedFacility"
                   [removable]="true"
-                  (removed)="remove(selFac)">
+                  (removed)="removeFac(selFac)">
           {{selFac}}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
         <input matInput
                matTooltip="24 Hour-Frontdesk, AC, Elevator, Parking, Restaurant, SPA, Swimming Pool, WiFi"
                [formControl]="facilityFormControl"
-               [matChipInputFor]="chipList"
+               [matChipInputFor]="chipListFac"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               (matChipInputTokenEnd)="add($event)">
+               (matChipInputTokenEnd)="addFac($event)">
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-type general-update-hotel">
+    <div>Hotel Type</div>
+    <mat-form-field>
+      <mat-label>Hotel Type</mat-label>
+      <mat-chip-list #chipListTyp>
+        <mat-chip *ngFor="let selTyp of selectedType"
+                  [removable]="true"
+                  (removed)="removeTyp(selTyp)">
+          {{selTyp}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input matInput
+               matTooltip="Normal, Deluxe, Premium"
+               [formControl]="typeFormControl"
+               [matChipInputFor]="chipListTyp"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (matChipInputTokenEnd)="addTyp($event)">
       </mat-chip-list>
     </mat-form-field>
   </div>

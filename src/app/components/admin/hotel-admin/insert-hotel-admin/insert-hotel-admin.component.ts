@@ -23,7 +23,9 @@ export class InsertHotelAdminComponent implements OnInit {
   isDisable: boolean;
 
   selectedFacility: string[] = [];
+  selectedType: string[] = [];
   allFacility: string[] = ['24 Hour-Frontdesk', 'AC', 'Elevator', 'Parking', 'Restaurant', 'SPA', 'Swimming Pool', 'WiFi'];
+  allType: string[] = ['Normal', 'Deluxe', 'Premium'];
 
   nameFormControl: FormControl = new FormControl();
   ratingFormControl: FormControl = new FormControl();
@@ -33,6 +35,7 @@ export class InsertHotelAdminComponent implements OnInit {
   latitudeFormControl: FormControl = new FormControl();
   longitudeFormControl: FormControl = new FormControl();
   facilityFormControl: FormControl = new FormControl();
+  typeFormControl: FormControl = new FormControl();
   informationFormControl: FormControl = new FormControl();
 
   separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -40,7 +43,7 @@ export class InsertHotelAdminComponent implements OnInit {
   ngOnInit() {
   }
 
-  add(event: MatChipInputEvent): void {
+  addFac(event: MatChipInputEvent): void {
     const value = event.value.trim();
 
     if (value === '') {
@@ -78,10 +81,55 @@ export class InsertHotelAdminComponent implements OnInit {
     this.facilityFormControl.setValue(null);
   }
 
-  remove(facility: string): void {
-    const index = this.selectedFacility.indexOf(facility);
+  removeFac(type: string): void {
+    const index = this.selectedFacility.indexOf(type);
     if (index >= 0) {
       this.selectedFacility.splice(index, 1);
+    }
+  }
+
+  addTyp(event: MatChipInputEvent): void {
+    const value = event.value.trim();
+
+    if (value === '') {
+      return;
+    }
+
+    let flagFac = false;
+    for (const fac of this.allType) {
+      if (fac === value) {
+        flagFac = true;
+        break;
+      }
+    }
+    if (!flagFac) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Wrong Type'
+      });
+      return;
+    }
+
+    for (const fac of this.selectedType) {
+      if (fac === value) {
+        flagFac = false;
+        break;
+      }
+    }
+    if (!flagFac) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Duplicate Type'
+      });
+      return;
+    }
+
+    this.selectedType.push(value.trim());
+    this.typeFormControl.setValue(null);
+  }
+
+  removeTyp(type: string): void {
+    const index = this.selectedType.indexOf(type);
+    if (index >= 0) {
+      this.selectedType.splice(index, 1);
     }
   }
 
@@ -102,6 +150,7 @@ export class InsertHotelAdminComponent implements OnInit {
       price: this.priceFormControl.value,
       province: '',
       rating: this.ratingFormControl.value,
+      type: ''
     };
 
     this.hotelService.insertHotel(newHotel).subscribe(async value => {
@@ -113,8 +162,11 @@ export class InsertHotelAdminComponent implements OnInit {
   insertFacility(value) {
 
     for (const fas of this.selectedFacility) {
-      this.hotelService.insertHotelFacility(value.data.InsertNewHotel.id, fas).subscribe( value1 => {
-      });
+      this.hotelService.insertHotelFacility(value.data.InsertNewHotel.id, fas).subscribe();
+    }
+
+    for (const typ of this.selectedType) {
+      this.hotelService.insertHotelType(value.data.InsertNewHotel.id, typ).subscribe();
     }
 
     this.dialogRef.close({

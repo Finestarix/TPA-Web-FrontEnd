@@ -28,7 +28,7 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
 
   dataHotelDelete$: Subscription;
 
-  allColumns = ['image', 'name', 'rating', 'address', 'city', 'province', 'facility', 'update', 'delete'];
+  allColumns = ['image', 'name', 'rating', 'address', 'city', 'province', 'information', 'type', 'facility', 'update', 'delete'];
   dataSource = new MatTableDataSource();
 
   private dialogConfirmRef: MatDialogRef<DialogConfirmationComponent>;
@@ -49,16 +49,17 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
     this.getHotelData();
   }
 
-  getHotelData() {
-    this.dataHotel$ = this.hotelService.getAllHotel().subscribe(async query => {
-      await this.fetchHotelData(query);
-    });
-  }
-
   setDataSource(hotels: object[]) {
     this.dataSource = new MatTableDataSource(hotels);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  getHotelData() {
+    this.dataHotelArr = [];
+    this.dataHotel$ = this.hotelService.getAllHotel().subscribe(async query => {
+      await this.fetchHotelData(query);
+    });
   }
 
   fetchHotelData(query) {
@@ -69,41 +70,28 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
     }
 
     this.setDataSource(this.dataHotelArr);
+    this.dataHotel$.unsubscribe();
   }
 
   createNewHotel(hotel: any): HotelData {
 
     let facilities = '';
-
     for (const fac of hotel.facility) {
       facilities += fac.name + ', ';
     }
+    facilities = facilities.substring(0, facilities.length - 2);
 
-    facilities = facilities.slice(0, facilities.length - 1);
+    let types = '';
+    for (const typ of hotel.type) {
+      types += typ.name + ', ';
+    }
+    types = types.substring(0, types.length - 2);
 
     let imageShow: string;
-    if (hotel.photo !== undefined) {
-      if (hotel.photo.length === 0) {
-        imageShow = 'no-image.png';
-      } else {
-        imageShow = hotel.photo[0].source;
-      }
-    } else {
+    if (hotel.photo.length === 0) {
       imageShow = 'no-image.png';
-    }
-
-    let cityShow: string;
-    if (hotel.location === undefined) {
-      cityShow = hotel.city;
     } else {
-      cityShow = hotel.location.city;
-    }
-
-    let provinceShow: string;
-    if (hotel.location === undefined) {
-      provinceShow = hotel.province;
-    } else {
-      provinceShow = hotel.location.province;
+      imageShow = hotel.photo[0].source;
     }
 
     return {
@@ -111,14 +99,15 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
       name: hotel.name,
       rating: hotel.rating,
       address: hotel.address,
-      city: cityShow,
-      province: provinceShow,
+      city: hotel.location.city,
+      province: hotel.location.province,
       image: imageShow,
       facility: facilities,
       information: hotel.information,
       longitude: hotel.longitude,
       latitude: hotel.latitude,
-      price: hotel.price
+      price: hotel.price,
+      type: types,
     };
   }
 
@@ -139,32 +128,21 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
     this.setDataSource(this.dataHotelArr);
   }
 
-  removeHotelData(id: number) {
-    this.dataHotelDelete$ = this.hotelService.deleteHotelByID(id).subscribe(async query => {
-      await this.afterRemoveHotelData(query);
+  updateAction(hotel) {
+    this.dialogUpdateRef = this.dialogUpdate.open(UpdateHotelAdminComponent, {data: hotel});
+
+    this.dialogUpdateRef.afterClosed().subscribe(async data => {
+      await this.afterUpdateHotelData(data);
     });
+
   }
 
-  afterRemoveHotelData(query) {
-    const currID = query.data.DeleteHotel.id;
-
-    if (currID === 0) {
-      this.dialogError.open(DialogErrorComponent, {
-        data: 'Error Delete Data !'
-      });
+  afterUpdateHotelData(data) {
+    if (data === undefined) {
       return;
     }
 
-    this.dataHotelArr = this.dataHotelArr.filter((value, key) => {
-      // @ts-ignore
-      return value.id !== currID;
-    });
-    this.setDataSource(this.dataHotelArr);
-
-    this.dialogError.open(DialogErrorComponent, {
-      data: 'Success Delete Data !'
-    });
-    return;
+    this.getHotelData();
   }
 
   deleteAction(hotel) {
@@ -172,7 +150,9 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
 
     this.dialogConfirmRef.afterClosed().subscribe(temp => {
       if (temp === true) {
-        this.removeHotelData(hotel.id);
+        this.dataHotelDelete$ = this.hotelService.deleteHotelByID(hotel.id).subscribe(async query => {
+          await this.afterRemoveHotelData(query);
+        });
       } else if (temp === true) {
         return;
       }
@@ -180,36 +160,8 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
 
   }
 
-  updateAction(hotel) {
-    this.dialogUpdateRef = this.dialogUpdate.open(UpdateHotelAdminComponent, {
-      data: hotel
-    });
-
-    this.dialogUpdateRef.afterClosed().subscribe(async data => {
-      await this.afterUpdateHotelData(data);
-    });
-  }
-
-  afterUpdateHotelData(data) {
-
-    if (data === undefined) {
-      return;
-    }
-
-    const tempData = this.dataHotelArr.filter((value, key) => {
-      return value.id === data.dataHotel.id;
-    });
-
-    tempData[0].name = data.dataHotel.name;
-    tempData[0].information = data.dataHotel.information;
-    tempData[0].price = data.dataHotel.price;
-    tempData[0].rating = data.dataHotel.rating;
-
-    this.dataHotelArr = this.dataHotelArr.filter((value, key) => {
-      return value.id !== data.dataHotel.id;
-    });
-    this.dataHotelArr.push(this.createNewHotel(tempData[0]));
-    this.setDataSource(this.dataHotelArr);
+  afterRemoveHotelData(query) {
+    this.getHotelData();
   }
 
   applyFilter(filterValue: string) {
@@ -217,6 +169,5 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
-
 
 }

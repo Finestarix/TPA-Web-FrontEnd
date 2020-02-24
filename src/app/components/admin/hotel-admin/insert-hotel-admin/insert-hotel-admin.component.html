@@ -72,7 +72,7 @@
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let selFac of selectedFacility"
                   [removable]="true"
-                  (removed)="remove(selFac)">
+                  (removed)="removeFac(selFac)">
           {{selFac}}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
@@ -81,7 +81,28 @@
                [formControl]="facilityFormControl"
                [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               (matChipInputTokenEnd)="add($event)">
+               (matChipInputTokenEnd)="addFac($event)">
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-type general-insert-hotel">
+    <div>Hotel Type</div>
+    <mat-form-field>
+      <mat-label>Hotel Type</mat-label>
+      <mat-chip-list #chipListTyp>
+        <mat-chip *ngFor="let selTyp of selectedType"
+                  [removable]="true"
+                  (removed)="removeTyp(selTyp)">
+          {{selTyp}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input matInput
+               matTooltip="Normal, Deluxe, Premium"
+               [formControl]="typeFormControl"
+               [matChipInputFor]="chipListTyp"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (matChipInputTokenEnd)="addTyp($event)">
       </mat-chip-list>
     </mat-form-field>
   </div>

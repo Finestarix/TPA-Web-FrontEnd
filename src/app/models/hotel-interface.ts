@@ -11,4 +11,5 @@ export interface HotelData {
   latitude: any;
   information: any;
   price: any;
+  type: string;
 }

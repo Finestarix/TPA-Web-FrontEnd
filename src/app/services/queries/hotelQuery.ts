@@ -70,24 +70,30 @@ export const getHotelByLatLong = gql`
 export const getHotelByID = gql`
     query getHotelByID($idData: String!) {
         GetHotelByID(id: $idData) {
+            information
             id
-            name
-            location {
-                city
-                province
-                region
+            photo {
+                hotelid
+                source
             }
             facility {
                 name
                 photo
             }
-            photo {
-                source
-                id
-                hotelid
-            }
+            name
+            address
             latitude
             longitude
+            rating
+            price
+            location {
+                city
+                province
+                region
+            }
+            type {
+                name
+            }
         }
     }
 `;
@@ -121,6 +127,9 @@ export const getAllHotel = gql`
             price
             rating
             information
+            type {
+                name
+            }
         }
     }
 `;
@@ -149,10 +158,6 @@ export const updateHotel = gql`
     mutation updateHotel($idData: String!, $nameData:String!, $priceData: Int!, $ratingData: String!, $informationData: String!) {
         UpdateHotel(id: $idData, name: $nameData, price: $priceData, rating: $ratingData, information: $informationData) {
             id
-            name
-            price
-            rating
-            information
         }
     }
 `;
@@ -160,6 +165,14 @@ export const updateHotel = gql`
 export const insertHotelFacility = gql`
     mutation insertHotelFacility($idData: Int!, $nameData: String!) {
         InsertHotelFacility(hotelid: $idData, name: $nameData) {
+            id
+        }
+    }
+`;
+
+export const insertHotelType = gql`
+    mutation insertHotelType($idData: Int!, $nameData: String!) {
+        InsertHotelType(hotelid: $idData, name: $nameData) {
             id
         }
     }

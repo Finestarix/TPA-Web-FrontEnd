@@ -16,7 +16,6 @@ export class HotelHistoryComponent implements OnInit {
 
   ngOnInit() {
     this.historyHotelData = JSON.parse(this.hotelHistoryService.getSession());
-    console.log(this.historyHotelData);
   }
 
   passData(event) {

@@ -6,10 +6,10 @@ import {
   getHotelByLatLong,
   getHotelByID,
   getAllHotel,
-  deleteHotelByID, insertHotel, insertHotelFacility, updateHotel
+  deleteHotelByID, insertHotel, insertHotelFacility, updateHotel, insertHotelType
 } from './queries/hotelQuery';
 import {Apollo} from 'apollo-angular';
-import {HotelData} from "../models/hotel-interface";
+import {HotelData} from '../models/hotel-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +72,7 @@ export class HotelService {
   getAllHotel() {
     return this.apollo.query<any>({
       query: getAllHotel,
+      fetchPolicy: 'no-cache',
     });
   }
 
@@ -141,4 +142,15 @@ export class HotelService {
       }
     });
   }
+
+  insertHotelType(id: number, name: string) {
+    return this.apollo.mutate<any>({
+      mutation: insertHotelType,
+      variables: {
+        idData: id,
+        nameData: name
+      }
+    });
+  }
+
 }

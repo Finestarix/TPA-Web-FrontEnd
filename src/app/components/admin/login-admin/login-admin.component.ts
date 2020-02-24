@@ -54,7 +54,6 @@ export class LoginAdminComponent implements OnInit {
   }
 
   afterLoginAdmin(query) {
-    console.log(query);
     this.adminLogin = query.data.AdminLogin.jwtToken;
 
     if (this.adminLogin === '') {

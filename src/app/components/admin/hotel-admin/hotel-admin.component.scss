@@ -22,6 +22,11 @@
 
   .mat-header-cell, .mat-cell {
     width: 200px;
+    margin-left: 20px;
+  }
+
+  .button, .mat-cell {
+    width: 100px !important;
   }
 
   .mat-column-image {
@@ -31,9 +36,6 @@
     }
   }
 }
-
-
-
 
 ::ng-deep {
   .mat-button, .mat-raised-button {
