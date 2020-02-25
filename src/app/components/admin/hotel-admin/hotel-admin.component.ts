@@ -153,7 +153,7 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
         this.dataHotelDelete$ = this.hotelService.deleteHotelByID(hotel.id).subscribe(async query => {
           await this.afterRemoveHotelData(query);
         });
-      } else if (temp === true) {
+      } else {
         return;
       }
     });

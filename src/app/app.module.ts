@@ -27,7 +27,9 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatIconModule,
+  MatChipsModule
 } from '@angular/material';
 
 
@@ -69,6 +71,13 @@ import {LoginAdminComponent} from './components/admin/login-admin/login-admin.co
 import {HotelAdminComponent} from './components/admin/hotel-admin/hotel-admin.component';
 import {HomeAdminComponent} from './components/admin/home-admin/home-admin.component';
 import {DialogConfirmationComponent} from './components/admin/core/dialog-confirmation/dialog-confirmation.component';
+import {DialogErrorComponent} from './components/admin/core/dialog-error/dialog-error.component';
+import {InsertHotelAdminComponent} from './components/admin/hotel-admin/insert-hotel-admin/insert-hotel-admin.component';
+import {UpdateHotelAdminComponent} from './components/admin/hotel-admin/update-hotel-admin/update-hotel-admin.component';
+import {TrainAdminComponent} from './components/admin/train-admin/train-admin.component';
+import {EventAdminComponent} from './components/admin/event-admin/event-admin.component';
+import {InsertTrainAdminComponent} from './components/admin/train-admin/insert-train-admin/insert-train-admin.component';
+import {UpdateTrainAdminComponent} from './components/admin/train-admin/update-train-admin/update-train-admin.component';
 
 import {icon, Marker} from 'leaflet';
 
@@ -76,11 +85,6 @@ import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 import {SearchCarPipe} from './pipe/car/search-car.pipe';
 import {SortCarPipe} from './pipe/car/sort-car.pipe';
-import {DialogErrorComponent} from "./components/admin/core/dialog-error/dialog-error.component";
-import {InsertHotelAdminComponent} from "./components/admin/hotel-admin/insert-hotel-admin/insert-hotel-admin.component";
-import {UpdateHotelAdminComponent} from "./components/admin/hotel-admin/update-hotel-admin/update-hotel-admin.component";
-import {MatIconModule} from "@angular/material/icon";
-import {MatChipsModule} from "@angular/material/chips";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -143,13 +147,19 @@ Marker.prototype.options.icon = iconDefault;
     UpdateHotelAdminComponent,
     HomeAdminComponent,
     DialogConfirmationComponent,
-    DialogErrorComponent
+    DialogErrorComponent,
+    TrainAdminComponent,
+    InsertTrainAdminComponent,
+    UpdateTrainAdminComponent,
+    EventAdminComponent
   ],
   entryComponents: [
     LoginComponent,
     RegisterComponent,
     InsertHotelAdminComponent,
     UpdateHotelAdminComponent,
+    InsertTrainAdminComponent,
+    UpdateTrainAdminComponent,
     DialogConfirmationComponent,
     DialogErrorComponent
   ],
