@@ -87,7 +87,8 @@ export class TrainAdminComponent implements OnInit, AfterViewInit {
       departureTime: train.departureTime,
       class: classes,
       nameCode: train.name + ' ' +  train.code,
-      price: train.price
+      price: train.price,
+      transit: train.transit.name
     };
   }
 
@@ -95,9 +96,7 @@ export class TrainAdminComponent implements OnInit, AfterViewInit {
     this.dialogInsertRef = this.dialogInsert.open(InsertTrainAdminComponent);
 
     this.dialogInsertRef.afterClosed().subscribe(data => {
-      // this.trainService.getHotelByID(data.dataHotel).subscribe(async data2 => {
-      //   await this.afterInsertHotelData(data2);
-      // });
+      this.getTrainData();
     });
 
   }
@@ -106,7 +105,7 @@ export class TrainAdminComponent implements OnInit, AfterViewInit {
     this.dialogUpdateRef = this.dialogUpdate.open(UpdateTrainAdminComponent, {data: train});
 
     this.dialogUpdateRef.afterClosed().subscribe(async data => {
-      //   await this.afterUpdateHotelData(data);
+        await this.getTrainData();
     });
 
   }

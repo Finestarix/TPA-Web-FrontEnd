@@ -1,1 +1,126 @@
-<p>insert-train-admin works!</p>
+<div class="insert-train-container">
+
+  <div class="insert-train-title"> Insert Train </div>
+
+  <div class="insert-train-name general-insert-train">
+    <div>Train Name</div>
+    <mat-form-field>
+      <mat-label>Train Name</mat-label>
+      <input matInput [formControl]="nameFormControl" required>
+      <mat-error *ngIf="nameFormControl.invalid">Please Fill Train Name</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-train-code general-insert-train">
+    <div>Train Code</div>
+    <mat-form-field>
+      <mat-label>Train Code</mat-label>
+      <input matInput [formControl]="codeFormControl" required>
+      <mat-error *ngIf="codeFormControl.invalid">Please Fill Train Code</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-train-arrival general-insert-train">
+    <div>Train Station Arrival</div>
+    <mat-form-field>
+      <mat-label>Hotel Station Arrival</mat-label>
+      <input matInput [formControl]="arrivalFormControl" required>
+      <mat-error *ngIf="arrivalFormControl.invalid">Please Fill Train Station Arrival</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-train-arrival-date general-insert-train">
+    <div>Train Arrival Date</div>
+    <mat-form-field>
+      <mat-label>Train Arrival Date</mat-label>
+      <input matInput [matDatepicker]="arrivalDate" [formControl]="arrivalDateFormControl">
+      <mat-datepicker-toggle matSuffix [for]="arrivalDate"></mat-datepicker-toggle>
+      <mat-datepicker #arrivalDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-train-arrival-date general-insert-train">
+    <div>Train Arrival Time</div>
+    <div class="timepicker" >
+      <ngx-timepicker-field [formControl]="arrivalTimeFormControl" [format]="24" [controlOnly]="true"></ngx-timepicker-field>
+    </div>
+  </div>
+
+  <div class="insert-train-departure general-insert-train">
+    <div>Train Station Departure</div>
+    <mat-form-field>
+      <mat-label>Train Station Departure</mat-label>
+      <input matInput [formControl]="departureFormControl" required>
+      <mat-error *ngIf="departureFormControl.invalid">Please Fill Train Station Departure</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-train-departure-date general-insert-train">
+    <div>Train Departure Date</div>
+    <mat-form-field>
+      <mat-label>Train Departure Date</mat-label>
+      <input matInput [matDatepicker]="departureDate" [formControl]="departureDateFormControl">
+      <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
+      <mat-datepicker #departureDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-train-departure-date general-insert-train">
+    <div>Train Departure Time</div>
+    <div class="timepicker" >
+      <ngx-timepicker-field [formControl]="departureTimeFormControl" [format]="24" [controlOnly]="true"></ngx-timepicker-field>
+    </div>
+  </div>
+
+  <div class="insert-train-transit general-insert-train">
+    <div>Train Station Transit</div>
+    <mat-form-field>
+      <mat-label>Train Station Transit</mat-label>
+      <input matInput [formControl]="transitFormControl" required>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-train-seat general-insert-train">
+    <div>Train Seat</div>
+    <mat-form-field>
+      <mat-label>Train Seat</mat-label>
+      <input matInput [formControl]="seatFormControl" required>
+      <mat-error *ngIf="seatFormControl.invalid">Please Fill Train Seat</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-price general-insert-train">
+    <div>Train Price</div>
+    <mat-form-field>
+      <mat-label>Train Price</mat-label>
+      <input matInput [formControl]="priceFormControl" required>
+      <mat-error *ngIf="priceFormControl.invalid">Please Fill Train Price</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-hotel-class general-insert-train">
+    <div>Train Class</div>
+    <mat-form-field>
+      <mat-label>Train Class</mat-label>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let selClass of selectedClass"
+                  [removable]="true"
+                  (removed)="removeClass(selClass)">
+          {{selClass}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input matInput
+               matTooltip="Economy, Executive, Business"
+               [formControl]="classFormControl"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (matChipInputTokenEnd)="addClass($event)">
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button [disabled]="isDisable" mat-button (click)="insertTrain()">Insert Train</button>
+  </div>
+
+</div>

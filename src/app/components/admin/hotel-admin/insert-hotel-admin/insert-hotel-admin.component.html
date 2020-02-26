@@ -43,25 +43,25 @@
     <mat-form-field>
       <mat-label>Hotel Price</mat-label>
       <input matInput [formControl]="priceFormControl" required>
-      <mat-error *ngIf="cityFormControl.invalid">Please Fill Hotel Price</mat-error>
+      <mat-error *ngIf="priceFormControl.invalid">Please Fill Hotel Price</mat-error>
     </mat-form-field>
   </div>
 
-  <div class="insert-hotel-price general-insert-hotel">
+  <div class="insert-hotel-latitude general-insert-hotel">
     <div>Hotel Latitude</div>
     <mat-form-field>
       <mat-label>Hotel Latitude</mat-label>
       <input matInput [formControl]="latitudeFormControl" required>
-      <mat-error *ngIf="cityFormControl.invalid">Please Fill Hotel Latitude</mat-error>
+      <mat-error *ngIf="latitudeFormControl.invalid">Please Fill Hotel Latitude</mat-error>
     </mat-form-field>
   </div>
 
-  <div class="insert-hotel-price general-insert-hotel">
+  <div class="insert-hotel-longitude general-insert-hotel">
     <div>Hotel Longitude</div>
     <mat-form-field>
       <mat-label>Hotel Longitude</mat-label>
       <input matInput [formControl]="longitudeFormControl" required>
-      <mat-error *ngIf="cityFormControl.invalid">Please Fill Hotel Longitude</mat-error>
+      <mat-error *ngIf="longitudeFormControl.invalid">Please Fill Hotel Longitude</mat-error>
     </mat-form-field>
   </div>
 
@@ -112,7 +112,7 @@
     <mat-form-field>
       <mat-label>Hotel Information</mat-label>
       <input matInput [formControl]="informationFormControl" required>
-      <mat-error *ngIf="nameFormControl.invalid">Please Fill Hotel Facility</mat-error>
+      <mat-error *ngIf="informationFormControl.invalid">Please Fill Hotel Facility</mat-error>
     </mat-form-field>
   </div>
 

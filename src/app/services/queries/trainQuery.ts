@@ -65,3 +65,55 @@ export const deleteTrainByID = gql`
         }
     }
 `;
+
+export const insertTrain = gql`
+    mutation($nameData: String!, $codeData: String!, $seatData: Int!, $priceData: Int!, $arrivalData: String!,
+        $arrivalTimeData: String!, $transitData: String!, $departureData: String!, $departureTimeData: String!) {
+        InsertNewTrain(name: $nameData, code: $codeData, seat: $seatData, price: $priceData, arrival: $arrivalData,
+            arrivalTime: $arrivalTimeData, transit: $transitData, departure: $departureData, departureTime: $departureTimeData) {
+            id
+        }
+    }
+`;
+
+export const updateTrain = gql`
+    mutation($idData: String!, $seatData: Int!, $priceData: Int!,
+        $arrivalTimeData: String!, $departureTimeData: String!) {
+        UpdateTrain(id: $idData, seat: $seatData, price: $priceData,
+            arrivalTime: $arrivalTimeData, departureTime: $departureTimeData) {
+            id
+            arrival{
+                code
+                id
+                locationId
+                name
+            }
+            transit {
+                code
+                id
+                locationId
+                name
+            }
+            departure {
+                code
+                id
+                locationId
+                name
+            }
+            name
+            price
+            seat
+
+        }
+    }
+`;
+
+export const insertClassTrain = gql`
+    mutation insertTrainClass($idData: Int!, $nameData: String!) {
+        InsertNewTrainClass(trainId: $idData, name: $nameData) {
+            id
+            name
+            trainId
+        }
+    }
+`;

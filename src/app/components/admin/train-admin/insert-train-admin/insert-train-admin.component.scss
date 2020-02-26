@@ -1,0 +1,45 @@
+.insert-train-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 80vh;
+
+  .insert-train-title {
+    margin-top: 270px;
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+
+  .general-insert-train {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      width: 140px;
+      margin-right: 10px;
+      text-align: left;
+    }
+
+    mat-form-field, .timepicker {
+      width: 150px;
+    }
+
+    .timepicker {
+      margin-bottom: 10px;
+    }
+
+  }
+
+  input[type=file] {
+    display: none;
+  }
+
+  button {
+    margin-bottom: 20px;
+  }
+
+}

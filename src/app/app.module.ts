@@ -85,6 +85,7 @@ import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 import {SearchCarPipe} from './pipe/car/search-car.pipe';
 import {SortCarPipe} from './pipe/car/sort-car.pipe';
+import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -203,6 +204,7 @@ Marker.prototype.options.icon = iconDefault;
     MatProgressSpinnerModule,
     MatIconModule,
     MatChipsModule,
+    NgxMaterialTimepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
