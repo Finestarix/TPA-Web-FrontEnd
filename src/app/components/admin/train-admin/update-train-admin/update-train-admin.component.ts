@@ -17,7 +17,9 @@ export class UpdateTrainAdminComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) private data,
               private dialogRef: MatDialogRef<UpdateTrainAdminComponent>,
               private dialogError: MatDialog,
-              private trainService: TrainService) { }
+              private trainService: TrainService) {
+
+  }
 
   selectedClass: string[] = [];
   allClass: string[] = ['Economy', 'Executive', 'Business'];

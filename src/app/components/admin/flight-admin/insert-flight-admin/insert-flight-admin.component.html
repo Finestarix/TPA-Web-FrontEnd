@@ -1,0 +1,96 @@
+<div class="insert-flight-container">
+
+  <div class="insert-flight-title"> Insert Flight </div>
+
+  <div class="insert-flight-name general-insert-flight">
+    <div>Flight Company Name</div>
+    <mat-form-field>
+      <mat-label>Flight Company Name</mat-label>
+      <input matInput [formControl]="nameFormControl" required>
+      <mat-error *ngIf="nameFormControl.invalid">Please Fill Flight Company Name</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-flight-code general-insert-flight">
+    <div>Flight Model</div>
+    <mat-form-field>
+      <mat-label>Flight Model</mat-label>
+      <input matInput [formControl]="modelFormControl" required>
+      <mat-error *ngIf="modelFormControl.invalid">Please Fill Flight Model</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-flight-price general-insert-flight">
+    <div>Flight Price</div>
+    <mat-form-field>
+      <mat-label>Flight Price</mat-label>
+      <input matInput [formControl]="priceFormControl" required>
+      <mat-error *ngIf="priceFormControl.invalid">Please Fill Flight Price</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-flight-arrival general-insert-flight">
+    <div>Flight Arrival Airport</div>
+    <mat-form-field>
+      <mat-label>Flight Arrival Airport</mat-label>
+      <input matInput [formControl]="arrivalFormControl" required>
+      <mat-error *ngIf="arrivalFormControl.invalid">Please Fill Flight Arrival Airport</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-flight-arrival-date general-insert-flight">
+    <div>Flight Arrival Date</div>
+    <mat-form-field>
+      <mat-label>Flight Arrival Date</mat-label>
+      <input matInput [matDatepicker]="arrivalDate" [formControl]="arrivalDateFormControl">
+      <mat-datepicker-toggle matSuffix [for]="arrivalDate"></mat-datepicker-toggle>
+      <mat-datepicker #arrivalDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-flight-arrival-date general-insert-flight">
+    <div>Flight Arrival Time</div>
+    <div class="timepicker" >
+      <ngx-timepicker-field [formControl]="arrivalTimeFormControl" [format]="24" [controlOnly]="true"></ngx-timepicker-field>
+    </div>
+  </div>
+
+  <div class="insert-flight-departure general-insert-flight">
+    <div>Flight Departure Airport</div>
+    <mat-form-field>
+      <mat-label>Flight Departure Airport</mat-label>
+      <input matInput [formControl]="departureFormControl" required>
+      <mat-error *ngIf="departureFormControl.invalid">Please Fill Flight Departure Airport</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-flight-departure-date general-insert-flight">
+    <div>Flight Departure Date</div>
+    <mat-form-field>
+      <mat-label>Flight Departure Date</mat-label>
+      <input matInput [matDatepicker]="departureDate" [formControl]="departureDateFormControl">
+      <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
+      <mat-datepicker #departureDate></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-flight-departure-date general-insert-flight">
+    <div>Flight Departure Time</div>
+    <div class="timepicker" >
+      <ngx-timepicker-field [formControl]="departureTimeFormControl" [format]="24" [controlOnly]="true"></ngx-timepicker-field>
+    </div>
+  </div>
+
+  <div class="insert-flight-transit general-insert-flight">
+    <div>Flight Arrival Airport</div>
+    <mat-form-field>
+      <mat-label>Flight Arrival Airport</mat-label>
+      <input matInput [formControl]="transitFormControl" required>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button [disabled]="isDisable" mat-button (click)="insertFlight()">Insert Flight</button>
+  </div>
+
+</div>

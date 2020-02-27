@@ -22,11 +22,26 @@
 
   .mat-header-cell, .mat-cell {
     width: 200px;
-    margin-left: 20px;
   }
 
   .button, .mat-cell {
     width: 100px !important;
+  }
+
+  mat-cell,
+  .mat-cell,
+  mat-footer-cell,
+  .mat-footer-cell,
+  mat-header-cell .mat-header-cell {
+    padding: 0 0.75rem !important;
+  }
+
+
+  .mat-column-image {
+    img {
+      width: 180px;
+      height: 100px;
+    }
   }
 }
 

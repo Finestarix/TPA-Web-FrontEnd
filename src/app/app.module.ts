@@ -11,6 +11,7 @@ import {JwtModule} from '@auth0/angular-jwt';
 import {Ng5SliderModule} from 'ng5-slider';
 import {NgxContentLoadingModule} from 'ngx-content-loading';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {
   MatDialogModule,
   MatNativeDateModule,
@@ -31,7 +32,6 @@ import {
   MatIconModule,
   MatChipsModule
 } from '@angular/material';
-
 
 import {AppComponent} from './app.component';
 import {LoginComponent} from './components/login/login.component';
@@ -78,6 +78,7 @@ import {TrainAdminComponent} from './components/admin/train-admin/train-admin.co
 import {EventAdminComponent} from './components/admin/event-admin/event-admin.component';
 import {InsertTrainAdminComponent} from './components/admin/train-admin/insert-train-admin/insert-train-admin.component';
 import {UpdateTrainAdminComponent} from './components/admin/train-admin/update-train-admin/update-train-admin.component';
+import {FlightAdminComponent} from './components/admin/flight-admin/flight-admin.component';
 
 import {icon, Marker} from 'leaflet';
 
@@ -85,7 +86,8 @@ import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 import {SearchCarPipe} from './pipe/car/search-car.pipe';
 import {SortCarPipe} from './pipe/car/sort-car.pipe';
-import {NgxMaterialTimepickerModule} from "ngx-material-timepicker";
+import {InsertFlightAdminComponent} from "./components/admin/flight-admin/insert-flight-admin/insert-flight-admin.component";
+import {UpdateFlightAdminComponent} from "./components/admin/flight-admin/update-flight-admin/update-flight-admin.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -152,7 +154,10 @@ Marker.prototype.options.icon = iconDefault;
     TrainAdminComponent,
     InsertTrainAdminComponent,
     UpdateTrainAdminComponent,
-    EventAdminComponent
+    EventAdminComponent,
+    FlightAdminComponent,
+    InsertFlightAdminComponent,
+    UpdateFlightAdminComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -161,6 +166,8 @@ Marker.prototype.options.icon = iconDefault;
     UpdateHotelAdminComponent,
     InsertTrainAdminComponent,
     UpdateTrainAdminComponent,
+    InsertFlightAdminComponent,
+    UpdateFlightAdminComponent,
     DialogConfirmationComponent,
     DialogErrorComponent
   ],

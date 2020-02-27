@@ -1,15 +1,18 @@
-.update-train-container {
+.insert-flight-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  .update-train-title {
+  height: 80vh;
+
+  .insert-flight-title {
+    margin-top: 270px;
     margin-bottom: 20px;
     font-size: 25px;
   }
 
-  .general-update-train {
+  .general-insert-flight {
     display: flex;
     flex-direction: row;
     align-items: center;
