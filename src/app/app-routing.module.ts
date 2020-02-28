@@ -14,6 +14,8 @@ import {SearchCarComponent} from './components/main/car/search-car/search-car.co
 import {LoginAdminComponent} from './components/admin/login-admin/login-admin.component';
 import {AuthGuard} from './guards/auth.guard';
 import {HomeAdminComponent} from './components/admin/home-admin/home-admin.component';
+import {InsertBlogAdminComponent} from "./components/admin/blog-admin/insert-blog-admin/insert-blog-admin.component";
+import {UpdateBlogAdminComponent} from "./components/admin/blog-admin/update-blog-admin/update-blog-admin.component";
 
 const routes: Routes = [
   {
@@ -88,6 +90,14 @@ const routes: Routes = [
         path: 'Home',
         component: HomeAdminComponent,
         canActivate: [AuthGuard],
+      },
+      {
+        path: 'InsertBlog',
+        component: InsertBlogAdminComponent,
+      },
+      {
+        path: 'UpdateBlog',
+        component: UpdateBlogAdminComponent,
       }
     ]
   }

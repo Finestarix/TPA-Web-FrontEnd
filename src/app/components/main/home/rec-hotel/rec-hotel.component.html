@@ -29,7 +29,12 @@
 
   <div class="hotel-content">
     <div *ngFor="let hotel of recHotel">
-      <img class="hotel-image" src="assets/hotels/{{hotel.photo[0].source}}" alt="Hotel">
+      <div *ngIf="hotel.photo[0]; else other">
+        <img class="hotel-image" src="assets/hotels/{{hotel.photo[0].source}}" alt="Hotel">
+      </div>
+      <ng-template #other>
+        <img class="hotel-image" src="assets/hotels/no-image.png" alt="Hotel">
+      </ng-template>
       <p>{{hotel.name}}</p>
       <p>$ {{hotel.price}} / Night</p>
       <app-star-bar [widthRating]="hotel.rating/5 * 100"></app-star-bar>

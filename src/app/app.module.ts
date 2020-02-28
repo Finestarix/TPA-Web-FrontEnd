@@ -79,6 +79,11 @@ import {EventAdminComponent} from './components/admin/event-admin/event-admin.co
 import {InsertTrainAdminComponent} from './components/admin/train-admin/insert-train-admin/insert-train-admin.component';
 import {UpdateTrainAdminComponent} from './components/admin/train-admin/update-train-admin/update-train-admin.component';
 import {FlightAdminComponent} from './components/admin/flight-admin/flight-admin.component';
+import {InsertFlightAdminComponent} from './components/admin/flight-admin/insert-flight-admin/insert-flight-admin.component';
+import {UpdateFlightAdminComponent} from './components/admin/flight-admin/update-flight-admin/update-flight-admin.component';
+import {InsertBlogAdminComponent} from './components/admin/blog-admin/insert-blog-admin/insert-blog-admin.component';
+import {UpdateBlogAdminComponent} from './components/admin/blog-admin/update-blog-admin/update-blog-admin.component';
+import {TextEditorComponent} from './components/core/text-editor/text-editor.component';
 
 import {icon, Marker} from 'leaflet';
 
@@ -86,8 +91,8 @@ import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 import {SearchCarPipe} from './pipe/car/search-car.pipe';
 import {SortCarPipe} from './pipe/car/sort-car.pipe';
-import {InsertFlightAdminComponent} from "./components/admin/flight-admin/insert-flight-admin/insert-flight-admin.component";
-import {UpdateFlightAdminComponent} from "./components/admin/flight-admin/update-flight-admin/update-flight-admin.component";
+import {BlogAdminComponent} from "./components/admin/blog-admin/blog-admin.component";
+
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -157,7 +162,11 @@ Marker.prototype.options.icon = iconDefault;
     EventAdminComponent,
     FlightAdminComponent,
     InsertFlightAdminComponent,
-    UpdateFlightAdminComponent
+    UpdateFlightAdminComponent,
+    InsertBlogAdminComponent,
+    UpdateBlogAdminComponent,
+    TextEditorComponent,
+    BlogAdminComponent
   ],
   entryComponents: [
     LoginComponent,

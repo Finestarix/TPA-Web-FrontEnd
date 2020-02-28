@@ -1,0 +1,53 @@
+.editor-container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .editor-button {
+
+    button {
+      border: 1px solid black;
+      background-color: lightgray;
+      margin: 0 5px;
+
+      cursor: pointer;
+      outline: none;
+
+      &:hover {
+        background-color: lightgreen;
+      }
+    }
+
+  }
+
+  .editor-content {
+
+    width: 100%;
+
+    .editor-title {
+
+      padding: 20px;
+
+      margin-top: 10px;
+      border: 1px solid gray;
+      border-radius: 20px;
+      outline: none;
+
+      height: auto;
+    }
+
+    .editor {
+      height: 200px;
+      padding: 20px;
+
+      margin-top: 10px;
+      border: 1px solid gray;
+      border-radius: 20px;
+      outline: none;
+    }
+  }
+
+
+}

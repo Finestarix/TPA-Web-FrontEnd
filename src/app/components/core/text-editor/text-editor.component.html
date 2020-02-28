@@ -1,0 +1,17 @@
+<div class="editor-container">
+
+  <div class="editor-button">
+    <button mat-button href="javascript:void(0)" (click)="format('bold')" ><i class="fa fa-bold"></i></button>
+    <button mat-button href="javascript:void(0)" (click)="format('italic')"><i class="fa fa-italic"></i></button>
+    <button mat-button href="javascript:void(0)" (click)="format('underline')"><i class="fa fa-underline"></i></button>
+    <button mat-button href="javascript:void(0)" (click)="format('strikethrough')"><i class="fa fa-strikethrough"></i></button>
+    <button mat-button href="javascript:void(0)" (click)="format('insertunorderedlist')"><i class="fa fa-list"></i></button>
+    <button mat-button href="javascript:void(0)" (click)="format('insertorderedlist')"><i class="fa fa-list-ol"></i></button>
+  </div>
+
+  <div class="editor-content">
+    <div class="editor-title" #title contenteditable="true"></div>
+    <div class="editor" #content contenteditable="true"></div>
+  </div>
+
+</div>
