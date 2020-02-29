@@ -13,7 +13,6 @@ import * as _moment from 'moment';
 import {default as _rollupMoment, Moment} from 'moment';
 import {type} from 'os';
 
-
 const moment = _rollupMoment || _moment;
 
 export const MY_FORMATS = {

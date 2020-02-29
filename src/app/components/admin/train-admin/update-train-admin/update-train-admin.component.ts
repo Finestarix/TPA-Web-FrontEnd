@@ -84,7 +84,17 @@ export class UpdateTrainAdminComponent implements OnInit {
     }
   }
 
-  insertTrain() {
+  updateTrain() {
+
+    if (this.priceFormControl.invalid || this.seatFormControl.invalid
+      || this.arrivalDateFormControl.invalid || this.arrivalTimeFormControl.invalid
+      || this.departureDateFormControl.invalid || this.departureTimeFormControl.invalid) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Fill All Field !'
+      });
+      return;
+    }
+
     this.isDisable = true;
 
     const arrivalDate = new Date(this.arrivalDateFormControl.value);

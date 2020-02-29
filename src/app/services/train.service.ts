@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import {deleteTrainByID, getAllTrain, insertClassTrain, insertTrain, updateTrain} from './queries/trainQuery';
+import {
+  deleteTrainByID,
+  getAllTrain,
+  getAllTrainStation,
+  insertClassTrain,
+  insertTrain,
+  updateTrain
+} from './queries/trainQuery';
 import {Apollo} from 'apollo-angular';
 import {TrainData} from '../models/train-interface';
 
@@ -13,6 +20,13 @@ export class TrainService {
   getAllTrain() {
     return this.apollo.query<any>({
       query: getAllTrain,
+      fetchPolicy: 'no-cache',
+    });
+  }
+
+  getAllTrainStation() {
+    return this.apollo.query<any>({
+      query: getAllTrainStation,
       fetchPolicy: 'no-cache',
     });
   }

@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {TrainService} from '../../../services/train.service';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import {TrainService} from "../../../../services/train.service";
+import {FormControl} from "@angular/forms";
+import {Observable} from "rxjs";
+import {map, startWith} from "rxjs/operators";
 
 @Component({
-  selector: 'app-train',
-  templateUrl: './train.component.html',
-  styleUrls: ['./train.component.scss']
+  selector: 'app-cardbox-train',
+  templateUrl: './cardbox-train.component.html',
+  styleUrls: ['./cardbox-train.component.scss']
 })
-export class TrainComponent implements OnInit {
+export class CardboxTrainComponent implements OnInit {
 
   constructor(private trainService: TrainService) {
     this.trainService.getAllTrainStation().subscribe(async value => {

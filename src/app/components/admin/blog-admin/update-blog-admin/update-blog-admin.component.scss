@@ -1,0 +1,16 @@
+.update-blog-container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .update-blog-title {
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+
+    margin-bottom: 10px;
+  }
+
+}

@@ -6,6 +6,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {DialogErrorComponent} from '../../core/dialog-error/dialog-error.component';
 import {HotelService} from '../../../../services/hotel.service';
 import {HotelData} from '../../../../models/hotel-interface';
+import {log} from "util";
 
 @Component({
   selector: 'app-insert-hotel-admin',
@@ -134,6 +135,16 @@ export class InsertHotelAdminComponent implements OnInit {
   }
 
   insertHotel() {
+
+    if (this.addressFormControl.invalid || this.cityFormControl.invalid
+      || this.informationFormControl.invalid || this.latitudeFormControl.invalid
+      || this.longitudeFormControl.invalid || this.nameFormControl.invalid
+      || this.priceFormControl.invalid || this.ratingFormControl.invalid) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Fill All Field !'
+      });
+      return;
+    }
 
     this.isDisable = true;
 

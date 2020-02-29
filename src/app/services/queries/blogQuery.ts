@@ -1,0 +1,46 @@
+import gql from 'graphql-tag';
+
+export const insertBlog = gql`
+    mutation insertBlog($userData: Int!, $imageData: String!,
+        $categoryData: String!, $titleData: String!, $contentData: String!){
+        InsertNewBlog(userID: $userData, image: $imageData,
+            category:$categoryData, title: $titleData, content: $contentData) {
+            category
+            content
+        }
+    }
+`;
+
+export const getAllBlog = gql`
+    {
+        AllBlog {
+            category
+            content
+            id
+            image
+            title
+            userID
+            viewCount
+        }
+    }
+`;
+
+export const deleteBlog = gql`
+    mutation deleteBlog($idData: Int!) {
+        DeleteBlog(id: $idData) {
+            id
+        }
+    }
+`;
+
+export const updateBlog = gql`
+    mutation($idData: Int!, $contentData:String!, $imageData: String!,
+        $categoryData: String!) {
+        UpdateBlog(id: $idData, content: $contentData, image: $imageData,
+            category: $categoryData) {
+            category
+            id
+            content
+        }
+    }
+`;

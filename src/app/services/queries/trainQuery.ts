@@ -36,6 +36,24 @@ export const getAllTrain = gql`
         }
     }
 `;
+
+export const getAllTrainStation = gql`
+    query getAllTrainStation {
+        AllTrainStation {
+            code
+            id
+            location {
+                city
+                id
+                province
+                region
+            }
+            locationId
+            name
+        }
+    }
+`;
+
 export const deleteTrainByID = gql`
     mutation deleteTrainData($idData: String!) {
         DeleteTrain(id: $idData) {

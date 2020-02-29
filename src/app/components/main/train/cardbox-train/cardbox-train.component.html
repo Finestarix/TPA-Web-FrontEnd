@@ -1,0 +1,84 @@
+<div class="cardbox-train-container">
+
+  <div class="cardbox-train-top-top">
+
+    <div class="cardbox-train-top">
+      <div class="cardbox-train-container-image">
+        <div class="fa fa-train"></div>
+      </div>
+      <p class="cardbox-train-container-text">Reservation And Book Online Train Ticket</p>
+    </div>
+  </div>
+
+  <div class="cardbox-train-mid">
+
+    <div class="cardbox-train-location">
+      <mat-form-field>
+        <input type="text"
+               placeholder="Input Source"
+               matInput
+               [formControl]="sourceFormControl"
+               [matAutocomplete]="source">
+        <mat-autocomplete #source="matAutocomplete">
+          <mat-option *ngFor="let station of filteredSourceStationList | async" [value]="station">
+            {{station}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text"
+               placeholder="Input Destination"
+               matInput
+               [formControl]="destinationFormControl"
+               [matAutocomplete]="destination">
+        <mat-autocomplete #destination="matAutocomplete">
+          <mat-option *ngFor="let station of filteredDestinationStationList | async" [value]="station">
+            {{station}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <div class="cardbox-train-date">
+
+      <mat-form-field>
+        <mat-label>Departure</mat-label>
+        <input matInput [matDatepicker]="departureDate" [formControl]="departureDateFormControl">
+        <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
+        <mat-datepicker #departureDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Return</mat-label>
+        <input matInput [matDatepicker]="arrivalDate" [formControl]="arrivalDateFormControl">
+        <mat-datepicker-toggle matSuffix [for]="arrivalDate"></mat-datepicker-toggle>
+        <mat-datepicker #arrivalDate></mat-datepicker>
+      </mat-form-field>
+
+
+    </div>
+
+    <div class="cardbox-train-passenger">
+
+      <div>
+        <mat-label>Adult</mat-label>
+        <mat-slider
+          thumbLabel
+          min="1"
+          max="10"></mat-slider>
+      </div>
+
+      <div>
+        <mat-label>Infant</mat-label>
+        <mat-slider
+          thumbLabel
+          min="1"
+          max="10"></mat-slider>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -138,6 +138,14 @@ export class UpdateHotelAdminComponent implements OnInit {
 
   updateHotel() {
 
+    if (this.informationFormControl.invalid || this.nameFormControl.invalid
+      || this.priceFormControl.invalid || this.ratingFormControl.invalid) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Fill All Field !'
+      });
+      return;
+    }
+
     this.isDisable = true;
 
     const newHotel: HotelData = {

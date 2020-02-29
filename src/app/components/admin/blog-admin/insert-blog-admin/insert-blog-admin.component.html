@@ -4,11 +4,25 @@
     Insert Blog
   </div>
 
-  <app-text-editor #textEditor></app-text-editor>
+  <app-text-editor #textEditor [conditional]="selectedArg"></app-text-editor>
+
+
+  <mat-form-field>
+    <mat-label>Image Link</mat-label>
+    <input matInput placeholder="Image Link" [(ngModel)]="selectedImage">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Blog Category</mat-label>
+    <mat-select [(ngModel)]="selectedCategory" name="food">
+      <mat-option value="Culinary"> Culinary </mat-option>
+      <mat-option value="Tips And Trick"> Tips and Trick </mat-option>
+      <mat-option value="Info"> Info </mat-option>
+    </mat-select>
+  </mat-form-field>
 
   <div>
     <button mat-button (click)="insertBlog()"> Insert Blog </button>
   </div>
-
 
 </div>

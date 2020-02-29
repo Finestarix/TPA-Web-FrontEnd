@@ -90,6 +90,17 @@ export class InsertTrainAdminComponent implements OnInit {
   }
 
   insertTrain() {
+    if (this.nameFormControl.invalid || this.codeFormControl.invalid
+      || this.priceFormControl.invalid || this.seatFormControl.invalid
+      || this.arrivalDateFormControl.invalid || this.arrivalTimeFormControl.invalid
+      || this.departureDateFormControl.invalid || this.departureTimeFormControl.invalid
+      || this.departureFormControl.invalid || this.arrivalFormControl.invalid) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Fill All Field !'
+      });
+      return;
+    }
+
     this.isDisable = true;
 
     const arrivalDate = new Date(this.arrivalDateFormControl.value);

@@ -84,6 +84,8 @@ import {UpdateFlightAdminComponent} from './components/admin/flight-admin/update
 import {InsertBlogAdminComponent} from './components/admin/blog-admin/insert-blog-admin/insert-blog-admin.component';
 import {UpdateBlogAdminComponent} from './components/admin/blog-admin/update-blog-admin/update-blog-admin.component';
 import {TextEditorComponent} from './components/core/text-editor/text-editor.component';
+import {BlogAdminComponent} from './components/admin/blog-admin/blog-admin.component';
+import {CardboxTrainComponent} from './components/main/train/cardbox-train/cardbox-train.component';
 
 import {icon, Marker} from 'leaflet';
 
@@ -91,8 +93,6 @@ import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 import {SearchCarPipe} from './pipe/car/search-car.pipe';
 import {SortCarPipe} from './pipe/car/sort-car.pipe';
-import {BlogAdminComponent} from "./components/admin/blog-admin/blog-admin.component";
-
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -166,7 +166,8 @@ Marker.prototype.options.icon = iconDefault;
     InsertBlogAdminComponent,
     UpdateBlogAdminComponent,
     TextEditorComponent,
-    BlogAdminComponent
+    BlogAdminComponent,
+    CardboxTrainComponent
   ],
   entryComponents: [
     LoginComponent,

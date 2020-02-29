@@ -67,7 +67,6 @@ export class FlightAdminComponent implements OnInit, AfterViewInit {
 
   fetchHotelData(query) {
     this.dataFlight = query.data.AllFlight;
-    console.log(this.dataFlight);
 
     for (const hotel of this.dataFlight) {
       this.dataFlightArr.push(this.createNewFlight(hotel));

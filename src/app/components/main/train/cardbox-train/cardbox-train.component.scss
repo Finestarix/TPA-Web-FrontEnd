@@ -1,0 +1,79 @@
+.cardbox-train-container {
+
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding-bottom: 20px;
+  border-bottom: 1px solid grey;
+
+  .cardbox-train-top-top {
+
+    padding: 0px 50px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .cardbox-train-top {
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .cardbox-train-container-image {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: orangered;
+        border-radius: 100%;
+
+        width: 40px;
+        height: 40px;
+      }
+
+      .cardbox-train-container-text {
+        font-size: 20px;
+        margin-left: 20px;
+      }
+
+    }
+  }
+
+  .cardbox-train-mid {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .cardbox-train-location mat-form-field {
+      margin: 10px 15px;
+    }
+
+    .cardbox-train-date mat-form-field {
+      margin: 10px 15px;
+    }
+
+    .cardbox-train-passenger {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      div {
+        margin: 10px 15px;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
+  .mat-form-field {
+    width: 150px !important;
+  }
+}

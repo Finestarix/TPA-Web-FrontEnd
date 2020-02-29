@@ -10,8 +10,8 @@
   </div>
 
   <div class="editor-content">
-    <div class="editor-title" #title contenteditable="true"></div>
-    <div class="editor" #content contenteditable="true"></div>
+      <div class="editor-title" #title contenteditable="true" [innerHTML]="conditional"></div>
+    <div class="editor" #content contenteditable="true" [innerHTML]="conditional2"></div>
   </div>
 
 </div>

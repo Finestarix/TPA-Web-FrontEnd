@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {FlightService} from '../../../../services/flight.service';
 import {FormControl} from '@angular/forms';
 import {FlightData} from '../../../../models/flight-interface';
+import {DialogErrorComponent} from "../../core/dialog-error/dialog-error.component";
 
 @Component({
   selector: 'app-update-flight-admin',
@@ -34,6 +35,18 @@ export class UpdateFlightAdminComponent implements OnInit {
   }
 
   updateFlight() {
+
+
+    if (this.modelFormControl.invalid || this.arrivalFormControl.invalid ||
+      this.arrivalTimeFormControl.invalid || this.arrivalDateFormControl.invalid ||
+      this.departureFormControl.invalid || this.departureTimeFormControl.invalid ||
+      this.departureDateFormControl.invalid || this.transitFormControl.invalid ||
+      this.priceFormControl.invalid) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Fill All Field !'
+      });
+      return;
+    }
 
     const arrivalDate = new Date(this.arrivalDateFormControl.value);
     const arrivalTime = arrivalDate.toISOString().substr(0, 11) + this.arrivalTimeFormControl.value + ':00Z';

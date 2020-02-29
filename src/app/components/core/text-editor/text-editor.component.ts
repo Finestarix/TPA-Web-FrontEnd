@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from "@angular/forms";
 
 @Component({
@@ -7,6 +7,9 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./text-editor.component.scss']
 })
 export class TextEditorComponent implements OnInit {
+
+  @Input() conditional: string;
+  @Input() conditional2: string;
 
   @ViewChild('title', {static: true})
   private title: ElementRef;
