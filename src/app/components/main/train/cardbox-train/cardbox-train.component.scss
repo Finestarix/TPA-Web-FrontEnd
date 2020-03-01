@@ -1,6 +1,7 @@
 .cardbox-train-container {
 
   margin-top: 10px;
+  margin-bottom: 60px;
 
   display: flex;
   flex-direction: column;
@@ -71,9 +72,18 @@
         flex-direction: column;
       }
     }
+
+
   }
 
-  .mat-form-field {
+  .mat-form-field, .mat-slider {
     width: 150px !important;
   }
 }
+
+::ng-deep {
+  .mat-button, .mat-raised-button {
+    background-color: orangered !important;
+  }
+}
+

@@ -38,52 +38,6 @@ export class UpdateTrainAdminComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  addClass(event: MatChipInputEvent): void {
-    const value = event.value.trim();
-
-    if (value === '') {
-      return;
-    }
-
-    let flagClass = false;
-    for (const fac of this.allClass) {
-      if (fac === value) {
-        flagClass = true;
-        break;
-      }
-    }
-    if (!flagClass) {
-      this.dialogError.open(DialogErrorComponent, {
-        data: 'Wrong Class'
-      });
-      return;
-    }
-
-    for (const fac of this.selectedClass) {
-      if (fac === value) {
-        flagClass = false;
-        break;
-      }
-    }
-    if (!flagClass) {
-      this.dialogError.open(DialogErrorComponent, {
-        data: 'Duplicate Class'
-      });
-      return;
-    }
-
-    this.selectedClass.push(value.trim());
-    this.classFormControl.setValue(null);
-  }
-
-  removeClass(type: string): void {
-    const index = this.selectedClass.indexOf(type);
-    if (index >= 0) {
-      this.selectedClass.splice(index, 1);
-    }
-  }
-
   updateTrain() {
 
     if (this.priceFormControl.invalid || this.seatFormControl.invalid
@@ -98,9 +52,11 @@ export class UpdateTrainAdminComponent implements OnInit {
     this.isDisable = true;
 
     const arrivalDate = new Date(this.arrivalDateFormControl.value);
+    arrivalDate.setHours(arrivalDate.getHours() + 7);
     const arrivalTime = arrivalDate.toISOString().substr(0, 11) + this.arrivalTimeFormControl.value + ':00Z';
 
     const departureDate = new Date(this.departureDateFormControl.value);
+    departureDate.setHours(departureDate.getHours() + 7);
     const departureTime = departureDate.toISOString().substr(0, 11) + this.departureTimeFormControl.value + ':00Z';
 
     const newTrain: TrainData = {
@@ -108,8 +64,8 @@ export class UpdateTrainAdminComponent implements OnInit {
       arrivalName: '',
       price: this.priceFormControl.value,
       nameCode: '',
+      class: this.classFormControl.value,
       transit: '',
-      class: '',
       seat: this.seatFormControl.value,
       id: this.data.id,
       departureTime: arrivalTime,
@@ -117,16 +73,8 @@ export class UpdateTrainAdminComponent implements OnInit {
     };
 
     this.trainService.updateTrain(newTrain).subscribe(async value => {
-      await this.insertClass(value);
+      await this.dialogRef.close();
     });
-  }
-
-  insertClass(value) {
-    for (const cls of this.selectedClass) {
-      this.trainService.insertNewTrainClass(value.data.InsertNewTrain.id, cls).subscribe();
-    }
-
-    this.dialogRef.close();
   }
 
 }

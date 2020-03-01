@@ -12,11 +12,7 @@ export const getAllTrain = gql`
                 locationId
                 name
             }
-            class {
-                id
-                name
-                trainId
-            }
+            class
             transit {
                 code
                 id
@@ -85,9 +81,9 @@ export const deleteTrainByID = gql`
 `;
 
 export const insertTrain = gql`
-    mutation($nameData: String!, $codeData: String!, $seatData: Int!, $priceData: Int!, $arrivalData: String!,
+    mutation($nameData: String!, $codeData: String!, $classData: String!, $seatData: Int!, $priceData: Int!, $arrivalData: String!,
         $arrivalTimeData: String!, $transitData: String!, $departureData: String!, $departureTimeData: String!) {
-        InsertNewTrain(name: $nameData, code: $codeData, seat: $seatData, price: $priceData, arrival: $arrivalData,
+        InsertNewTrain(name: $nameData, code: $codeData, class: $classData, seat: $seatData, price: $priceData, arrival: $arrivalData,
             arrivalTime: $arrivalTimeData, transit: $transitData, departure: $departureData, departureTime: $departureTimeData) {
             id
         }
@@ -99,6 +95,29 @@ export const updateTrain = gql`
         $arrivalTimeData: String!, $departureTimeData: String!) {
         UpdateTrain(id: $idData, seat: $seatData, price: $priceData,
             arrivalTime: $arrivalTimeData, departureTime: $departureTimeData) {
+            id
+        }
+    }
+`;
+
+export const getAllStation = gql`
+    {
+        AllTrainStation {
+            code
+            id
+            location {
+                city
+                province
+                region
+            }
+            name
+        }
+    }
+`;
+
+export const getTrainByLocation = gql`
+    query getTrain($arrivalData: String!, $departureData:String!){
+        GetTrainByLocation(arrival: $arrivalData, departure:$departureData) {
             id
             arrival{
                 code
@@ -118,20 +137,13 @@ export const updateTrain = gql`
                 locationId
                 name
             }
+            arrivalTime
+            departureTime
             name
             price
             seat
-
-        }
-    }
-`;
-
-export const insertClassTrain = gql`
-    mutation insertTrainClass($idData: Int!, $nameData: String!) {
-        InsertNewTrainClass(trainId: $idData, name: $nameData) {
-            id
-            name
-            trainId
+            code
+            class
         }
     }
 `;

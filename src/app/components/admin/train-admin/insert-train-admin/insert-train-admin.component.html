@@ -102,20 +102,8 @@
     <div>Train Class</div>
     <mat-form-field>
       <mat-label>Train Class</mat-label>
-      <mat-chip-list #chipList>
-        <mat-chip *ngFor="let selClass of selectedClass"
-                  [removable]="true"
-                  (removed)="removeClass(selClass)">
-          {{selClass}}
-          <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
-        <input matInput
-               matTooltip="Economy, Executive, Business"
-               [formControl]="classFormControl"
-               [matChipInputFor]="chipList"
-               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               (matChipInputTokenEnd)="addClass($event)">
-      </mat-chip-list>
+      <input matInput [formControl]="classFormControl" required>
+      <mat-error *ngIf="priceFormControl.invalid">Please Fill Train Classi</mat-error>
     </mat-form-field>
   </div>
 

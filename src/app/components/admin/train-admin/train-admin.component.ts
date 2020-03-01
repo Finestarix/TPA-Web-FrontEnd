@@ -7,9 +7,9 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {TrainService} from '../../../services/train.service';
 import {InsertTrainAdminComponent} from './insert-train-admin/insert-train-admin.component';
 import {UpdateTrainAdminComponent} from './update-train-admin/update-train-admin.component';
-import {Subscription} from "rxjs";
-import {HotelData} from "../../../models/hotel-interface";
-import {TrainData} from "../../../models/train-interface";
+import {Subscription} from 'rxjs';
+import {HotelData} from '../../../models/hotel-interface';
+import {TrainData} from '../../../models/train-interface';
 
 @Component({
   selector: 'app-train-admin',
@@ -72,12 +72,6 @@ export class TrainAdminComponent implements OnInit, AfterViewInit {
 
   createNewTrain(train: any): TrainData {
 
-    let classes = '';
-    for (const cls of train.class) {
-      classes += cls.name + ', ';
-    }
-    classes = classes.substring(0, classes.length - 2);
-
     return {
       id: train.id,
       seat: train.seat,
@@ -85,7 +79,7 @@ export class TrainAdminComponent implements OnInit, AfterViewInit {
       arrivalTime: train.arrivalTime,
       departureName: train.departure.name + ' (' + train.departure.code + ')',
       departureTime: train.departureTime,
-      class: classes,
+      class: train.class,
       nameCode: train.name + ' ' +  train.code,
       price: train.price,
       transit: train.transit.name

@@ -1,1 +1,163 @@
-<app-cardbox-train></app-cardbox-train>
+<div class="train-container">
+
+  <div class="train-top-container">
+
+    <div class="train-result-search">
+      <div class="train-result-icon">
+        <i class="fa fa-train"></i>
+      </div>
+      <div class="train-result-content">
+        <div>
+          {{source}} - {{destination}}
+        </div>
+        <div>
+          {{departure | date: 'EEE, dd MMM yyyy'}} - {{arrival | date: 'EEE, dd MMM yyyy'}} &bull; {{adult}} Adult
+          &bull; {{infant}} Infant
+        </div>
+      </div>
+    </div>
+
+    <div (click)="goToSearchTrain()" class="train-search">
+      Change Search
+    </div>
+  </div>
+
+  <div class="train-bottom-container">
+
+    <div class="train-bottom-left">
+
+      <div class="train-bottom-left-top">
+        <div>Filter</div>
+        <div class="train-reset" (click)="resetAll()">RESET</div>
+      </div>
+
+      <mat-accordion class="train">
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Class
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="checkbox-list">
+            <mat-checkbox [(ngModel)]="checkboxClass[0]">Economy</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxClass[1]">Business</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxClass[2]">Executive</mat-checkbox>
+          </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Time
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="checkbox-list">
+            <mat-checkbox [(ngModel)]="checkboxTime[0]">00:00 - 06:00</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxTime[1]">06:00 - 12:00</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxTime[2]">12:00 - 18:00</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxTime[3]">18:00 - 24:00</mat-checkbox>
+          </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Train Name
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="checkbox-list" *ngFor="let train of trainDataType; let i = index;">
+            <mat-checkbox [(ngModel)]="checkboxType[i]">{{train}}</mat-checkbox>
+          </div>
+
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </div>
+
+    <div class="train-bottom-right">
+
+      <div class="train-bottom-right-top">
+        <div class="train-bottom-right-title">Showing all trains to your destination</div>
+        <mat-form-field>
+          <mat-label>Select an option</mat-label>
+          <mat-select [(value)]="selectedSort">
+            <mat-option value="sortBy">Sort By</mat-option>
+            <mat-option value="lowestPrice">Lowest Price</mat-option>
+            <mat-option value="highestPrice">Highest Price</mat-option>
+            <mat-option value="shortestDuration">Shortest Duration</mat-option>
+            <mat-option value="typeAsceding">Type Ascending</mat-option>
+            <mat-option value="typeDescending">Type Descending</mat-option>
+            <mat-option value="classAscending">Class Ascending</mat-option>
+            <mat-option value="classDescending">Class Descending</mat-option>
+            <mat-option value="transitAscending">Count Transit Ascending</mat-option>
+            <mat-option value="transitDescending">Count Transit Descending</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="train-data" *ngFor="let train of trainData |
+          searchTrain: [checkboxClass, checkboxTime, checkboxType, trainDataType] |
+          sortTrain: selectedSort">
+
+        <div class="train-data-top">
+          <div class="train-title">
+            <div>{{train.name}} &ensp; {{train.code}}</div>
+            <div>{{train.class}}</div>
+          </div>
+          <div class="train-mid">
+            <div class="train-arrival">
+              <div>{{train.arrivalTime | date: 'HH:mm'}}</div>
+              <div>{{train.arrival.code}}</div>
+            </div>
+
+            <div class="train-duration">
+              <div>{{train.duration}}</div>
+            </div>
+
+            <div class="train-departure">
+              <div>{{train.departureTime | date: 'HH:mm'}}</div>
+              <div>{{train.departure.code}}</div>
+            </div>
+
+          </div>
+
+          <div class="train-price">
+            <div>{{train.price | currency: 'IDR'}}</div>
+            <button mat-raised-button
+                    matTooltip="Choose {{train.name}}">
+              CHOOSE
+            </button>
+          </div>
+
+        </div>
+
+        <div class="train-data-bottom" style="margin-bottom: 5px">
+          <button mat-button (click)="train.isOpen = !train.isOpen">View Detail</button>
+        </div>
+
+        <mat-chip-list [ngStyle]="{'display': (train.isOpen) ? 'block' : 'none'}">
+          <mat-chip color="primary" selected> {{train.arrival.name}} </mat-chip>
+          <mat-chip color="accent" selected *ngIf="train.transit.name !== 'No Transit'"> {{train.transit.name}} </mat-chip>
+          <mat-chip color="primary" selected> {{train.departure.name}} </mat-chip>
+        </mat-chip-list>
+        <div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+</div>

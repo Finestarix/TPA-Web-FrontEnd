@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 import {TrainService} from '../../../services/train.service';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {log} from 'util';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-train',
@@ -11,43 +12,95 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class TrainComponent implements OnInit {
 
-  constructor(private trainService: TrainService) {
-    this.trainService.getAllTrainStation().subscribe(async value => {
-      await this.getAllTrainStation(value.data.AllTrainStation);
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
+              private trainService: TrainService) {
+    this.activatedRoute.queryParams.subscribe(async params => {
+      await this.getAllParameterData(params);
     });
+
+    this.selectedSort = 'sortBy';
   }
 
-  private sourceFormControl: FormControl = new FormControl();
-  private destinationFormControl: FormControl = new FormControl();
-  private departureDateFormControl = new FormControl(new Date());
-  private arrivalDateFormControl = new FormControl(new Date());
+  private source: string;
+  private destination: string;
+  private adult: string;
+  private infant: string;
+  private departure: Date;
+  private arrival: Date;
 
-  stationList: string[] = [];
-  filteredSourceStationList: Observable<string[]>;
-  filteredDestinationStationList: Observable<string[]>;
+  private selectedSort: string;
+
+  checkboxClass: boolean[] = [false, false, false];
+  checkboxTime: boolean[] = [false, false, false, false];
+  checkboxType: boolean[] = [];
+
+  trainData: object[] = [];
+  trainDataType: string[] = [];
 
   ngOnInit() {
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    return this.stationList.filter(option => option.toLowerCase().includes(filterValue));
-  }
+  getAllParameterData(params) {
 
-  getAllTrainStation(value) {
-    for (const val of value) {
-      this.stationList.push(val.name + '(' + val.code + ')');
+    if (params.source === undefined) {
+      this.router.navigateByUrl('/Train');
+      return;
     }
 
-    this.filteredSourceStationList = this.sourceFormControl.valueChanges.pipe(
-      startWith(''),
-      map(station => this._filter(station))
-    );
+    this.source = params.source;
+    this.destination = params.destination;
+    this.departure = new Date(params.departure);
+    this.arrival = new Date(params.arrival);
+    this.adult = params.adult;
+    this.infant = params.infant;
 
-    this.filteredDestinationStationList = this.destinationFormControl.valueChanges.pipe(
-      startWith(''),
-      map(station => this._filter(station))
-    );
+    // TODO: Buat ambil data train
+    this.trainService.getTrainByLocation(this.source, this.destination).subscribe(async value => {
+      await this.getTrainData(value);
+    });
+
+
+    // TODO: Sorting dan filter
   }
 
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
+  getTrainData(value) {
+    this.trainData = value.data.GetTrainByLocation;
+
+    for (const train of this.trainData) {
+      // @ts-ignore
+      this.trainDataType.push(train.name);
+      // @ts-ignore
+      const dur = moment.duration(moment(train.departureTime).diff(moment(train.arrivalTime))).asMinutes();
+      // @ts-ignore
+      train.duration = Math.floor(dur / 60) + ' H ' + (dur - ( Math.floor(dur / 60) * 60)) + ' M';
+      // @ts-ignore
+      train.isOpen = false;
+    }
+
+    this.trainDataType = this.trainDataType.filter(this.onlyUnique);
+    for (let i = 0 ; i < this.trainDataType.length ; i++) {
+      this.checkboxType[i] = false;
+    }
+  }
+
+  goToSearchTrain() {
+    this.router.navigateByUrl('Train');
+  }
+
+  resetAll() {
+    this.checkboxType.forEach((part, index, data) => {
+      this.checkboxType[index] = false;
+    })
+    this.checkboxClass.forEach((part, index, data) => {
+      this.checkboxClass[index] = false;
+    })
+    this.checkboxTime.forEach((part, index, data) => {
+      this.checkboxTime[index] = false;
+    })
+  }
 }

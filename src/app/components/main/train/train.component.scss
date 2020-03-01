@@ -1,0 +1,152 @@
+.train-container {
+
+  font-family: "Open Sans", serif !important;
+
+  .train-top-container {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 10px 20px;
+
+    .train-result-search {
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .train-result-icon {
+        width: 40px;
+        height: 40px;
+
+        padding: 0 15px 0 0;
+        font-size: 30px;
+      }
+
+      .train-result-content {
+        font-size: 20px;
+      }
+
+    }
+
+    .train-search {
+      color: orange;
+      border: 1px solid orange;
+      border-radius: 10px;
+      padding: 10px;
+
+      cursor: pointer;
+    }
+
+  }
+
+  .train-bottom-container {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .train-bottom-left {
+
+      margin-top: 15px;
+
+      width: 20%;
+
+      .train-bottom-left-top {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        font-size: 20px;
+
+        height: 50px;
+
+        .train-reset {
+          cursor: pointer;
+          color: #0064d2;
+        }
+
+      }
+
+      .checkbox-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+    }
+
+    .train-bottom-right {
+
+      width: 70%;
+      padding-left: 20px;
+
+      .train-bottom-right-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        height: 50px;
+
+        .train-bottom-right-title {
+          font-size: 20px;
+        }
+
+      }
+
+      .train-data {
+
+        display: flex;
+        flex-direction: column;
+
+        box-shadow: 1px 1px 1px 1px black;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+
+        .train-data-top {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+
+
+          .train-title {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+          }
+
+          .train-mid {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            width: 50%;
+
+            .train-arrival, .train-duration, .train-departure {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: flex-start;
+              width: 30%;
+            }
+
+          }
+
+        }
+
+        .train-data-bottom {
+
+
+        }
+      }
+
+    }
+
+  }
+
+}

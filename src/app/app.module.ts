@@ -93,6 +93,9 @@ import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 import {SearchCarPipe} from './pipe/car/search-car.pipe';
 import {SortCarPipe} from './pipe/car/sort-car.pipe';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {SearchTrainPipe} from "./pipe/train/search-train.pipe";
+import {SortTrainPipe} from "./pipe/train/sort-train.pipe";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -149,6 +152,8 @@ Marker.prototype.options.icon = iconDefault;
     SearchCarComponent,
     SearchCarPipe,
     SortCarPipe,
+    SearchTrainPipe,
+    SortTrainPipe,
     LoginAdminComponent,
     HotelAdminComponent,
     InsertHotelAdminComponent,
@@ -222,6 +227,7 @@ Marker.prototype.options.icon = iconDefault;
     MatIconModule,
     MatChipsModule,
     NgxMaterialTimepickerModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

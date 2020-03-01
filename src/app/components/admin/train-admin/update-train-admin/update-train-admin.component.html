@@ -1,6 +1,6 @@
 <div class="update-train-container">
 
-  <div class="update-train-title"> Insert Train </div>
+  <div class="update-train-title"> Update Train </div>
 
   <div class="update-train-arrival-date general-update-train">
     <div>Train Arrival Date</div>
@@ -51,27 +51,6 @@
       <mat-label>Train Price</mat-label>
       <input matInput [formControl]="priceFormControl" required>
       <mat-error *ngIf="priceFormControl.invalid">Please Fill Train Price</mat-error>
-    </mat-form-field>
-  </div>
-
-  <div class="update-hotel-class general-update-train">
-    <div>Train Class</div>
-    <mat-form-field>
-      <mat-label>Train Class</mat-label>
-      <mat-chip-list #chipList>
-        <mat-chip *ngFor="let selClass of selectedClass"
-                  [removable]="true"
-                  (removed)="removeClass(selClass)">
-          {{selClass}}
-          <mat-icon matChipRemove>cancel</mat-icon>
-        </mat-chip>
-        <input matInput
-               matTooltip="Economy, Executive, Business"
-               [formControl]="classFormControl"
-               [matChipInputFor]="chipList"
-               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-               (matChipInputTokenEnd)="addClass($event)">
-      </mat-chip-list>
     </mat-form-field>
   </div>
 

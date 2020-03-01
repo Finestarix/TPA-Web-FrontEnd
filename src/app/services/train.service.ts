@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   deleteTrainByID,
   getAllTrain,
-  getAllTrainStation,
-  insertClassTrain,
+  getAllTrainStation, getTrainByLocation,
   insertTrain,
   updateTrain
 } from './queries/trainQuery';
@@ -31,12 +30,24 @@ export class TrainService {
     });
   }
 
+  getTrainByLocation(arrival: string, departure: string) {
+    return this.apollo.query<any>({
+      query: getTrainByLocation,
+      variables: {
+        arrivalData: arrival,
+        departureData: departure,
+      },
+      fetchPolicy: 'no-cache',
+    });
+  }
+
   insertNewTrain(train: TrainData) {
 
     const nameCode = train.nameCode.split(',', 2);
 
     const nameConverted = String(nameCode[0]);
     const codeConverted = String(nameCode[1]);
+    const classConverted = String(train.class);
     const seatConverted = train.seat;
     const priceConverted = train.price;
     const arrivalConverted = String(train.arrivalName);
@@ -50,6 +61,7 @@ export class TrainService {
       variables: {
         nameData: nameConverted,
         codeData: codeConverted,
+        classData: classConverted,
         seatData: seatConverted,
         priceData: priceConverted,
         arrivalData: arrivalConverted,
@@ -57,16 +69,6 @@ export class TrainService {
         transitData: transitConverted,
         departureData: departureConverted,
         departureTimeData: departureTimeConverted
-      }
-    });
-  }
-
-  insertNewTrainClass(id: number, name: string) {
-    return this.apollo.mutate<any>({
-      mutation: insertClassTrain,
-      variables: {
-        idData: id,
-        nameData: String(name),
       }
     });
   }

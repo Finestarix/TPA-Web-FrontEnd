@@ -16,6 +16,8 @@ import {AuthGuard} from './guards/auth.guard';
 import {HomeAdminComponent} from './components/admin/home-admin/home-admin.component';
 import {InsertBlogAdminComponent} from "./components/admin/blog-admin/insert-blog-admin/insert-blog-admin.component";
 import {UpdateBlogAdminComponent} from "./components/admin/blog-admin/update-blog-admin/update-blog-admin.component";
+import {CardboxTrainComponent} from "./components/main/train/cardbox-train/cardbox-train.component";
+import {TrainService} from "./services/train.service";
 
 const routes: Routes = [
   {
@@ -58,7 +60,16 @@ const routes: Routes = [
       },
       {
         path: 'Train',
-        component: TrainComponent
+        children: [
+          {
+            path: '',
+            component: CardboxTrainComponent
+          },
+          {
+            path: 'Search',
+            component: TrainComponent
+          }
+        ]
       },
       {
         path: 'Car Rental',
