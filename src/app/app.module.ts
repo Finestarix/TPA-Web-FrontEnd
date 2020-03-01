@@ -100,6 +100,8 @@ import {MatListModule} from "@angular/material/list";
 import {SearchFlightPipe} from "./pipe/flight/search-flight.pipe";
 import {SortFlightPipe} from "./pipe/flight/sort-flight.pipe";
 import {ChatPageComponent} from "./components/main/chat-page/chat-page.component";
+import {InsertEventAdminComponent} from "./components/admin/event-admin/insert-event-admin/insert-event-admin.component";
+import {UpdateEventAdminComponent} from "./components/admin/event-admin/update-event-admin/update-event-admin.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -179,7 +181,9 @@ Marker.prototype.options.icon = iconDefault;
     SearchPlaneComponent,
     SearchFlightPipe,
     SortFlightPipe,
-    ChatPageComponent
+    ChatPageComponent,
+    InsertEventAdminComponent,
+    UpdateEventAdminComponent
   ],
   entryComponents: [
     LoginComponent,
