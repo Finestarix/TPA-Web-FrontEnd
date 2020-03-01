@@ -63,11 +63,11 @@ export class InsertTrainAdminComponent implements OnInit {
 
     const arrivalDate = new Date(this.arrivalDateFormControl.value);
     arrivalDate.setHours(arrivalDate.getHours() + 7);
-    const arrivalTime = arrivalDate.toISOString().substr(0, 11) + this.arrivalTimeFormControl.value + ':00Z';
+    const arrivalTimeS = arrivalDate.toISOString().substr(0, 11) + this.arrivalTimeFormControl.value + ':00Z';
 
     const departureDate = new Date(this.departureDateFormControl.value);
     departureDate.setHours(departureDate.getHours() + 7);
-    const departureTime = departureDate.toISOString().substr(0, 11) + this.departureTimeFormControl.value + ':00Z';
+    const departureTimeS = departureDate.toISOString().substr(0, 11) + this.departureTimeFormControl.value + ':00Z';
 
     const transitString = (this.transitFormControl.value === null) ? '' : this.transitFormControl.value;
 
@@ -80,8 +80,8 @@ export class InsertTrainAdminComponent implements OnInit {
       class: this.classFormControl.value,
       seat: this.seatFormControl.value,
       id: 0,
-      departureTime: departureTime,
-      arrivalTime: arrivalTime
+      departureTime: departureTimeS,
+      arrivalTime: arrivalTimeS
     };
 
     console.log(newTrain.transit);

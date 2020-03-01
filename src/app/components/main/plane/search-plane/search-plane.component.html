@@ -1,1 +1,232 @@
-<p>search-plane works!</p>
+<div class="plane-container">
+
+  <div class="plane-top-container">
+
+    <div class="plane-result-search">
+      <div class="plane-result-icon">
+        <i class="fa fa-plane"></i>
+      </div>
+      <div class="plane-result-content">
+        <div>
+          {{from}} - {{to}}
+        </div>
+        <div *ngIf="status === 'true'">
+          First Step
+        </div>
+        <div *ngIf="status === 'false'">
+          Last Step
+        </div>
+        <div>
+          {{startDate | date: 'EEE, dd MMM yyyy'}} &bull; {{passenger}} Passengers &bull; {{class}} Class
+        </div>
+      </div>
+    </div>
+
+    <div (click)="goToSearchPlane()" class="train-search">
+      Change Search
+    </div>
+  </div>
+
+  <div class="plane-bottom-container">
+
+    <div class="plane-bottom-left">
+
+      <div class="plane-bottom-left-top">
+        <div>Filter</div>
+        <div class="plane-reset" (click)="resetAll()">RESET</div>
+      </div>
+
+      <mat-accordion class="plane">
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Transit
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="checkbox-list">
+            <mat-checkbox [(ngModel)]="checkboxTransit[0]">Direct</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxTransit[1]">1 Transit</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxTransit[2]">2 Transit</mat-checkbox>
+          </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Transit Duration
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ng5-slider [(value)]="valueTransitDuration" [(highValue)]="highValueTransitDuration" [options]="options"></ng5-slider>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Departure Time
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="checkbox-list">
+            <mat-checkbox [(ngModel)]="checkboxDepartureTime[0]">00:00 - 06:00</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxDepartureTime[1]">06:00 - 12:00</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxDepartureTime[2]">12:00 - 18:00</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxDepartureTime[3]">18:00 - 24:00</mat-checkbox>
+          </div>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Arrival Time
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="checkbox-list">
+          <mat-checkbox [(ngModel)]="checkboxArrivalTime[0]">00:00 - 06:00</mat-checkbox>
+          <mat-checkbox [(ngModel)]="checkboxArrivalTime[1]">06:00 - 12:00</mat-checkbox>
+          <mat-checkbox [(ngModel)]="checkboxArrivalTime[2]">12:00 - 18:00</mat-checkbox>
+          <mat-checkbox [(ngModel)]="checkboxArrivalTime[3]">18:00 - 24:00</mat-checkbox>
+        </div>
+      </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Airlines
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="checkbox-list">
+            <mat-checkbox [(ngModel)]="checkboxArlines[0]" > Garuda Indonesia </mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxArlines[1]" > Lion Air </mat-checkbox>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Facilities
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="checkbox-list">
+            <mat-checkbox [(ngModel)]="checkboxFacility[0]">Baggage</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxFacility[1]">Entertainment</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxFacility[2]">Meal</mat-checkbox>
+            <mat-checkbox [(ngModel)]="checkboxFacility[3]">USB Port / Power</mat-checkbox>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Transit Airport
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="checkbox-list" *ngFor="let plane of planeDataTransit; let i = index;">
+            <mat-checkbox [(ngModel)]="checkboxTransitAirport[i]">{{plane}}</mat-checkbox>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Trip Duration
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <ng5-slider [(value)]="valueTripDuration" [(highValue)]="highValueTripDuration" [options]="options"></ng5-slider>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </div>
+
+    <div class="plane-bottom-right" *ngIf="planeData">
+
+      <div class="plane-bottom-right-top">
+        <div class="plane-bottom-right-title">Showing {{planeData.length}} best flights with best deals.</div>
+        <mat-form-field>
+          <mat-label>Select an option</mat-label>
+          <mat-select [(value)]="selectedSort">
+            <mat-option value="sortBy">Sort By</mat-option>
+            <mat-option value="lowestPrice">Lowest Price</mat-option>
+            <mat-option value="highestPrice">Highest Price</mat-option>
+            <mat-option value="shortestDuration">Shortest Duration</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="plane-data" *ngFor="let plane of planeData |
+        searchFlight: [ checkboxTransit, checkboxDepartureTime,
+          checkboxArrivalTime, checkboxFacility, checkboxArlines, checkboxTransitAirport,
+          valueTripDuration, highValueTripDuration, valueTransitDuration, highValueTransitDuration, planeDataTransit] |
+        sortFlight: selectedSort">
+
+        <div class="plane-data-top">
+          <div class="plane-title">
+            <div>{{plane.company.name}}</div>
+            <div><img src="assets/flight/company/{{plane.company.image}}" alt=""></div>
+          </div>
+          <div class="plane-mid">
+            <div class="plane-arrival">
+              <div>{{plane.arrivalTime | date: 'HH:mm'}}</div>
+              <div>{{plane.fromAirport.code}}</div>
+            </div>
+
+            <div class="plane-duration">
+              <div>{{plane.duration}}</div>
+            </div>
+
+            <div class="plane-departure">
+              <div>{{plane.departureTime | date: 'HH:mm'}}</div>
+              <div>{{plane.toAirport.code}}</div>
+            </div>
+
+          </div>
+
+          <div class="plane-price">
+            <div>{{plane.price | currency: 'IDR'}}</div>
+            <button mat-raised-button
+                    (click)="nextStep()"
+                    matTooltip="Choose {{plane.name}}">
+              CHOOSE
+            </button>
+          </div>
+
+        </div>
+
+        <div>
+          <mat-tab-group>
+            <mat-tab label="Flight Detail">
+              <mat-list style="display: flex; flex-direction: column">
+                <mat-list-item> {{plane.fromAirport.name}} </mat-list-item>
+                <mat-list-item *ngIf="plane.transit.name !== 'No Airport'"> {{plane.transit.name}} </mat-list-item>
+                <mat-list-item> {{plane.toAirport.name}} </mat-list-item>
+              </mat-list>
+            </mat-tab>
+            <mat-tab label="Price Detail">
+              <mat-list>
+                <mat-list-item> Price: {{plane.price}} </mat-list-item>
+                <mat-list-item> Tax : Included </mat-list-item>
+                <mat-list-item> Passenger Service Charge: FREE </mat-list-item>
+                <mat-list-item> Total: {{plane.price}}  </mat-list-item>
+              </mat-list>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

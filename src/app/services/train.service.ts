@@ -30,12 +30,18 @@ export class TrainService {
     });
   }
 
-  getTrainByLocation(arrival: string, departure: string) {
+  getTrainByLocation(arrival: string, departure: string, time: string) {
+
+    console.log(arrival);
+    console.log(departure);
+    console.log(time);
+
     return this.apollo.query<any>({
       query: getTrainByLocation,
       variables: {
         arrivalData: arrival,
         departureData: departure,
+        dateData: time,
       },
       fetchPolicy: 'no-cache',
     });

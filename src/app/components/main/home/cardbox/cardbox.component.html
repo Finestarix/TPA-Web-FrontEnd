@@ -9,9 +9,10 @@
     <div class="cardbox-content">
       <app-cardbox-imagetext id="linkPlane" [linkImageText]="linkPlane" (click)="setState(1)"></app-cardbox-imagetext>
       <app-cardbox-imagetext id="linkHotel" [linkImageText]="linkHotel" (click)="setState(2)"></app-cardbox-imagetext>
-      <app-cardbox-imagetext id="linkTrain"  [linkImageText]="linkTrain"></app-cardbox-imagetext>
+      <app-cardbox-imagetext id="linkTrain" [linkImageText]="linkTrain" (click)="goToTrain()"></app-cardbox-imagetext>
       <app-cardbox-imagetext id="linkCar" [linkImageText]="linkCar" (click)="setState(3)"></app-cardbox-imagetext>
-      <app-cardbox-imagetext id="linkEntertainment"  [linkImageText]="linkEntertainment"></app-cardbox-imagetext>
+      <app-cardbox-imagetext id="linkEntertainment" [linkImageText]="linkEntertainment"
+                             (click)="goToEntertainment()"></app-cardbox-imagetext>
     </div>
   </div>
 

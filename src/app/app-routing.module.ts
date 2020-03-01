@@ -18,6 +18,8 @@ import {InsertBlogAdminComponent} from "./components/admin/blog-admin/insert-blo
 import {UpdateBlogAdminComponent} from "./components/admin/blog-admin/update-blog-admin/update-blog-admin.component";
 import {CardboxTrainComponent} from "./components/main/train/cardbox-train/cardbox-train.component";
 import {TrainService} from "./services/train.service";
+import {SearchPlaneComponent} from "./components/main/plane/search-plane/search-plane.component";
+import {ChatPageComponent} from "./components/main/chat-page/chat-page.component";
 
 const routes: Routes = [
   {
@@ -29,11 +31,19 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
+        path: 'Chat',
+        component: ChatPageComponent
+      },
+      {
         path: 'Flight',
         children: [
           {
             path: '',
             component: PlaneComponent,
+          },
+          {
+            path: 'Search',
+            component: SearchPlaneComponent
           }
         ]
       },

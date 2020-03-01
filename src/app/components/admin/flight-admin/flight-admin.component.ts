@@ -97,10 +97,11 @@ export class FlightAdminComponent implements OnInit, AfterViewInit {
     return {
       companyName: flight.company.name,
       companyIcon: flight.company.image,
+      transitDuration: flight.transitDuration,
       arriveDate: flight.arrivalTime,
       departDate: flight.departureTime.toString(),
       duration: duration.hours() + ' Hour ' + duration.minutes() + ' Minutes',
-      price: 10000,
+      price: flight.price,
       timeline: timelineStr,
       transit: transitAirport,
       id: flight.id,

@@ -82,10 +82,18 @@
   </div>
 
   <div class="insert-flight-transit general-insert-flight">
-    <div>Flight Arrival Airport</div>
+    <div>Flight Transit Airport</div>
     <mat-form-field>
-      <mat-label>Flight Arrival Airport</mat-label>
+      <mat-label>Flight Transit Airport</mat-label>
       <input matInput [formControl]="transitFormControl" required>
+    </mat-form-field>
+  </div>
+
+  <div class="insert-flight-transit general-insert-flight">
+    <div>Flight Transit Duration</div>
+    <mat-form-field>
+      <mat-label>Flight Transit Duration</mat-label>
+      <input matInput [formControl]="transitDurationFormControl" required>
     </mat-form-field>
   </div>
 

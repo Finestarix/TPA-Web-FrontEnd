@@ -1,6 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {deleteFlight, getAllFlight, insertFlight, updateFlight} from './queries/flightQuery';
+import {
+  deleteFlight,
+  getAllFlight,
+  getAllFlightAirport,
+  getAllFlightData,
+  insertFlight,
+  updateFlight
+} from './queries/flightQuery';
 import {FlightData} from "../models/flight-interface";
 
 @Injectable({
@@ -18,12 +25,32 @@ export class FlightService {
     });
   }
 
+  getAllFlightAirport() {
+    return this.apollo.query<any>({
+      query: getAllFlightAirport,
+      fetchPolicy: 'no-cache',
+    });
+  }
+
+  getFlightData(from: string, to: string, date: string) {
+
+    return this.apollo.query<any>({
+      query: getAllFlightData,
+      variables: {
+        fromData: from,
+        toData: to,
+        dateData: date,
+      }
+    });
+  }
+
   insertFlight(flight: FlightData) {
 
     return this.apollo.mutate<any>({
       mutation: insertFlight,
       variables: {
         companyData: flight.companyName,
+        durationData: flight.transitDuration,
         modelData: flight.model,
         priceData: flight.price,
         fromAirportData: flight.from,
@@ -41,6 +68,7 @@ export class FlightService {
       mutation: updateFlight,
       variables: {
         idData: flight.id,
+        durationData: flight.transitDuration,
         modelData: flight.model,
         priceData: flight.price,
         fromAirportData: flight.from,

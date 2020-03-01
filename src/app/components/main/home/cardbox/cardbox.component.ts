@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {linkPlane, linkHotel, linkTrain, linkCar, linkEntertainment} from './cardboxData';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cardbox',
@@ -14,7 +15,7 @@ export class CardboxComponent implements OnInit, AfterViewInit {
   linkCar: object;
   linkEntertainment: object;
 
-  constructor() {
+  constructor(private router: Router) {
     this.linkPlane = linkPlane;
     this.linkHotel = linkHotel;
     this.linkTrain = linkTrain;
@@ -64,6 +65,14 @@ export class CardboxComponent implements OnInit, AfterViewInit {
       document.getElementById('linkCar').classList.add('active-content');
       document.getElementById('linkCar').classList.remove('passive-content');
     }
+  }
+
+  goToTrain() {
+    this.router.navigateByUrl('Train');
+  }
+
+  goToEntertainment() {
+    this.router.navigateByUrl('Entertainment');
   }
 
 

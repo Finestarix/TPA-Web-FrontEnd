@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {HotelService} from '../../../../services/hotel.service';
 import {Subscription} from 'rxjs';
+import {log} from "util";
 
 @Component({
   selector: 'app-rec-hotel',
@@ -12,9 +13,6 @@ export class RecHotelComponent implements OnInit {
 
   recHotel$: Subscription;
   recHotel: any;
-  ratingWidth: number;
-
-  loadingPlaceholder: number[] = [1, 2, 3, 4, 5, 6, 7, 8];
 
   constructor(private http: HttpClient,
               private recHotelService: HotelService) {
@@ -27,6 +25,7 @@ export class RecHotelComponent implements OnInit {
       });
 
     }, () => {
+      console.log('Location Turn Off');
     });
 
   }
@@ -37,6 +36,7 @@ export class RecHotelComponent implements OnInit {
 
   afterGetRecHotel(query) {
     this.recHotel = query.data.NearestHotel;
+    console.log(this.recHotel);
   }
 
 }

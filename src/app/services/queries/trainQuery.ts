@@ -116,8 +116,8 @@ export const getAllStation = gql`
 `;
 
 export const getTrainByLocation = gql`
-    query getTrain($arrivalData: String!, $departureData:String!){
-        GetTrainByLocation(arrival: $arrivalData, departure:$departureData) {
+    query getTrain($arrivalData: String!, $departureData:String!, $dateData: String!){
+        GetTrainByLocation(arrival: $arrivalData, departure:$departureData, date:$dateData) {
             id
             arrival{
                 code

@@ -1,0 +1,167 @@
+.plane-container {
+
+  font-family: "Open Sans", serif !important;
+
+  .plane-top-container {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 10px 20px;
+
+    .plane-result-search {
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .plane-result-icon {
+        width: 40px;
+        height: 40px;
+
+        padding: 0 15px 0 0;
+        font-size: 30px;
+      }
+
+      .plane-result-content {
+        font-size: 20px;
+      }
+
+    }
+
+    .train-search {
+      color: orange;
+      border: 1px solid orange;
+      border-radius: 10px;
+      padding: 10px;
+
+      cursor: pointer;
+    }
+
+  }
+
+  .plane-bottom-container {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .plane-bottom-left {
+
+      margin-top: 15px;
+
+      width: 20%;
+
+      .plane-bottom-left-top {
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        font-size: 20px;
+
+        height: 50px;
+
+        .plane-reset {
+          cursor: pointer;
+          color: #0064d2;
+        }
+
+      }
+
+      .checkbox-list {
+        display: flex;
+        flex-direction: column;
+      }
+
+    }
+
+    .plane-bottom-right {
+      width: 70%;
+      padding-left: 20px;
+
+      .plane-bottom-right-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        height: 50px;
+
+        .plane-bottom-right-title {
+          font-size: 20px;
+        }
+
+
+      }
+
+      .plane-data {
+        display: flex;
+        flex-direction: column;
+
+        box-shadow: 1px 1px 1px 1px black;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+
+        .plane-data-top {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          .plane-title {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+
+            img {
+              width: 150px;
+              height: 80px;
+            }
+          }
+
+          .plane-mid {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            width: 50%;
+
+            .plane-arrival, .plane-duration, .plane-departure {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: flex-start;
+              width: 30%;
+            }
+
+          }
+
+          .plane-price {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+          }
+
+        }
+      }
+
+
+    }
+  }
+}
+
+::ng-deep {
+  .ng5-slider {
+    .ng5-slider-pointer {
+      display: none !important;
+    }
+
+    .ng5-slider-selection {
+      background: #9b870c !important;
+    }
+  }
+}

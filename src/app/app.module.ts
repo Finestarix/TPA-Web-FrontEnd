@@ -30,7 +30,8 @@ import {
   MatSortModule,
   MatProgressSpinnerModule,
   MatIconModule,
-  MatChipsModule
+  MatChipsModule,
+  MatExpansionModule
 } from '@angular/material';
 
 import {AppComponent} from './app.component';
@@ -61,7 +62,6 @@ import {CardboxHotelComponent} from './components/main/home/cardbox/cardbox-hote
 import {MapComponent} from './components/main/hotel/map/map.component';
 import {RecHotelComponent} from './components/main/home/rec-hotel/rec-hotel.component';
 import {StarBarComponent} from './components/core/star-bar/star-bar.component';
-import {FlightClassComponent} from './components/main/home/cardbox/cardbox-plane/flight-class/flight-class.component';
 import {HotelRoomComponent} from './components/main/home/cardbox/cardbox-hotel/hotel-room/hotel-room.component';
 import {SearchHotelComponent} from './components/main/hotel/search-hotel/search-hotel.component';
 import {DetailHotelComponent} from './components/main/hotel/detail-hotel/detail-hotel.component';
@@ -93,9 +93,13 @@ import {SearchHotelPipe} from './pipe/hotel/search-hotel.pipe';
 import {SortHotelPipe} from './pipe/hotel/sort-hotel.pipe';
 import {SearchCarPipe} from './pipe/car/search-car.pipe';
 import {SortCarPipe} from './pipe/car/sort-car.pipe';
-import {MatExpansionModule} from "@angular/material/expansion";
-import {SearchTrainPipe} from "./pipe/train/search-train.pipe";
-import {SortTrainPipe} from "./pipe/train/sort-train.pipe";
+import {SearchTrainPipe} from './pipe/train/search-train.pipe';
+import {SortTrainPipe} from './pipe/train/sort-train.pipe';
+import {SearchPlaneComponent} from "./components/main/plane/search-plane/search-plane.component";
+import {MatListModule} from "@angular/material/list";
+import {SearchFlightPipe} from "./pipe/flight/search-flight.pipe";
+import {SortFlightPipe} from "./pipe/flight/sort-flight.pipe";
+import {ChatPageComponent} from "./components/main/chat-page/chat-page.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -142,7 +146,6 @@ Marker.prototype.options.icon = iconDefault;
     MapComponent,
     StarBarComponent,
     RecHotelComponent,
-    FlightClassComponent,
     HotelRoomComponent,
     SearchHotelComponent,
     DetailHotelComponent,
@@ -172,7 +175,11 @@ Marker.prototype.options.icon = iconDefault;
     UpdateBlogAdminComponent,
     TextEditorComponent,
     BlogAdminComponent,
-    CardboxTrainComponent
+    CardboxTrainComponent,
+    SearchPlaneComponent,
+    SearchFlightPipe,
+    SortFlightPipe,
+    ChatPageComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -228,6 +235,7 @@ Marker.prototype.options.icon = iconDefault;
     MatChipsModule,
     NgxMaterialTimepickerModule,
     MatExpansionModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

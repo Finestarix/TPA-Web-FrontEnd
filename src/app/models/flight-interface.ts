@@ -4,6 +4,7 @@ export interface FlightData {
   departDate: string;
   arriveDate: string;
   duration: string;
+  transitDuration: number;
   price: number;
   timeline: string;
   transit: string;

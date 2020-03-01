@@ -9,13 +9,6 @@
     align-items: center;
     justify-content: space-between;
 
-
-    .cardbox-history {
-      padding-right: 10px;
-      color: #0264D3;
-      cursor: pointer;
-    }
-
     .cardbox-plane-top {
 
       display: flex;
@@ -123,17 +116,17 @@
     }
 
     //.cardbox-plane-cabin {
-      input[type=text] {
-        margin-top: 22px;
-        padding-bottom: 5px;
-
-        font-size: 15px;
-        width: 150px;
-
-        border: 0px;
-        outline: 0px;
-        border-bottom: 1px solid rgba(169, 169, 169, .8);
-      }
+    //  input[type=text] {
+    //    margin-top: 22px;
+    //    padding-bottom: 5px;
+    //
+    //    font-size: 15px;
+    //    width: 150px;
+    //
+    //    border: 0px;
+    //    outline: 0px;
+    //    border-bottom: 1px solid rgba(169, 169, 169, .8);
+    //  }
     //}
 
     .cardbox-plane-departure {
@@ -188,6 +181,16 @@
 
   }
 
+}
+
+.cardbox-template {
+  display: flex;
+  flex-direction: row;
+
+  input[type=number] {
+    border: none;
+    outline: none;
+  }
 }
 
 .mat-form-field {

@@ -55,13 +55,13 @@ export class TrainComponent implements OnInit {
     this.adult = params.adult;
     this.infant = params.infant;
 
-    // TODO: Buat ambil data train
-    this.trainService.getTrainByLocation(this.source, this.destination).subscribe(async value => {
+    this.arrival.setHours(this.arrival.getHours() + 7);
+    const arrivalTime = this.arrival.toISOString().substr(0, 11) + '00:00:00Z';
+
+    this.trainService.getTrainByLocation(this.source, this.destination, arrivalTime).subscribe(async value => {
       await this.getTrainData(value);
     });
 
-
-    // TODO: Sorting dan filter
   }
 
   onlyUnique(value, index, self) {

@@ -29,6 +29,7 @@ export class InsertFlightAdminComponent implements OnInit {
   departureDateFormControl: FormControl = new FormControl();
   transitFormControl: FormControl = new FormControl();
   priceFormControl: FormControl = new FormControl();
+  transitDurationFormControl: FormControl = new FormControl();
 
   isDisable: boolean;
 
@@ -41,7 +42,7 @@ export class InsertFlightAdminComponent implements OnInit {
       this.arrivalFormControl.invalid || this.arrivalTimeFormControl.invalid ||
       this.arrivalDateFormControl.invalid || this.departureFormControl.invalid ||
       this.departureTimeFormControl.invalid || this.departureDateFormControl.invalid ||
-      this.transitFormControl.invalid || this.priceFormControl.invalid) {
+      this.priceFormControl.invalid) {
       this.dialogError.open(DialogErrorComponent, {
         data: 'Fill All Field !'
       });
@@ -49,16 +50,20 @@ export class InsertFlightAdminComponent implements OnInit {
     }
 
     const arrivalDate = new Date(this.arrivalDateFormControl.value);
+    arrivalDate.setHours(arrivalDate.getHours() + 7);
     const arrivalTime = arrivalDate.toISOString().substr(0, 11) + this.arrivalTimeFormControl.value + ':00Z';
 
     const departureDate = new Date(this.departureDateFormControl.value);
+    departureDate.setHours(departureDate.getHours() + 7);
     const departureTime = departureDate.toISOString().substr(0, 11) + this.departureTimeFormControl.value + ':00Z';
 
     const transitChecked = this.transitFormControl.value === null ? '' : this.transitFormControl.value;
+    const transitCheckedDur = this.transitDurationFormControl.value === null ? 0 : this.transitDurationFormControl.value;
 
     const flight: FlightData = {
       id: 0,
       companyName: this.nameFormControl.value,
+      transitDuration: transitCheckedDur,
       companyIcon: '',
       model: this.modelFormControl.value,
       price: this.priceFormControl.value,
