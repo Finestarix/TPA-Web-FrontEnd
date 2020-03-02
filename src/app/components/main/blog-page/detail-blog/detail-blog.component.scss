@@ -1,0 +1,25 @@
+.blog-detail-container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    border-radius: 10px;
+    width: 90%;
+  }
+
+  .promo-share {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    color: #0064d2;
+    cursor: pointer;
+
+    * {
+      margin: 10px;
+    }
+  }
+}

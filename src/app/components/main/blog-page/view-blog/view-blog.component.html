@@ -1,0 +1,7 @@
+<div class="blog-container">
+  <div class="blog-card" *ngFor="let blog of allBlogData">
+    <img class="hotel-image" src="assets/blog/{{blog.image}}" alt="Hotel">
+    <p [innerHTML]="blog.title"></p>
+    <button mat-button (click)="goToDetail(blog)">See Detail</button>
+  </div>
+</div>

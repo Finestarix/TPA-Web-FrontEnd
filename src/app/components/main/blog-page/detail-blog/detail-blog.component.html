@@ -1,0 +1,14 @@
+<div class="blog-detail-container">
+  <div><img src="assets/blog/{{blogData.image}}" alt=""></div>
+  <div [innerHTML]="blogData.title" ></div>
+
+  <div class="promo-share">
+    <div (click)="facebook()">Share with Facebook</div>
+    <div (click)="copy()">Copy Link</div>
+    <div (click)="line()">Share with Line</div>
+    <div (click)="whatsapp()">Share with Whatsapp</div>
+  </div>
+
+  <div [innerHTML]="blogData.content"></div>
+
+</div>

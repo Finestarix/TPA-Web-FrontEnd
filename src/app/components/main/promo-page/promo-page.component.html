@@ -1,1 +1,32 @@
-<p>promo-page works!</p>
+<div *ngIf="data1">
+
+  <div class="promo-image">
+    <img src="assets/promo/{{data1.image}}" alt="">
+  </div>
+
+  <div class="promo-content">
+    <div class="promo-title">{{data1.name}}</div>
+    <div class="promo-detail">{{data1.detail}}</div>
+  </div>
+
+  <div class="promo-share">
+    <div (click)="facebook()">Share with Facebook</div>
+    <div (click)="copy()">Copy Link</div>
+    <div (click)="whatsapp()">Share with Whatsapp</div>
+  </div>
+
+</div>
+<hr>
+<div class="promo-other">
+  Other Promo
+</div>
+<div *ngFor="let p of data2">
+  <div class="promo-image">
+    <img src="assets/promo/{{p.image}}" alt="">
+  </div>
+
+  <div class="promo-content">
+    <div class="promo-title">{{p.name}}</div>
+  </div>
+
+</div>

@@ -25,6 +25,20 @@ export const getAllBlog = gql`
     }
 `;
 
+export const getBlogByID = gql`
+    query getBlogByID($idData: Int!){
+        BlogByID(id: $idData) {
+            category
+            content
+            id
+            image
+            title
+            userID
+            viewCount
+        }
+    }
+`;
+
 export const deleteBlog = gql`
     mutation deleteBlog($idData: Int!) {
         DeleteBlog(id: $idData) {

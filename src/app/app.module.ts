@@ -102,6 +102,10 @@ import {SortFlightPipe} from "./pipe/flight/sort-flight.pipe";
 import {ChatPageComponent} from "./components/main/chat-page/chat-page.component";
 import {InsertEventAdminComponent} from "./components/admin/event-admin/insert-event-admin/insert-event-admin.component";
 import {UpdateEventAdminComponent} from "./components/admin/event-admin/update-event-admin/update-event-admin.component";
+import {PromoPageComponent} from "./components/main/promo-page/promo-page.component";
+import {BlogPageComponent} from "./components/main/blog-page/blog-page.component";
+import {ViewBlogComponent} from "./components/main/blog-page/view-blog/view-blog.component";
+import {DetailBlogComponent} from "./components/main/blog-page/detail-blog/detail-blog.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -183,7 +187,11 @@ Marker.prototype.options.icon = iconDefault;
     SortFlightPipe,
     ChatPageComponent,
     InsertEventAdminComponent,
-    UpdateEventAdminComponent
+    UpdateEventAdminComponent,
+    PromoPageComponent,
+    BlogPageComponent,
+    ViewBlogComponent,
+    DetailBlogComponent
   ],
   entryComponents: [
     LoginComponent,

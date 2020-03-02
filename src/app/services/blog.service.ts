@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BlogData} from '../models/blog-interface';
 import {Apollo} from 'apollo-angular';
-import {deleteBlog, getAllBlog, insertBlog, updateBlog} from './queries/blogQuery';
+import {deleteBlog, getAllBlog, getBlogByID, insertBlog, updateBlog} from './queries/blogQuery';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,15 @@ export class BlogService {
         titleData: blog.title,
         contentData: blog.content,
       }
+    });
+  }
+
+  getBlogByID(id: number) {
+    return this.apollo.query<any>({
+      query: getBlogByID,
+      variables: {
+        idData: id,
+      },
     });
   }
 
