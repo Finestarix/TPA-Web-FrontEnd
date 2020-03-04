@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ChatService} from "../../../services/chat.service";
 
 @Component({
   selector: 'app-entertainment',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntertainmentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private chatService: ChatService) { }
 
   ngOnInit() {
+    this.chatService.listen('event').subscribe(m => {
+      alert(m);
+    });
   }
 
 }

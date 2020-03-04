@@ -100,12 +100,11 @@ import {MatListModule} from "@angular/material/list";
 import {SearchFlightPipe} from "./pipe/flight/search-flight.pipe";
 import {SortFlightPipe} from "./pipe/flight/sort-flight.pipe";
 import {ChatPageComponent} from "./components/main/chat-page/chat-page.component";
-import {InsertEventAdminComponent} from "./components/admin/event-admin/insert-event-admin/insert-event-admin.component";
-import {UpdateEventAdminComponent} from "./components/admin/event-admin/update-event-admin/update-event-admin.component";
 import {PromoPageComponent} from "./components/main/promo-page/promo-page.component";
 import {BlogPageComponent} from "./components/main/blog-page/blog-page.component";
 import {ViewBlogComponent} from "./components/main/blog-page/view-blog/view-blog.component";
 import {DetailBlogComponent} from "./components/main/blog-page/detail-blog/detail-blog.component";
+import {MaterialFileInputModule} from "ngx-material-file-input";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -186,8 +185,6 @@ Marker.prototype.options.icon = iconDefault;
     SearchFlightPipe,
     SortFlightPipe,
     ChatPageComponent,
-    InsertEventAdminComponent,
-    UpdateEventAdminComponent,
     PromoPageComponent,
     BlogPageComponent,
     ViewBlogComponent,
@@ -205,50 +202,51 @@ Marker.prototype.options.icon = iconDefault;
     DialogConfirmationComponent,
     DialogErrorComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    FormsModule,
-    HttpClientModule,
-    HttpLinkModule,
-    ApolloModule,
-    GraphQLModule,
-    MatNativeDateModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: () => {
-          return localStorage.getItem('access-token');
-        },
-        // whitelistedDomains: ['localhost'],
-        blacklistedRoutes: ['localhost']
-      }
-    }),
-    MatFormFieldModule,
-    MatDatepickerModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatSliderModule,
-    MatCheckboxModule,
-    Ng5SliderModule,
-    MatSelectModule,
-    NgxContentLoadingModule,
-    MatButtonModule,
-    MatTooltipModule,
-    InfiniteScrollModule,
-    MatTabsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatProgressSpinnerModule,
-    MatIconModule,
-    MatChipsModule,
-    NgxMaterialTimepickerModule,
-    MatExpansionModule,
-    MatListModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        FormsModule,
+        HttpClientModule,
+        HttpLinkModule,
+        ApolloModule,
+        GraphQLModule,
+        MatNativeDateModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem('access-token');
+                },
+                // whitelistedDomains: ['localhost'],
+                blacklistedRoutes: ['localhost']
+            }
+        }),
+        MatFormFieldModule,
+        MatDatepickerModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        MatSliderModule,
+        MatCheckboxModule,
+        Ng5SliderModule,
+        MatSelectModule,
+        NgxContentLoadingModule,
+        MatButtonModule,
+        MatTooltipModule,
+        InfiniteScrollModule,
+        MatTabsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatProgressSpinnerModule,
+        MatIconModule,
+        MatChipsModule,
+        NgxMaterialTimepickerModule,
+        MatExpansionModule,
+        MatListModule,
+        MaterialFileInputModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [

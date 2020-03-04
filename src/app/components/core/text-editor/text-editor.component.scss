@@ -2,50 +2,37 @@
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 
   .editor-button {
 
-    button {
-      border: 1px solid black;
-      background-color: lightgray;
-      margin: 0 5px;
+    border:solid 1px #ddd;
+    background:#f4f4f4;
+    padding: 5px;
+    border-radius:3px;
 
+    button {
       cursor: pointer;
       outline: none;
 
-      &:hover {
-        background-color: lightgreen;
-      }
+      border-radius: 0 !important;
+      background-color: transparent !important;
     }
-
   }
 
   .editor-content {
 
     width: 100%;
 
-    .editor-title {
-
-      padding: 20px;
-
-      margin-top: 10px;
-      border: 1px solid gray;
-      border-radius: 20px;
-      outline: none;
-
-      height: auto;
-    }
-
     .editor {
-      height: 200px;
-      padding: 20px;
+      height: fit-content;
+      padding: 10px 20px;
 
       margin-top: 10px;
       border: 1px solid gray;
-      border-radius: 20px;
+      background:#f4f4f4;
+      border-radius: 10px;
       outline: none;
+
     }
   }
 

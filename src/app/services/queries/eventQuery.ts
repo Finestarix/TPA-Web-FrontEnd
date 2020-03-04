@@ -12,6 +12,8 @@ export const getAllEvent = gql `
             image
             price
             title
+            description
+            termCondition
         }
     }
 `;
@@ -19,22 +21,24 @@ export const getAllEvent = gql `
 export const insertEvent = gql`
     mutation insertEvent($categoryData:String!, $imageData:String!,
         $titleData:String!, $priceData:Int!, $locationData: String!, $latitudeData: Float!,
-        $longitudeData: Float!, $dateData: String!) {
+        $longitudeData: Float!, $dateData: String!, $descriptionData: String!, $termConditionData: String!) {
         InsertNewEvent(category: $categoryData, image: $imageData, title: $titleData,
             price: $priceData, location: $locationData, latitude: $latitudeData,
-            longitude: $longitudeData, date: $dateData) {
+            longitude: $longitudeData, date: $dateData, description: $descriptionData,
+            termCondition: $termConditionData) {
             id
         }
     }
 `;
 
 export const updateEvent = gql`
-    mutation updateEvent($idData:String!, $categoryData:String!, $imageData:String!,
+    mutation updateEvent($idData:Int!, $categoryData:String!, $imageData:String!,
         $titleData:String!, $priceData:Int!, $locationData: String!, $latitudeData: Float!,
-        $longitudeData: Float!, $dateData: String!) {
+        $longitudeData: Float!, $dateData: String!, $descriptionData: String!, $termConditionData: String!) {
         UpdateEvent(id: $idData, category: $categoryData, image: $imageData, title: $titleData,
             price: $priceData, location: $locationData, latitude: $latitudeData,
-            longitude: $longitudeData, date: $dateData) {
+            longitude: $longitudeData, date: $dateData, description: $descriptionData,
+            termCondition: $termConditionData) {
             id
         }
     }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {deleteEvent, getAllEvent, insertEvent, updateEvent} from './queries/eventQuery';
-import {EventData} from "../models/event-interface";
+import {EventData} from '../models/event-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +28,9 @@ export class EventService {
         locationData: event.location,
         longitudeData: event.longitude,
         priceData: event.price,
-        titleData: event.title
+        titleData: event.title,
+        termConditionData: event.termCondition,
+        descriptionData: event.description
       }
     });
   }
@@ -45,7 +47,9 @@ export class EventService {
         locationData: event.location,
         longitudeData: event.longitude,
         priceData: event.price,
-        titleData: event.title
+        titleData: event.title,
+        termConditionData: event.termCondition,
+        descriptionData: event.description
       }
     });
   }

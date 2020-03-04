@@ -8,13 +8,10 @@ import {FormControl} from "@angular/forms";
 })
 export class TextEditorComponent implements OnInit {
 
-  @Input() conditional: string;
-  @Input() conditional2: string;
+  @Input() textArg: string;
 
-  @ViewChild('title', {static: true})
-  private title: ElementRef;
   @ViewChild('content', {static: true})
-  private content: ElementRef;
+  public content: ElementRef;
 
   constructor() {
   }
@@ -24,10 +21,6 @@ export class TextEditorComponent implements OnInit {
 
   format(command) {
     document.execCommand(command, false);
-  }
-
-  getTitle() {
-    return this.title.nativeElement.innerHTML;
   }
 
   getContent() {

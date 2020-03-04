@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {BlogService} from "../../../../services/blog.service";
 
 @Component({
@@ -10,6 +10,7 @@ import {BlogService} from "../../../../services/blog.service";
 export class DetailBlogComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
               private blogService: BlogService) {
     this.activatedRoute.queryParams.subscribe(async params => {
       await this.getAllParameterData(params);
@@ -17,6 +18,7 @@ export class DetailBlogComponent implements OnInit {
   }
 
   blogData: any;
+  blogDataRec: any;
 
   ngOnInit() {
   }
@@ -25,10 +27,19 @@ export class DetailBlogComponent implements OnInit {
     this.blogService.getBlogByID(params.id).subscribe(async value => {
       await this.getBlogData(value);
     });
+
+    this.blogService.getRecommendedBlog(params.id).subscribe(async value => {
+      await this.getRecData(value);
+    })
   }
 
   getBlogData(value) {
     this.blogData = value.data.BlogByID;
+  }
+
+  getRecData(value) {
+    this.blogDataRec = value.data.GetRecommendedBlog;
+    console.log(this.blogDataRec);
   }
 
   facebook() {
@@ -45,5 +56,13 @@ export class DetailBlogComponent implements OnInit {
 
   line() {
     window.open('http://line.me/R/msg/text/?Blog/Detail?id=' + this.blogData.id);
+  }
+
+  goToDetail(blog: any) {
+    this.router.navigate(['/Blog/Detail'], {
+      queryParams: {
+        id: blog.id,
+      }
+    });
   }
 }

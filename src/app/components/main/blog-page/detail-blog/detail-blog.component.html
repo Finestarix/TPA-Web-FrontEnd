@@ -1,14 +1,23 @@
-<div class="blog-detail-container">
+<div class="blog-detail-container" *ngIf="blogData && blogDataRec">
+
   <div><img src="assets/blog/{{blogData.image}}" alt=""></div>
   <div [innerHTML]="blogData.title" ></div>
 
   <div class="promo-share">
-    <div (click)="facebook()">Share with Facebook</div>
-    <div (click)="copy()">Copy Link</div>
-    <div (click)="line()">Share with Line</div>
-    <div (click)="whatsapp()">Share with Whatsapp</div>
+    <div (click)="facebook()"><i class="fa fa-facebook-f"></i></div>
+    <div (click)="copy()"><i class="fa fa-link"></i></div>
+    <div (click)="line()"><i class="fa fa-line"></i></div>
+    <div (click)="whatsapp()"><i class="fa fa-whatsapp"></i></div>
   </div>
 
   <div [innerHTML]="blogData.content"></div>
 
+</div>
+
+<div>
+  <div *ngFor="let r of blogDataRec">
+    <div><img src="assets/blog/{{r.image}}" alt=""></div>
+    <div [innerHTML]="r.title"></div>
+    <button mat-button (click)="goToDetail(r)">See Detail</button>
+  </div>
 </div>

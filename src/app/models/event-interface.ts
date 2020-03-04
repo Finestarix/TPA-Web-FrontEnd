@@ -7,6 +7,7 @@ export interface EventData {
   longitude: any;
   date: string;
   description: string;
+  termCondition: string;
   type: string;
   image: string;
 }

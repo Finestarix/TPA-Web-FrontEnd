@@ -35,7 +35,7 @@ export class UpdateBlogAdminComponent implements OnInit {
   }
 
   updateBlog() {
-    if (this.textEditor.getTitle() === '' || this.textEditor.getContent() === ''
+    if (this.textEditor.getContent() === ''
       || this.selectedCategory === '' || this.selectedImage === '') {
       this.dialogError.open(DialogErrorComponent, {
         data: 'Fill All Field !'
@@ -48,7 +48,7 @@ export class UpdateBlogAdminComponent implements OnInit {
       category: this.selectedCategory,
       content: this.textEditor.getContent(),
       image: this.selectedImage,
-      title: this.textEditor.getTitle(),
+      title: '',
       userID: 0,
       viewCount: 0,
     };

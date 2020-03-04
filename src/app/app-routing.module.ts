@@ -20,8 +20,6 @@ import {CardboxTrainComponent} from "./components/main/train/cardbox-train/cardb
 import {TrainService} from "./services/train.service";
 import {SearchPlaneComponent} from "./components/main/plane/search-plane/search-plane.component";
 import {ChatPageComponent} from "./components/main/chat-page/chat-page.component";
-import {InsertEventAdminComponent} from "./components/admin/event-admin/insert-event-admin/insert-event-admin.component";
-import {UpdateEventAdminComponent} from "./components/admin/event-admin/update-event-admin/update-event-admin.component";
 import {PromoPageComponent} from "./components/main/promo-page/promo-page.component";
 import {BlogPageComponent} from "./components/main/blog-page/blog-page.component";
 import {DetailBlogComponent} from "./components/main/blog-page/detail-blog/detail-blog.component";
@@ -141,14 +139,6 @@ const routes: Routes = [
       {
         path: 'UpdateBlog',
         component: UpdateBlogAdminComponent,
-      },
-      {
-        path: 'InsertEvent',
-        component: InsertEventAdminComponent,
-      },
-      {
-        path: 'UpdateEvent',
-        component: UpdateEventAdminComponent,
       }
     ]
   }

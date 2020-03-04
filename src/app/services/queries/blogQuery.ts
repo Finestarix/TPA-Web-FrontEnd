@@ -39,6 +39,20 @@ export const getBlogByID = gql`
     }
 `;
 
+export const getRecommendedBlog = gql`
+    query getRecommendedBlog($idData: Int!){
+        GetRecommendedBlog(id: $idData) {
+            category
+            content
+            id
+            image
+            title
+            userID
+            viewCount
+        }
+    }
+`;
+
 export const deleteBlog = gql`
     mutation deleteBlog($idData: Int!) {
         DeleteBlog(id: $idData) {

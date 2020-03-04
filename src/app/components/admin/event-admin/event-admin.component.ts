@@ -1,14 +1,17 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DialogConfirmationComponent} from '../core/dialog-confirmation/dialog-confirmation.component';
-import * as moment from 'moment';
 import {EventData} from '../../../models/event-interface';
 import {EventService} from '../../../services/event.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {TextEditorComponent} from '../../core/text-editor/text-editor.component';
+import {DialogErrorComponent} from "../core/dialog-error/dialog-error.component";
+import {ChatService} from "../../../services/chat.service";
+import {log} from "util";
 
 @Component({
   selector: 'app-event-admin',
@@ -20,6 +23,9 @@ export class EventAdminComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+  @ViewChildren(TextEditorComponent)
+  private textEditor: QueryList<TextEditorComponent>;
+
   dataEvent$: Subscription;
   dataEvent: any;
   dataEventArr: EventData[] = [];
@@ -28,11 +34,34 @@ export class EventAdminComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
 
   private dialogConfirmRef: MatDialogRef<DialogConfirmationComponent>;
+  selectedID: number;
+  selectedImage: string;
+  selectedLatitude: number;
+  selectedLongitude: number;
+  selectedPrice: number;
+  selectedLocation: string;
+  selectedDate: string;
+  selectedCategory: string;
+  selectedDescription: string;
+  selectedTermCondition: string;
+  selectedTitle: string;
 
   constructor(private eventService: EventService,
+              private chatService: ChatService,
               private dialogConfirm: MatDialog,
               private router: Router,
               private dialogError: MatDialog) {
+    this.selectedID = 0;
+    this.selectedImage = '';
+    this.selectedLatitude = 0;
+    this.selectedLongitude = 0;
+    this.selectedPrice = 0;
+    this.selectedLocation = '';
+    this.selectedDate = '';
+    this.selectedCategory = '';
+    this.selectedDescription = '';
+    this.selectedTermCondition = '';
+    this.selectedTitle = '';
   }
 
   ngOnInit() {
@@ -40,6 +69,12 @@ export class EventAdminComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.getEventData();
+  }
+
+  applyFilter(filterEvent: any) {
+    let filterValue: string = filterEvent.target.value;
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
   setDataSource(flight: object[]) {
@@ -77,51 +112,92 @@ export class EventAdminComponent implements OnInit, AfterViewInit {
       price: event.price,
       title: event.title,
       type: event.type,
-      description: ''
+      description: event.description,
+      termCondition: event.termCondition
     };
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim();
-    filterValue = filterValue.toLowerCase();
-    this.dataSource.filter = filterValue;
+  isAllEmpty(): boolean {
+    return (this.selectedDate === '' || this.selectedImage === '' || this.selectedCategory === '' ||
+      this.selectedLongitude === 0 || this.selectedLatitude === 0 ||  this.selectedLocation === '');
   }
 
+  createNewEventInput(): EventData {
+    return {
+      date: this.selectedDate,
+      id: this.selectedID,
+      // @ts-ignore
+      image: this.selectedImage.files[0].name,
+      location: this.selectedLocation,
+      latitude: this.selectedLatitude,
+      longitude: this.selectedLongitude,
+      price: this.selectedPrice,
+      title: this.selectedTitle,
+      type: this.selectedCategory,
+      // @ts-ignore
+      description: this.textEditor.toArray()[0].content.nativeElement.innerHTML,
+      // @ts-ignore
+      termCondition: this.textEditor.toArray()[1].content.nativeElement.innerHTML
+    };
+  }
 
-  updateAction(row: any) {
-    console.log(row.id);
-    this.router.navigate(['/Admin/UpdateEvent'], {
-      queryParams: {
-        date: row.date,
-        id: row.id,
-        image: row.image,
-        location: row.location,
-        latitude: row.latitude,
-        longitude: row.longitude,
-        price: row.price,
-        title: row.title,
-        type: row.type,
-        description: ''
-      }
+  insertAction() {
+
+    if (this.isAllEmpty()) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Fill all Field !'
+      });
+      return;
+    }
+
+    let newEvent: EventData;
+    newEvent = this.createNewEventInput();
+
+    this.eventService.insertEvent(newEvent).subscribe(async query => {
+      await this.getEventData();
     });
+
+    this.chatService.emit('event', 'New Event Inserted !');
   }
 
-  deleteAction(row: any) {
+  setData(row: any) {
+    this.selectedPrice = row.price;
+    this.selectedID = row.id;
+    this.selectedImage = row.image;
+    this.selectedLocation = row.location;
+    this.selectedLatitude = row.latitude;
+    this.selectedLongitude = row.longitude;
+    this.selectedTitle = row.title;
+    this.selectedCategory = row.type;
+    this.textEditor.toArray()[0].content.nativeElement.innerHTML = row.description;
+    this.textEditor.toArray()[1].content.nativeElement.innerHTML = row.termCondition;
+  }
+
+  updateAction() {
+
+    let newEvent: EventData;
+    newEvent = this.createNewEventInput();
+    console.log(newEvent);
+
+    this.eventService.updateEvent(newEvent).subscribe(async query => {
+      await this.getEventData();
+    });
+
+    this.chatService.emit('event', 'Event Updated!');
+  }
+
+  deleteAction(event: any) {
     this.dialogConfirmRef = this.dialogConfirm.open(DialogConfirmationComponent);
 
     this.dialogConfirmRef.afterClosed().subscribe(temp => {
       if (temp === true) {
-        this.eventService.deleteEvent(row.id).subscribe(async query => {
+        this.eventService.deleteEvent(event.id).subscribe(async query => {
           await this.getEventData();
         });
       } else {
         return;
       }
     });
-  }
-
-  insertAction() {
-    this.router.navigate(['/Admin/InsertEvent']);
   }
 
 }

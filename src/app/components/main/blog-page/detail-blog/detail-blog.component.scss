@@ -15,10 +15,12 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    color: #0064d2;
     cursor: pointer;
 
+
     * {
+      background-color: #0064d2;
+      border-radius: 100%;
       margin: 10px;
     }
   }
