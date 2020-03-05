@@ -1,0 +1,39 @@
+<div class="chat">
+  <div class="chat-bubble">
+    <div *ngFor="let message of messageLists; let i =index">
+      <div class="send-bubble" *ngIf="validate(message)">
+        <div *ngIf="message.length < 100">
+          {{ message }}
+        </div>
+        <div *ngIf="message.length > 100">
+          <img src="{{imgSrc}}">
+          <a href="{{imgSrc}}" download="">Download</a>
+        </div>
+      </div>
+      <div class="recv-bubble" *ngIf="!validate(message)">
+        <div *ngIf="message.length < 100">
+          {{ message }}
+        </div>
+        <div *ngIf="message.length > 100">
+          <img src="{{imgSrc}}">
+          <a href="{{imgSrc}}" download="">Download</a>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <br>
+    <div>
+      <mat-form-field>
+        <mat-label>Message</mat-label>
+        <input matInput placeholder="Message" [formControl]="messageControl" required>
+      </mat-form-field>
+      <input type="file"
+             #fileInput
+             (change)="onFileChange($event)"
+             style="display: none;">
+      <button mat-button class="submit-btn"
+              (click)="fileInput.click()">Image</button>
+      <button *ngIf="messageControl.value != ''" mat-button (click)="sendMessage()">Send</button>
+    </div>
+  </div>

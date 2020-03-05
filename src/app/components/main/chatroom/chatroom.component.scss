@@ -1,0 +1,31 @@
+.chat {
+  padding: 10%;
+
+  img{
+    width: 50%;
+  }
+
+  a{
+    text-decoration: none;
+    color: black;
+  }
+
+  .chat-bottom {
+    margin: 5%;
+  }
+
+  .send-bubble {
+    position: relative;
+    background: forestgreen;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .recv-bubble {
+    position: relative;
+    background: #0264D3;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+}

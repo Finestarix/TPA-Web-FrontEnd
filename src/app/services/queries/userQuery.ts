@@ -34,7 +34,7 @@ export const insertNewUser = gql`
     }
 `;
 
-export const getUserByID = gql `
+export const getUserByID = gql`
     query getUserLogin($searchID: String!) {
         UserByID(id: $searchID) {
             id
@@ -44,4 +44,17 @@ export const getUserByID = gql `
         }
     }
 `;
+
+export const updateUser = gql`
+    mutation updateUser($titleData: String!, $firstNameData: String!,
+        $lastNameData: String!, $cityData: String!, $addressData: String!,
+        $zipCodeData: String!, $idData: Int!){
+            UpdateUserProfile(title: $titleData, firstname: $firstNameData,
+                  lastname: $lastNameData, city: $cityData, address: $addressData,
+                  zipcode: $zipCodeData, id: $idData) {
+            id
+        }
+    }
+`;
+
 

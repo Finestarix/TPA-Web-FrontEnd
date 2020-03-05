@@ -52,7 +52,6 @@ export class DetailHotelComponent implements OnInit, AfterViewInit {
 
   getHotelData(query) {
     this.hotelData = query.data.GetHotelByID;
-    console.log(this.hotelData);
 
     setTimeout(() => {
       this.map = L.map('map', {zoomControl: false}).setView([this.hotelData.latitude, this.hotelData.longitude], 8);
@@ -83,7 +82,7 @@ export class DetailHotelComponent implements OnInit, AfterViewInit {
       '&room=' + this.room + '&guest=' + this.guest);
   }
 
-  
+
 }
 
 

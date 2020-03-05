@@ -1,0 +1,58 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Update Account
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="account">
+
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select [formControl]="selectedTitle">
+          <mat-option value="Mr"> Mr </mat-option>
+          <mat-option value="Mrs"> Mrs </mat-option>
+          <mat-option value="Miss"> Miss </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" [formControl]="selectedFirstName">
+        <mat-error *ngIf="selectedFirstName.invalid">Please Select First Name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last Name" [formControl]="selectedLastName">
+        <mat-error *ngIf="selectedLastName.invalid">Please Select Last Name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input matInput placeholder="City" [formControl]="selectedCity">
+        <mat-error *ngIf="selectedCity.invalid">Please Select City</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address" [formControl]="selectedAddress">
+        <mat-error *ngIf="selectedAddress.invalid">Please Select Address</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Zip Code</mat-label>
+        <input matInput placeholder="Zip Code" [formControl]="selectedZipCode">
+        <mat-error *ngIf="selectedZipCode.invalid">Please Select Zip Code</mat-error>
+      </mat-form-field>
+
+      <button mat-button (click)="updateAction()">Update</button>
+
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+<button mat-button (click)="sendNotification()">Send Notification Email</button>
+

@@ -109,7 +109,9 @@ import {DetailEntertainmentComponent} from './components/main/entertainment/deta
 import {InsertBlogComponent} from './components/main/blog-page/insert-blog/insert-blog.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import {CalendarPriceComponent} from "./components/main/plane/calendar-price/calendar-price.component";
+import {CalendarPriceComponent} from './components/main/plane/calendar-price/calendar-price.component';
+import {ChatroomComponent} from './components/main/chatroom/chatroom.component';
+import {AccountPageComponent} from "./components/core/navbar/account-page/account-page.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -194,7 +196,9 @@ Marker.prototype.options.icon = iconDefault;
     SearchEntertainmentComponent,
     DetailEntertainmentComponent,
     InsertBlogComponent,
-    CalendarPriceComponent
+    CalendarPriceComponent,
+    ChatroomComponent,
+    AccountPageComponent
   ],
   entryComponents: [
     LoginComponent,

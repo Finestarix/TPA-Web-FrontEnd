@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {Observable} from 'rxjs';
 
-import {getEmailAndPhone, getUserByID, getValidUser, insertNewUser} from './queries/userQuery';
+import {getEmailAndPhone, getUserByID, getValidUser, insertNewUser, updateUser} from './queries/userQuery';
 
 @Injectable({
   providedIn: 'root'
@@ -73,6 +73,30 @@ export class UserService {
       query: getUserByID,
       variables: {
         searchID: convertedID,
+      }
+    });
+
+  }
+
+  updateUser(title: string, firstName: string, lastName: string,
+             city: string, address: string, zipcode: number, id: number): Observable<any> {
+
+    const titleConvert = String(title);
+    const firstNameConvert = String(firstName);
+    const lastNameConvert = String(lastName);
+    const cityConvert = String(city);
+    const addressConvert = String(address);
+
+    return this.apollo.mutate<any>({
+      mutation: updateUser,
+      variables: {
+        titleData: titleConvert,
+        firstNameData: firstNameConvert,
+        lastNameData: lastNameConvert,
+        cityData: cityConvert,
+        addressData: addressConvert,
+        zipCodeData: String(zipcode),
+        idData: id
       }
     });
 

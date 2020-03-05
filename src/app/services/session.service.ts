@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,20 @@ export class SessionService {
 
   getSession() {
     return sessionStorage.getItem('id');
+  }
+
+  getSessionID() {
+    const helper = new JwtHelperService();
+
+    const decodedToken = helper.decodeToken(this.getSession());
+    return decodedToken.id;
+  }
+
+  getSessionEmail() {
+    const helper = new JwtHelperService();
+
+    const decodedToken = helper.decodeToken(this.getSession());
+    return decodedToken.Email;
   }
 
   removeSession() {

@@ -3,6 +3,7 @@ import {SessionService} from '../../../../services/session.service';
 import {Subscription} from 'rxjs';
 import {UserService} from '../../../../services/user.service';
 import {log} from 'util';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-profile',
@@ -12,6 +13,7 @@ import {log} from 'util';
 export class ProfileComponent implements OnInit {
 
   constructor(private sessionService: SessionService,
+              private router: Router,
               private userService: UserService) {
     const id = sessionService.getSession();
     this.userProfile$ = userService.getUserByID(id).subscribe(async query => {
@@ -48,4 +50,7 @@ export class ProfileComponent implements OnInit {
     this.displayStatus = (this.displayStatus === 'none') ? 'flex' : 'none';
   }
 
+  goToProfile() {
+    this.router.navigateByUrl('Account');
+  }
 }

@@ -22,7 +22,9 @@ import {BlogPageComponent} from './components/main/blog-page/blog-page.component
 import {DetailBlogComponent} from './components/main/blog-page/detail-blog/detail-blog.component';
 import {SearchEntertainmentComponent} from './components/main/entertainment/search-entertainment/search-entertainment.component';
 import {DetailEntertainmentComponent} from './components/main/entertainment/detail-entertainment/detail-entertainment.component';
-import {CalendarPriceComponent} from "./components/main/plane/calendar-price/calendar-price.component";
+import {CalendarPriceComponent} from './components/main/plane/calendar-price/calendar-price.component';
+import {ChatroomComponent} from './components/main/chatroom/chatroom.component';
+import {AccountPageComponent} from "./components/core/navbar/account-page/account-page.component";
 
 const routes: Routes = [
   {
@@ -32,6 +34,14 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent
+      },
+      {
+        path: 'Chat',
+        component: ChatroomComponent
+      },
+      {
+        path: 'Account',
+        component: AccountPageComponent
       },
       {
         path: 'Flight',

@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {HotelService} from '../../../../services/hotel.service';
 import {Subscription} from 'rxjs';
-import {log} from "util";
 
 @Component({
   selector: 'app-rec-hotel',
@@ -36,7 +35,6 @@ export class RecHotelComponent implements OnInit {
 
   afterGetRecHotel(query) {
     this.recHotel = query.data.NearestHotel;
-    console.log(this.recHotel);
   }
 
 }
