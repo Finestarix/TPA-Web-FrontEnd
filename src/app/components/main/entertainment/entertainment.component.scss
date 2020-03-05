@@ -1,0 +1,167 @@
+.image-slider-container {
+
+  margin-top: 10px;
+
+  width: 100%;
+  height: 300px;
+  background-color: #0264D3;
+
+  .image-slider-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 305px;
+
+    .image-slider-template {
+      height: 305px;
+      width: 970px;
+    }
+
+    .image-slider img {
+      position: absolute;
+      top: 0;
+      left: 15% !important;
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility:    hidden;
+      -ms-backface-visibility:     hidden;
+      width: auto;
+    }
+
+    .image-arrow {
+      z-index: 10;
+      width: 15px;
+    }
+
+  }
+
+}
+
+@media only screen and (max-width: 1150px) {
+  .image-slider-container {
+    margin-top: 0px;
+    height: 200px;
+
+    .image-slider-content {
+
+      height: 205px;
+
+      .image-slider img {
+        height: 200px;
+      }
+
+      .image-arrow {
+        z-index: 10;
+        width: 15px;
+      }
+
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .image-slider-container {
+    margin-top: 0px;
+    height: 100px;
+
+    .image-slider-content {
+
+      height: 105px;
+
+      .image-slider img {
+        height: 100px;
+      }
+
+      .image-arrow {
+        z-index: 10;
+        width: 15px;
+      }
+
+    }
+  }
+}
+
+.cardbox-container {
+  margin: 10px 20px 20px 20px;
+  width: auto;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #C5C7C4;
+  border-radius: 10px;
+
+  .cardbox-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  * {
+    margin: 10px 10px 0 10px;
+  }
+
+  ::ng-deep {
+    .mat-button, .mat-raised-button {
+      background-color: white !important;
+    }
+  }
+}
+
+.category-container {
+
+  display: flex;
+  flex-direction: column;
+
+  .category-title {
+    margin-top: 20px;
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .category-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: fit-content;
+    height: fit-content;
+
+    mat-card {
+      width: 300px;
+
+      padding: 10px;
+      margin: 10px;
+
+      background-color: #c6cbda;
+
+      img {
+        width: 300px;
+        height: 210px;
+      }
+
+      .content-title {
+        font-size: 20px;
+        color: #0B7FC7;
+      }
+
+      .content-location {
+        color: #58627a;
+      }
+
+      .content-price {
+        color: #ff5500;
+      }
+
+    }
+
+
+  }
+
+
+
+}

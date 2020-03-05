@@ -7,6 +7,7 @@ import {LabelType, Options} from 'ng5-slider';
 import * as moment from 'moment';
 import {LocationsService} from '../../../../services/locations.service';
 import {type} from 'os';
+import {ChatService} from "../../../../services/chat.service";
 
 @Component({
   selector: 'app-search-hotel',
@@ -17,6 +18,7 @@ export class SearchHotelComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
+              private chatService: ChatService,
               private hotelService: HotelService,
               private locationService: LocationsService) {
     this.activatedRoute.queryParams.subscribe(async params => {
@@ -80,6 +82,10 @@ export class SearchHotelComponent implements OnInit {
 
   ngOnInit() {
     this.lastValue = 0;
+
+    this.chatService.listen('hotel').subscribe(m => {
+      alert(m);
+    });
   }
 
   getAllParameterData(params) {

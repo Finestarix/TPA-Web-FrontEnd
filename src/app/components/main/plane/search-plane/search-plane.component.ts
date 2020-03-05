@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LabelType, Options} from 'ng5-slider';
 import {FlightService} from '../../../../services/flight.service';
 import * as moment from 'moment';
+import {ChatService} from "../../../../services/chat.service";
 
 @Component({
   selector: 'app-search-plane',
@@ -13,6 +14,7 @@ export class SearchPlaneComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
+              private chatService: ChatService,
               private flightService: FlightService) {
     this.selectedSort = 'sortBy';
 
@@ -50,6 +52,9 @@ export class SearchPlaneComponent implements OnInit {
   selectedSort: string;
 
   ngOnInit() {
+    this.chatService.listen('flight').subscribe(m => {
+      alert(m);
+    });
   }
 
   getAllParameterData(params) {

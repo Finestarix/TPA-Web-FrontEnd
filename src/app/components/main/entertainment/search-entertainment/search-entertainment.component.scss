@@ -1,0 +1,139 @@
+.top-container {
+
+  position: relative;
+
+  .background-location img {
+    overflow: hidden;
+    width: 100%;
+    height: 600px;
+
+  }
+
+  .cardbox-container {
+    width: fit-content;
+
+    position: absolute;
+    top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    right:  0;
+    left: 0;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #C5C7C4;
+    border-radius: 10px;
+
+    .cardbox-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    * {
+      margin: 10px 10px 0 10px;
+    }
+
+    ::ng-deep {
+      .mat-button, .mat-raised-button {
+        background-color: white !important;
+      }
+    }
+  }
+
+  .foreground-location {
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+
+    width: 100%;
+    height: fit-content;
+
+    img {
+      width: 150px;
+      height: 150px;
+    }
+
+    div {
+      font-size: 28px;
+    }
+  }
+}
+
+.bottom-container-data {
+
+  display: flex;
+  flex-direction: row;
+
+  .bottom-container {
+      width: 20%;
+
+    .checkbox-list {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .bottom-data {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 70%;
+
+    .data-container {
+
+      background-color: #d7d4f0;
+      box-shadow: 1px 1px 1px 2px black;
+
+      border-radius: 10px;
+
+      margin: 10px;
+      padding: 10px;
+
+      width: 300px;
+
+      img {
+        width: 300px;
+        height: 200px;
+      }
+
+      .event-title {
+        font-size: 20px;
+        color: #0B7FC7;
+      }
+
+      .event-location {
+        color: #ff5500;
+      }
+
+    }
+  }
+
+
+}
+
+::ng-deep {
+  .ng5-slider {
+    .ng5-slider-pointer {
+      display: none !important;
+    }
+
+    .ng5-slider-selection {
+      background: #9b870c !important;
+    }
+  }
+}
+
+

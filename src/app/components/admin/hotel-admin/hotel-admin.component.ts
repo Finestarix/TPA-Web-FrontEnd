@@ -10,6 +10,7 @@ import {UpdateHotelAdminComponent} from './update-hotel-admin/update-hotel-admin
 import {HotelData} from '../../../models/hotel-interface';
 import DateTimeFormat = Intl.DateTimeFormat;
 import * as moment from 'moment';
+import {ChatService} from "../../../services/chat.service";
 
 
 @Component({
@@ -39,6 +40,7 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
               private dialogInsert: MatDialog,
               private dialogUpdate: MatDialog,
               private dialogConfirm: MatDialog,
+              private chatService: ChatService,
               private dialogError: MatDialog) {
   }
 
@@ -123,6 +125,7 @@ export class HotelAdminComponent implements OnInit, AfterViewInit {
   }
 
   afterInsertHotelData(data) {
+    this.chatService.emit('hotel', 'New Hotel Inserted !');
     const newHotel = data.data.GetHotelByID;
     this.dataHotelArr.push(this.createNewHotel(newHotel));
     this.setDataSource(this.dataHotelArr);

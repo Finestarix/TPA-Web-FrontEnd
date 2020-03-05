@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {ChatService} from "../../../services/chat.service";
 
 @Component({
   selector: 'app-hotel',
@@ -7,7 +8,8 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 })
 export class HotelComponent implements OnInit, AfterViewInit {
 
-  constructor() {
+  constructor(private chatService: ChatService) {
+
   }
 
   quickCard: HTMLElement;

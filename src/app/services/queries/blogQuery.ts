@@ -5,8 +5,7 @@ export const insertBlog = gql`
         $categoryData: String!, $titleData: String!, $contentData: String!){
         InsertNewBlog(userID: $userData, image: $imageData,
             category:$categoryData, title: $titleData, content: $contentData) {
-            category
-            content
+            id
         }
     }
 `;
@@ -66,9 +65,7 @@ export const updateBlog = gql`
         $categoryData: String!) {
         UpdateBlog(id: $idData, content: $contentData, image: $imageData,
             category: $categoryData) {
-            category
             id
-            content
         }
     }
 `;

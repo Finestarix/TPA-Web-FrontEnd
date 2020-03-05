@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {TrainService} from '../../../services/train.service';
 import {log} from 'util';
 import * as moment from 'moment';
+import {ChatService} from "../../../services/chat.service";
 
 @Component({
   selector: 'app-train',
@@ -14,6 +15,7 @@ export class TrainComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
+              private chatService: ChatService,
               private trainService: TrainService) {
     this.activatedRoute.queryParams.subscribe(async params => {
       await this.getAllParameterData(params);
@@ -39,6 +41,9 @@ export class TrainComponent implements OnInit {
   trainDataType: string[] = [];
 
   ngOnInit() {
+    this.chatService.listen('train').subscribe(m => {
+      alert(m);
+    });
   }
 
   getAllParameterData(params) {

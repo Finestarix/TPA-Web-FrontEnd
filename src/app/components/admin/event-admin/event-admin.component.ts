@@ -9,9 +9,8 @@ import {EventData} from '../../../models/event-interface';
 import {EventService} from '../../../services/event.service';
 import {Router} from '@angular/router';
 import {TextEditorComponent} from '../../core/text-editor/text-editor.component';
-import {DialogErrorComponent} from "../core/dialog-error/dialog-error.component";
-import {ChatService} from "../../../services/chat.service";
-import {log} from "util";
+import {DialogErrorComponent} from '../core/dialog-error/dialog-error.component';
+import {ChatService} from '../../../services/chat.service';
 
 @Component({
   selector: 'app-event-admin',
@@ -119,12 +118,16 @@ export class EventAdminComponent implements OnInit, AfterViewInit {
 
   isAllEmpty(): boolean {
     return (this.selectedDate === '' || this.selectedImage === '' || this.selectedCategory === '' ||
-      this.selectedLongitude === 0 || this.selectedLatitude === 0 ||  this.selectedLocation === '');
+      this.selectedLongitude === 0 || this.selectedLatitude === 0 || this.selectedLocation === '');
   }
 
   createNewEventInput(): EventData {
+    const arrivalDate = new Date(this.selectedDate);
+    arrivalDate.setHours(arrivalDate.getHours() + 7);
+    const arrivalTime = arrivalDate.toISOString().substr(0, 11) + '00:00:00Z';
+
     return {
-      date: this.selectedDate,
+      date: arrivalTime,
       id: this.selectedID,
       // @ts-ignore
       image: this.selectedImage.files[0].name,
@@ -154,7 +157,7 @@ export class EventAdminComponent implements OnInit, AfterViewInit {
     newEvent = this.createNewEventInput();
 
     this.eventService.insertEvent(newEvent).subscribe(async query => {
-      await this.getEventData();
+      await this.checkInsertSuccess(query);
     });
 
     this.chatService.emit('event', 'New Event Inserted !');
@@ -177,13 +180,9 @@ export class EventAdminComponent implements OnInit, AfterViewInit {
 
     let newEvent: EventData;
     newEvent = this.createNewEventInput();
-    console.log(newEvent);
-
     this.eventService.updateEvent(newEvent).subscribe(async query => {
       await this.getEventData();
     });
-
-    this.chatService.emit('event', 'Event Updated!');
   }
 
   deleteAction(event: any) {
@@ -200,4 +199,13 @@ export class EventAdminComponent implements OnInit, AfterViewInit {
     });
   }
 
+  checkInsertSuccess(value) {
+    if (value.data.InsertNewEvent === null) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Insert Failed !'
+      });
+    } else {
+      this.getEventData();
+    }
+  }
 }

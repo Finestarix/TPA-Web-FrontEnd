@@ -1,0 +1,115 @@
+<div class="top-container">
+  <div *ngIf="selectedLocation" class="background-location">
+    <img src="assets/event/location/{{selectedLocation}}.jpg" alt="">
+  </div>
+
+  <div *ngIf="selectedLocation" class="foreground-location">
+    <img src="assets/event/location/{{selectedLocation}}.png" alt="">
+    <div>Things To Do In {{selectedLocation}}</div>
+  </div>
+
+  <div class="cardbox-container">
+    <div class="cardbox-content">
+      <mat-form-field style="width:30%">
+        <mat-label>Event Category</mat-label>
+        <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="detectChange()">
+          <mat-option value="All">All</mat-option>
+          <mat-option value="Activity">Activity</mat-option>
+          <mat-option value="Attraction">Attraction</mat-option>
+          <mat-option value="Event">Event</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width:30%">
+        <mat-label>Location</mat-label>
+        <mat-select [(ngModel)]="selectedLocation" (ngModelChange)= "detectChange()">
+          <mat-optgroup *ngFor="let group of eventLocation" [label]="group.name">
+            <mat-option *ngFor="let city of group.data" value="{{city}}" style="height: 90px">
+              <img src="assets/event/location/{{city}}.webp" alt="">
+              <div style="display: none">{{city}}</div>
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button color="white">Search</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="bottom-container-data">
+
+  <div class="bottom-container">
+    <mat-accordion>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Price
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ng5-slider (valueChange)="detectChange()" (highValueChange)="detectChange()" [(value)]="selectedLowPrice" [(highValue)]="selectedHighPrice" [options]="options"></ng5-slider>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Category
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="checkbox-list">
+          <mat-checkbox [(ngModel)]="selectedCheckBoxAttraction" (change)="detectChange()">Attraction</mat-checkbox>
+          <mat-checkbox [(ngModel)]="selectedCheckBoxActivity" (change)="detectChange()">Activity</mat-checkbox>
+          <mat-checkbox [(ngModel)]="selectedCheckBoxEvent" (change)="detectChange()">Event</mat-checkbox>
+        </div>
+
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Start Date
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <input matInput [(ngModel)]="selectedStartDate" [matDatepicker]="startDate" (dateChange)="detectChange()">
+          <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+          <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            End Date
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+          <input matInput [(ngModel)]="selectedEndDate" [matDatepicker]="picker" (dateChange)="detectChange()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+  </div>
+
+  <div class="bottom-data"
+       infinite-scroll
+       [infiniteScrollDistance]="2"
+       [infiniteScrollThrottle]="50"
+       (scrolled)="onScroll()">
+    <div *ngFor="let e of dataShow" class="data-container">
+      <div><img src="assets/event/{{e.image}}" alt=""></div>
+      <div class="event-title">{{e.title}}</div>
+      <div class="event-location">{{e.location}}</div>
+      <div>{{e.price  | currency: 'IDR'}}</div>
+      <button style="float: right" mat-button (click)="goToDetail(e)">View Detail</button>
+    </div>
+  </div>
+
+</div>

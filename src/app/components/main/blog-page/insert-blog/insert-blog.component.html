@@ -1,0 +1,35 @@
+<div class="blog-container">
+
+  <div>
+    <h2>Detail Blog</h2>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput placeholder="Title" [(ngModel)]="selectedTitle">
+  </mat-form-field>
+
+  <div>
+    <mat-label>Content</mat-label>
+    <app-text-editor #textContent [textArg]="selectedContent"></app-text-editor>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select [(ngModel)]="selectedCategory">
+      <mat-option value="Event"> Holiday </mat-option>
+      <mat-option value="Activity"> Tips And Trick </mat-option>
+      <mat-option value="Attraction"> Info </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <ngx-mat-file-input [(ngModel)]="selectedImage" placeholder="Image" ></ngx-mat-file-input>
+    <mat-icon matSuffix>folder</mat-icon>
+  </mat-form-field>
+
+  <div>
+    <button mat-button (click)="insertAction()">Insert</button>
+  </div>
+
+</div>

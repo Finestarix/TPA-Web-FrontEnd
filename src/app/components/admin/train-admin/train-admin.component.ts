@@ -10,6 +10,7 @@ import {UpdateTrainAdminComponent} from './update-train-admin/update-train-admin
 import {Subscription} from 'rxjs';
 import {HotelData} from '../../../models/hotel-interface';
 import {TrainData} from '../../../models/train-interface';
+import {ChatService} from "../../../services/chat.service";
 
 @Component({
   selector: 'app-train-admin',
@@ -25,6 +26,7 @@ export class TrainAdminComponent implements OnInit, AfterViewInit {
               private dialogInsert: MatDialog,
               private dialogUpdate: MatDialog,
               private dialogConfirm: MatDialog,
+              private chatService: ChatService,
               private dialogError: MatDialog) {
   }
 
@@ -90,6 +92,7 @@ export class TrainAdminComponent implements OnInit, AfterViewInit {
     this.dialogInsertRef = this.dialogInsert.open(InsertTrainAdminComponent);
 
     this.dialogInsertRef.afterClosed().subscribe(data => {
+      this.chatService.emit('train', 'New Train Inserted !');
       this.getTrainData();
     });
 

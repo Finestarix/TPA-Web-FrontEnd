@@ -1,1 +1,87 @@
-<p>entertainment works!</p>
+<div class="image-slider-container">
+
+  <div class="image-slider-content">
+    <img (click)="prevImageSlider()" class="image-arrow" src="assets/home-imageslider/left.webp" alt="">
+    <div class="image-slider-template">
+
+    </div>
+    <div class="image-slider" *ngFor="let currImage of imageList; let i = index;">
+      <img *ngIf="i === currIndex"
+           [@imageSliderAnimation]=currentState
+           src="{{currImage}}" alt="">
+    </div>
+    <img (click)="nextImageSlider()" class="image-arrow" src="assets/home-imageslider/right.webp" alt="">
+  </div>
+
+</div>
+
+<div class="cardbox-container">
+  <div class="cardbox-content">
+    <mat-form-field style="width:30%">
+      <mat-label>Event Category</mat-label>
+      <mat-select [(ngModel)]="selectedCategory">
+        <mat-option value="All">All</mat-option>
+        <mat-option value="Activity">Activity</mat-option>
+        <mat-option value="Attraction">Attraction</mat-option>
+        <mat-option value="Event">Event</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="width:30%">
+      <mat-label>Location</mat-label>
+      <mat-select [(ngModel)]="selectedLocation">
+        <mat-optgroup *ngFor="let group of eventLocation" [label]="group.name">
+          <mat-option *ngFor="let city of group.data" value="{{city}}" style="height: 90px">
+            <img src="assets/event/location/{{city}}.webp" alt="">
+            <div style="display: none">{{city}}</div>
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+    <button mat-button color="white" (click)="goToDetail()">Search</button>
+  </div>
+</div>
+
+<div *ngIf="eventDataActivity && eventDataAttraction && eventDataEvent" class="category-container">
+
+  <div class="category-title">Best Offers</div>
+  <div class="category-content">
+    <mat-card *ngFor="let activity of eventDataConcat">
+      <img src="assets/event/{{activity.image}}" alt="">
+      <div class="content-title">{{activity.title}}</div>
+      <div class="content-location">{{activity.location}}</div>
+      <div class="content-price">{{activity.price | currency: 'IDR'}}</div>
+    </mat-card>
+  </div>
+
+  <div class="category-title">Trending Activity</div>
+  <div class="category-content">
+    <mat-card *ngFor="let activity of eventDataActivity">
+      <img src="assets/event/{{activity.image}}" alt="">
+      <div class="content-title">{{activity.title}}</div>
+      <div class="content-location">{{activity.location}}</div>
+      <div class="content-price">{{activity.price | currency: 'IDR'}}</div>
+    </mat-card>
+  </div>
+
+  <div class="category-title">Trending Attraction</div>
+  <div class="category-content">
+    <mat-card *ngFor="let attraction of eventDataAttraction">
+      <img src="assets/event/{{attraction.image}}" alt="">
+      <div class="content-title">{{attraction.title}}</div>
+      <div class="content-location">{{attraction.location}}</div>
+      <div class="content-price">{{attraction.price | currency: 'IDR'}}</div>
+    </mat-card>
+  </div>
+
+  <div class="category-title">Trending Event</div>
+  <div class="category-content">
+    <mat-card *ngFor="let event of eventDataEvent">
+      <img src="assets/event/{{event.image}}" alt="">
+      <div class="content-title">{{event.title}}</div>
+      <div class="content-location">{{event.location}}</div>
+      <div class="content-price">{{event.price | currency: 'IDR'}}</div>
+    </mat-card>
+  </div>
+
+</div>
+

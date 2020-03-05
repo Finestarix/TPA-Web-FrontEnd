@@ -81,8 +81,6 @@ import {UpdateTrainAdminComponent} from './components/admin/train-admin/update-t
 import {FlightAdminComponent} from './components/admin/flight-admin/flight-admin.component';
 import {InsertFlightAdminComponent} from './components/admin/flight-admin/insert-flight-admin/insert-flight-admin.component';
 import {UpdateFlightAdminComponent} from './components/admin/flight-admin/update-flight-admin/update-flight-admin.component';
-import {InsertBlogAdminComponent} from './components/admin/blog-admin/insert-blog-admin/insert-blog-admin.component';
-import {UpdateBlogAdminComponent} from './components/admin/blog-admin/update-blog-admin/update-blog-admin.component';
 import {TextEditorComponent} from './components/core/text-editor/text-editor.component';
 import {BlogAdminComponent} from './components/admin/blog-admin/blog-admin.component';
 import {CardboxTrainComponent} from './components/main/train/cardbox-train/cardbox-train.component';
@@ -95,16 +93,20 @@ import {SearchCarPipe} from './pipe/car/search-car.pipe';
 import {SortCarPipe} from './pipe/car/sort-car.pipe';
 import {SearchTrainPipe} from './pipe/train/search-train.pipe';
 import {SortTrainPipe} from './pipe/train/sort-train.pipe';
-import {SearchPlaneComponent} from "./components/main/plane/search-plane/search-plane.component";
-import {MatListModule} from "@angular/material/list";
-import {SearchFlightPipe} from "./pipe/flight/search-flight.pipe";
-import {SortFlightPipe} from "./pipe/flight/sort-flight.pipe";
-import {ChatPageComponent} from "./components/main/chat-page/chat-page.component";
-import {PromoPageComponent} from "./components/main/promo-page/promo-page.component";
-import {BlogPageComponent} from "./components/main/blog-page/blog-page.component";
-import {ViewBlogComponent} from "./components/main/blog-page/view-blog/view-blog.component";
-import {DetailBlogComponent} from "./components/main/blog-page/detail-blog/detail-blog.component";
-import {MaterialFileInputModule} from "ngx-material-file-input";
+import {SearchPlaneComponent} from './components/main/plane/search-plane/search-plane.component';
+import {MatListModule} from '@angular/material/list';
+import {SearchFlightPipe} from './pipe/flight/search-flight.pipe';
+import {SortFlightPipe} from './pipe/flight/sort-flight.pipe';
+import {ChatPageComponent} from './components/main/chat-page/chat-page.component';
+import {PromoPageComponent} from './components/main/promo-page/promo-page.component';
+import {BlogPageComponent} from './components/main/blog-page/blog-page.component';
+import {ViewBlogComponent} from './components/main/blog-page/view-blog/view-blog.component';
+import {DetailBlogComponent} from './components/main/blog-page/detail-blog/detail-blog.component';
+import {MaterialFileInputModule} from 'ngx-material-file-input';
+import {MatCardModule} from '@angular/material/card';
+import {SearchEntertainmentComponent} from './components/main/entertainment/search-entertainment/search-entertainment.component';
+import {DetailEntertainmentComponent} from './components/main/entertainment/detail-entertainment/detail-entertainment.component';
+import {InsertBlogComponent} from "./components/main/blog-page/insert-blog/insert-blog.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -176,8 +178,6 @@ Marker.prototype.options.icon = iconDefault;
     FlightAdminComponent,
     InsertFlightAdminComponent,
     UpdateFlightAdminComponent,
-    InsertBlogAdminComponent,
-    UpdateBlogAdminComponent,
     TextEditorComponent,
     BlogAdminComponent,
     CardboxTrainComponent,
@@ -188,7 +188,10 @@ Marker.prototype.options.icon = iconDefault;
     PromoPageComponent,
     BlogPageComponent,
     ViewBlogComponent,
-    DetailBlogComponent
+    DetailBlogComponent,
+    SearchEntertainmentComponent,
+    DetailEntertainmentComponent,
+    InsertBlogComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -202,51 +205,52 @@ Marker.prototype.options.icon = iconDefault;
     DialogConfirmationComponent,
     DialogErrorComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        FormsModule,
-        HttpClientModule,
-        HttpLinkModule,
-        ApolloModule,
-        GraphQLModule,
-        MatNativeDateModule,
-        JwtModule.forRoot({
-            config: {
-                tokenGetter: () => {
-                    return localStorage.getItem('access-token');
-                },
-                // whitelistedDomains: ['localhost'],
-                blacklistedRoutes: ['localhost']
-            }
-        }),
-        MatFormFieldModule,
-        MatDatepickerModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatAutocompleteModule,
-        MatSliderModule,
-        MatCheckboxModule,
-        Ng5SliderModule,
-        MatSelectModule,
-        NgxContentLoadingModule,
-        MatButtonModule,
-        MatTooltipModule,
-        InfiniteScrollModule,
-        MatTabsModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatProgressSpinnerModule,
-        MatIconModule,
-        MatChipsModule,
-        NgxMaterialTimepickerModule,
-        MatExpansionModule,
-        MatListModule,
-        MaterialFileInputModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    FormsModule,
+    HttpClientModule,
+    HttpLinkModule,
+    ApolloModule,
+    GraphQLModule,
+    MatNativeDateModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => {
+          return localStorage.getItem('access-token');
+        },
+        // whitelistedDomains: ['localhost'],
+        blacklistedRoutes: ['localhost']
+      }
+    }),
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatSliderModule,
+    MatCheckboxModule,
+    Ng5SliderModule,
+    MatSelectModule,
+    NgxContentLoadingModule,
+    MatButtonModule,
+    MatTooltipModule,
+    InfiniteScrollModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatIconModule,
+    MatChipsModule,
+    NgxMaterialTimepickerModule,
+    MatExpansionModule,
+    MatListModule,
+    MaterialFileInputModule,
+    MatCardModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
   exports: [

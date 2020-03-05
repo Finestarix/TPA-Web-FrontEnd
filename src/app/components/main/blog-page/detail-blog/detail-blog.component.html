@@ -6,7 +6,7 @@
   <div class="promo-share">
     <div (click)="facebook()"><i class="fa fa-facebook-f"></i></div>
     <div (click)="copy()"><i class="fa fa-link"></i></div>
-    <div (click)="line()"><i class="fa fa-line"></i></div>
+    <div (click)="line()"><i class="fa fa-share"></i></div>
     <div (click)="whatsapp()"><i class="fa fa-whatsapp"></i></div>
   </div>
 
@@ -14,8 +14,9 @@
 
 </div>
 
-<div>
-  <div *ngFor="let r of blogDataRec">
+<div class="trending-title">Trending Story</div>
+<div class="trending-story">
+  <div *ngFor="let r of blogDataRec" class="trending-content">
     <div><img src="assets/blog/{{r.image}}" alt=""></div>
     <div [innerHTML]="r.title"></div>
     <button mat-button (click)="goToDetail(r)">See Detail</button>

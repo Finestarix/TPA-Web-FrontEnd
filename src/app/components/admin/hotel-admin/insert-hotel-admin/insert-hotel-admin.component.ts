@@ -7,6 +7,7 @@ import {DialogErrorComponent} from '../../core/dialog-error/dialog-error.compone
 import {HotelService} from '../../../../services/hotel.service';
 import {HotelData} from '../../../../models/hotel-interface';
 import {log} from "util";
+import {ChatService} from "../../../../services/chat.service";
 
 @Component({
   selector: 'app-insert-hotel-admin',
@@ -17,6 +18,7 @@ export class InsertHotelAdminComponent implements OnInit {
 
   constructor(private dialogRef: MatDialogRef<InsertHotelAdminComponent>,
               private dialogError: MatDialog,
+              private chatService: ChatService,
               private hotelService: HotelService) {
     this.isDisable = false;
   }

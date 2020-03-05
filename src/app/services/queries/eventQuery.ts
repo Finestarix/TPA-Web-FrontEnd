@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
-export const getAllEvent = gql `
+export const getAllEvent = gql`
     query {
         AllEntertainment {
-            category
+            type
             date
             id
             latitude
@@ -44,10 +44,50 @@ export const updateEvent = gql`
     }
 `;
 
-export const deleteEvent = gql `
+export const deleteEvent = gql`
     mutation deleteEvent($idData: Int!) {
         DeleteEvent(id: $idData) {
             id
         }
     }
+`;
+
+export const getEntertainment = gql`
+  query getEntCategory($categoryData: String!){
+      GetEntertainmentCategory(category: $categoryData) {
+          type
+          date
+          id
+          latitude
+          location
+          longitude
+          image
+          price
+          title
+          description
+          termCondition
+      }
+  }
+`;
+
+export const getFilterEntertainment = gql`
+  query getFilter($lowPriceData: Int!, $highPriceData: Int!,
+      $startDateData: String!, $endDateData: String!, $isActivityData: String!,
+      $isEventData: String!, $isAttractionData: String!, $locationData: String!){
+      GetFilterEntertainment(lowPrice: $lowPriceData, highPrice: $highPriceData,
+          startDate: $startDateData, endDate: $endDateData, isActivity: $isActivityData,
+          isEvent: $isEventData, isAttraction: $isAttractionData, location: $locationData ) {
+              type
+              date
+              id
+              latitude
+              location
+              longitude
+              image
+              price
+              title
+              description
+              termCondition
+      }
+  }
 `;

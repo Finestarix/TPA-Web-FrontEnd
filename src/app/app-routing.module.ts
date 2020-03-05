@@ -14,8 +14,6 @@ import {SearchCarComponent} from './components/main/car/search-car/search-car.co
 import {LoginAdminComponent} from './components/admin/login-admin/login-admin.component';
 import {AuthGuard} from './guards/auth.guard';
 import {HomeAdminComponent} from './components/admin/home-admin/home-admin.component';
-import {InsertBlogAdminComponent} from "./components/admin/blog-admin/insert-blog-admin/insert-blog-admin.component";
-import {UpdateBlogAdminComponent} from "./components/admin/blog-admin/update-blog-admin/update-blog-admin.component";
 import {CardboxTrainComponent} from "./components/main/train/cardbox-train/cardbox-train.component";
 import {TrainService} from "./services/train.service";
 import {SearchPlaneComponent} from "./components/main/plane/search-plane/search-plane.component";
@@ -23,6 +21,8 @@ import {ChatPageComponent} from "./components/main/chat-page/chat-page.component
 import {PromoPageComponent} from "./components/main/promo-page/promo-page.component";
 import {BlogPageComponent} from "./components/main/blog-page/blog-page.component";
 import {DetailBlogComponent} from "./components/main/blog-page/detail-blog/detail-blog.component";
+import {SearchEntertainmentComponent} from "./components/main/entertainment/search-entertainment/search-entertainment.component";
+import {DetailEntertainmentComponent} from "./components/main/entertainment/detail-entertainment/detail-entertainment.component";
 
 const routes: Routes = [
   {
@@ -99,7 +99,20 @@ const routes: Routes = [
       },
       {
         path: 'Entertainment',
-        component: EntertainmentComponent
+        children: [
+          {
+            path: '',
+            component: EntertainmentComponent
+          },
+          {
+            path: 'Search',
+            component: SearchEntertainmentComponent
+          },
+          {
+            path: 'Detail',
+            component: DetailEntertainmentComponent
+          },
+        ]
       },
       {
         path: 'Promo',
@@ -131,14 +144,6 @@ const routes: Routes = [
         path: 'Home',
         component: HomeAdminComponent,
         canActivate: [AuthGuard],
-      },
-      {
-        path: 'InsertBlog',
-        component: InsertBlogAdminComponent,
-      },
-      {
-        path: 'UpdateBlog',
-        component: UpdateBlogAdminComponent,
       }
     ]
   }

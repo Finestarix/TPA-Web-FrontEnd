@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {deleteEvent, getAllEvent, insertEvent, updateEvent} from './queries/eventQuery';
+import {
+  deleteEvent,
+  getAllEvent,
+  getEntertainment,
+  getFilterEntertainment,
+  insertEvent,
+  updateEvent
+} from './queries/eventQuery';
 import {EventData} from '../models/event-interface';
 
 @Injectable({
@@ -14,6 +21,33 @@ export class EventService {
     return this.apollo.query<any>({
       query: getAllEvent,
       fetchPolicy: 'no-cache'
+    });
+  }
+
+  getEventCategory(category: string) {
+    return this.apollo.query<any>({
+      query: getEntertainment,
+      variables: {
+        categoryData: category,
+      }
+    });
+  }
+
+  getFilterEntertainment(lowPrice: number, highPrice: number,
+                         startDate: string, endDate: string, location: string,
+                         isActivity: string, isEvent: string, isAttraction: string) {
+    return this.apollo.query<any>({
+      query: getFilterEntertainment,
+      variables: {
+        lowPriceData: lowPrice,
+        highPriceData: highPrice,
+        startDateData: startDate,
+        endDateData: endDate,
+        isActivityData: isActivity,
+        isEventData: isEvent,
+        isAttractionData: isAttraction,
+        locationData: location
+      }
     });
   }
 

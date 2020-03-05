@@ -14,6 +14,7 @@ import {HotelService} from '../../../services/hotel.service';
 import {FlightService} from '../../../services/flight.service';
 import {FlightData} from '../../../models/flight-interface';
 import * as moment from 'moment';
+import {ChatService} from "../../../services/chat.service";
 
 @Component({
   selector: 'app-flight-admin',
@@ -39,6 +40,7 @@ export class FlightAdminComponent implements OnInit, AfterViewInit {
   private dialogUpdateRef: MatDialogRef<UpdateFlightAdminComponent>;
 
   constructor(private flightService: FlightService,
+              private chatService: ChatService,
               private dialogInsert: MatDialog,
               private dialogUpdate: MatDialog,
               private dialogConfirm: MatDialog,
@@ -121,6 +123,7 @@ export class FlightAdminComponent implements OnInit, AfterViewInit {
     this.dialogInsertRef = this.dialogInsert.open(InsertFlightAdminComponent);
 
     this.dialogInsertRef.afterClosed().subscribe(data => {
+      this.chatService.emit('flight', 'New Flight Inserted !');
       this.getFlightData();
     });
   }
