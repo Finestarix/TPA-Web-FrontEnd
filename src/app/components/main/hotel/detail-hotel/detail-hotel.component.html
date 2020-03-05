@@ -1,15 +1,25 @@
-<div *ngIf="hotelData">
+<div *ngIf="hotelData" class="detail-hotel">
   <div>
-    <div>{{hotelData.location.region}}</div>
-    >
-    <div>{{hotelData.location.province}}</div>
-    >
-    <div>{{hotelData.location.city}}</div>
+    <b>{{hotelData.location.region}}</b> > <b>{{hotelData.location.province}}</b> > <b>{{hotelData.location.city}}</b>
   </div>
   <div>
+    <div class="image-hotel" *ngFor="let pic of hotelData.photo">
+      <img src="assets/hotels/{{pic.source}}" alt="">
+    </div>
     <div>{{hotelData.name}}</div>
     <div>
       <app-star-bar [widthRating]="hotelData.rating/5 * 100"></app-star-bar>
     </div>
   </div>
+
+  <div class="promo-share">
+    <div (click)="facebook()"><i class="fa fa-facebook"></i> Share with Facebook</div>
+    <div (click)="copy()"><i class="fa fa-share"></i>Copy Link</div>
+    <div (click)="whatsapp()"><i class="fa fa-whatsapp"></i>Share with Whatsapp</div>
+  </div>
+
+
+  <div class="map-container" id="map"></div>
+
 </div>
+

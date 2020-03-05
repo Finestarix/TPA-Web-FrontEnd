@@ -8,7 +8,6 @@ import * as moment from 'moment';
 import {LabelType, Options} from 'ng5-slider';
 import {SearchHotel} from '../../../../helpers/search-hotel';
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -96,6 +95,15 @@ export class MapComponent implements OnInit {
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
+      this.map.on('moveend', function(){
+
+        const latitude = parseFloat(this.map.getCenter().lat)
+        const longitude = parseFloat( this.map.getCenter().lng)
+
+        this.hotelService.getHotelByRadius(latitude, longitude).subscribe( async (result) => {
+          this.getHotelData(result);
+        });
+      }.bind(this));
 
       const temp = L.marker([this.userLocation.coords.latitude, this.userLocation.coords.longitude]);
       temp.addTo(this.map);
@@ -123,9 +131,9 @@ export class MapComponent implements OnInit {
 
     this.dateDiff = this.endDate.getDate() - this.startDate.getDate();
 
-    this.hotelData$ = this.hotelService.getHotelByCity(this.destination).subscribe(async query => {
-      await this.getHotelData(query);
-    });
+    // this.hotelData$ = this.hotelService.getHotelByCity(this.destination).subscribe(async query => {
+    //   await this.getHotelData(query);
+    // });
 
     this.hotelArea$ = this.locationService.getLocationWithProvince(this.destination).subscribe(async query => {
       await this.getHotelArea(query);
@@ -164,7 +172,11 @@ export class MapComponent implements OnInit {
   }
 
   getHotelData(query) {
-    this.hotelData = query.data.GetHotelByLocation;
+    this.marker.forEach(
+      value1 => {
+        value1.remove();
+      });
+    this.hotelData = query.data.GetHotelByRadius;
     this.increaseTotalRating();
     this.getAllMarker();
     this.detectChange();
@@ -237,6 +249,7 @@ export class MapComponent implements OnInit {
           await this.changeCurrentHotel(query);
         });
       });
+
       mark.addTo(this.map);
     }
   }

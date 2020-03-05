@@ -15,6 +15,7 @@ import {FlightService} from '../../../services/flight.service';
 import {FlightData} from '../../../models/flight-interface';
 import * as moment from 'moment';
 import {ChatService} from "../../../services/chat.service";
+import {DialogErrorComponent} from "../core/dialog-error/dialog-error.component";
 
 @Component({
   selector: 'app-flight-admin',
@@ -122,10 +123,20 @@ export class FlightAdminComponent implements OnInit, AfterViewInit {
   insertAction() {
     this.dialogInsertRef = this.dialogInsert.open(InsertFlightAdminComponent);
 
-    this.dialogInsertRef.afterClosed().subscribe(data => {
+    this.dialogInsertRef.afterClosed().subscribe(async data => {
+      await this.afterInsert(data);
+    });
+  }
+
+  afterInsert(value) {
+    if (value.data.InsertNewFlight === null) {
+      this.dialogError.open(DialogErrorComponent, {
+        data: 'Insert Failed !'
+      });
+    } else {
       this.chatService.emit('flight', 'New Flight Inserted !');
       this.getFlightData();
-    });
+    }
   }
 
   updateAction(flight: any) {

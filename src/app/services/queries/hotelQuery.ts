@@ -143,11 +143,11 @@ export const deleteHotelByID = gql`
 `;
 
 export const insertHotel = gql`
-    mutation insertHotel($nameData: String!, $ratingData: String!, $addressData: String!, 
-        $locationData: String!, $priceData: Int!, $latitudeData: String!, 
+    mutation insertHotel($nameData: String!, $ratingData: String!, $addressData: String!,
+        $locationData: String!, $priceData: Int!, $latitudeData: String!,
         $longitudeData: String!, $informationData: String!) {
-        InsertNewHotel(name: $nameData, rating: $ratingData, address: $addressData, 
-            location: $locationData, price: $priceData, latitude: $latitudeData, 
+        InsertNewHotel(name: $nameData, rating: $ratingData, address: $addressData,
+            location: $locationData, price: $priceData, latitude: $latitudeData,
             longitude: $longitudeData, information: $informationData) {
             id
         }
@@ -174,6 +174,33 @@ export const insertHotelType = gql`
     mutation insertHotelType($idData: Int!, $nameData: String!) {
         InsertHotelType(hotelid: $idData, name: $nameData) {
             id
+        }
+    }
+`;
+
+export const getHotelByRadius = gql`
+    query getHotelByRadius($latitude: Float!, $longitude: Float!) {
+        GetHotelByRadius(latitude: $latitude, longitude: $longitude) {
+            id
+            photo {
+                hotelid
+                source
+            }
+            facility {
+                name
+                photo
+            }
+            name
+            address
+            latitude
+            longitude
+            rating
+            price
+            location {
+                city
+                province
+                region
+            }
         }
     }
 `;

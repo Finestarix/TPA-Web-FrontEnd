@@ -38,12 +38,10 @@ export class PromoPageComponent implements OnInit {
 
   getData1(value) {
     this.data1 = value.data.GetPromo;
-    console.log(this.data1)
   }
 
   getData2(value) {
     this.data2 = value.data.OtherPromo;
-    console.log(this.data2)
   }
 
   facebook() {

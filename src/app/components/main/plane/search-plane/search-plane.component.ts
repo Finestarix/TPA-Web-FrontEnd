@@ -1,9 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LabelType, Options} from 'ng5-slider';
 import {FlightService} from '../../../../services/flight.service';
 import * as moment from 'moment';
-import {ChatService} from "../../../../services/chat.service";
+import {ChatService} from '../../../../services/chat.service';
+import {CalendarView} from 'angular-calendar';
+import {
+  startOfDay,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  addHours
+} from 'date-fns';
+import { Subject } from 'rxjs';
+import {
+  CalendarEvent,
+  CalendarEventAction,
+  CalendarEventTimesChangedEvent,
+} from 'angular-calendar';
+
+const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3'
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF'
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA'
+  }
+};
 
 @Component({
   selector: 'app-search-plane',
@@ -48,6 +77,8 @@ export class SearchPlaneComponent implements OnInit {
   };
 
   planeData: any;
+  planeDataShow: any = [];
+  totalShow = 1;
   planeDataTransit: string[] = [];
   selectedSort: string;
 
@@ -88,6 +119,7 @@ export class SearchPlaneComponent implements OnInit {
 
   getFlightData(value) {
     this.planeData = value.data.FlightByLocation;
+    this.planeDataShow = this.planeData.slice(0, this.totalShow);
 
     for (const plane of this.planeData) {
       if (plane.transit.name !== 'No Airport') {
@@ -134,5 +166,16 @@ export class SearchPlaneComponent implements OnInit {
       }
     });
 
+  }
+
+  goToCalendar() {
+    this.router.navigate(['/Flight/Calendar']);
+  }
+
+  onScroll() {
+    if (this.totalShow <= this.planeData.length) {
+      this.totalShow += 2;
+      this.planeDataShow = this.planeData.slice(0, this.totalShow);
+    }
   }
 }

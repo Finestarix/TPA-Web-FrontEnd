@@ -97,7 +97,7 @@ import {SearchPlaneComponent} from './components/main/plane/search-plane/search-
 import {MatListModule} from '@angular/material/list';
 import {SearchFlightPipe} from './pipe/flight/search-flight.pipe';
 import {SortFlightPipe} from './pipe/flight/sort-flight.pipe';
-import {ChatPageComponent} from './components/main/chat-page/chat-page.component';
+
 import {PromoPageComponent} from './components/main/promo-page/promo-page.component';
 import {BlogPageComponent} from './components/main/blog-page/blog-page.component';
 import {ViewBlogComponent} from './components/main/blog-page/view-blog/view-blog.component';
@@ -106,7 +106,10 @@ import {MaterialFileInputModule} from 'ngx-material-file-input';
 import {MatCardModule} from '@angular/material/card';
 import {SearchEntertainmentComponent} from './components/main/entertainment/search-entertainment/search-entertainment.component';
 import {DetailEntertainmentComponent} from './components/main/entertainment/detail-entertainment/detail-entertainment.component';
-import {InsertBlogComponent} from "./components/main/blog-page/insert-blog/insert-blog.component";
+import {InsertBlogComponent} from './components/main/blog-page/insert-blog/insert-blog.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import {CalendarPriceComponent} from "./components/main/plane/calendar-price/calendar-price.component";
 
 const iconRetinaUrl = 'assets/leaflet/images/marker-icon-2x.png';
 const iconUrl = 'assets/leaflet/images/marker-icon.png';
@@ -184,14 +187,14 @@ Marker.prototype.options.icon = iconDefault;
     SearchPlaneComponent,
     SearchFlightPipe,
     SortFlightPipe,
-    ChatPageComponent,
     PromoPageComponent,
     BlogPageComponent,
     ViewBlogComponent,
     DetailBlogComponent,
     SearchEntertainmentComponent,
     DetailEntertainmentComponent,
-    InsertBlogComponent
+    InsertBlogComponent,
+    CalendarPriceComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -203,7 +206,7 @@ Marker.prototype.options.icon = iconDefault;
     InsertFlightAdminComponent,
     UpdateFlightAdminComponent,
     DialogConfirmationComponent,
-    DialogErrorComponent
+    DialogErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -250,6 +253,7 @@ Marker.prototype.options.icon = iconDefault;
     MatListModule,
     MaterialFileInputModule,
     MatCardModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
   providers: [],
   bootstrap: [AppComponent],

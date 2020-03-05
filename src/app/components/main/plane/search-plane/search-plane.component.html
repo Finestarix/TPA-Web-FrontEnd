@@ -162,67 +162,74 @@
             <mat-option value="shortestDuration">Shortest Duration</mat-option>
           </mat-select>
         </mat-form-field>
+
+        <button mat-button (click)="goToCalendar()">Open Calendar</button>
       </div>
 
-      <div class="plane-data" *ngFor="let plane of planeData |
+      <div infinite-scroll
+           [infiniteScrollDistance]="2"
+           [infiniteScrollThrottle]="50"
+           (scrolled)="onScroll()">
+        <div class="plane-data" *ngFor="let plane of planeDataShow |
         searchFlight: [ checkboxTransit, checkboxDepartureTime,
           checkboxArrivalTime, checkboxFacility, checkboxArlines, checkboxTransitAirport,
           valueTripDuration, highValueTripDuration, valueTransitDuration, highValueTransitDuration, planeDataTransit] |
         sortFlight: selectedSort">
 
-        <div class="plane-data-top">
-          <div class="plane-title">
-            <div>{{plane.company.name}}</div>
-            <div><img src="assets/flight/company/{{plane.company.image}}" alt=""></div>
+          <div class="plane-data-top">
+            <div class="plane-title">
+              <div>{{plane.company.name}}</div>
+              <div><img src="assets/flight/company/{{plane.company.image}}" alt=""></div>
+            </div>
+            <div class="plane-mid">
+              <div class="plane-arrival">
+                <div>{{plane.arrivalTime | date: 'HH:mm'}}</div>
+                <div>{{plane.fromAirport.code}}</div>
+              </div>
+
+              <div class="plane-duration">
+                <div>{{plane.duration}}</div>
+              </div>
+
+              <div class="plane-departure">
+                <div>{{plane.departureTime | date: 'HH:mm'}}</div>
+                <div>{{plane.toAirport.code}}</div>
+              </div>
+
+            </div>
+
+            <div class="plane-price">
+              <div>{{plane.price | currency: 'IDR'}}</div>
+              <button mat-raised-button
+                      (click)="nextStep()"
+                      matTooltip="Choose {{plane.name}}">
+                CHOOSE
+              </button>
+            </div>
+
           </div>
-          <div class="plane-mid">
-            <div class="plane-arrival">
-              <div>{{plane.arrivalTime | date: 'HH:mm'}}</div>
-              <div>{{plane.fromAirport.code}}</div>
-            </div>
 
-            <div class="plane-duration">
-              <div>{{plane.duration}}</div>
-            </div>
-
-            <div class="plane-departure">
-              <div>{{plane.departureTime | date: 'HH:mm'}}</div>
-              <div>{{plane.toAirport.code}}</div>
-            </div>
-
-          </div>
-
-          <div class="plane-price">
-            <div>{{plane.price | currency: 'IDR'}}</div>
-            <button mat-raised-button
-                    (click)="nextStep()"
-                    matTooltip="Choose {{plane.name}}">
-              CHOOSE
-            </button>
+          <div>
+            <mat-tab-group>
+              <mat-tab label="Flight Detail">
+                <mat-list style="display: flex; flex-direction: column">
+                  <mat-list-item> {{plane.fromAirport.name}} </mat-list-item>
+                  <mat-list-item *ngIf="plane.transit.name !== 'No Airport'"> {{plane.transit.name}} </mat-list-item>
+                  <mat-list-item> {{plane.toAirport.name}} </mat-list-item>
+                </mat-list>
+              </mat-tab>
+              <mat-tab label="Price Detail">
+                <mat-list>
+                  <mat-list-item> Price: {{plane.price}} </mat-list-item>
+                  <mat-list-item> Tax : Included </mat-list-item>
+                  <mat-list-item> Passenger Service Charge: FREE </mat-list-item>
+                  <mat-list-item> Total: {{plane.price}}  </mat-list-item>
+                </mat-list>
+              </mat-tab>
+            </mat-tab-group>
           </div>
 
         </div>
-
-        <div>
-          <mat-tab-group>
-            <mat-tab label="Flight Detail">
-              <mat-list style="display: flex; flex-direction: column">
-                <mat-list-item> {{plane.fromAirport.name}} </mat-list-item>
-                <mat-list-item *ngIf="plane.transit.name !== 'No Airport'"> {{plane.transit.name}} </mat-list-item>
-                <mat-list-item> {{plane.toAirport.name}} </mat-list-item>
-              </mat-list>
-            </mat-tab>
-            <mat-tab label="Price Detail">
-              <mat-list>
-                <mat-list-item> Price: {{plane.price}} </mat-list-item>
-                <mat-list-item> Tax : Included </mat-list-item>
-                <mat-list-item> Passenger Service Charge: FREE </mat-list-item>
-                <mat-list-item> Total: {{plane.price}}  </mat-list-item>
-              </mat-list>
-            </mat-tab>
-          </mat-tab-group>
-        </div>
-
       </div>
 
     </div>
@@ -230,3 +237,5 @@
   </div>
 
 </div>
+
+

@@ -6,7 +6,7 @@ import {
   getHotelByLatLong,
   getHotelByID,
   getAllHotel,
-  deleteHotelByID, insertHotel, insertHotelFacility, updateHotel, insertHotelType
+  deleteHotelByID, insertHotel, insertHotelFacility, updateHotel, insertHotelType, getHotelByRadius
 } from './queries/hotelQuery';
 import {Apollo} from 'apollo-angular';
 import {HotelData} from '../models/hotel-interface';
@@ -51,6 +51,19 @@ export class HotelService {
 
     return this.apollo.query<any>({
       query: getHotelByLatLong,
+      variables: {
+        latitude: convertedLatitude,
+        longitude: convertedLongitude,
+      }
+    });
+  }
+
+  getHotelByRadius(latitude: any, longitude: any) {
+    const convertedLatitude = parseFloat(latitude);
+    const convertedLongitude = parseFloat(longitude);
+
+    return this.apollo.query<any>({
+      query: getHotelByRadius,
       variables: {
         latitude: convertedLatitude,
         longitude: convertedLongitude,

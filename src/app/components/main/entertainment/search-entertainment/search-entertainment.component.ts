@@ -103,4 +103,14 @@ export class SearchEntertainmentComponent implements OnInit {
       this.dataShow = this.eventData.slice(0, this.totalShow);
     }
   }
+
+  resetAll() {
+    this.selectedHighPrice = this.options.ceil;
+    this.selectedLowPrice = this.options.floor;
+    this.selectedCheckBoxAttraction = true;
+    this.selectedCheckBoxActivity = true;
+    this.selectedCheckBoxEvent = true;
+    this.selectedStartDate = '';
+    this.selectedEndDate = '';
+  }
 }

@@ -24,4 +24,15 @@ export class ChatService {
   public emit(eventName: string, data: any) {
     this.socket.emit(eventName, data);
   }
+
+  getUserData(item: string) {
+
+  }
+
+  getAllChat() {
+  }
+
+  insertChat(userId: number, num: number, s: string) {
+
+  }
 }

@@ -14,15 +14,15 @@ import {SearchCarComponent} from './components/main/car/search-car/search-car.co
 import {LoginAdminComponent} from './components/admin/login-admin/login-admin.component';
 import {AuthGuard} from './guards/auth.guard';
 import {HomeAdminComponent} from './components/admin/home-admin/home-admin.component';
-import {CardboxTrainComponent} from "./components/main/train/cardbox-train/cardbox-train.component";
-import {TrainService} from "./services/train.service";
-import {SearchPlaneComponent} from "./components/main/plane/search-plane/search-plane.component";
-import {ChatPageComponent} from "./components/main/chat-page/chat-page.component";
-import {PromoPageComponent} from "./components/main/promo-page/promo-page.component";
-import {BlogPageComponent} from "./components/main/blog-page/blog-page.component";
-import {DetailBlogComponent} from "./components/main/blog-page/detail-blog/detail-blog.component";
-import {SearchEntertainmentComponent} from "./components/main/entertainment/search-entertainment/search-entertainment.component";
-import {DetailEntertainmentComponent} from "./components/main/entertainment/detail-entertainment/detail-entertainment.component";
+import {CardboxTrainComponent} from './components/main/train/cardbox-train/cardbox-train.component';
+import {TrainService} from './services/train.service';
+import {SearchPlaneComponent} from './components/main/plane/search-plane/search-plane.component';
+import {PromoPageComponent} from './components/main/promo-page/promo-page.component';
+import {BlogPageComponent} from './components/main/blog-page/blog-page.component';
+import {DetailBlogComponent} from './components/main/blog-page/detail-blog/detail-blog.component';
+import {SearchEntertainmentComponent} from './components/main/entertainment/search-entertainment/search-entertainment.component';
+import {DetailEntertainmentComponent} from './components/main/entertainment/detail-entertainment/detail-entertainment.component';
+import {CalendarPriceComponent} from "./components/main/plane/calendar-price/calendar-price.component";
 
 const routes: Routes = [
   {
@@ -34,10 +34,6 @@ const routes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'Chat',
-        component: ChatPageComponent
-      },
-      {
         path: 'Flight',
         children: [
           {
@@ -47,6 +43,10 @@ const routes: Routes = [
           {
             path: 'Search',
             component: SearchPlaneComponent
+          },
+          {
+            path: 'Calendar',
+            component: CalendarPriceComponent
           }
         ]
       },
